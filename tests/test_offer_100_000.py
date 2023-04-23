@@ -11,6 +11,10 @@ def test_open_page(driver):
     driver.get('https://openweathermap.org/%27')
     assert 'openweathermap' in driver.current_url
     print(driver.current_url)
+def test_open_page2(driver):
+    driver.get('https://openweathermap.org/%27')
+    assert 'openweathermap' in driver.current_url
+    print(driver.current_url)
 
 
 
