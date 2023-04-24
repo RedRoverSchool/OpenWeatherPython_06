@@ -1,4 +1,4 @@
-from selenium.webdriver import ActionChains
+from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.common.by import By
@@ -32,30 +32,15 @@ def test_authorization_page(driver):
     pass
 
 
-def test_rename_api_key(driver):
+def test_search_weather_forecast(driver):
     driver.get('https://openweathermap.org/')
-    # Click on the "Sign In"
-    # sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
-    # driver.execute_script("arguments[0].scrollIntoView();", sign_in)
-    # action = ActionChains(driver)
-    # action.move_to_element(sign_in).click().perform()
-    # Enter valid Username and Password
-    driver.get('https://openweathermap.org/home/sign_in')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email"))).send_keys('badlolpro@gmail.com')
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_password"))).send_keys('36Pv@tdm2H7/x-d')
-    # Click on the "Submit Button"
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//input[@value='Submit']"))).click()
-    # Click on the dropdown button
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@id='user-dropdown']"))).click()
-    # Click on the My API keys button
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'My API keys')]"))).click()
-    # select Actions -> Rename API Key -> Click Checkbox -> Rename API Key - > Save Changes
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]"))).click()
-    rename_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "edit_key_form_name")))
+    search_bar = driver.find_element(By.CSS_SELECTOR, 'input[name="q"]')
+    search_bar.send_keys('London')
+    search_bar.send_keys(Keys.RETURN)
+    displayed_city = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'a[href*="/city/"][href$="2643743"]')))
+    displayed_city.click()
+    switch_container = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "//*[@id='weather-widget']/div[1]/div/div/div[1]/div[2]/div[3]")))
     time.sleep(5)
-    rename_checkbox.clear()
-    rename_checkbox.send_keys("Main")
-    save_changes = driver.find_element(By.XPATH, "//button[contains(text(),'Save')]")
-    save_changes.click()
+    switch_container.click()
