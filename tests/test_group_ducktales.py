@@ -1,5 +1,6 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -30,3 +31,33 @@ def test_check_page_title(driver):
 def test_authorization_page(driver):
     pass
 
+
+def test_rename_api_key(driver):
+    driver.get('https://openweathermap.org/')
+    # Click on the "Sign In"
+    sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
+    action = ActionChains(driver)
+    action.move_to_element(sign_in).click().perform()
+    # Enter valid Username and Password
+    driver.get('https://openweathermap.org/home/sign_in')
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email"))).send_keys('badlolpro@gmail.com')
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_password"))).send_keys('36Pv@tdm2H7/x-d')
+    # Click on the "Submit Button"
+    WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//input[@value='Submit']"))).click()
+    # Click on the dropdown button
+    dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@id='user-dropdown']")))
+    dropdown_button.click()
+    # Click on the My API keys button
+    my_api_keys_button = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'My API keys')]")))
+    my_api_keys_button.click()
+    # select Actions -> Rename API Key -> Click Checkbox -> Rename API Key - > Save Changes
+    click_checkbox = driver.find_element(By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]")
+    click_checkbox.click()
+    rename_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "edit_key_form_name")))
+    time.sleep(5)
+    rename_checkbox.clear()
+    rename_checkbox.send_keys("Main")
+    save_changes = driver.find_element(By.XPATH, "//button[contains(text(),'Save')]")
+    save_changes.click()
