@@ -25,3 +25,8 @@ def test_fill_search_city_field(driver):
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+
+def test_authorization_page(driver):
+    pass
+
