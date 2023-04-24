@@ -35,9 +35,10 @@ def test_authorization_page(driver):
 def test_rename_api_key(driver):
     driver.get('https://openweathermap.org/')
     # Click on the "Sign In"
-    sign_in = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li.user-li>a")))
-    action = ActionChains(driver)
-    action.move_to_element(sign_in).click().perform()
+    # sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
+    # driver.execute_script("arguments[0].scrollIntoView();", sign_in)
+    # action = ActionChains(driver)
+    # action.move_to_element(sign_in).click().perform()
     # Enter valid Username and Password
     driver.get('https://openweathermap.org/home/sign_in')
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email"))).send_keys('badlolpro@gmail.com')
