@@ -58,6 +58,7 @@ def test_rename_api_key(driver):
     rename_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "edit_key_form_name")))
     time.sleep(5)
     rename_checkbox.clear()
+    time.sleep(5)
     rename_checkbox.send_keys("Main")
     save_changes = driver.find_element(By.XPATH, "//button[contains(text(),'Save')]")
     save_changes.click()
