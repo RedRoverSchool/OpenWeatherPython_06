@@ -35,7 +35,7 @@ def test_authorization_page(driver):
 def test_rename_api_key(driver):
     driver.get('https://openweathermap.org/')
     # Click on the "Sign In"
-    sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
+    sign_in = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li.user-li>a")))
     action = ActionChains(driver)
     action.move_to_element(sign_in).click().perform()
     # Enter valid Username and Password
@@ -53,12 +53,11 @@ def test_rename_api_key(driver):
         EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'My API keys')]")))
     my_api_keys_button.click()
     # select Actions -> Rename API Key -> Click Checkbox -> Rename API Key - > Save Changes
-    click_checkbox = driver.find_element(By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]")
+    click_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]")))
     click_checkbox.click()
     rename_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "edit_key_form_name")))
     time.sleep(5)
     rename_checkbox.clear()
-    time.sleep(5)
     rename_checkbox.send_keys("Main")
     save_changes = driver.find_element(By.XPATH, "//button[contains(text(),'Save')]")
     save_changes.click()
