@@ -8,10 +8,17 @@ def test_open_page(driver):
     driver.maximize_window()
     assert 'openweathermap' in driver.current_url
 
+
 def test_check_page_title(driver):
     # function checks page title
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
+
 def test_python():
     print('Hello girls!')
+
+
+def test_open_google(driver):
+    driver.get('https://www.google.com')
+
