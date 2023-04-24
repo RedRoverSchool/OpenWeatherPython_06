@@ -20,3 +20,8 @@ def test_fill_search_city_field(driver):
         (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'New York'))
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
+
+
+def test_check_page_title(driver):
+    driver.get('https://openweathermap.org')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
