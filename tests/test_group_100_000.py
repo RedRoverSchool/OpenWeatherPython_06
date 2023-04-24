@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -11,5 +10,9 @@ def test_should_open_given_link(driver):
 
 def test_check_page_title(driver):
     # function checks page title
+    driver.get('https://openweathermap.org')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+def test_verify_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
