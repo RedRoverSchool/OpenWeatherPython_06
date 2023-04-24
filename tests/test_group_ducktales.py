@@ -25,3 +25,23 @@ def test_fill_search_city_field(driver):
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+def test_authorization(driver):
+    driver.get('https://openweathermap.org/')
+    assert 'openweathermap' in driver.current_url, 'openweathermap is not in URL'
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    driver.find_element(By.CSS_SELECTOR, '.user-li').click()
+    assert 'users/sign_in' in driver.current_url, 'wrong URL'
+    assert driver.title == 'Members', 'wrong title'
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_email').send_keys('jnksdcj')
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_password').send_keys('adnai')
+    driver.find_element(By.CSS_SELECTOR, 'input[value="Submit"]').click()
+    assert 'Invalid Email or password.' in driver.find_element(By.CSS_SELECTOR, '.panel-body').text,\
+        'trouble with hint - negative case'
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_email').clear()
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_email').send_keys('danya92656@gmail.com')
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_password').clear()
+    driver.find_element(By.CSS_SELECTOR, '.input-group #user_password').send_keys('007007007')
+    driver.find_element(By.CSS_SELECTOR, 'input[value="Submit"]').click()
+    assert 'Signed in successfully.' in driver.find_element(By.CSS_SELECTOR, '.panel-body').text, 'wrong hint - signed was succeced'
