@@ -47,15 +47,12 @@ def test_rename_api_key(driver):
     WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//input[@value='Submit']"))).click()
     # Click on the dropdown button
-    dropdown_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@id='user-dropdown']")))
-    dropdown_button.click()
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@id='user-dropdown']"))).click()
     # Click on the My API keys button
-    my_api_keys_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'My API keys')]")))
-    my_api_keys_button.click()
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//a[contains(text(),'My API keys')]"))).click()
     # select Actions -> Rename API Key -> Click Checkbox -> Rename API Key - > Save Changes
-    click_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]")))
-    click_checkbox.click()
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//tbody/tr[1]/td[4]/a[2]/i[1]"))).click()
     rename_checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "edit_key_form_name")))
     time.sleep(5)
     rename_checkbox.clear()
