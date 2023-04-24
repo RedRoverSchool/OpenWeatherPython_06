@@ -12,3 +12,6 @@ def test_check_page_title(driver):
     # function checks page title
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+def test_python():
+    print('Hello girls!')
