@@ -4,8 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL = "https://openweathermap.org/"
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
-tab_guide = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[1]/a')
-tab_api = (By.XPATH, "//body/nav[@id='nav-website']/ul[@id='first-level-nav']/div[@id='desktop-menu']/ul[1]/li[2]")
+tab_guide = (By.CSS_SELECTOR, '#desktop-menu a[href="/guide"]')
+tab_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
 bt_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
 
 
