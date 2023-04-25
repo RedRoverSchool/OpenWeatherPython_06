@@ -2,8 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-test_email = 'chosenonex1@gmail.com'
-test_password = 'gNrts5W?K_.qLFu'
+# test_email = 'chosenonex1@gmail.com'
+# test_password = 'gNrts5W?K_.qLFu'
 URL = 'https://openweathermap.org/'
 
 # def test_open_page(driver):
@@ -15,7 +15,7 @@ def test_sing_in_empty_fields(driver):
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div'))) # ожидание загрузки элементов
     # singin_button = driver.find_element(By.XPATH, '//a[contains(@href, "sign_in")]')
-    singin_button = WebDriverWait(driver, 5).until(
+    singin_button = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable((By.XPATH, '//a[contains(@href, "sign_in")]')))
     singin_button.click()
     input_button = driver.find_element(By.XPATH, '//*[@id="new_user"]/input[3]')
