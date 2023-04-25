@@ -44,4 +44,6 @@ def test_check_log_in(driver):
     expected_log = 'Sign in'
     search_option_log_text = search_option_log.text
     assert search_option_log_text == expected_log
+    print(search_option_log_text)
+
 
