@@ -4,10 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-driver = webdriver.Chrome()
-driver.maximize_window()
 
-def test_open_page():
+def test_open_blog_article(driver):
     driver.get("https://openweathermap.org/")
 
     blog_btn = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
@@ -19,6 +17,7 @@ def test_open_page():
 
     all_btn = driver.find_element(By.LINK_TEXT, "ALL")
     all_btn.click()
+    assert "Blog" in driver.title, "Заголовок страницы не содержит слово 'Blog'"
 
     first_article = driver.find_element(By.CSS_SELECTOR, "[class=post__title]")
     first_article.click()
