@@ -27,13 +27,13 @@ def test_python():
 
 def test_checkout_menu_tab_guide(driver):
     driver.get(URL)
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 35)
     wait.until_not(EC.presence_of_element_located(load_div))
-    tab_guild = WebDriverWait(driver, 45).until(EC.presence_of_element_located
+    tab_guild_bt = WebDriverWait(driver, 35).until(EC.presence_of_element_located
                                                 (tab_guide))
-    tab_guild.click()
+    tab_guild_bt.click()
     assert driver.current_url == 'https://openweathermap.org/guide'
-    bt_home = WebDriverWait(driver, 45).until(EC.presence_of_element_located
+    bt_home = WebDriverWait(driver, 35).until(EC.presence_of_element_located
                                               (bt_go_home))
     bt_home.click()
     assert driver.current_url == URL
