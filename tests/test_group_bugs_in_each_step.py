@@ -6,22 +6,12 @@ from selenium.webdriver.common.by import By
 
 URL = 'https://openweathermap.org/'
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 
 def test_should_open_given_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
 
-def test_should_open_given_link(driver):
-    driver.get(URL)
-    assert 'openweathermap' in driver.current_url
-
-
-def test_open_page():
-    driver.get('https://openweathermap.org/')
-    assert 'openweathermap' in driver.current_url
-    print(driver.current_url)
 
 
 def test_check_page_title():
