@@ -59,3 +59,9 @@ class TestApiKeysPage:
         actual_url = driver.current_url
         assert actual_url == expected_api_keys_URL, 'The API page URL does not match expected'
 
+    def test_api_keys_tab_is_active(self, driver, open_api_keys_page):
+        my_tab_elements = driver.find_elements(By.CSS_SELECTOR, '#myTab li')
+        expected_result = "active"
+        actual_result = my_tab_elements[2].get_attribute('class')
+        assert actual_result == expected_result, "API Keys tab is not active"
+
