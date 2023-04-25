@@ -50,3 +50,9 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     for option in options:
         assert city in option.text
 
+def test_social_link_medium(driver):
+    driver.get('https://openweathermap.org/')
+    click_medium = driver.find_element(By.CSS_SELECTOR, 'a[href="https://medium.com/@openweathermap"]')
+    driver.execute_script("return arguments[0].scrollIntoView(true);", click_medium)
+    click_medium.click()
+    driver.switch_to.window(driver.window_handles[1])
