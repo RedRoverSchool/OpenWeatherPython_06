@@ -6,6 +6,10 @@ test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
 URL = 'https://openweathermap.org/'
 
+def test_open_page():
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url # проверка наличия строки в url
+
 def test_sing_in_empty_fields(driver):
     driver.get(URL)
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
