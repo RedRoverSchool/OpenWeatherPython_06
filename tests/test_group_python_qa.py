@@ -50,4 +50,15 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     for option in options:
         assert city in option.text
 
-# test
+
+def test_support2(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_support = driver.find_element(By.ID, 'support-dropdown')
+    click_support.click()
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/faq']").is_displayed()
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/appid']").is_displayed()
+    assert driver.find_element(
+        By.CSS_SELECTOR,
+        "#support-dropdown-menu a[href = 'https://home.openweathermap.org/questions']").is_displayed()
