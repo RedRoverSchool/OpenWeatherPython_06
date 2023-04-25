@@ -1,7 +1,32 @@
+import pytest
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+
+URL_sing_in_page = "https://home.openweathermap.org/users/sign_in"
+signIn_button = (By.CSS_SELECTOR, "ul .user-li")
+email_field = (By.ID, 'user_email')
+user_email = "jtzcmspsmgvbep@bugfoo.com"
+user_password = "Test1212"
+password_field = (By.ID, 'user_password')
+submit_button = (By.CSS_SELECTOR, '.btn-color[value="Submit"]')
+tab_api_keys = (By.CSS_SELECTOR, '#myTab [href="/api_keys"')
+URL_api_keys_page = 'https://home.openweathermap.org/api_keys'
+
+
+
+
+@pytest.fixture()
+def open_api_keys_page(driver):
+    driver.implicitly_wait(10)
+    wait = WebDriverWait(driver, 15)
+    driver.get(URL_sing_in_page)
+    wait.until(EC.element_to_be_clickable(signIn_button)).click()
+    wait.until(EC.element_to_be_clickable(email_field)).send_keys(user_email)
+    wait.until(EC.element_to_be_clickable(password_field)).send_keys(user_password)
+    wait.until(EC.element_to_be_clickable(submit_button)).click()
+    wait.until(EC.element_to_be_clickable(tab_api_keys)).click()
 
 
 def test_fill_search_city_field(driver):
@@ -29,4 +54,53 @@ def test_check_page_title(driver):
 
 def test_authorization_page(driver):
     pass
+
+
+class TestApiKeysPage:
+    def test_open_my_api_keys(self, driver, open_api_keys_page):
+        expected_api_keys_URL = URL_api_keys_page
+        actual_url = driver.current_url
+        assert actual_url == expected_api_keys_URL, 'The API page URL does not match expected'
+
+    def test_api_keys_tab_is_active(self, driver, open_api_keys_page):
+        my_tab_elements = driver.find_elements(By.CSS_SELECTOR, '#myTab li')
+        expected_result = "active"
+        actual_result = my_tab_elements[2].get_attribute('class')
+        assert actual_result == expected_result, "API Keys tab is not active"
+
+    def test_change_status_api_key(self, driver, open_api_keys_page):
+        # api_key_rows = driver.find_elements(By.CSS_SELECTOR, ".material_table.api-keys tbody tr")
+        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        initial_status = first_column_values[2].text
+        if initial_status == "Inactive":
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        else:
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        current_status = first_column_values_after_switch[2].text
+        assert current_status != initial_status, "API Key status has not changed"
+
+    def test_status_api_key_not_changed(self, driver, open_api_keys_page):
+        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        initial_status = first_column_values[2].text
+        if initial_status == "Inactive":
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.dismiss()
+        else:
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.dismiss()
+        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        current_status = first_column_values_after_switch[2].text
+        assert current_status == initial_status, "API Key status was changed"
+
 
