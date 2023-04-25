@@ -42,3 +42,13 @@ def test_login_form(driver):
     driver.find_element(By.CSS_SELECTOR, 'input[value="Submit"]').click()
     user_logout = driver.find_element(By.CSS_SELECTOR, '.panel-heading').text
     assert user_logout == 'Alert'
+
+def test_on_api_page_recommend_version_of_api(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    button_nav_bar_api = WebDriverWait(driver, 35).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(2)>a")))
+    button_nav_bar_api.click()
+    recommend_version_of_api = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
+    assert recommend_version_of_api == "One Call API 3.0"
