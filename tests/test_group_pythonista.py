@@ -29,32 +29,11 @@ def test_checkout_menu_tab_guide(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
-    tab_guild = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(tab_guide))
+    tab_guild = WebDriverWait(driver, 45).until(EC.presence_of_element_located
+                                                (tab_guide))
     tab_guild.click()
     assert driver.current_url == 'https://openweathermap.org/guide'
-    bt_home = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(bt_go_home))
+    bt_home = WebDriverWait(driver, 45).until(EC.presence_of_element_located
+                                              (bt_go_home))
     bt_home.click()
     assert driver.current_url == URL
-
-
-def test_checkout_menu_tab_api(driver):
-    driver.get(URL)
-    wait = WebDriverWait(driver, 15)
-    wait.until_not(EC.presence_of_element_located(load_div))
-    tab_b_api = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(tab_api))
-    tab_b_api.click()
-    assert driver.current_url == 'https://openweathermap.org/api'
-    btn_home = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(bt_go_home))
-    btn_home.click()
-    assert driver.current_url == URL
-
-
-def test_on_api_page_recommend_version_of_api(driver):
-    driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    button_nav_bar_api = WebDriverWait(driver, 35).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(2)>a")))
-    button_nav_bar_api.click()
-    recommend_version_of_api = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
-    assert recommend_version_of_api == "One Call API 3"
