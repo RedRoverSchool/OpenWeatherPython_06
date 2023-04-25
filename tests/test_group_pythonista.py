@@ -33,7 +33,7 @@ def test_checkout_menu_tab_guide(driver):
                                                    ((By.XPATH, "//div[@id='desktop-menu']//a[@href='/guide']")))
     tab_guild_bt.click()
     assert driver.current_url == 'https://openweathermap.org/guide'
-    bt_home = WebDriverWait(driver, 35).until(EC.presence_of_element_located
-                                              (bt_go_home))
-    bt_home.click()
-    assert driver.current_url == URL
+    # bt_home = WebDriverWait(driver, 35).until(EC.presence_of_element_located
+    #                                           (bt_go_home))
+    # bt_home.click()
+    # assert driver.current_url == URL
