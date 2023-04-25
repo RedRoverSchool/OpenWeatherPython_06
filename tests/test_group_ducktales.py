@@ -62,6 +62,48 @@ def test_fill_search_city_field(driver):
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
 
+    def test_change_status_api_key(self, driver, open_api_keys_page):
+        wait = WebDriverWait(driver, 15)
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
+        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        initial_status = first_column_values[2].text
+        if initial_status == "Inactive":
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        else:
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
+        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        current_status = first_column_values_after_switch[2].text
+        assert current_status != initial_status, "API Key status has not changed"
+
+    def test_status_api_key_not_changed(self, driver, open_api_keys_page):
+        wait = WebDriverWait(driver, 15)
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
+        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        initial_status = first_column_values[2].text
+        if initial_status == "Inactive":
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.dismiss()
+        else:
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.dismiss()
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
+        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        current_status = first_column_values_after_switch[2].text
+        assert current_status == initial_status, "API Key status was changed"
+
+
+
 
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org')
