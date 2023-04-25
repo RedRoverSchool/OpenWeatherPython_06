@@ -36,14 +36,15 @@ def test_sing_in_positive(driver):
     alert = driver.find_element(By.XPATH, '//*[@class="panel-body"]')
     assert alert.text == 'Signed in successfully.'
 
-def test_open_weather_map_empty(driver):
+def test_open_weather_map(driver):
     driver.get(URL)
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     # driver.implicitly_wait(15)
-    zoom_map = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.XPATH, '//a[contains(@href, "weathermap?zoom")]')))
-    # zoom_map = driver.find_element(By.XPATH, '//a[contains(@href, "weathermap?zoom")]')
+    # zoom_map = WebDriverWait(driver, 15).until(
+    #     EC.presence_of_element_located((By.XPATH, '//a[contains(@href, "weathermap?zoom")]')))
+    driver.find_element(By.XPATH, '//button[text()="Allow all"]').click()
+    zoom_map = driver.find_element(By.XPATH, '//a[contains(@href, "weathermap?zoom")]')
     zoom_map.click()
     window_weathermap_zoom = driver.window_handles[1] # возвращаем дескриптор новой страницы
     driver.switch_to.window(window_weathermap_zoom) # переключаем selenium на новую страницу
