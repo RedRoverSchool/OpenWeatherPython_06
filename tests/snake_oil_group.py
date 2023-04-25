@@ -27,3 +27,10 @@ def test_search_field_placeholder(driver):
     expected_placeholder = 'Search city'
     actual_placeholder = search_city_field.get_attribute('placeholder')
     assert actual_placeholder == expected_placeholder, f'Search field placeholder is {actual_placeholder}, expected {expected_placeholder}'
+
+
+def test_logo_is_presented(driver):
+    driver.get('https://openweathermap.org/')
+    logo = driver.find_element(By.XPATH, "/html/body//img[contains(@src, 'logo') or contains(@id, 'logo') or "
+                                         "contains(@class, 'logo')]")
+    assert logo.is_displayed(), "Logo not found on the Home page"
