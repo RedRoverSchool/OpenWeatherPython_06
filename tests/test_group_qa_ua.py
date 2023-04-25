@@ -31,3 +31,12 @@ def test_fill_search_city_field(driver):
     # displayed_city_text = displayed_city.text
     # print(displayed_city_text)
     assert displayed_city == expected_city
+
+
+def test_chack_log_in(driver):
+    driver.get('https://openweathermap.org/')
+    search_option_log = driver.find_element(By.CSS_SELECTOR, ".user-li a")
+    driver.implicitly_wait(30)
+    search_option_log_text = search_option_log.text
+    driver.implicitly_wait(20)
+    assert search_option_log.text == 'Sign in'
