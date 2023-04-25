@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 URL_sing_in_page = "https://home.openweathermap.org/users/sign_in"
-signIn_button = (By.CSS_SELECTOR, "ul .user-li")
 email_field = (By.ID, 'user_email')
 user_email = "jtzcmspsmgvbep@bugfoo.com"
 user_password = "Test1212"
@@ -21,8 +20,6 @@ URL_api_keys_page = 'https://home.openweathermap.org/api_keys'
 def open_api_keys_page(driver):
     wait = WebDriverWait(driver, 15)
     driver.get(URL_sing_in_page)
-    d = wait.until(EC.element_to_be_clickable(signIn_button))
-    d.click()
     wait.until(EC.element_to_be_clickable(email_field)).send_keys(user_email)
     wait.until(EC.element_to_be_clickable(password_field)).send_keys(user_password)
     wait.until(EC.element_to_be_clickable(submit_button)).click()
