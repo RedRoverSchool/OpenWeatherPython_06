@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 URL = 'https://openweathermap.org/'
+URL_TWITTER = 'https://twitter.com/OpenWeatherMap'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -51,13 +52,11 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     for option in options:
         assert city in option.text
 
+
 def test_social_link_twitter(driver):
     driver.get('https://openweathermap.org/')
-    time.sleep(10)
-
     click_twitter = driver.find_element(By.CSS_SELECTOR, 'a[href="https://twitter.com/OpenWeatherMap"]')
     driver.execute_script("return arguments[0].scrollIntoView(true);", click_twitter)
     click_twitter.click()
     driver.switch_to.window(driver.window_handles[1])
-
-    time.sleep(10)
+    assert "https://twitter.com/OpenWeatherMap" == URL_TWITTER, "Url is not presented"
