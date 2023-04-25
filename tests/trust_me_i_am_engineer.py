@@ -69,3 +69,5 @@ def test_fill_email_negative(driver):
     displayed_alert_text = displayed_alert.text
     assert displayed_alert_text == expected_alert
 
+pass
+
