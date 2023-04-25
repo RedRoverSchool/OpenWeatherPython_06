@@ -54,3 +54,10 @@ def test_top_bar_nav(driver):
     top_bar_logo = driver.find_element(By.XPATH, "//li[@class='logo']")
     print(f"Main logo on the top is displayed {top_bar_logo.is_displayed()}")
 
+
+def test_top_bar_guide(driver):
+    driver.get('https://openweathermap.org/')
+    time.sleep(5)
+    top_bar_button1_guide = driver.find_element(By.XPATH, "//div[@id='desktop-menu']/ul/li/a[@href='/guide']")
+    top_bar_button1_guide.click()
+    assert driver.current_url == "https://openweathermap.org/guide"
