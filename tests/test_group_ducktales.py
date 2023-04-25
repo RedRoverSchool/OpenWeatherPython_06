@@ -41,3 +41,7 @@ def test_registration(driver):
     click_submit_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//input[@value='Submit']")))
     click_submit_button.click()
+    success_message = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, '//div[@class="panel-body"]')))
+    expected_message = 'Signed in successfully.'
+    assert success_message.text == expected_message
