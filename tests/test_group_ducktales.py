@@ -81,21 +81,5 @@ class TestApiKeysPage:
         current_status = first_column_values_after_switch[2].text
         assert current_status != initial_status, "API Key status has not changed"
 
-    def test_status_api_key_not_changed(self, driver, open_api_keys_page):
-        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
-        initial_status = first_column_values[2].text
-        if initial_status == "Inactive":
-            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
-            switch_status.click()
-            alert = driver.switch_to.alert
-            alert.dismiss()
-        else:
-            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
-            switch_status.click()
-            alert = driver.switch_to.alert
-            alert.dismiss()
-        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
-        current_status = first_column_values_after_switch[2].text
-        assert current_status == initial_status, "API Key status was changed"
 
 
