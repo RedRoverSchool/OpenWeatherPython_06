@@ -1,13 +1,9 @@
 import time
 from selenium import webdriver
-import pytest
-from webdriver_manager.chrome import ChromeDriverManager  # CDM - it is class
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+import pytest
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC, wait
-
-browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
 
