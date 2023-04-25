@@ -4,6 +4,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
+import random
+import string
+
 URL_sing_in_page = "https://home.openweathermap.org/users/sign_in"
 email_field = (By.ID, 'user_email')
 user_email = "jtzcmspsmgvbep@bugfoo.com"
@@ -12,6 +15,13 @@ password_field = (By.ID, 'user_password')
 submit_button = (By.CSS_SELECTOR, '.btn-color[value="Submit"]')
 tab_api_keys = (By.CSS_SELECTOR, '#myTab [href="/api_keys"')
 URL_api_keys_page = 'https://home.openweathermap.org/api_keys'
+SIGN_IN_ALERT = By.CLASS_NAME, 'panel-body'
+
+
+def random_word():
+    letters = string.ascii_lowercase
+    random_word = ''.join(random.choice(letters) for _ in range(8))
+    return random_word
 
 
 @pytest.fixture()
@@ -22,6 +32,16 @@ def open_api_keys_page(driver):
     wait.until(EC.element_to_be_clickable(password_field)).send_keys(user_password)
     wait.until(EC.element_to_be_clickable(submit_button)).click()
     wait.until(EC.element_to_be_clickable(tab_api_keys)).click()
+
+
+class TestSignInPage:
+    def test_wrong_data_get_alert(self, driver):
+        wait = WebDriverWait(driver, 15)
+        driver.get(URL_sing_in_page)
+        wait.until(EC.element_to_be_clickable(email_field)).send_keys(random_word())
+        wait.until(EC.element_to_be_clickable(password_field)).send_keys(random_word())
+        wait.until(EC.element_to_be_clickable(submit_button)).click()
+        assert driver.find_element(*SIGN_IN_ALERT).is_displayed(), "не отображается 'Alert Invalid...' "
 
 
 def test_fill_search_city_field(driver):
