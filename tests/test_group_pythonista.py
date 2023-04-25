@@ -29,9 +29,11 @@ def test_checkout_menu_tab_guide(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
-    driver.find_element(*tab_guide).click()
+    menu_guide = wait.until(EC.element_to_be_clickable(tab_guide))
+    menu_guide.click()
     assert driver.current_url == 'https://openweathermap.org/guide'
-    driver.find_element(*bt_go_home).click()
+    home_pg = wait.until(EC.element_to_be_clickable(bt_go_home))
+    home_pg.click()
     assert driver.current_url == URL
 
 
@@ -39,7 +41,9 @@ def test_checkout_menu_tab_api(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
-    driver.find_element(*tab_api).click()
+    menu_api = wait.until(EC.element_to_be_clickable(tab_api))
+    menu_api.click()
     assert driver.current_url == 'https://openweathermap.org/api'
-    driver.find_element(*bt_go_home).click()
+    go_home = wait.until(EC.element_to_be_clickable(bt_go_home))
+    go_home.click()
     assert driver.current_url == URL
