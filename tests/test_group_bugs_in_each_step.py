@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 URL = 'https://openweathermap.org/'
-
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 
 def test_should_open_given_link(driver):
