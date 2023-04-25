@@ -31,6 +31,5 @@ def test_search_field_placeholder(driver):
 
 def test_logo_is_presented(driver):
     driver.get('https://openweathermap.org/')
-    logo = driver.find_element(By.XPATH, "/html/body//img[contains(@src, 'logo') or contains(@id, 'logo') or "
-                                         "contains(@class, 'logo')]")
+    logo = driver.find_element(By.XPATH, "//li[contains(@class, 'logo')]")
     assert logo.is_displayed(), "Logo not found on the Home page"
