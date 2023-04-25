@@ -20,3 +20,13 @@ def test_verify_page_title(driver):
 def test_compare_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+def test_pricing_title(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    button_pricing = WebDriverWait(driver, 35).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="desktop-menu"]/ul/li[5]/a')))
+    button_pricing.click()
+    pricing_text = driver.find_element(By.XPATH, "/html/body/main/div[1]/div/div/div[1]/h1").text
+    assert pricing_text == "Pricing"
