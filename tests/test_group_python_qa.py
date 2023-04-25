@@ -19,13 +19,13 @@ def test_should_open_given_link(driver):
 
 
 def test_check_page_title(driver):
-    driver.get('https://openweathermap.org/')
-    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+    driver.get(URL)
+    assert driver.title == 'Current weather and forecast - OpenWeatherMap'
 
 
 @pytest.mark.parametrize('city', cities)
 def test_fill_search_city_field(driver, city):
-    driver.get('https://openweathermap.org/')
+    driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
     search_city_input = driver.find_element(*search_city_field)
@@ -40,7 +40,7 @@ def test_fill_search_city_field(driver, city):
 
 @pytest.mark.parametrize('city', cities)
 def test_all_dropdown_options_should_contain_valid_city(driver, city):
-    driver.get('https://openweathermap.org/')
+    driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
     search_city_input = driver.find_element(*search_city_field)
