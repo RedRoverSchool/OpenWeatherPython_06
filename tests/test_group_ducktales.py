@@ -1,8 +1,28 @@
 from selenium.webdriver import Keys
+import pytest
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+
+URL_sing_in_page = "https://home.openweathermap.org/users/sign_in"
+email_field = (By.ID, 'user_email')
+user_email = "jtzcmspsmgvbep@bugfoo.com"
+user_password = "Test1212"
+password_field = (By.ID, 'user_password')
+submit_button = (By.CSS_SELECTOR, '.btn-color[value="Submit"]')
+tab_api_keys = (By.CSS_SELECTOR, '#myTab [href="/api_keys"')
+URL_api_keys_page = 'https://home.openweathermap.org/api_keys'
+
+
+@pytest.fixture()
+def open_api_keys_page(driver):
+    wait = WebDriverWait(driver, 15)
+    driver.get(URL_sing_in_page)
+    wait.until(EC.element_to_be_clickable(email_field)).send_keys(user_email)
+    wait.until(EC.element_to_be_clickable(password_field)).send_keys(user_password)
+    wait.until(EC.element_to_be_clickable(submit_button)).click()
+    wait.until(EC.element_to_be_clickable(tab_api_keys)).click()
 
 
 def test_fill_search_city_field(driver):
@@ -30,6 +50,7 @@ def test_check_page_title(driver):
 
 def test_authorization_page(driver):
     pass
+
 
 
 def test_registration(driver):
