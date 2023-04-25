@@ -50,3 +50,15 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     for option in options:
         assert city in option.text
 
+
+@pytest.mark.parametrize('city', cities)
+def test_all_dropdown_options_should_contain_valid_city(driver, city):
+    driver.get('https://openweathermap.org/')
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    search_city_input = driver.find_element(*search_city_field)
+    search_city_input.send_keys(city)
+    driver.find_element(*search_button).click()
+    options = driver.find_elements(*search_dropdown)
+    for option in options:
+        assert city in option.text
