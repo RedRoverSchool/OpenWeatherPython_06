@@ -51,3 +51,23 @@ def test_on_api_page_recommend_version_of_api(driver):
     button_nav_bar_api.click()
     recommend_version_of_api = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert recommend_version_of_api == "One Call API 3.0"
+
+def test_fill_email_negative(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    sign_in_button = driver.find_element(By.CSS_SELECTOR, ".user-li a")
+    sign_in_button.click()
+    email = driver.find_element(By.CSS_SELECTOR, ".input-group .string")
+    email.click()
+    email.send_keys('test@email.com')
+    create_user = driver.find_element(By.CSS_SELECTOR, ".new_user .btn")
+    create_user.click()
+    expected_alert = 'Invalid Email or password.'
+    displayed_alert = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, ".panel-body")))
+    displayed_alert_text = displayed_alert.text
+    assert displayed_alert_text == expected_alert
+
+pass
+
