@@ -3,6 +3,7 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
@@ -49,4 +50,18 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     options = driver.find_elements(*search_dropdown)
     for option in options:
         assert city in option.text
+
+
+
+    # // li / a[ @ href = "/examples"] [text() = 'Partners']
+    # .breadcrumb - title
+
+def test_link_in_nav_bar_Partners(driver):
+    driver.get('https://openweathermap.org/')
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    link_nav_bar_partners = WebDriverWait(driver, 35).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(8)>a")))
+    link_nav_bar_partners.click()
+    nav_bar_partners_title_text = driver.find_element(By.CSS_SELECTOR, ".breadcrumb-title").text
+    assert nav_bar_partners_title_text == "Partners and solutions"
 
