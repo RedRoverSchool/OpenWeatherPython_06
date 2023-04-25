@@ -8,24 +8,16 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC, wait
 
 browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
 
 URL = 'https://openweathermap.org/'
+
 
 def test_should_open_given_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
 
 
-def test_open_marketplace_page():
-    driver.get('https://openweathermap.org/')    # open the main page
-    time.sleep(5)
-    # # search link and then click
-    marketplace_link = driver.find_element(By.CSS_SELECTOR, "div#desktop-menu li:nth-child(4) a")
-    marketplace_link.click()
-    # # switch to new opened tab
-    driver.switch_to.window(driver.window_handles[1])
-    # # check if the current url is correct
-    assert driver.current_url == 'https://home.openweathermap.org/marketplace'
-    assert 'Marketplace' in driver.title
+def test_check_page_title(driver):  # check title name
+    driver.get('https://home.openweathermap.org/marketplace')
+    assert driver.title == 'Marketplace: History Bulk, History Forecast Bulk, ' \
+                           'Historical Weather Data by State for all ZIP codes, USA - OpenWeather'
