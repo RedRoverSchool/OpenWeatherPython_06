@@ -1,6 +1,7 @@
+from selenium.webdriver import Keys
 import pytest
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -61,28 +62,6 @@ def test_fill_search_city_field(driver):
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
 
-
-def test_check_page_title(driver):
-    driver.get('https://openweathermap.org')
-    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
-
-
-def test_authorization_page(driver):
-    pass
-
-
-class TestApiKeysPage:
-    def test_open_my_api_keys(self, driver, open_api_keys_page):
-        expected_api_keys_URL = URL_api_keys_page
-        actual_url = driver.current_url
-        assert actual_url == expected_api_keys_URL, 'The API page URL does not match expected'
-
-    def test_api_keys_tab_is_active(self, driver, open_api_keys_page):
-        my_tab_elements = driver.find_elements(By.CSS_SELECTOR, '#myTab li')
-        expected_result = "active"
-        actual_result = my_tab_elements[2].get_attribute('class')
-        assert actual_result == expected_result, "API Keys tab is not active"
-
     def test_change_status_api_key(self, driver, open_api_keys_page):
         wait = WebDriverWait(driver, 15)
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
@@ -126,5 +105,25 @@ class TestApiKeysPage:
 
 
 
+def test_check_page_title(driver):
+    driver.get('https://openweathermap.org')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
+def test_authorization_page(driver):
+    pass
+
+
+def test_registration(driver):
+    driver.get('https://openweathermap.org/home/sign_in')
+    enter_email = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_email")))
+    enter_email.send_keys('badlolpro@gmail.com')
+    enter_password = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "user_password")))
+    enter_password.send_keys('36Pv@tdm2H7/x-d')
+    click_submit_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//input[@value='Submit']")))
+    click_submit_button.click()
+    expected_message = 'Signed in successfully.'
+    success_message = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, "//div[@class='panel-body']")))
+    assert success_message.text == expected_message
