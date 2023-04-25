@@ -127,3 +127,32 @@ def test_registration(driver):
     success_message = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.XPATH, "//div[@class='panel-body']")))
     assert success_message.text == expected_message
+
+#Экспериментальный тест с проверкой температуры. Тестирование рекомендовано провести для нескольких географических точек, сильно разнящихся по климату
+def test_city_temperature(driver):
+    driver.get('http://openweathermap.org/')
+    time.sleep(10)
+    temperature_scale_choice = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[contains(text(), 'Metric: °C, m/s')]")))  # удостоверимся, что шкала для теста - Цельсий (можно рассматривать это как precondition, но лучше подстраховаться)
+    temperature_scale_choice.click()
+    search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys('Reykjavík')
+    search_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "button[class='button-round dark']")))
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "//span[contains(text(), 'Reykjavík, IS')]")))
+    search_option.click()
+    expected_city = 'Reykjavík, IS'
+    displayed_city = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "//h2[contains(text(), 'Reykjavík, IS')]")))
+    assert displayed_city.text == expected_city #проверяем, соответствует ли вывод запросу
+    displayed_temperature = WebDriverWait(driver, 15).until(EC.presence_of_element_located( #проверяем, адекватны ли температурные значения
+        (By.CSS_SELECTOR, "span[class='heading']")))
+    displayed_temperature_text = displayed_temperature.text
+    assert displayed_temperature_text[0] == '-' or displayed_temperature_text[0].isdigit
+    assert displayed_temperature_text[:-2].isdigit
+    assert displayed_temperature_text[-2:] == '°C'
+    num = int(displayed_temperature_text[:-2])
+    assert -10 <= num <= 10 #граничные значения исходя из средних температур сезона за всю историю наблюдений
