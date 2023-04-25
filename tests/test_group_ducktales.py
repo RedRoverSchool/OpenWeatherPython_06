@@ -82,7 +82,6 @@ class TestApiKeysPage:
         assert current_status != initial_status, "API Key status has not changed"
 
     def test_status_api_key_not_changed(self, driver, open_api_keys_page):
-        # api_key_rows = driver.find_elements(By.CSS_SELECTOR, ".material_table.api-keys tbody tr")
         first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
         initial_status = first_column_values[2].text
         if initial_status == "Inactive":
