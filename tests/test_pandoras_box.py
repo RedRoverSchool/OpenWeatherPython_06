@@ -8,7 +8,7 @@ URL = 'https://openweathermap.org/'
 
 def test_sing_in_empty_fields(driver):
     driver.get(URL)
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div'))) # ожидание загрузки элементов
     driver.find_element(By.XPATH, '//a[contains(@href, "sign_in")]').click()
     driver.find_element(By.XPATH, '//*[@id="new_user"]/input[3]').click()
@@ -17,7 +17,7 @@ def test_sing_in_empty_fields(driver):
 
 def test_sing_in_positive(driver):
     driver.get(URL)
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     driver.find_element(By.XPATH, '//a[contains(@href, "sign_in")]').click()
     email_form = driver.find_element(By.XPATH, '//*[@id = "user_email"]')
@@ -36,7 +36,7 @@ def test_sing_in_positive(driver):
 
 def test_open_weather_map(driver):
     driver.get(URL)
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     driver.find_element(By.XPATH, '//a[contains(@href, "weathermap?zoom")]').click()
     window_weathermap_zoom = driver.window_handles[1] # возвращаем дескриптор новой страницы
