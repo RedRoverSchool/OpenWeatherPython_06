@@ -65,3 +65,21 @@ class TestApiKeysPage:
         actual_result = my_tab_elements[2].get_attribute('class')
         assert actual_result == expected_result, "API Keys tab is not active"
 
+    def test_change_status_api_key(self, driver, open_api_keys_page):
+        # api_key_rows = driver.find_elements(By.CSS_SELECTOR, ".material_table.api-keys tbody tr")
+        first_column_values = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        initial_status = first_column_values[2].text
+        if initial_status == "Inactive":
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-off')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        else:
+            switch_status = first_column_values[3].find_element(By.CSS_SELECTOR, '.fa.fa-toggle-on')
+            switch_status.click()
+            alert = driver.switch_to.alert
+            alert.accept()
+        first_column_values_after_switch = driver.find_elements(By.XPATH, "//tbody/tr[1]/td")
+        current_status = first_column_values_after_switch[2].text
+        assert current_status != initial_status, "API Key status has not changed"
+
