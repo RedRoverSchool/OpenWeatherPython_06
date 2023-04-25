@@ -6,7 +6,7 @@ test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
 URL = 'https://openweathermap.org/'
 
-def test_open_page():
+def test_open_page(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url # проверка наличия строки в url
 
