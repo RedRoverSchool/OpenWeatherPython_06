@@ -1,12 +1,11 @@
 import time
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
+URL = "https://openweathermap.org/"
 def test_open_blog_article(driver):
-    driver.get("https://openweathermap.org/")
+    driver.get(URL)
 
     blog_btn = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
         (By.LINK_TEXT, "Blog")))
