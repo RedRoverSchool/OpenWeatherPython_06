@@ -29,10 +29,10 @@ def test_checkout_menu_tab_guide(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
-    tab_guild = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(tab_guide))
+    tab_guild = WebDriverWait(driver, 35).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#desktop-menu a[href="/guide"]')))
     tab_guild.click()
     assert driver.current_url == 'https://openweathermap.org/guide'
-    bt_home = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(bt_go_home))
+    bt_home = WebDriverWait(driver, 35).until(EC.element_to_be_clickable(bt_go_home))
     bt_home.click()
     assert driver.current_url == URL
 
@@ -41,8 +41,9 @@ def test_checkout_menu_tab_api(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
-    tab_b_api = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(tab_api))
+    tab_b_api = WebDriverWait(driver, 35).until(EC.element_to_be_clickable(tab_api))
     tab_b_api.click()
     assert driver.current_url == 'https://openweathermap.org/api'
+
     wait.until(EC.element_to_be_clickable(bt_go_home)).click()
     assert driver.current_url == URL
