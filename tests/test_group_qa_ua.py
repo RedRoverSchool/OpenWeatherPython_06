@@ -3,15 +3,18 @@ import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
     driver.maximize_window()
     assert 'openweathermap' in driver.current_url
     print(driver.current_url)
 
+
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org/')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
 
 def test_fill_search_city_field(driver):
     driver.get('https://openweathermap.org/')
@@ -36,7 +39,8 @@ def test_fill_search_city_field(driver):
 def test_chack_log_in(driver):
     driver.get('https://openweathermap.org/')
     search_option_log = driver.find_element(By.CSS_SELECTOR, ".user-li a")
-    driver.implicitly_wait(30)
+    driver.implicitly_wait(40)
+    expected_log = 'Sign in'
     search_option_log_text = search_option_log.text
-    driver.implicitly_wait(20)
-    assert search_option_log.text == 'Sign in'
+    driver.implicitly_wait(30)
+    assert search_option_log.text == expected_log
