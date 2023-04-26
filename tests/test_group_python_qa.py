@@ -53,7 +53,7 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
 
 def test_support_button(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     click_support = driver.find_element(By.ID, 'support-dropdown')
     click_support.click()
