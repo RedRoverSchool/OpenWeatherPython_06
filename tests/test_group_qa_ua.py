@@ -49,7 +49,8 @@ def test_check_blog(driver):
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     expected_log = 'Blog'
+    search_option_log = WebDriverWait(driver, 15).until(EC.visibility_of_element_located(
+        (By.CSS_SELECTOR, '#desktop-menu li:nth-child(9) a'))).text
     search_option_log = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, '#desktop-menu li:nth-child(9) a'))).text
-    print(type(search_option_log))
     assert expected_log == search_option_log
