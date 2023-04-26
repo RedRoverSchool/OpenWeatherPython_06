@@ -87,7 +87,5 @@ def test_home_button(driver):
         tab_home_link.click()
         assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
     except TimeoutException as e:
-            print(f"TimeoutException occurred: {e}")
-
-
+        print(f"TimeoutException occurred: {e}")
 
