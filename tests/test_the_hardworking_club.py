@@ -2,6 +2,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pytest
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -100,4 +103,26 @@ def test_pricing_title(driver):
 def test_partners_title(driver):
     driver.get('https://openweathermap.org/examples')
     assert driver.title == 'Partners and solutions - OpenWeatherMap'
+
+@pytest.fixture(scope="session")
+def driver():
+    print('start browser')
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('https://home.openweathermap.org/marketplace')
+    driver.maximize_window()
+    yield driver
+    driver.quit()
+
+
+def test_find_element_on_page(driver):
+     elements_on_page = driver.find_elements(By.XPATH, '//div/*[@class = "product"]')
+     assert elements_on_page
+
+def test_number_of_elements_on_page(driver):
+    number_of_elements_on_page = len(driver.find_elements(By.XPATH, '//div/*[@class = "product"]'))
+    assert number_of_elements_on_page == 3
+    print('number_of_elements_on_page:', number_of_elements_on_page)
+
+
+
 
