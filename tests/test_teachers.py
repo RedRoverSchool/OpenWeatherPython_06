@@ -12,7 +12,7 @@ search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 sign_in_link = (By.CSS_SELECTOR, '.user-li a')
-pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
+pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href$="price"]')
 price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 
 
@@ -76,3 +76,4 @@ def test_should_be_valid_title_on_price_page(driver, open_and_load_page, wait):
     driver.execute_script("arguments[0].click();", element)
     pricing_text = driver.find_element(*price_page_title).text
     assert pricing_text == "Pricing"
+
