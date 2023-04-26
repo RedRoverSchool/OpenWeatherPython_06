@@ -8,21 +8,22 @@ def test_open_page(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url # проверка наличия строки в url
 
+
 def test_current_time(driver): # проверка текущей даты и времени
     driver.get(URL)
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    driver.find_element(By.XPATH, '//button[text()="Allow all"]').click()
+    driver.find_element(By.XPATH, '//button[text()="Allow all"]').click() # принимаем куки
     cookies_data = driver.get_cookies()
-    city_id = dict(cookies_data[5]).get('value')
-    driver.add_cookie({'name': 'cityid', 'value': f'{city_id}'})
-    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p")[:12]
-    print(current_time)
+    cityid = dict(cookies_data[5]).get('value') # достаем из куки id города
+    driver.add_cookie({'name': 'cityid', 'value': f'{cityid}'}) # подставляем куки с id города
+    driver.get(URL) # открываем страницу с id города
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p").lower()
     current_time_from_page = driver.find_element(
-        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text[:12]
-    print(current_time_from_page)
+        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()
     assert current_time == current_time_from_page
-
 
 def test_8_days_forecast(driver): # проверка, что отображается прогноз на 8 дней
     driver.get("https://openweathermap.org/")
