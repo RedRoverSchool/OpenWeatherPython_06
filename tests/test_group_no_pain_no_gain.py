@@ -54,3 +54,35 @@ def test_fill_search_city_field(driver):
         (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'New York'))
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
+
+
+def test_recover_password(driver):
+    driver.get(SIGN_IN_PAGE)
+    cssValue = driver.find_element(By.XPATH, "//a[@href='#']").value_of_css_property(
+        "cursor"
+    )
+    assert cssValue == "pointer"
+    driver.find_element(By.XPATH, "//a[@href='#']").click()
+    element = driver.find_element(By.XPATH, "//input[@class='form-control string email optional']")
+    text = element.get_attribute('placeholder')
+    assert text == 'Enter email'
+    driver.find_element(By.XPATH, "//input[@class='form-control string email optional']").send_keys(WRONG_LOGIN)
+    cssValue = driver.find_element(By.XPATH, "//input[@value='Send']").value_of_css_property(
+        "cursor"
+    )
+    assert cssValue == "pointer"
+    WebDriverWait(driver, 10).until_not(EC.text_to_be_present_in_element_value(
+        (By.XPATH, "//input[@value='Send']"), "Create user"))
+    driver.find_element(By.XPATH, "//input[@value='Send']").click()
+    assert "users/password" in driver.current_url
+    driver.find_element(By.XPATH, "//div[@class='panel-heading']"), 'NO ERROR MESSAGE!'
+    driver.find_element(By.XPATH, "// *[contains(text(), 'Email not found')]"), 'NO EMAIL NOT FOUND MESSAGE!'
+    driver.find_element(By.XPATH, "//div[@class='sign-form']"), 'NO FORGOT YOUR PASSWORD FORM!'
+    driver.find_element(By.XPATH, "//*[contains(text(),'Forgot your password?')]")
+    element = driver.find_element(By.ID, "user_email")
+    text = element.get_attribute('placeholder')
+    assert text == 'Enter email'
+    element = driver.find_element(By.ID, "user_email")
+    text = element.get_attribute('value')
+    assert text == WRONG_LOGIN
+    driver.find_element(By.XPATH, "//input[@value='Change password']"), 'NO CHANGE PASSWORD BUTTON!'
