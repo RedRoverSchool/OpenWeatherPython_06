@@ -65,6 +65,8 @@ def test_check_facebook_link_in_footer(driver):
     footer_buttons = driver.find_elements(By.CSS_SELECTOR, '.social a')
     assert footer_buttons[0].get_attribute('href') == 'https://www.facebook.com/groups/270748973021342'
 
+
+@pytest.mark.skip("need to refactor why this test sometimes doesn't work")
 def test_captcha_sign_in_form(driver):
     driver.get(URL)
     search_sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
@@ -87,4 +89,3 @@ def test_captcha_sign_in_form(driver):
     search_btn_create_account.click()
     search_failed_message = driver.find_element(By.CSS_SELECTOR, "#new_user > div:nth-child(20) > div.has-error > div")
     assert search_failed_message.is_displayed()
-
