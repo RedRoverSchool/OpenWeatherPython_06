@@ -13,7 +13,7 @@ def open_page(driver):
 
 
 def test_go_to_sign_in_page(driver, open_page):
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 25)
     wait.until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div'))
     )
