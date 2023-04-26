@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
-import pytz
 URL = 'https://openweathermap.org/'
 
 def test_open_page(driver):
@@ -10,9 +9,13 @@ def test_open_page(driver):
     assert 'openweathermap' in driver.current_url # проверка наличия строки в url
 
 def test_current_time(driver): # проверка текущей даты и времени
-    driver.get("https://openweathermap.org/")
+    driver.get(URL)
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    driver.find_element(By.XPATH, '//button[text()="Allow all"]').click()
+    cookies_data = driver.get_cookies()
+    city_id = dict(cookies_data[5]).get('value')
+    driver.add_cookie({'name': 'cityid', 'value': f'{city_id}'})
     search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
     search_city_field.send_keys('Minsk')
     search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
@@ -20,8 +23,7 @@ def test_current_time(driver): # проверка текущей даты и в�
     search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
     search_option.click()
-    current_time = datetime.datetime.now(pytz.timezone('Europe/Moscow')).strftime("%b %d, %I:%M%p").lower()[:12]
-    print(current_time)
+    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p").lower()[:12]
     current_time_from_page = driver.find_element(
         By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()[:12]
     assert current_time == current_time_from_page
