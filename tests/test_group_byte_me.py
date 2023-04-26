@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
-SIGNIN_BTN = (By.CLASS_NAME, 'user-li')
+# SIGNIN_BTN = (By.CLASS_NAME, 'user-li')
 
 
 @pytest.fixture()
@@ -18,5 +18,8 @@ def test_go_to_sign_in_page(driver, open_page):
     wait.until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div'))
     )
-    wait.until(EC.element_to_be_clickable([*SIGNIN_BTN])).click()
+    sign_button = wait.until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, '.user-li>a')))
+    sign_button.click()
     assert "sign_in" in driver.current_url, "--------Wrong URL-----------"
+
