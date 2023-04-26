@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 URL = 'https://openweathermap.org/'
 WRONG_LOGIN = 'error@gmail.com'
@@ -35,4 +38,21 @@ def test_wrong_login_password(driver):
     driver.find_element(By.XPATH, "//input[@value='Submit']").click()
     driver.find_element(By.XPATH, "//div[@class='panel-heading']"), 'NO ALERT'
     driver.find_element(By.XPATH, "//*[contains(text(), 'Invalid Email or password.')]")
+
+browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+url1 = 'https://home.openweathermap.org/users/sign_in'
+
+user_name1 = 'murzin199593@gmail.com'
+password1 = '1234567890'
+def test_authorization():
+    browser.get(url1)
+    user_name = browser.find_element(By.XPATH, "//input[@id='user_email']")
+    user_name.send_keys(user_name1)
+    password = browser.find_element(By.XPATH, "//input[@id='user_password']")
+    password.send_keys(password1)
+    submit_btn = browser.find_element(By.XPATH, "//input[@name='commit']")
+    submit_btn.click()
+    notice = browser.find_element(By.XPATH, "//*[@class='panel-body']")
+    value_notice = notice.text
+    assert value_notice == 'Signed in successfully.'
 
