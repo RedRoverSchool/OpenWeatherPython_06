@@ -10,7 +10,7 @@ import string
 
 URL = 'https://openweathermap.org/'
 URL_SignIN = 'https://home.openweathermap.org/users/sign_in'
-SIGNIN_BTN = (By.CSS_SELECTOR, '.user-li>a')
+SIGNIN_BTN = (By.CLASS_NAME, 'user-li')
 LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 EMAIL_FIELD = (By.ID, 'user_email')
 PASSWORD_FIELD = (By.ID, 'user_password')
@@ -32,16 +32,16 @@ def random_word():  # https://flexiple.com/python/generate-random-string-python/
 
 
 def test_go_to_sign_in_page(driver, open_page):
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 30)
     wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
-    try:
-        driver.find_element(*FOOTER_ACCEPT_BTN).click()
-        # driver.switch_to.alert.accept()
-        signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
-        signin_btn.click()
-    except TimeoutException:
-        signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
-        signin_btn.click()
+    signin_btn = driver.find_element(*SIGNIN_BTN)
+    signin_btn.click()
+    # footer = driver.find_element(*FOOTER_ACCEPT_BTN)
+    # if footer.is_displayed():
+    #     footer.click()
+    # else:
+    #     signin_btn = wait.until(EC.element_to_be_clickable([*SIGNIN_BTN]))
+    #     signin_btn.click()
     assert "sign_in" in driver.current_url, assert_msg
 
 
