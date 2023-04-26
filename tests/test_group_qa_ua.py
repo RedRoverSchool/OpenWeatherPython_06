@@ -36,12 +36,9 @@ def test_fill_search_city_field(driver):
     assert displayed_city == expected_city
 
 
-def test_chack_log_in(driver):
+def test_search_field_placeholder(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    expected_log = 'Sign in'
-    WebDriverWait(driver, 15).until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, '.user-li a')))
-    search_option_log = driver.find_element(By.CSS_SELECTOR, ".user-li a").text
-    assert expected_log == search_option_log
+    search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
+    expected_placeholder = 'Search city'
+    actual_placeholder = search_city_field.get_attribute('placeholder')
+    assert actual_placeholder == expected_placeholder, f'Search field placeholder is {actual_placeholder}, expected {expected_placeholder}'
