@@ -11,6 +11,9 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
+sign_in_link = (By.CSS_SELECTOR, '.user-li a')
+pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
+price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 
 
 def test_should_open_given_link(driver):
@@ -50,3 +53,26 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     for option in options:
         assert city in option.text
 
+
+@pytest.fixture()
+def open_and_load_page(driver, wait):
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located(load_div))
+
+
+@pytest.fixture()
+def wait(driver):
+    wait = WebDriverWait(driver, 25)
+    yield wait
+
+
+def test_should_go_to_sign_in_page(driver, open_and_load_page, wait):
+    sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
+    driver.execute_script("arguments[0].click();", sign_link)
+    assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
+
+def test_should_be_valid_title_on_price_page(driver, open_and_load_page, wait):
+    element = wait.until(EC.element_to_be_clickable(pricing_link))
+    driver.execute_script("arguments[0].click();", element)
+    pricing_text = driver.find_element(*price_page_title).text
+    assert pricing_text == "Pricing"
