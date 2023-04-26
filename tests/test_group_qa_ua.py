@@ -38,6 +38,6 @@ def test_chack_log_in(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     expected_log = 'Sign in'
     WebDriverWait(driver, 30).until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, '#mobile-menu > li:nth-child(13) > a'), 'Sign in'))
-    displayed_log = driver.find_element(By.CSS_SELECTOR, '#mobile-menu > li:nth-child(13) > a').text
-    assert expected_log == displayed_log
+        (By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a'), 'Sign in'))
+    assert_msg = '\n================\nAssertion Error\n================\n'
+    assert driver.find_element(By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a').is_displayed(), assert_msg
