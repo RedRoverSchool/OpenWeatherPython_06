@@ -9,7 +9,7 @@ URL = 'https://openweathermap.org/'
 @pytest.fixture()
 def open_page(driver):
     driver.get(URL)
-    assert driver.current_url == URL, "--------Wrong URL-----------"
+    assert driver.current_url == URL, "--------Wrong URL----------"
 
 
 def test_go_to_sign_in_page(driver, open_page):
@@ -19,4 +19,4 @@ def test_go_to_sign_in_page(driver, open_page):
     )
     sign_button = driver.find_element(By.CSS_SELECTOR, '.user-li>a')
     sign_button.click()
-    assert "sign_in" in driver.current_url, "--------Wrong URL-----------"
+    assert "sign_in" in driver.current_url, "--------Wrong URL----------"
