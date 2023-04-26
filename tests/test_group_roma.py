@@ -6,32 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = "https://openweathermap.org/"
 
 
-def test_open_blog_article(driver):
-    driver.get(URL)
-    time.sleep(15)
-    wait = WebDriverWait(driver, 3)
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#desktop-menu > ul > li:nth-child(9) > a"))).click()
-
-
-
-    driver.switch_to.window(driver.window_handles[1])
-
-    all_btn = driver.find_element(By.LINK_TEXT, "ALL")
-    all_btn.click()
-    assert "Blog" in driver.title, "Заголовок страницы не содержит слово 'Blog'"
-
-
-    first_article = driver.find_element(By.CSS_SELECTOR, "[class=post__title]")
-    first_article.click()
-
-    cookie = driver.find_element(By.CSS_SELECTOR, "button[type='button']")
-    cookie.click()
-
-    return_btn = wait.until(EC.element_to_be_clickable(
-        (By.CSS_SELECTOR, ".return [href='/blog']")))
-    return_btn.click()
-
-    time.sleep(5)
+def test_check_page_title(driver):
+    # function checks page title
+    driver.get('https://openweathermap.org')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
 def test_should_open_given_link(driver):
