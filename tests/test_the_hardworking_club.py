@@ -90,3 +90,8 @@ def test_support_drop_down(driver):
     for i, el in enumerate(items):
         assert el.find_element(By.TAG_NAME, 'a').get_attribute('href') == urls[i]
         assert el.find_element(By.TAG_NAME, 'a').get_attribute("innerHTML") == texts[i]
+
+
+def test_pricing_title(driver):
+    driver.get('https://openweathermap.org/price')
+    assert driver.title == 'Pricing - OpenWeatherMap'
