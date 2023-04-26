@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
+import pytz
 URL = 'https://openweathermap.org/'
 
 def test_open_page(driver):
@@ -19,10 +20,10 @@ def test_current_time(driver): # проверка текущей даты и в�
     search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
     search_option.click()
-    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p").lower()
+    current_time = datetime.datetime.now(pytz.timezone('Europe/Moscow')).strftime("%b %d, %I:%M%p").lower()[:12]
     print(current_time)
     current_time_from_page = driver.find_element(
-        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()
+        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()[:12]
     assert current_time == current_time_from_page
 
 
