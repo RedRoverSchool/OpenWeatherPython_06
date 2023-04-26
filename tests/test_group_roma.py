@@ -20,6 +20,7 @@ def test_open_blog_article(driver):
     all_btn = driver.find_element(By.LINK_TEXT, "ALL")
     all_btn.click()
     assert "Blog" in driver.title, "Заголовок страницы не содержит слово 'Blog'"
+    time.sleep(7)
 
     first_article = driver.find_element(By.CSS_SELECTOR, "[class=post__title]")
     first_article.click()
