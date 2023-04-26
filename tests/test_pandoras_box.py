@@ -16,16 +16,11 @@ def test_current_time(driver): # проверка текущей даты и в�
     cookies_data = driver.get_cookies()
     city_id = dict(cookies_data[5]).get('value')
     driver.add_cookie({'name': 'cityid', 'value': f'{city_id}'})
-    search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
-    search_city_field.send_keys('Minsk')
-    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
-    search_button.click()
-    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
-        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
-    search_option.click()
-    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p").lower()[:12]
+    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p")[:12]
+    print(current_time)
     current_time_from_page = driver.find_element(
-        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()[:12]
+        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text[:12]
+    print(current_time_from_page)
     assert current_time == current_time_from_page
 
 
