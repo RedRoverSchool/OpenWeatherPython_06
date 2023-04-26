@@ -12,5 +12,10 @@ def test_check_page_title(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
     print(f'The site title is: {driver.title}')
 
-
+def test_click_guide(driver):
+    driver.get(URL)
+    search_button_guide = driver.find_element(By.XPATH, '//*[@id="desktop-menu"]/ul/li[1]/a')
+    search_button_guide.click()
+    assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
+    print(f'The page site title is: {driver.title}')
 
