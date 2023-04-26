@@ -87,7 +87,5 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     driver.find_element(*accept_cookies).click()
     expected_text = 'Sign in'
     element = driver.find_element(*sign_in_link)
-    action_chains = ActionChains(driver)
-    action_chains.move_to_element(element)
-    sign_in_text = element.text
+    sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
