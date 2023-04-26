@@ -85,5 +85,7 @@ def test_should_be_valid_title_on_price_page(driver, open_and_load_page, wait):
 
 def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     driver.find_element(*accept_cookies).click()
+    expected_text = 'Sign in'
+    wait.until(EC.text_to_be_present_in_element(sign_in_link, expected_text))
     sign_in_text = driver.find_element(*sign_in_link).text
-    assert sign_in_text == 'Sign in'
+    assert sign_in_text == expected_text
