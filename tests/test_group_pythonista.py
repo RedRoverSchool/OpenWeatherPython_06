@@ -10,6 +10,7 @@ load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 selector_dashboard = (By.XPATH, "//h1[contains(text(),'Weather dashboard')]")
 tab_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
 selector_api = (By.XPATH, "//h1[contains(text(),'Weather API')]")
+selector_marketplace_tab = (By.XPATH, '//div[@id="desktop-menu"]//li[4]/a')
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
@@ -88,4 +89,30 @@ def test_home_button(driver):
         assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+def test_guide_button(driver):
+    #  testing Guide tab button
+    try:
+        driver.get('https://openweathermap.org')
+        WebDriverWait(driver, 50).until_not(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+        tab_name_guide = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(
+            (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "guide")]')))
+        tab_name_guide.click()
+        assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
+def test_marketplace_page_link(driver):
+    try:
+        driver.get(URL)
+        WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(load_div))
+        marketplace_tab = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+            (selector_marketplace_tab)))
+        marketplace_tab.click()
+        expected_url ='https://home.openweathermap.org/marketplace'
+        assert expected_url
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
 
