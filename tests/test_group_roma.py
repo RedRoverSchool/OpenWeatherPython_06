@@ -4,6 +4,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = "https://openweathermap.org/"
+
+
 def test_open_blog_article(driver):
     driver.get(URL)
 
@@ -11,6 +13,7 @@ def test_open_blog_article(driver):
         (By.LINK_TEXT, "Blog")))
     time.sleep(5)
     blog_btn.click()
+
 
     driver.switch_to.window(driver.window_handles[1])
 
@@ -29,3 +32,14 @@ def test_open_blog_article(driver):
     return_btn.click()
 
     time.sleep(5)
+
+
+def test_should_open_given_link(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
+
+
+def test_button_search_exist(driver):
+    driver.get(URL)
+    btn = driver.find_element(By.XPATH, "//button[@type='submit']")
+    assert btn.text == "Search"
