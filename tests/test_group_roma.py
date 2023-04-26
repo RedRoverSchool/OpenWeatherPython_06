@@ -8,10 +8,10 @@ URL = "https://openweathermap.org/"
 
 def test_open_blog_article(driver):
     driver.get(URL)
+    time.sleep(15)
+    wait = WebDriverWait(driver, 3)
+    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#desktop-menu > ul > li:nth-child(9) > a"))).click()
 
-    blog_btn = WebDriverWait(driver, 150).until(EC.element_to_be_clickable(
-        (By.LINK_TEXT, "Blog")))
-    blog_btn.click()
 
 
     driver.switch_to.window(driver.window_handles[1])
@@ -27,7 +27,7 @@ def test_open_blog_article(driver):
     cookie = driver.find_element(By.CSS_SELECTOR, "button[type='button']")
     cookie.click()
 
-    return_btn = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+    return_btn = wait.until(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, ".return [href='/blog']")))
     return_btn.click()
 
