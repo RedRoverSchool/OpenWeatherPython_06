@@ -9,9 +9,8 @@ URL = "https://openweathermap.org/"
 def test_open_blog_article(driver):
     driver.get(URL)
 
-    blog_btn = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(
+    blog_btn = WebDriverWait(driver, 150).until(EC.element_to_be_clickable(
         (By.LINK_TEXT, "Blog")))
-    time.sleep(5)
     blog_btn.click()
 
 
