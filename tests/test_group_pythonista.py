@@ -7,11 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL = "https://openweathermap.org/"
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
-home_btn = (By.CSS_SELECTOR, '.breadcrumb.pull-right.hidden-xs li :nth-child(1)')
 selector_dashboard = (By.XPATH, "//h1[contains(text(),'Weather dashboard')]")
-bt_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
 tab_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
-
+selector_api = (By.XPATH, "//h1[contains(text(),'Weather API')]")
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
@@ -44,7 +42,10 @@ def test_checkout_menu_tab_api(driver):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
     try:
-        assert driver.current_url == 'https://openweathermap.org/api'
+        exp_alert = 'Weather API'
+        disp_alert = WebDriverWait(driver, 25).until(EC.presence_of_element_located(selector_api))
+        disp_alert_text = disp_alert.text
+        assert exp_alert == disp_alert_text
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
