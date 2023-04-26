@@ -95,3 +95,9 @@ def test_support_drop_down(driver):
 def test_pricing_title(driver):
     driver.get('https://openweathermap.org/price')
     assert driver.title == 'Pricing - OpenWeatherMap'
+
+
+def test_partners_title(driver):
+    driver.get('https://openweathermap.org/examples')
+    assert driver.title == 'Partners and solutions - OpenWeatherMap'
+
