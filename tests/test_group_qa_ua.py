@@ -44,16 +44,12 @@ def test_search_field_placeholder(driver):
     assert actual_placeholder == expected_placeholder, f'Search field placeholder is {actual_placeholder}, expected {expected_placeholder}'
 
 
-def test_check_log_in(driver):
+def test_check_blog(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    expected_log = 'Sign in'
+    expected_log = 'Blog'
     search_option_log = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, '.user-li a'))).text
+        (By.CSS_SELECTOR, '#desktop-menu li:nth-child(9) a'))).text
+    print(type(search_option_log))
     assert expected_log == search_option_log
-
-
-
-
-
