@@ -62,6 +62,18 @@ def test_fill_search_city_field(driver):
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
 
+class TestApiKeysPage:
+    def test_open_my_api_keys(self, driver, open_api_keys_page):
+            expected_api_keys_URL = URL_api_keys_page
+            actual_url = driver.current_url
+            assert actual_url == expected_api_keys_URL, 'The API page URL does not match expected'
+
+    def test_api_keys_tab_is_active(self, driver, open_api_keys_page):
+            my_tab_elements = driver.find_elements(By.CSS_SELECTOR, '#myTab li')
+            expected_result = "active"
+            actual_result = my_tab_elements[2].get_attribute('class')
+            assert actual_result == expected_result, "API Keys tab is not active"
+
     def test_change_status_api_key(self, driver, open_api_keys_page):
         wait = WebDriverWait(driver, 15)
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
