@@ -169,6 +169,6 @@ def test_city_temperature(driver):
     assert -10 <= temperature <= 10  # граничные значения исходя из средних температур сезона за всю историю наблюдений
 
 
-def test_new_pass(driver):
+def test_new_pass():
     pass
 
