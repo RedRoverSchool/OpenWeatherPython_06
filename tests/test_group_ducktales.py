@@ -167,3 +167,8 @@ def test_city_temperature(driver):
     x = re.compile(r"^(-?[0-9]+)°C$")
     temperature = int(x.match(displayed_temperature_text).group(1))
     assert -10 <= temperature <= 10  # граничные значения исходя из средних температур сезона за всю историю наблюдений
+
+
+def test_new_pass():
+    pass
+
