@@ -104,24 +104,10 @@ def test_partners_title(driver):
     driver.get('https://openweathermap.org/examples')
     assert driver.title == 'Partners and solutions - OpenWeatherMap'
 
-@pytest.fixture(scope="session")
-def driver():
-    print('start browser')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get('https://home.openweathermap.org/marketplace')
-    driver.maximize_window()
-    yield driver
-    driver.quit()
 
-
-def test_find_element_on_page(driver):
-     elements_on_page = driver.find_elements(By.XPATH, '//div/*[@class = "product"]')
-     assert elements_on_page
-
-def test_number_of_elements_on_page(driver):
-    number_of_elements_on_page = len(driver.find_elements(By.XPATH, '//div/*[@class = "product"]'))
-    assert number_of_elements_on_page == 3
-    print('number_of_elements_on_page:', number_of_elements_on_page)
+def test_guide_title(driver):
+    driver.get('https://openweathermap.org/guide')
+    assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
 
 
 
