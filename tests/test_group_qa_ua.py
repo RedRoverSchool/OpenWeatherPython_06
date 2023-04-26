@@ -31,3 +31,12 @@ def test_fill_search_city_field(driver):
     # displayed_city_text = displayed_city.text
     # print(displayed_city_text)
     assert displayed_city == expected_city
+
+def test_box_presence(driver):
+    driver.get("https://home.openweathermap.org/marketplace")
+    driver.maximize_window()
+    # marketplace_button = driver.find_element(By.CSS_SELECTOR, "ul:nth-child(1) li:nth-child(4)")
+    # marketplace_button.click()
+    boxes = driver.find_elements(By.CSS_SELECTOR,".product:nth-child(1), .product:nth-child(2), .product")
+    print(f'len boxes = {len(boxes)}')
+    assert len(boxes) == 3
