@@ -1,3 +1,4 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -77,7 +78,7 @@ def test_recover_password(driver):
     assert "users/password" in driver.current_url
     driver.find_element(By.XPATH, "//div[@class='panel-heading']"), 'NO ERROR MESSAGE!'
     driver.find_element(By.XPATH, "// *[contains(text(), 'Email not found')]"), 'NO EMAIL NOT FOUND MESSAGE!'
-    driver.find_element(By.XPATH, "//div[@class='sign-form']"), 'NO FORGOT YOUR PASSWORD FORM!'
+    driver.find_element(By.XPATH, "//div[@class='sign-form']"), 'NO FORGOT YOUR PASSWORD FORM!!'
     driver.find_element(By.XPATH, "//*[contains(text(),'Forgot your password?')]")
     element = driver.find_element(By.ID, "user_email")
     text = element.get_attribute('placeholder')
