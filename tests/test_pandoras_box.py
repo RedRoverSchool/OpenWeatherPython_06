@@ -72,4 +72,15 @@ def test_8_days_forecast(driver): # проверка, что отображае�
     assert amount_of_days == 8
 
 
+def test_open_pricing(driver):
+    driver.get("https://openweathermap.org/")
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    button_pricing = driver.find_element(By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
+    button_pricing.click()
+    expected_title = "Pricing"
+    displayed_title = driver.find_element(By.CSS_SELECTOR, 'h1.breadcrumb-title').text
+    assert displayed_title == expected_title
+
+
 
