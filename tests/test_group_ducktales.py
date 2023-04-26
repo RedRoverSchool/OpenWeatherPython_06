@@ -62,6 +62,18 @@ def test_fill_search_city_field(driver):
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
 
+class TestApiKeysPage:
+    def test_open_my_api_keys(self, driver, open_api_keys_page):
+            expected_api_keys_URL = URL_api_keys_page
+            actual_url = driver.current_url
+            assert actual_url == expected_api_keys_URL, 'The API page URL does not match expected'
+
+    def test_api_keys_tab_is_active(self, driver, open_api_keys_page):
+            my_tab_elements = driver.find_elements(By.CSS_SELECTOR, '#myTab li')
+            expected_result = "active"
+            actual_result = my_tab_elements[2].get_attribute('class')
+            assert actual_result == expected_result, "API Keys tab is not active"
+
     def test_change_status_api_key(self, driver, open_api_keys_page):
         wait = WebDriverWait(driver, 15)
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@class="edit_key_btn edit-key-btn"]')))
@@ -127,3 +139,36 @@ def test_registration(driver):
     success_message = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.XPATH, "//div[@class='panel-body']")))
     assert success_message.text == expected_message
+
+#Экспериментальный тест с проверкой температуры. Тестирование рекомендовано провести для нескольких географических точек, сильно разнящихся по климату
+def test_city_temperature(driver):
+    driver.get('http://openweathermap.org/')
+    time.sleep(10)
+    temperature_scale_choice = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[contains(text(), 'Metric: °C, m/s')]")))  # удостоверимся, что шкала для теста - Цельсий (можно рассматривать это как precondition, но лучше подстраховаться)
+    temperature_scale_choice.click()
+    search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys('Reykjavík')
+    search_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "button[class='button-round dark']")))
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "//span[contains(text(), 'Reykjavík, IS')]")))
+    search_option.click()
+    expected_city = 'Reykjavík, IS'
+    displayed_city = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "//h2[contains(text(), 'Reykjavík, IS')]")))
+    assert displayed_city.text == expected_city #проверяем, соответствует ли вывод запросу
+    displayed_temperature = WebDriverWait(driver, 15).until(EC.presence_of_element_located( #проверяем, адекватны ли температурные значения
+        (By.CSS_SELECTOR, "span[class='heading']")))
+    displayed_temperature_text = displayed_temperature.text
+    import re
+    x = re.compile(r"^(-?[0-9]+)°C$")
+    temperature = int(x.match(displayed_temperature_text).group(1))
+    assert -10 <= temperature <= 10  # граничные значения исходя из средних температур сезона за всю историю наблюдений
+
+
+def test_new_pass():
+    pass
+
