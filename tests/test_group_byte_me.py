@@ -15,6 +15,7 @@ def test_check_page_title(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 def test_fill_search_city_field(driver):
+    driver.get('https://openweathermap.org/')
     search_city_field = driver.find_element(By.CSS_SELECTOR, '[placeholder="Search city"]')
     search_city_field.send_keys('New York')
     time.sleep(10)
