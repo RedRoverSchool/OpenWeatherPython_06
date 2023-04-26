@@ -32,6 +32,7 @@ def test_fill_search_city_field(driver):
     # print(displayed_city_text)
     assert displayed_city == expected_city
 
+
 def test_box_presence(driver):
     driver.get("https://home.openweathermap.org/marketplace")
     driver.maximize_window()
