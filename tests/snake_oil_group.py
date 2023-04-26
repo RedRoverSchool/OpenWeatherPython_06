@@ -57,3 +57,27 @@ def test_logo_is_presented(driver):
     driver.get('https://openweathermap.org/')
     logo = driver.find_element(By.XPATH, "//li[contains(@class, 'logo')]")
     assert logo.is_displayed(), "Logo not found on the Home page"
+
+def test_captcha_sign_in_form(driver):
+    driver.get(URL)
+    search_sign_in = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a")
+    search_sign_in.click()
+    search_create_account = driver.find_element(By.XPATH, "//a[text() = 'Create an Account.']")
+    search_create_account.click()
+    search_field_username = driver.find_element(By.CSS_SELECTOR, "#user_username")
+    search_field_username.send_keys("Test123")
+    search_field_email = driver.find_element(By.CSS_SELECTOR, "#user_email")
+    search_field_email.send_keys("testbordiotatiana@gmail.com")
+    search_field_password = driver.find_element(By.CSS_SELECTOR, "#user_password")
+    search_field_password.send_keys("123test")
+    search_field_repeatpas = driver.find_element(By.CSS_SELECTOR, "#user_password_confirmation")
+    search_field_repeatpas.send_keys("123test")
+    search_checkbox_age = driver.find_element(By.CSS_SELECTOR, "#agreement_is_age_confirmed")
+    search_checkbox_age.click()
+    search_checkbox_privacy = driver.find_element(By.CSS_SELECTOR, "#agreement_is_accepted")
+    search_checkbox_privacy.click()
+    search_btn_create_account = driver.find_element(By.CSS_SELECTOR, "#new_user > div:nth-child(21) > input")
+    search_btn_create_account.click()
+    search_failed_message = driver.find_element(By.CSS_SELECTOR, "#new_user > div:nth-child(20) > div.has-error > div")
+    assert search_failed_message.is_displayed()
+
