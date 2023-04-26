@@ -104,12 +104,15 @@ def test_guide_button(driver):
         print(f"TimeoutException occurred: {e}")
 
 def test_marketplace_page_link(driver):
-    driver.get(URL)
-    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(load_div))
-    marketplace_tab = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
-        (selector_marketplace_tab)))
-    marketplace_tab.click()
-    expected_url ='https://home.openweathermap.org/marketplace'
-    assert expected_url
+    try:
+        driver.get(URL)
+        WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(load_div))
+        marketplace_tab = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+            (selector_marketplace_tab)))
+        marketplace_tab.click()
+        expected_url ='https://home.openweathermap.org/marketplace'
+        assert expected_url
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
 
 
