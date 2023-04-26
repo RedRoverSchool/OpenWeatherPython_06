@@ -35,6 +35,7 @@ def test_go_to_sign_in_page(driver, open_page):
     wait = WebDriverWait(driver, 30)
     wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
     signin_btn = driver.find_element(*SIGNIN_BTN)
+    driver.execute_script("return arguments[0].scrollIntoView(true);", signin_btn)
     signin_btn.click()
     # footer = driver.find_element(*FOOTER_ACCEPT_BTN)
     # if footer.is_displayed():
@@ -63,3 +64,18 @@ def test_login_negativ(driver, email, password):
     wait.until(EC.element_to_be_clickable([*SUBMIT_BTN]))
     driver.find_element(*SUBMIT_BTN).click()
     assert driver.find_element(*SIGNIN_ALERT).is_displayed(), assert_msg
+
+def test_create_new_acc(driver):
+    driver.get(URL_SignIN)
+    wait = WebDriverWait(driver, 20)
+    waint
+    wait_until_clickable([*USERNAME_FIELD]).send_keys('Weather_06')
+    page.wait_until_clickable([*EMAIL_FIELD]).send_keys("123456@gmail.com")
+    page.wait_until_clickable([*PASSWORD_FIELD]).send_keys('qsc123WDV$')
+    page.wait_until_clickable([*REP_PASSWORD_FIELD]).send_keys('qsc123WDV$')
+    page.wait_until_clickable([*IAM16_CHECKBOX]).click()
+    page.wait_until_clickable([*AGREMENT_CHECKBOX]).click()
+    time.sleep(10)
+    page.wait_until_clickable([*RECAPTCHA_CHECKBOX]).click()
+    time.sleep(2)
+    # d.wait_until_clickable(d.LOGIN_BUTTON).click()
