@@ -46,7 +46,7 @@ def test_search_field_placeholder(driver):
 
 def test_check_blog(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 30).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     expected_log = 'Blog'
     search_option_log = WebDriverWait(driver, 15).until(EC.visibility_of_element_located(
