@@ -89,3 +89,15 @@ def test_home_button(driver):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
+def test_guide_button(driver):
+    #  testing Guide tab button
+    try:
+        driver.get('https://openweathermap.org')
+        WebDriverWait(driver, 50).until_not(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+        tab_name_guide = WebDriverWait(driver, 45).until(EC.element_to_be_clickable(
+            (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "guide")]')))
+        tab_name_guide.click()
+        assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
