@@ -1,5 +1,4 @@
 import pytest
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,8 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = "https://openweathermap.org/"
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 selector_dashboard = (By.XPATH, "//h1[contains(text(),'Weather dashboard')]")
-tab_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
 selector_api = (By.XPATH, "//h1[contains(text(),'Weather API')]")
+tab_desk_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
+tab_desc_dashboard_bt = (By.XPATH, "//div[@id='desktop-menu']//a[@href='/weather-dashboard']")
 selector_marketplace_tab = (By.XPATH, '//div[@id="desktop-menu"]//li[4]/a')
 
 def test_open_page(driver):
@@ -24,10 +24,6 @@ def test_check_page_title(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
-def test_python():
-    print('Hello girls!')
-
-
 def test_checkout_menu_tab_api(driver):
     try:
         driver.get(URL)
@@ -37,8 +33,7 @@ def test_checkout_menu_tab_api(driver):
         print(f"TimeoutException occurred: {e}")
 
     try:
-        tab_b_api = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(
-            (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')))
+        tab_b_api = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(tab_desk_api))
         tab_b_api.click()
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
@@ -60,8 +55,7 @@ def test_checkout_menu_tab_dashboard(driver):
         print(f"TimeoutException occurred: {e}")
 
     try:
-        tab_dashboard_bt = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(
-            (By.XPATH, "//div[@id='desktop-menu']//a[@href='/weather-dashboard']")))
+        tab_dashboard_bt = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(tab_desc_dashboard_bt))
         tab_dashboard_bt.click()
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
