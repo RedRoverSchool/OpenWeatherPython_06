@@ -17,3 +17,6 @@ def test_verify_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
+def test_compare_page_title(driver):
+    driver.get('https://openweathermap.org')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
