@@ -18,3 +18,8 @@ def test_home_page_header(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     header = driver.find_element(By.CSS_SELECTOR, "h1")
     assert header.text == "OpenWeather", "Wrong h1 Header"
+
+
+def test_should_open_url(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
