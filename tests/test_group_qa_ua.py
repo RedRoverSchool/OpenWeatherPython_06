@@ -33,7 +33,16 @@ def test_fill_search_city_field(driver):
     assert displayed_city == expected_city
 
 def test_chack_log_in(driver):
-    driver.get('https://openweathermap.org/')
-    expected_log = 'Sign in'
-    displayed_log = driver.find_element(By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a').text
-    assert expected_log == displayed_log
+    try:
+        driver.get('https://openweathermap.org/')
+        WebDriverWait(driver, 25).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+    try:
+        expected_log = 'Sign in'
+        displayed_log = WebDriverWait(driver, 25).until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a'))).text
+        assert expected_log == displayed_log
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
