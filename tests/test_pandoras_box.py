@@ -12,7 +12,15 @@ def test_current_time(driver): # проверка текущей даты и в�
     driver.get("https://openweathermap.org/")
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
+    search_city_field.send_keys('Minsk')
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+    search_option.click()
     current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p").lower()
+    print(current_time)
     current_time_from_page = driver.find_element(
         By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text.lower()
     assert current_time == current_time_from_page
