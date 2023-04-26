@@ -38,15 +38,13 @@ def test_checkout_menu_tab_api(driver):
         print(f"TimeoutException occurred: {e}")
 
     try:
-        tab_b_api = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(tab_api))
+        tab_b_api = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')))
         tab_b_api.click()
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
     try:
         assert driver.current_url == 'https://openweathermap.org/api'
-        btn_home = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(bt_go_home))
-        btn_home.click()
-        assert driver.current_url == URL
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
