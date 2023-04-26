@@ -19,6 +19,14 @@ def test_look_for_buttons(driver):
     weather_widget_weather_button = driver.find_element(By.XPATH, "//*[contains(text(),'Different Weather')]")
     weather_widget_metric_button = driver.find_element(By.XPATH, "//*[contains(text(),'Metric')]")
     weather_widget_imperial_button = driver.find_element(By.XPATH, "//*[contains(text(),'Imperial')]")
+    expected_button1 = 'Search'
+    expected_button2 = 'Different Weather?'
+    expected_button3 = 'Metric: °C, m/s'
+    expected_button4 = 'Imperial: °F, mph'
+    assert search_button.text == expected_button1
+    assert weather_widget_weather_button.text == expected_button2
+    assert weather_widget_metric_button.text == expected_button3
+    assert weather_widget_imperial_button.text == expected_button4
     print('\n')
     print(f'The Search button text is: {search_button.text}')
     print(f'The Weather button text is: {weather_widget_weather_button.text}')
