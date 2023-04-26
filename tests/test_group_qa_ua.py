@@ -38,6 +38,7 @@ def test_chack_log_in(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     expected_log = 'Sign in'
     WebDriverWait(driver, 15).until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, '.user-li > a')))
-    search_option_log = driver.find_element(By.CSS_SELECTOR, ".user-li > a").text
-    assert expected_log == search_option_log
+        (By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a')))
+    displayed_log = driver.find_element(By.CSS_SELECTOR, "#desktop-menu > ul > li.user-li > a").text
+    assert expected_log == displayed_log
+
