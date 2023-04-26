@@ -17,6 +17,7 @@ def test_go_to_sign_in_page(driver, open_page):
     wait.until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div'))
     )
-    sign_button = driver.find_element(By.CSS_SELECTOR, '.user-li>a')
+    sign_button = wait.until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, '.user-li>a')))
     sign_button.click()
     assert "sign_in" in driver.current_url, "--------Wrong URL----------"
