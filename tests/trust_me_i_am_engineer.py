@@ -6,6 +6,7 @@ user_name = 'taf88156@mail.com'
 password = "Taf88156"
 login = 'taffy'
 
+
 def test_login_form(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
@@ -32,6 +33,7 @@ def test_login_form(driver):
     user_logout = driver.find_element(By.CSS_SELECTOR, '.panel-heading').text
     assert user_logout == 'Alert'
 
+
 def test_nav_bar_api_title(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
@@ -42,6 +44,7 @@ def test_nav_bar_api_title(driver):
     nav_bar_api_title_text = driver.find_element(By.CSS_SELECTOR, "h1[class]").text
     assert nav_bar_api_title_text == "Weather API"
 
+
 def test_on_api_page_recommend_version_of_api(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
@@ -51,6 +54,7 @@ def test_on_api_page_recommend_version_of_api(driver):
     button_nav_bar_api.click()
     recommend_version_of_api = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert recommend_version_of_api == "One Call API 3.0"
+
 
 def test_fill_email_negative(driver):
     driver.get('https://openweathermap.org/')
@@ -68,6 +72,3 @@ def test_fill_email_negative(driver):
         (By.CSS_SELECTOR, ".panel-body")))
     displayed_alert_text = displayed_alert.text
     assert displayed_alert_text == expected_alert
-
-pass
-
