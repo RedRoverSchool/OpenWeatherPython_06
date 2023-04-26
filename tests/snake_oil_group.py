@@ -4,7 +4,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
@@ -13,6 +12,7 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
+
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
@@ -39,6 +39,7 @@ def test_fill_search_city_field(driver, city):
     actual_city = driver.find_element(*displayed_city).text
     assert expected_city in actual_city
 
+
 def test_search_field_present(driver):
     driver.get('https://openweathermap.org/')
     search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
@@ -57,6 +58,12 @@ def test_logo_is_presented(driver):
     driver.get('https://openweathermap.org/')
     logo = driver.find_element(By.XPATH, "//li[contains(@class, 'logo')]")
     assert logo.is_displayed(), "Logo not found on the Home page"
+
+
+def test_check_facebook_link_in_footer(driver):
+    driver.get('https://openweathermap.org/')
+    footer_buttons = driver.find_elements(By.CSS_SELECTOR, '.social a')
+    assert footer_buttons[0].get_attribute('href') == 'https://www.facebook.com/groups/270748973021342'
 
 def test_captcha_sign_in_form(driver):
     driver.get(URL)
