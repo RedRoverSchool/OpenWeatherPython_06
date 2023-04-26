@@ -1,23 +1,23 @@
 import time
 
 import pytest
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import random
 import string
 
-
 URL = 'https://openweathermap.org/'
 URL_SignIN = 'https://home.openweathermap.org/users/sign_in'
-SIGNIN_BTN = (By.CLASS_NAME, 'user-li')
+SIGNIN_BTN = (By.CSS_SELECTOR, '.user-li>a')
 LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 EMAIL_FIELD = (By.ID, 'user_email')
 PASSWORD_FIELD = (By.ID, 'user_password')
 SUBMIT_BTN = (By.CSS_SELECTOR, '[value="Submit"]')
 SIGNIN_ALERT = (By.CLASS_NAME, 'panel-heading')
 FOOTER_ACCEPT_BTN = (By.CSS_SELECTOR, '.stick-footer-panel__btn-container button')
-assert_msg = f'\n================\nAssertion Error\n================\n'
+assert_msg = '\n================\nAssertion Error\n================\n'
 
 
 @pytest.fixture()
@@ -26,7 +26,7 @@ def open_page(driver):
     assert driver.current_url == URL, assert_msg
 
 
-def random_word(): #https://flexiple.com/python/generate-random-string-python/
+def random_word():  # https://flexiple.com/python/generate-random-string-python/
     random_word = ''.join(random.choice(string.ascii_letters) for _ in range(8))
     return random_word
 
@@ -37,16 +37,19 @@ def test_go_to_sign_in_page(driver, open_page):
     try:
         driver.find_element(*FOOTER_ACCEPT_BTN).click()
         # driver.switch_to.alert.accept()
-        wait.until(EC.element_to_be_clickable([*SIGNIN_BTN])).click()
-    except:
-        driver.find_element(*SIGNIN_BTN).click()
+        signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
+        signin_btn.click()
+    except TimeoutException:
+        signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
+        signin_btn.click()
     assert "sign_in" in driver.current_url, assert_msg
+
 
 @pytest.mark.parametrize(
     "email,password",
     [("", ""),
      ("", random_word()),
-     (random_word(), "" ),
+     (random_word(), ""),
      (f'{random_word()}@gmail.com', random_word()),
      ("eliser89@mail.ru", random_word()),
      (random_word(), random_word())],
