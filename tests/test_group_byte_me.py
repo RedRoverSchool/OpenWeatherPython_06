@@ -16,6 +16,7 @@ EMAIL_FIELD = (By.ID, 'user_email')
 PASSWORD_FIELD = (By.ID, 'user_password')
 SUBMIT_BTN = (By.CSS_SELECTOR, '[value="Submit"]')
 SIGNIN_ALERT = (By.CLASS_NAME, 'panel-heading')
+FOOTER_ACCEPT_BTN = (By.CSS_SELECTOR, '.stick-footer-panel__btn-container button')
 assert_msg = f'\n================\nAssertion Error\n================\n'
 
 
@@ -34,10 +35,11 @@ def test_go_to_sign_in_page(driver, open_page):
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
     try:
-        driver.switch_to.alert.accept()
+        driver.find_element(*FOOTER_ACCEPT_BTN).click()
+        # driver.switch_to.alert.accept()
         wait.until(EC.element_to_be_clickable([*SIGNIN_BTN])).click()
     except:
-        wait.until(EC.element_to_be_clickable([*SIGNIN_BTN])).click()
+        driver.find_element(*SIGNIN_BTN).click()
     assert "sign_in" in driver.current_url, assert_msg
 
 @pytest.mark.parametrize(
