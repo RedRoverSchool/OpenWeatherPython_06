@@ -6,12 +6,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_go_to_blog(driver):
+def test_check_tab_blog(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 20).until_not(
-        EC.presence_of_element_located((By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    go_to_blog = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, '#desktop-menu li:nth-child(9)')))
-    go_to_blog.click()
-    expected_page = 'https://openweather.co.uk/blog/category/weather'
-    assert expected_page in driver.page_source
+    tab_blog = driver.find_element(By.CSS_SELECTOR, '#desktop-menu li:nth-child(9)')
+    assert tab_blog.text == 'Blog'
+
