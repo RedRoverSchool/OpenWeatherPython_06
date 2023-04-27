@@ -49,3 +49,7 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     options = driver.find_elements(*search_dropdown)
     for option in options:
         assert city in option.text
+
+    options = driver.find_elements(*search_dropdown)
+    for option in options:
+        assert city in option.text
