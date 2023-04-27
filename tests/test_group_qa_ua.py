@@ -36,8 +36,7 @@ def test_chack_log_in(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 30).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    expected_log = 'Sign in'
-    WebDriverWait(driver, 30).until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a'), 'Sign in'))
-    assert_msg = '\n================\nAssertion Error\n================\n'
-    assert driver.find_element(By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a').is_displayed(), assert_msg
+    expected_text = 'Sign in'
+    displayed_log = driver.find_element(By.CSS_SELECTOR, '#desktop-menu > ul > li.user-li > a')
+    sign_in_text = driver.execute_script("return arguments[0].textContent", displayed_log)
+    assert sign_in_text == expected_text
