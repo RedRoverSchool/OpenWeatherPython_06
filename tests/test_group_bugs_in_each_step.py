@@ -47,8 +47,6 @@ def test_click_guide(driver):
 
 def test_should_open_url2(driver):
     driver.get(URL2)
-    assert 'home' in driver.current_url
-    assert 'openweathermap' in driver.current_url
-    assert 'sign_in' in driver.current_url
+    assert driver.current_url == URL2
 
 
