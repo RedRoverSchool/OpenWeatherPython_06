@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+import datetime
 
 test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
@@ -61,6 +62,14 @@ def test_current_weather_api(city):
     for key in expected_keys:
         assert key in response_data.keys()
     assert response.json()['name'] == city
+
+
+def test_8_days_forecast(driver): # проверка, что отображается прогноз на 8 дней
+    driver.get("https://openweathermap.org/")
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    amount_of_days = len(driver.find_elements(By.XPATH, '//*[@class="day-list"]/li'))
+    assert amount_of_days == 8
 
 
 
