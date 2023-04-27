@@ -122,7 +122,7 @@ def test_history_bulks(driver):
     WebDriverWait(driver, 15).until(
         EC.invisibility_of_element((By.CSS_SELECTOR, "[aria-label='Loading']")))
     WebDriverWait(driver, 15).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'div#desktop-menu a[href*=marketplace]'))).click()
+        EC.element_to_be_clickable((By.CSS_SELECTOR, 'div#desktop-menu ul li:nth-last-child(3) a.marketplace'))).click()
     WebDriverWait(driver, 15).until(
         EC.number_of_windows_to_be(2))
     driver.switch_to.window(driver.window_handles[1])
