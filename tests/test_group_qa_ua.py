@@ -55,4 +55,4 @@ def test_check_log_in(driver):
     search_option_log = WebDriverWait(driver, 30).until(EC.presence_of_element_located(
         (By.CSS_SELECTOR, '.user-li a'))).text
     assert expected_log == search_option_log
-    print(search_option_log)
+
