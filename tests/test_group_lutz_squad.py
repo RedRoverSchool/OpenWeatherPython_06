@@ -11,3 +11,4 @@ def test_check_tab_blog(driver):
     tab_blog = driver.find_element(By.CSS_SELECTOR, '#desktop-menu li:nth-child(9)').text
     assert tab_blog == 'Blog'
 
+
