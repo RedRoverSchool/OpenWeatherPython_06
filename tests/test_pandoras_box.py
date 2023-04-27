@@ -71,5 +71,36 @@ def test_8_days_forecast(driver): # проверка, что отображае�
     amount_of_days = len(driver.find_elements(By.XPATH, '//*[@class="day-list"]/li'))
     assert amount_of_days == 8
 
+def test_check_title(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    weekly_weather = driver.find_element(By.CSS_SELECTOR, '.daily-container.block.mobile-padding h3')
+    title_weekly_weather = weekly_weather.text
+    assert title_weekly_weather =='8-day forecast'
+
+
+def test_notification_tab_singIN(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 20).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    tab_signIN = driver.find_element(By.XPATH, '//a[text()="Sign in"]')
+    tab_signIN.click()
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    assert driver.title == 'Members'
+    user_email = driver.find_element(By.XPATH, "//input[@class='string email optional form-control']")
+    user_email.send_keys('marina@mail.ru')
+    user_password = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
+    user_password.send_keys('marina111')
+    click_submit = driver.find_element(By.XPATH, "//input[@value='Submit']")
+    click_submit.click()
+    driver.implicitly_wait(10)
+    notification_title = driver.find_element(By.CSS_SELECTOR, ".panel-heading")
+    disp_title = notification_title.text
+    assert disp_title == 'Alert'
+    notification_content = driver.find_element(By.CSS_SELECTOR, ".panel-body")
+    disp_text = notification_content.text
+    assert disp_text == 'Invalid Email or password.'
 
 
