@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 URL = 'https://openweathermap.org/'
 
 
