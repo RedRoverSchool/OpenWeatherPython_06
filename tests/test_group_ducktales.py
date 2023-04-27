@@ -163,8 +163,12 @@ def test_city_temperature(driver):
     displayed_temperature = WebDriverWait(driver, 15).until(EC.presence_of_element_located( #проверяем, адекватны ли температурные значения
         (By.CSS_SELECTOR, "span[class='heading']")))
     displayed_temperature_text = displayed_temperature.text
-    assert displayed_temperature_text[0] == '-' or displayed_temperature_text[0].isdigit
-    assert displayed_temperature_text[:-2].isdigit
-    assert displayed_temperature_text[-2:] == '°C'
-    num = int(displayed_temperature_text[:-2])
-    assert -10 <= num <= 10 #граничные значения исходя из средних температур сезона за всю историю наблюдений
+    import re
+    x = re.compile(r"^(-?[0-9]+)°C$")
+    temperature = int(x.match(displayed_temperature_text).group(1))
+    assert -10 <= temperature <= 10  # граничные значения исходя из средних температур сезона за всю историю наблюдений
+
+
+def test_new_pass():
+    pass
+
