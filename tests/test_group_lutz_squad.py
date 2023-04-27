@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 @pytest.fixture()
 def driver():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome()
     driver.maximize_window()
     yield driver
     driver.quit()
