@@ -18,11 +18,6 @@ def test_check_page_title(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
-def test_check_page_title(driver):
-    driver.get('https://openweathermap.org/')
-    assert driver.title == 'Сurrent weather'
-
-
 def test_should_open_url2(driver):
     driver.get(URL2)
     assert 'openweathermap' in driver.current_url
