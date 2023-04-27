@@ -11,6 +11,11 @@ selector_api = (By.XPATH, "//h1[contains(text(),'Weather API')]")
 tab_desk_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
 tab_desc_dashboard_bt = (By.XPATH, "//div[@id='desktop-menu']//a[@href='/weather-dashboard']")
 selector_marketplace_tab = (By.XPATH, '//div[@id="desktop-menu"]//li[4]/a')
+footer_panel = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
+btn_allow_all = (By.XPATH, '//*[@id="stick-footer-panel"]/div/div/div/div/div/button')
+btn_about_us = (By.CSS_SELECTOR, 'a[href*="/about-us"]')
+text_openweather = (By.XPATH, '//div/h1/span["orange -text"]')
+
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
@@ -68,6 +73,7 @@ def test_checkout_menu_tab_dashboard(driver):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
+
 def test_home_button(driver):
     #  testing going back to home from Guide page
     try:
@@ -84,6 +90,7 @@ def test_home_button(driver):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
+
 def test_guide_button(driver):
     #  testing Guide tab button
     try:
@@ -97,6 +104,7 @@ def test_guide_button(driver):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
+
 def test_marketplace_page_link(driver):
     try:
         driver.get(URL)
@@ -104,9 +112,18 @@ def test_marketplace_page_link(driver):
         marketplace_tab = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
             (selector_marketplace_tab)))
         marketplace_tab.click()
-        expected_url ='https://home.openweathermap.org/marketplace'
+        expected_url = 'https://home.openweathermap.org/marketplace'
         assert expected_url
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
 
+def test_check_about(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    wait.until(EC.element_to_be_clickable(footer_panel))
+    driver.find_element(*btn_allow_all).click()
+    driver.find_element(*btn_about_us).click()
+    title_about_us = driver.find_element(*text_openweather).text
+    assert title_about_us == 'OpenWeather'
