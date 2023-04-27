@@ -79,6 +79,7 @@ def test_check_title(driver):
     title_weekly_weather = weekly_weather.text
     assert title_weekly_weather =='8-day forecast'
 
+
 def test_notification_tab_singIN(driver):
     driver.get(URL)
     WebDriverWait(driver, 20).until_not(EC.presence_of_element_located(
