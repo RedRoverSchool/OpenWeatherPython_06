@@ -81,19 +81,13 @@ def test_check_title(driver):
 
 
 def test_notification_tab_singIN(driver):
-    driver.get(URL)
-    WebDriverWait(driver, 20).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    tab_signIN = driver.find_element(By.XPATH, '//a[text()="Sign in"]')
-    tab_signIN.click()
+    driver.get("https://home.openweathermap.org/users/sign_in")
     assert driver.title == 'Members'
     user_email = driver.find_element(By.XPATH, "//input[@class='string email optional form-control']")
     user_email.send_keys('marina@mail.ru')
     user_password = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
     user_password.send_keys('marina111')
-    click_submit = driver.find_element(By.XPATH, "//input[@value='Submit']")
-    click_submit.click()
-    driver.implicitly_wait(10)
+    driver.find_element(By.XPATH, "//input[@value='Submit']").click()
     notification_title = driver.find_element(By.CSS_SELECTOR, ".panel-heading")
     disp_title = notification_title.text
     assert disp_title == 'Alert'
