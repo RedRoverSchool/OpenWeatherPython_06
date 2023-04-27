@@ -56,6 +56,8 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
 def test_social_link_twitter(driver):
     # Check social link
     driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     click_twitter = driver.find_element(By.CSS_SELECTOR, 'a[href="https://twitter.com/OpenWeatherMap"]')
     driver.execute_script("return arguments[0].scrollIntoView(true);", click_twitter)
     click_twitter.click()
