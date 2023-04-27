@@ -74,3 +74,21 @@ def test_check_meteorological_conditions_are_displayed(driver):
     assert driver.find_element(By.CSS_SELECTOR, "li .icon-pressure").is_displayed()
     assert driver.find_element(By.XPATH, '//span[text()="Dew point:"] ').is_displayed()
 
+
+def test_temperature_f_conversion(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys(city)
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 15).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), city))
+    f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(3)')
+    f_temp.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
