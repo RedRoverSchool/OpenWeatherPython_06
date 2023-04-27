@@ -123,3 +123,4 @@ def test_support(driver):
     assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/appid']").is_displayed()
     assert driver.find_element(
         By.CSS_SELECTOR, "#support-dropdown-menu a[href = 'https://home.openweathermap.org/questions']").is_displayed()
+
