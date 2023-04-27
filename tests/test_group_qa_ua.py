@@ -1,7 +1,39 @@
 from selenium.webdriver.common.by import By
-import time
+import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
+URL = 'https://openweathermap.org/'
+cities = ['New York', 'Los Angeles', 'Paris']
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
+search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
+search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
+displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
+sign_in_link = (By.CSS_SELECTOR, '.user-li a')
+pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
+price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
+accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
+
+@pytest.fixture()
+def open_and_load_page(driver, wait):
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located(load_div))
+
+
+@pytest.fixture()
+def wait(driver):
+    wait = WebDriverWait(driver, 25)
+    yield wait
+
+
+def test_should_go_to_sign_in_page(driver, open_and_load_page, wait):
+    sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
+    driver.execute_script("arguments[0].click();", sign_link)
+    assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
 
 
 def test_open_page(driver):
@@ -44,16 +76,9 @@ def test_search_field_placeholder(driver):
     assert actual_placeholder == expected_placeholder, f'Search field placeholder is {actual_placeholder}, expected {expected_placeholder}'
 
 
-def test_check_log_in(driver):
-    driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    search_button_cookies = driver.find_element(By.CSS_SELECTOR, ".stick-footer-panel__link:nth-child(1)")
-    driver.implicitly_wait(10)
-    search_button_cookies.click()
-    expected_log = 'Sign in'
-    search_option_log = WebDriverWait(driver, 30).until(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, '.user-li a'))).text
-    assert expected_log == search_option_log
-    print(search_option_log)
-
+def test_check_log_in(driver, open_and_load_page, wait):
+    driver.find_element(*accept_cookies).click()
+    expected_text = 'Sign in'
+    element = driver.find_element(*sign_in_link)
+    sign_in_text = driver.execute_script("return arguments[0].textContent", element)
+    assert sign_in_text == expected_text
