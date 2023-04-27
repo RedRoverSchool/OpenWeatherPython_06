@@ -67,8 +67,6 @@ def test_current_weather_api(city):
 
 
 
-
-
 def test_fahrenheit_click(driver):
     driver.get('https://openweathermap.org/')
     driver.maximize_window()
@@ -76,5 +74,7 @@ def test_fahrenheit_click(driver):
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     ActionChains(driver).drag_and_drop_by_offset(temp_change, 72, 0).perform()
-    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    far_temp = driver.find_element(By.XPATH, '//*[@id="weather-widget"]/div[2]/div[1]/div[1]/div[2]/div[1]/span').text
+    assert far_temp.find("F") != -1 # проверяем, что в элементе на сайте с температурой есть буква F - фаренгейт
+
+
