@@ -72,4 +72,11 @@ def test_8_days_forecast(driver): # проверка, что отображае�
     assert amount_of_days == 8
 
 
-
+def test_find_title_Olga():  # проверка заголовка статьи
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get('https://openweathermap.org/')
+    driver.maximize_window()
+    title_article = driver.find_element(By.XPATH, '/html/body/main/div[13]/div/div[3]/h2')
+    time.sleep(10)
+    title_expect = "Forecast, Current and Historical"
+    assert title_article.text == title_expect
