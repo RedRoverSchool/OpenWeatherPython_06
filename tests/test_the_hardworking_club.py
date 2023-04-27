@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 URL = 'https://openweathermap.org/'
 
 
@@ -109,6 +110,11 @@ def test_guide_title(driver):
     driver.get('https://openweathermap.org/guide')
     assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
 
+
+
+def test_open_initiatives_title(driver):
+    driver.get('https://openweathermap.org/our-initiatives')
+    assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
 
 
