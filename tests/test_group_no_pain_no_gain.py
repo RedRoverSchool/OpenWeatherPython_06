@@ -87,3 +87,13 @@ def test_recover_password(driver):
     text = element.get_attribute('value')
     assert text == WRONG_LOGIN
     driver.find_element(By.XPATH, "//input[@value='Change password']"), 'NO CHANGE PASSWORD BUTTON!'
+
+def test_signin_form_with_empty_fields(driver):
+    driver.get('https://home.openweathermap.org/users/sign_in')
+    element = driver.find_element(By.XPATH, "//div[@class='input-group']//input[@id='user_email']")
+    text = element.get_attribute('placeholder')
+    assert text == 'Enter email'
+    element = driver.find_element(By.XPATH, "//div[@class='input-group']//input[@id='user_password']")
+    text = element.get_attribute('placeholder')
+    assert text == 'Password'
+    driver.find_element(By.XPATH, "//input[@value='Submit']").click()
