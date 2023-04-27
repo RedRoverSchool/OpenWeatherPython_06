@@ -4,7 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
-cities = ['New York', 'Los Angeles', 'Paris']
+cities = ['New York City, US', 'Los Angeles, US', 'Paris, FR']
 
 
 def test_should_open_given_link(driver):
