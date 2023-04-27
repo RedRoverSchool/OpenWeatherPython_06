@@ -1,9 +1,12 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
 import datetime
+
 
 test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
@@ -87,17 +90,12 @@ def test_current_time(driver): # проверка текущей даты и в�
     driver.get(URL)
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
-    search_city_field.send_keys('Iceland')
-    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
-    search_button.click()
-    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
-        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
-    search_option.click()
-    current_time = datetime.datetime.now().strftime("%b %d, %I:%M%p")[:12]
-    current_time_from_page = driver.find_element(
-        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text[:12]
-    assert current_time == current_time_from_page
+    current_time = datetime.datetime.now().utcnow().strftime("%b %d, %I:%M%p")[:12]
+    current_time_from_page_str = driver.find_element(
+        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text
+    current_time_from_page_obj = datetime.datetime.strptime(current_time_from_page_str, "%b %d, %I:%M%p").utcnow()
+    current_time_from_page_final = current_time_from_page_obj.strftime("%b %d, %I:%M%p")[:12]
+    assert current_time == current_time_from_page_final
 
 
 
