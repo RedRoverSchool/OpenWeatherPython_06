@@ -113,3 +113,13 @@ def test_temperature_c_conversion(driver):
     assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°C')]").is_displayed()
 
 
+def test_support(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_support = driver.find_element(By.ID, 'support-dropdown')
+    click_support.click()
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/faq']").is_displayed()
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/appid']").is_displayed()
+    assert driver.find_element(
+        By.CSS_SELECTOR, "#support-dropdown-menu a[href = 'https://home.openweathermap.org/questions']").is_displayed()
