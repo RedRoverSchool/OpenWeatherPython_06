@@ -1,5 +1,5 @@
 import pytest
-from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -89,3 +89,23 @@ def test_captcha_sign_in_form(driver):
     search_btn_create_account.click()
     search_failed_message = driver.find_element(By.CSS_SELECTOR, "#new_user > div:nth-child(20) > div.has-error > div")
     assert search_failed_message.is_displayed()
+
+
+def test_fill_upper_search_field(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_upper_field = driver.find_element(By.XPATH, "//div/form/input[@placeholder='Weather in your city']")
+    search_city_upper_field.send_keys('Almaty')
+    search_city_upper_field.send_keys(Keys.ENTER)
+    link_city = driver.find_element(By.XPATH, '//tbody/tr[1]/td[2]/b[1]/a[1]')
+    link_city.click()
+    expected_city = 'Almaty, KZ'
+    WebDriverWait(driver, 20).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'Almaty'))
+    result_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
+    assert result_city == expected_city
+
+
+
+
