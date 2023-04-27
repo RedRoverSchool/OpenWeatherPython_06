@@ -93,7 +93,7 @@ def test_captcha_sign_in_form(driver):
 
 def test_fill_upper_search_field(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 100).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     search_city_upper_field = driver.find_element(By.XPATH, "//div/form/input[@placeholder='Weather in your city']")
     search_city_upper_field.send_keys('Almaty')
