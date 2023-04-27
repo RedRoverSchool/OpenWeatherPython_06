@@ -46,29 +46,29 @@ def random_word():  # https://flexiple.com/python/generate-random-string-python/
 
 
 # ############################ TESTS #################################
-def test_go_to_sign_in_page(driver, open_page, wait):
-    # wait = WebDriverWait(driver, 30)
-    wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
-    footer = driver.find_element(*FOOTER_ACCEPT_BTN)
-    footer.click()
-    signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
-    driver.execute_script("return arguments[0].scrollIntoView(true);", signin_btn)
-    signin_btn.click()
-    wait.until(EC.url_to_be(URL_SignIN))
-    # signin_btn.click()
-    # footer = driver.find_element(*FOOTER_ACCEPT_BTN)
-    # if footer.is_displayed():
-    #     footer.click()
-    # else:
-    #     signin_btn = wait.until(EC.element_to_be_clickable([*SIGNIN_BTN]))
-    #     signin_btn.click()
-    assert "sign_in" in driver.current_url, assert_msg
+# def test_go_to_sign_in_page(driver, open_page, wait):
+#     # wait = WebDriverWait(driver, 30)
+#     wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
+#     footer = driver.find_element(*FOOTER_ACCEPT_BTN)
+#     footer.click()
+#     signin_btn = wait.until(EC.presence_of_element_located([*SIGNIN_BTN]))
+#     driver.execute_script("return arguments[0].scrollIntoView(true);", signin_btn)
+#     signin_btn.click()
+#     wait.until(EC.url_to_be(URL_SignIN))
+#     # signin_btn.click()
+#     # footer = driver.find_element(*FOOTER_ACCEPT_BTN)
+#     # if footer.is_displayed():
+#     #     footer.click()
+#     # else:
+#     #     signin_btn = wait.until(EC.element_to_be_clickable([*SIGNIN_BTN]))
+#     #     signin_btn.click()
+#     assert "sign_in" in driver.current_url, assert_msg
 
 
-# def test_should_go_to_sign_in_page(driver, open_page, wait):
-#     sign_btn = wait.until(EC.presence_of_element_located(SIGNIN_BTN))
-#     driver.execute_script("arguments[0].click();", sign_btn)
-#     assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
+def test_should_go_to_sign_in_page(driver, open_page, wait):
+    sign_btn = wait.until(EC.presence_of_element_located(SIGNIN_BTN))
+    driver.execute_script("arguments[0].click();", sign_btn)
+    assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
 
 
 @pytest.mark.parametrize(
