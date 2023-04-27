@@ -79,7 +79,6 @@ def test_check_title(driver):
     title_weekly_weather = weekly_weather.text
     assert title_weekly_weather =='8-day forecast'
 
-
 def test_notification_tab_singIN(driver):
     driver.get("https://home.openweathermap.org/users/sign_in")
     assert driver.title == 'Members'
