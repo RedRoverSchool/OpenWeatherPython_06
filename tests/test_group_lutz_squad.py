@@ -6,13 +6,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
 
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    yield driver
-    driver.quit()
-
 def test_go_to_blog(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(
