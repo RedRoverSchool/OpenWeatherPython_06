@@ -86,8 +86,6 @@ def test_notification_tab_singIN(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     tab_signIN = driver.find_element(By.XPATH, '//a[text()="Sign in"]')
     tab_signIN.click()
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
-        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     assert driver.title == 'Members'
     user_email = driver.find_element(By.XPATH, "//input[@class='string email optional form-control']")
     user_email.send_keys('marina@mail.ru')
