@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -22,6 +24,11 @@ alert_txt = (By.CLASS_NAME, "panel-body")
 assert_mmg = '\n====You need to sign in or sign up before continuing.===\n'
 btn_newAndUpd = (By.CSS_SELECTOR, 'a.round[href*="blog"]')
 text_openweather = (By.XPATH, '//div/h1/span["orange -text"]')
+search_city_field_selector = (By.XPATH, '//div[@id="weather-widget"]//div/input')
+search_submit_button = (By.XPATH, '//div[@id="weather-widget"]//div/button')
+search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+
+
 
 
 #
@@ -118,6 +125,22 @@ def test_marketplace_page_link(driver, open_page):
         assert expected_url
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+def test_search_city_field(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    search_city_field = driver.find_element(*search_city_field_selector)
+    search_city_field.send_keys('New York')
+    search_button = driver.find_element(*search_submit_button)
+    search_button.click()
+    search_option = wait.until(EC.element_to_be_clickable(search_dropdown_option))        # (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+    search_option.click()
+    expected_city = 'New York City, US'
+    wait.until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'New York'))
+    displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
+    assert displayed_city == expected_city
 
 
 def test_check_about(driver, open_page):
