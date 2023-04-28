@@ -180,6 +180,7 @@ def test_redirect_to_google_play(driver):
     assert 'OpenWeather' in app_title.text, \
         "The current app title in Google Play does not match 'OpenWeather'"
 
+
 def test_pricing_page(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
