@@ -20,6 +20,17 @@ def test_home_page_header(driver):
     assert header.text == "OpenWeather", "Wrong h1 Header"
 
 
-def test_should_open_url(driver):
+
+
+
+
+def test_should_refresh_link(driver):
+    current_title = driver.title
     driver.get(URL)
-    assert 'openweathermap' in driver.current_url
+    driver.refresh()
+    WebDriverWait(driver, 10).until(EC.title_is('OpenWeatherMap'))
+    assert current_title != driver.title
+
+
+
+
