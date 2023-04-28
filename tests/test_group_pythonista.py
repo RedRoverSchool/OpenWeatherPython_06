@@ -200,8 +200,8 @@ def test_check_marketplace(driver, open_page):
     driver.find_element(*btn_allow_all).click()
     driver.find_element(*btn_about_us).click()
     driver.find_element(*btn_marketplace).click()
-    txt_markpl = driver.find_element(*txt_mp_page).text
-    assert txt_markpl == 'Custom Weather Products'
+    txt_markplace = driver.find_element(*txt_mp_page).text
+    assert txt_markplace == 'Custom Weather Products'
 
 
 '''Footer / About us / Verify New and Updates button'''
