@@ -66,7 +66,6 @@ def test_current_weather_api(city):
     assert response.json()['name'] == city
 
 
-
 def test_fahrenheit_click(driver):
     driver.get('https://openweathermap.org/')
     driver.maximize_window()
