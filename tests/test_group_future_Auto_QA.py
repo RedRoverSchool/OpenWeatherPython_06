@@ -37,5 +37,12 @@ def test_page_source(driver):
     driver.quit()
 
 
+def test_get_name(driver):
+    driver.get(URL)
+    driver_name = driver.name
+    return driver_name
+
+
+
 
 
