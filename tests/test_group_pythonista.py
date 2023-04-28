@@ -1,5 +1,8 @@
+import time
+
 import pytest
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,10 +12,12 @@ load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 selector_dashboard = (By.XPATH, "//h1[contains(text(),'Weather dashboard')]")
 selector_api = (By.XPATH, "//h1[contains(text(),'Weather API')]")
 tab_desk_api = (By.CSS_SELECTOR, '#desktop-menu a[href="/api"]')
+btn_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
 tab_desc_dashboard_bt = (By.XPATH, "//div[@id='desktop-menu']//a[@href='/weather-dashboard']")
 selector_marketplace_tab = (By.XPATH, '//div[@id="desktop-menu"]//li[4]/a')
 footer_panel = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 btn_allow_all = (By.XPATH, '//*[@id="stick-footer-panel"]/div/div/div/div/div/button')
+
 # About As
 btn_about_us = (By.CSS_SELECTOR, 'a[href*="/about-us"]')
 btn_product_doc = (By.CSS_SELECTOR, 'div.grid-container [href="/api"]')
@@ -186,3 +191,18 @@ def test_news_and_update(driver, open_page):
     driver.close()
     driver.switch_to.window(driver.window_handles[0])
     driver.quit()
+
+
+'''Verify deckstop menu "API" button redirects to api page and btn "Home" return back'''
+
+
+def test_checkout_tab_api(driver, open_page):
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    bt_click_api = driver.find_element(By.CSS_SELECTOR, 'a[href*="/api"]')
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(bt_click_api)
+    driver.execute_script("arguments[0].click();", bt_click_api)
+    assert driver.current_url == 'https://openweathermap.org/api'
+    driver.find_element(*btn_go_home).click()
+    assert driver.current_url == URL
