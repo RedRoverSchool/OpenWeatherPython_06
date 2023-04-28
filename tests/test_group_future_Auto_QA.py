@@ -47,7 +47,8 @@ def test_should_be_email_field_placeholder(driver):
     except TimeoutException as e:
         print(f"error occurred: {e}")
 
-@pytest.mark.skip()
+
+# @pytest.mark.skip()
 def test_change_measurement_systems_to_imperial(driver):
     driver.get(URL)
     radio_button = driver.find_element(*(By.XPATH, "//div[text()='Imperial: °F, mph']"))
@@ -55,6 +56,7 @@ def test_change_measurement_systems_to_imperial(driver):
     action_chains.move_to_element(radio_button)
     driver.execute_script("arguments[0].click();", radio_button)
     # WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'span[class="heading"]')))
-    displayed_temperature = (By.CSS_SELECTOR, 'span[class="heading"]')
-    actual_temperature = driver.find_element(*displayed_temperature).text
+    # displayed_temperature = (By.CSS_SELECTOR, 'span[class="heading"]')
+    actual_temperature = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'span[class="heading"]'))).text
+    # actual_temperature = driver.find_element(*displayed_temperature).text
     assert actual_temperature[-1] == 'F'
