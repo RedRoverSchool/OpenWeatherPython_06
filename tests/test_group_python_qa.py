@@ -80,3 +80,4 @@ def test_image_open_weather(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     assert driver.find_element(By.XPATH, "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']")
 
+
