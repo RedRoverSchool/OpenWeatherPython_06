@@ -126,7 +126,6 @@ def test_open_marketplace(driver):
     actions = ActionChains(driver)
     actions.move_to_element(element)
     driver.execute_script("arguments[0].click();", element)
-    actions.perform()
     WebDriverWait(driver, 15).until(
         EC.number_of_windows_to_be(2))
     driver.switch_to.window(driver.window_handles[1])
