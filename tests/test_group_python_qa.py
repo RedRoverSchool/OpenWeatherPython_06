@@ -74,3 +74,4 @@ def test_check_meteorological_conditions_are_displayed(driver):
     assert driver.find_element(By.CSS_SELECTOR, "li .icon-pressure").is_displayed()
     assert driver.find_element(By.XPATH, '//span[text()="Dew point:"] ').is_displayed()
 
+test
