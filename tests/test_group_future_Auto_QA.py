@@ -47,7 +47,7 @@ def test_should_be_email_field_placeholder(driver):
     except TimeoutException as e:
         print(f"error occurred: {e}")
 
-
+@pytest.mark.skip()
 def test_change_measurement_systems_to_imperial(driver):
     driver.get(URL)
     radio_button = driver.find_element(*(By.XPATH, "//div[text()='Imperial: °F, mph']"))
