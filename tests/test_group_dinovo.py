@@ -20,4 +20,4 @@ def test_open_page():
     driver.get('https://openweathermap.org/')
     driver.maximize_window()
     assert 'openweathermap'in driver.current_url
-    print(driver.current_url)
+    prin(driver.current_url)
