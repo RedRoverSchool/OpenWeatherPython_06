@@ -82,3 +82,13 @@ def test_check_log_in(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
+
+def test_find_metric_buttons(driver):
+    driver.get(URL)
+    search_metric_button = driver.find_element(By.CSS_SELECTOR, 'div.switch-container > div:nth-child(2)')
+    search_imperial_button = driver.find_element(By.CSS_SELECTOR, 'div.switch-container > div:nth-child(3)')
+    expected_metric_button = 'Metric: °C, m/s'
+    expected_imperial_button = 'Imperial: °F, mph'
+    assert search_metric_button.text == expected_metric_button
+    assert search_imperial_button.text == expected_imperial_button
+
