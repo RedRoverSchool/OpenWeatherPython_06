@@ -75,3 +75,15 @@ def test_check_meteorological_conditions_are_displayed(driver):
     assert driver.find_element(By.XPATH, "//span[text()='Visibility:']").is_displayed()
     assert driver.find_element(By.CSS_SELECTOR, "li .icon-pressure").is_displayed()
     assert driver.find_element(By.XPATH, '//span[text()="Dew point:"] ').is_displayed()
+
+
+def test_c_to_f(driver):
+    driver.get(URL)
+    driver.maximize_window()
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    element = driver.find_element(By.CSS_SELECTOR, ".switch-container div:nth-child(3)")
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    assert driver.find_element(By.XPATH, '//div[@class="current-temp"]/span[contains(text(), "°F")][1]').is_displayed()
