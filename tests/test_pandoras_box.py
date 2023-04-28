@@ -3,11 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+import datetime
+from selenium.webdriver import ActionChains
 
 test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
 API_key = '2c254a2efb0b9008ce295e94a0939a2f'
 cities = ['Moscow', 'Paris']
+
+
 URL = 'https://openweathermap.org/'
 
 def test_open_page(driver):
@@ -61,6 +65,49 @@ def test_current_weather_api(city):
     for key in expected_keys:
         assert key in response_data.keys()
     assert response.json()['name'] == city
+
+
+def test_fahrenheit_click(driver):
+    driver.get('https://openweathermap.org/')
+    driver.maximize_window()
+    temp_change = driver.find_element(By.XPATH, '//*[@id="weather-widget"]/div[1]/div/div/div[1]/div[2]')
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    ActionChains(driver).drag_and_drop_by_offset(temp_change, 72, 0).perform()
+    far_temp = driver.find_element(By.XPATH, '//*[@id="weather-widget"]/div[2]/div[1]/div[1]/div[2]/div[1]/span').text
+    assert far_temp.find("F") != -1 # проверяем, что в элементе на сайте с температурой есть буква F - фаренгейт
+
+def test_8_days_forecast(driver): # проверка, что отображается прогноз на 8 дней
+    driver.get("https://openweathermap.org/")
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    amount_of_days = len(driver.find_elements(By.XPATH, '//*[@class="day-list"]/li'))
+    assert amount_of_days == 8
+
+def test_check_title(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    weekly_weather = driver.find_element(By.CSS_SELECTOR, '.daily-container.block.mobile-padding h3')
+    title_weekly_weather = weekly_weather.text
+    assert title_weekly_weather =='8-day forecast'
+
+def test_notification_tab_singIN(driver):
+    driver.get("https://home.openweathermap.org/users/sign_in")
+    assert driver.title == 'Members'
+    user_email = driver.find_element(By.XPATH, "//input[@class='string email optional form-control']")
+    user_email.send_keys('marina@mail.ru')
+    user_password = driver.find_element(By.XPATH, "//input[@placeholder='Password']")
+    user_password.send_keys('marina111')
+    driver.find_element(By.XPATH, "//input[@value='Submit']").click()
+    notification_title = driver.find_element(By.CSS_SELECTOR, ".panel-heading")
+    disp_title = notification_title.text
+    assert disp_title == 'Alert'
+    notification_content = driver.find_element(By.CSS_SELECTOR, ".panel-body")
+    disp_text = notification_content.text
+    assert disp_text == 'Invalid Email or password.'
+
+
 
 
 

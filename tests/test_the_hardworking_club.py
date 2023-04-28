@@ -110,6 +110,11 @@ def test_guide_title(driver):
     assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
 
 
+def test_open_initiatives_title(driver):
+    driver.get('https://openweathermap.org/our-initiatives')
+    assert driver.title == 'Our Initiatives - OpenWeatherMap'
+
+
 
 
 
