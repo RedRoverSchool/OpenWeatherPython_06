@@ -51,10 +51,9 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
         assert city in option.text
 
 
-def test_support_button(driver):
+def test_image_open_weather(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    click_support = driver.find_element(By.ID, 'support-dropdown')
-    click_support.click()
-    assert driver.find_element(By.ID, 'support-dropdown-menu').is_displayed()
+    assert driver.find_element(By.XPATH, "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']")
+
