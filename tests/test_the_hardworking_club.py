@@ -114,7 +114,24 @@ def test_open_initiatives_title(driver):
     driver.get('https://openweathermap.org/our-initiatives')
     assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
+from selenium.webdriver.common.action_chains import ActionChains
 
 
+def test_history_bulks(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 15).until(
+        EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "[aria-label='Loading']")))
+    WebDriverWait(driver, 15).until(
+        EC.invisibility_of_element((By.CSS_SELECTOR, "[aria-label='Loading']")))
+    element = driver.find_element(By.CSS_SELECTOR, 'div#desktop-menu a[href*=marketplace]')
+    actions = ActionChains(driver)
+    actions.move_to_element(element)
+    actions.click(element)
+    actions.perform()
+    WebDriverWait(driver, 15).until(
+        EC.number_of_windows_to_be(2))
+    driver.switch_to.window(driver.window_handles[1])
+    driver.find_element(By.XPATH, '//div//h5//a[@href="/history_bulks/new"]').click()
+    assert 'history_bulks/new' in driver.current_url
 
 
