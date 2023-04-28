@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -99,6 +101,7 @@ def test_fill_upper_search_field(driver):
     # search_city_upper_field = driver.find_element(By.XPATH, "//div/form/input[@placeholder='Weather in your city']")
     # search_city_upper_field.send_keys('Almaty')
     # search_city_upper_field.send_keys(Keys.ENTER)
+    time.sleep(5)
     element = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     action_chains = ActionChains(driver)
     action_chains.move_to_element(element)
