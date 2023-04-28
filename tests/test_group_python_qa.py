@@ -2,10 +2,8 @@ from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 URL = 'https://openweathermap.org/'
-URL_TWITTER = 'https://twitter.com/OpenWeatherMap'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -42,7 +40,7 @@ def test_fill_search_city_field(driver, city):
 
 @pytest.mark.parametrize('city', cities)
 def test_all_dropdown_options_should_contain_valid_city(driver, city):
-    driver.get('https://openweathermap.org/')
+    driver.get(URL)
     wait = WebDriverWait(driver, 15)
     wait.until_not(EC.presence_of_element_located(load_div))
     search_city_input = driver.find_element(*search_city_field)
