@@ -259,9 +259,14 @@ def test_contact_us(driver, open_page):
     assert driver.find_element(*question_page).is_displayed()
 
 #Testing Support tab
-def test_support_faq(driver, open_page, wait):
+def test_support_faq(driver, open_page):
     try:
-        driver.find_element(*support_tab).click()
+        driver.get(URL)
+        wait = WebDriverWait(driver, 15)
+        wait.until_not(EC.presence_of_element_located(load_div))
+        wait.until(EC.presence_of_element_located(support_tab))
+        driver.find_element(*support_tab)
+        wait.until(EC.presence_of_element_located(faq_link))
         driver.find_element(*faq_link).click()
         assert driver.current_url == 'https://openweathermap.org/faq'
     except TimeoutException as e:
