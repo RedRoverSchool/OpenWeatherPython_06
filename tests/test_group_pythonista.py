@@ -33,7 +33,7 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 btn_contact_as = (By.CSS_SELECTOR, '.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
 question_page = (By.CLASS_NAME, 'headline')
 btn_marketplace = (By.CSS_SELECTOR, 'div.grid-container a[href$="/marketplace"]')
-text_mp_page = (By.XPATH, '//*[@id="custom_weather_products"]/h1')
+
 
 
 @pytest.fixture()
@@ -120,6 +120,22 @@ def test_marketplace_page_link(driver, open_page):
         assert expected_url
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+def test_search_city_field(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    search_city_field = driver.find_element(*search_city_field_selector)
+    search_city_field.send_keys('New York')
+    search_button = driver.find_element(*search_submit_button)
+    search_button.click()
+    search_option = wait.until(EC.element_to_be_clickable(search_dropdown_option))        # (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+    search_option.click()
+    expected_city = 'New York City, US'
+    wait.until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'New York'))
+    displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
+    assert displayed_city == expected_city
 
 
 def test_search_city_field(driver):
