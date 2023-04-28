@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
@@ -18,6 +16,8 @@ selector_marketplace_tab = (By.XPATH, '//div[@id="desktop-menu"]//li[4]/a')
 footer_panel = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 btn_allow_all = (By.CLASS_NAME, "stick-footer-panel__link")
 btn_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
+# TODO (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+
 # About As
 btn_about_us = (By.CSS_SELECTOR, 'a[href*="/about-us"]')
 btn_product_doc = (By.CSS_SELECTOR, 'div.grid-container [href="/api"]')
@@ -33,7 +33,7 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 btn_contact_as = (By.CSS_SELECTOR, '.about-us :nth-child(9) [href="https://home.openweathermap.org/questions"]')
 question_page = (By.CLASS_NAME, 'headline')
 btn_marketplace = (By.CSS_SELECTOR, 'div.grid-container a[href$="/marketplace"]')
-text_mp_page = (By.XPATH, '//*[@id="custom_weather_products"]/h1')
+txt_mp_page = (By.XPATH, '//*[@id="custom_weather_products"]/h1')
 
 
 @pytest.fixture()
@@ -75,7 +75,6 @@ def test_checkout_menu_tab_dashboard(driver, open_page, wait):
     btn_dashb = driver.find_element(*btn_desc_dashboard)
     ActionChains(driver).move_to_element(btn_dashb).click(btn_dashb).perform()
     title_dashboard = driver.find_element(*title_weatherDashboard).text
-    time.sleep(4)
     assert title_dashboard == 'Weather dashboard'
     driver.find_element(*btn_go_home).click()
     assert driver.current_url == URL
@@ -131,7 +130,7 @@ def test_search_city_field(driver):
     search_button = driver.find_element(*search_submit_button)
     search_button.click()
     search_option = wait.until(EC.element_to_be_clickable(
-        search_dropdown_option))  # (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+        search_dropdown_option))
     search_option.click()
     expected_city = 'New York City, US'
     wait.until(EC.text_to_be_present_in_element(
@@ -201,8 +200,8 @@ def test_check_marketplace(driver, open_page):
     driver.find_element(*btn_allow_all).click()
     driver.find_element(*btn_about_us).click()
     driver.find_element(*btn_marketplace).click()
-    text_markpl = driver.find_element(*text_mp_page).text
-    assert text_markpl == 'Custom Weather Products'
+    txt_markpl = driver.find_element(*txt_mp_page).text
+    assert txt_markpl == 'Custom Weather Products'
 
 
 '''Footer / About us / Verify New and Updates button'''
