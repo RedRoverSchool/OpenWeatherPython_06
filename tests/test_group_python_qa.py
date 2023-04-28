@@ -79,5 +79,8 @@ def test_image_open_weather(driver):
     driver.get(URL)
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    assert driver.find_element(By.XPATH, "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']")
+    assert driver.find_element(By.XPATH,
+                               "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
+
+
 
