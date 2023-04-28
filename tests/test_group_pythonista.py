@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
@@ -76,7 +74,9 @@ def test_checkout_tab_api(driver, open_page, wait):
 
 def test_checkout_menu_tab_dashboard(driver, open_page, wait):
     btn_dashb = driver.find_element(*btn_desc_dashboard)
-    ActionChains(driver).move_to_element(btn_dashb).click(btn_dashb).perform()
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(btn_dashb)
+    driver.execute_script("arguments[0].click();", btn_dashb)
     title_dashboard = driver.find_element(*title_weatherDashboard).text
     assert title_dashboard == 'Weather dashboard'
     driver.find_element(*btn_go_home).click()
