@@ -57,16 +57,16 @@ def test_check_meteorological_conditions_are_displayed(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     search_city_field_1 = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, "input[placeholder='Search city']")))
-    search_city_field_1.send_keys('city')
+    search_city_field_1.send_keys(city)
     search_button_1 = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
     search_button_1.click()
     search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
         (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
     search_option.click()
     WebDriverWait(driver, 15).until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'city'))
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), city))
     displayed_city_1 = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
-    assert displayed_city_1 == 'city'
+    assert displayed_city_1 == city
     assert driver.find_element(By.CSS_SELECTOR, '.wind-line').is_displayed()
     assert driver.find_element(By.XPATH, '//span[text()="Humidity:"]').is_displayed()
     assert driver.find_element(By.XPATH, "//span[text()='Visibility:']").is_displayed()
