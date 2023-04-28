@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 URL = 'https://openweathermap.org/'
-
+URL2 = 'https://home.openweathermap.org/users/sign_in'
 
 def test_should_open_given_link(driver):
     driver.get(URL)
@@ -43,3 +43,10 @@ def test_click_guide(driver):
     driver.execute_script("arguments[0].click();", search_link_guide)
     assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
     print(f'Website page title is: {driver.title}')
+
+
+def test_should_open_url2(driver):
+    driver.get(URL2)
+    assert driver.current_url == URL2
+
+
