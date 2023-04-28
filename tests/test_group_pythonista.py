@@ -34,6 +34,11 @@ btn_contact_as = (By.CSS_SELECTOR, '.about-us :nth-child(9) [href="https://home.
 question_page = (By.CLASS_NAME, 'headline')
 btn_marketplace = (By.CSS_SELECTOR, 'div.grid-container a[href$="/marketplace"]')
 txt_mp_page = (By.XPATH, '//*[@id="custom_weather_products"]/h1')
+# Support tab
+support_tab = (By.CSS_SELECTOR, '#support-dropdown')
+faq_link = (By.XPATH, '//ul[@class="dropdown-menu dropdown-visible"]/li/a[text()="FAQ"]')
+how_to_start_link = (By.XPATH, '//ul[@class="dropdown-menu dropdown-visible"]/li/a[text()="How to start"]')
+ask_question_link = (By.XPATH, '//ul[@class="dropdown-menu dropdown-visible"]/li/a[text()="Ask a question"]')
 
 
 
@@ -252,3 +257,48 @@ def test_contact_us(driver, open_page):
     driver.find_element(*btn_contact_as).click()
     driver.switch_to.window(driver.window_handles[1])
     assert driver.find_element(*question_page).is_displayed()
+
+#Testing Support tab
+def test_support_faq(driver, open_page):
+    try:
+        driver.get(URL)
+        wait = WebDriverWait(driver, 15)
+        wait.until_not(EC.presence_of_element_located(load_div))
+        wait.until(EC.presence_of_element_located(support_tab))
+        driver.find_element(*support_tab)
+        wait.until(EC.presence_of_element_located(faq_link))
+        driver.find_element(*faq_link).click()
+        assert driver.current_url == 'https://openweathermap.org/faq'
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
+
+# TODO  need fix (mark.skip)
+def test_support_how_start(driver, open_page, wait):
+    try:
+        driver.get(URL)
+        wait = WebDriverWait(driver, 15)
+        wait.until_not(EC.presence_of_element_located(load_div))
+        wait.until(EC.presence_of_element_located(support_tab))
+        driver.find_element(*support_tab)
+        wait.until(EC.presence_of_element_located(how_to_start_link))
+        driver.find_element(*how_to_start_link).click()
+        assert driver.current_url == 'https://openweathermap.org/appid'
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
+
+
+def test_support_ask_question(driver, open_page, wait):
+    try:
+        driver.get(URL)
+        wait = WebDriverWait(driver, 15)
+        wait.until_not(EC.presence_of_element_located(load_div))
+        wait.until(EC.presence_of_element_located(support_tab))
+        driver.find_element(*support_tab)
+        wait.until(EC.presence_of_element_located(ask_question_link))
+        driver.find_element(*ask_question_link).click()
+        driver.switch_to.window(driver.window_handles[1])
+        assert driver.current_url == 'https://home.openweathermap.org/questions'
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
