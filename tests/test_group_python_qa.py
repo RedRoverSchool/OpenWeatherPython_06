@@ -3,6 +3,7 @@ from selenium import webdriver
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -12,7 +13,7 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
-driver = webdriver.Chrome()
+
 
 
 def test_should_open_given_link(driver):
@@ -54,10 +55,13 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
 
 
 def test_c_to_f():
+    driver = webdriver.Chrome()
     driver.get(URL)
     driver.maximize_window()
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    choose_temp = driver.find_element(By.CSS_SELECTOR, ".switch-container div:nth-child(3)")
-    choose_temp.click()
+    element = driver.find_element(By.CSS_SELECTOR, ".switch-container div:nth-child(3)")
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
     assert driver.find_element(By.XPATH, '//div[@class="current-temp"]/span[contains(text(), "°F")][1]').is_displayed()
