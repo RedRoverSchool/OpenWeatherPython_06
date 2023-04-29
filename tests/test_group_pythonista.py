@@ -18,6 +18,14 @@ btn_allow_all = (By.CLASS_NAME, "stick-footer-panel__link")
 btn_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
 # TODO (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
 
+#SignIn form
+sign_in_top_menu = (By.XPATH, "//div[@id='desktop-menu']//li[@class='user-li']/a")
+email_field = (By.ID, "user_email")
+password_field = (By.ID, "user_password")
+recover_link = (By.CSS_SELECTOR, ".pwd-lost-q a")
+btn_submit = (By.NAME, "commit")
+email_form = (By.CSS_SELECTOR, "div.pwd-lost-f")
+
 # About As
 btn_about_us = (By.CSS_SELECTOR, 'a[href*="/about-us"]')
 btn_product_doc = (By.CSS_SELECTOR, 'div.grid-container [href="/api"]')
@@ -305,3 +313,22 @@ def test_support_ask_question(driver, open_page):
         assert driver.current_url == 'https://home.openweathermap.org/questions'
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+
+'''test SignIn form > recover link '''
+def test_should_display_instructions_on_click_recover_link(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    wait.until(EC.presence_of_element_located(sign_in_top_menu))
+    action_chains = ActionChains(driver)
+    sign_in_element = driver.find_element(*sign_in_top_menu)
+    action_chains.move_to_element(sign_in_element)
+    driver.execute_script("arguments[0].click();", sign_in_element)
+    driver.find_element(*recover_link)
+    driver.find_element(*recover_link).click()
+    WebDriverWait(driver, 5)
+    wait.until(EC.presence_of_element_located(email_form))
+    email_instructions = driver.find_element(*email_form)
+    assert email_instructions.text == "Enter your email address and we will send you a link to reset your password.\nEmail", \
+        f"Expected email instructions text not found: {email_instructions}"
