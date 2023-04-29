@@ -122,6 +122,7 @@ def test_open_initiatives_title(driver):
     driver.get('https://openweathermap.org/our-initiatives')
     assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
+
 @pytest.mark.parametrize('city', cities)
 def test_fill_search_city_field(driver, city):
     driver.get('https://openweathermap.org/')
@@ -135,6 +136,15 @@ def test_fill_search_city_field(driver, city):
     wait.until(EC.text_to_be_present_in_element(displayed_city, city))
     actual_city = driver.find_element(*displayed_city).text
     assert expected_city in actual_city
+
+
+def test_blog_title(driver):
+    driver.get('https://openweather.co.uk/blog/category/weather')
+    assert driver.title == 'Blog - OpenWeatherMap'
+
+
+
+
 
 
 
