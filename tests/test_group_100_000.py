@@ -17,6 +17,7 @@ SUPPORT_FAQ = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(1)>a')
 FAQ_TITLE = (By.XPATH, "//h1[contains(text(),'Frequently Asked Questions')]")
 SUPPORT_HOW_TO_START = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(2)>a')
 SUPPORT_ASK_A_QUESTION = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(3)>a')
+SUPPORT = (By.CSS_SELECTOR, "# support-dropdown")
 
 @pytest.fixture()
 def open_page(driver):
@@ -34,7 +35,7 @@ def wait_upload(driver):
         print(f"TimeoutException occurred: {e}")
     yield wait
 
-def test_should_open_given_link(driver):
+def test_should_open_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
 
@@ -51,6 +52,17 @@ def test_verify_page_title(driver):
 def test_compare_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
+
+
+def test_default_units(driver):
+
+    wait = WebDriverWait(driver, 10)
+    driver.get('https://openweathermap.org/')
+    wait.until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+
+    actual_units = driver.find_element(By.CSS_SELECTOR, 'div.current-temp > span').text[-2:]
+    assert actual_units == '°C'
 
 '''Testing Support menu'''
 def test_desktop_menu_support(driver):
@@ -83,3 +95,12 @@ def test_support_faq(driver, wait_upload, open_page):
         assert exp_title == disp_title_text
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+def test_name_home_page(driver):
+    wait = WebDriverWait(driver, 20)
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located(LOAD_COOKIE))
+    title = driver.find_element(By.CSS_SELECTOR, "h1")
+    assert title.text == "OpenWeather"
+
+
