@@ -97,7 +97,7 @@ def test_support_faq(driver, wait_upload, open_page):
         print(f"TimeoutException occurred: {e}")
 
 def test_name_home_page(driver):
-    wait = WebDriverWait(driver, 20)
+    wait = WebDriverWait(driver, 10)
     driver.get(URL)
     wait.until_not(EC.presence_of_element_located(LOAD_COOKIE))
     title = driver.find_element(By.CSS_SELECTOR, "h1")
