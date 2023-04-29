@@ -41,7 +41,6 @@ how_to_start_link = (By.XPATH, '//ul[@class="dropdown-menu dropdown-visible"]/li
 ask_question_link = (By.XPATH, '//ul[@class="dropdown-menu dropdown-visible"]/li/a[text()="Ask a question"]')
 
 
-
 @pytest.fixture()
 def wait(driver):
     wait = WebDriverWait(driver, 15)
@@ -128,6 +127,7 @@ def test_marketplace_page_link(driver, open_page):
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
 
+
 def test_search_city_field(driver):
     driver.get(URL)
     wait = WebDriverWait(driver, 15)
@@ -136,7 +136,8 @@ def test_search_city_field(driver):
     search_city_field.send_keys('New York')
     search_button = driver.find_element(*search_submit_button)
     search_button.click()
-    search_option = wait.until(EC.element_to_be_clickable(search_dropdown_option))        # (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+    search_option = wait.until(EC.element_to_be_clickable(
+        search_dropdown_option))
     search_option.click()
     expected_city = 'New York City, US'
     wait.until(EC.text_to_be_present_in_element(
@@ -258,7 +259,10 @@ def test_contact_us(driver, open_page):
     driver.switch_to.window(driver.window_handles[1])
     assert driver.find_element(*question_page).is_displayed()
 
-#Testing Support tab
+
+'''Testing Support tab'''
+
+
 def test_support_faq(driver, open_page):
     try:
         driver.get(URL)
@@ -273,8 +277,8 @@ def test_support_faq(driver, open_page):
         print(f"TimeoutException occurred: {e}")
 
 
-# TODO  need fix (mark.skip)
-def test_support_how_start(driver, open_page, wait):
+# TODO  need fix
+def test_support_how_start(driver, open_page):
     try:
         driver.get(URL)
         wait = WebDriverWait(driver, 15)
@@ -288,8 +292,7 @@ def test_support_how_start(driver, open_page, wait):
         print(f"TimeoutException occurred: {e}")
 
 
-
-def test_support_ask_question(driver, open_page, wait):
+def test_support_ask_question(driver, open_page):
     try:
         driver.get(URL)
         wait = WebDriverWait(driver, 15)
