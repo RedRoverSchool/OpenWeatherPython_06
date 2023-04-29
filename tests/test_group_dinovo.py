@@ -9,14 +9,15 @@ def test_check_page_title(driver):
 
 
 from selenium import webdriver
-# import pytest
+import pytest
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 # from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-def test_open_page():
+# def test_open_page():
+def test_open_page(driver):
     driver.get('https://openweathermap.org/')
     driver.maximize_window()
     assert 'openweathermap'in driver.current_url
