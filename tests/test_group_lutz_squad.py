@@ -11,3 +11,8 @@ def test_check_page_title(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
+def test_check_website_name(driver):
+    driver.get('https://openweathermap.org/')
+    website_name = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'h1 .white-text')))
+    assert website_name.text == 'OpenWeather'
