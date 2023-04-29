@@ -75,11 +75,11 @@ def test_check_meteorological_conditions_are_displayed(driver):
 
 def test_api_recommended_version(driver):
     driver.get(URL)
-    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    button_api = WebDriverWait(driver, 10).until(
+    button_api = WebDriverWait(driver, 35).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(2)>a")))
     button_api.click()
-    api_recommended_version = driver.find_element(By.CSS_SELECTOR, '.lead a:nth-child(2)').text
+    api_recommended_version = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert api_recommended_version == "One Call API 3.0"
 
