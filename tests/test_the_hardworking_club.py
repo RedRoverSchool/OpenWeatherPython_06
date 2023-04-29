@@ -129,3 +129,10 @@ def test_open_marketplace(driver):
     assert 'history_bulks/new' in driver.current_url
 
 
+def test_blog_title(driver):
+    driver.get('https://openweather.co.uk/blog/category/weather')
+    assert driver.title == 'Blog - OpenWeatherMap'
+
+
+
+
