@@ -27,7 +27,7 @@ def test_check_support_menu(driver):
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_support)
     driver.execute_script("arguments[0].click();", button_support)
-    assert 'FAQ' and 'How to start' and 'Ask a question' in driver.page_source
+    assert 'FAQ' and 'How to start' and 'Ask a question' in  driver.page_source
 
 
 
