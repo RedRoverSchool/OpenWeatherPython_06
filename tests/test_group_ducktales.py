@@ -8,6 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import random
 import string
 
+BASE_URL = "https://openweathermap.org/"
 URL_sing_in_page = "https://home.openweathermap.org/users/sign_in"
 email_field = (By.ID, 'user_email')
 user_email = "jtzcmspsmgvbep@bugfoo.com"
@@ -62,6 +63,7 @@ def test_fill_search_city_field(driver):
     displayed_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
     assert displayed_city == expected_city
 
+
 class TestApiKeysPage:
     def test_open_my_api_keys(self, driver, open_api_keys_page):
             expected_api_keys_URL = URL_api_keys_page
@@ -115,8 +117,6 @@ class TestApiKeysPage:
         assert current_status == initial_status, "API Key status was changed"
 
 
-
-
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
@@ -140,7 +140,8 @@ def test_registration(driver):
         EC.visibility_of_element_located((By.XPATH, "//div[@class='panel-body']")))
     assert success_message.text == expected_message
 
-#Экспериментальный тест с проверкой температуры. Тестирование рекомендовано провести для нескольких географических точек, сильно разнящихся по климату
+
+# Экспериментальный тест с проверкой температуры. Тестирование рекомендовано провести для нескольких географических точек, сильно разнящихся по климату
 def test_city_temperature(driver):
     driver.get('http://openweathermap.org/')
     time.sleep(10)
@@ -171,4 +172,12 @@ def test_city_temperature(driver):
 
 def test_new_pass():
     pass
+
+
+def test_forecast_info(driver):
+    print(BASE_URL)
+    driver.get(BASE_URL)
+    forecast_period_head = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, "div.daily-container.block>h3")))
+    assert forecast_period_head.text == '8-day forecast'
 
