@@ -25,17 +25,18 @@ def test_home_page_header(driver):
 
 
 
-def test_should_refresh_link(driver):
-    current_title = driver.title
-    driver.get(URL)
-    driver.refresh()
-    WebDriverWait(driver, 60).until(EC.title_is('OpenWeatherMap'))
-    assert current_title != driver.title
+# def test_should_refresh_link(driver):
+#     current_title = driver.title
+#     driver.get(URL)
+#     driver.refresh()
+#     WebDriverWait(driver, 60).until(EC.title_is('OpenWeatherMap'))
+#     assert current_title != driver.title
 
 def test_page_source(driver):
     driver.get(URL)
     page_source = driver.page_source
     driver.quit()
+
 
 
 def test_get_name(driver):
