@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
 
@@ -115,13 +116,8 @@ def test_open_initiatives_title(driver):
     assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
 
-from selenium.webdriver.common.action_chains import ActionChains
 def test_open_marketplace(driver):
     driver.get('https://openweathermap.org/')
-    WebDriverWait(driver, 15).until(
-        EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "[aria-label='Loading']")))
-    WebDriverWait(driver, 15).until(
-        EC.invisibility_of_element((By.CSS_SELECTOR, "[aria-label='Loading']")))
     element = driver.find_element(By.CSS_SELECTOR, 'div#desktop-menu a[href*=marketplace]')
     actions = ActionChains(driver)
     actions.move_to_element(element)
