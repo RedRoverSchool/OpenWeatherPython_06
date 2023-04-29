@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -79,7 +80,9 @@ def test_api_recommended_version(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     button_api = WebDriverWait(driver, 35).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(2)>a")))
-    button_api.click()
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_api)
+    driver.execute_script("arguments[0].click();", button_api)
     api_recommended_version = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert api_recommended_version == "One Call API 3.0"
 
