@@ -12,6 +12,13 @@ def test_g(driver):
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
+def test_check_website_name(driver):
+    driver.get('https://openweathermap.org/')
+    website_name = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, 'h1 .white-text')))
+    assert website_name.text == 'OpenWeather'
+
+
 def test_check_support_menu(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(

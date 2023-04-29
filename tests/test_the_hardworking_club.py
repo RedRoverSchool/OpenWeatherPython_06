@@ -115,6 +115,12 @@ def test_open_initiatives_title(driver):
     assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
 
+def test_blog_title(driver):
+    driver.get('https://openweather.co.uk/blog/category/weather')
+    assert driver.title == 'Blog - OpenWeatherMap'
+
+
+
 
 
 
