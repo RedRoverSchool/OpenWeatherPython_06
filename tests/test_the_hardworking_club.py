@@ -2,6 +2,9 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pytest
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -95,3 +98,29 @@ def test_support_drop_down(driver):
 def test_pricing_title(driver):
     driver.get('https://openweathermap.org/price')
     assert driver.title == 'Pricing - OpenWeatherMap'
+
+
+def test_partners_title(driver):
+    driver.get('https://openweathermap.org/examples')
+    assert driver.title == 'Partners and solutions - OpenWeatherMap'
+
+
+def test_guide_title(driver):
+    driver.get('https://openweathermap.org/guide')
+    assert driver.title == 'OpenWeatherMap API guide - OpenWeatherMap'
+
+
+def test_open_initiatives_title(driver):
+    driver.get('https://openweathermap.org/our-initiatives')
+    assert driver.title == 'Our Initiatives - OpenWeatherMap'
+
+
+def test_blog_title(driver):
+    driver.get('https://openweather.co.uk/blog/category/weather')
+    assert driver.title == 'Blog - OpenWeatherMap'
+
+
+
+
+
+
