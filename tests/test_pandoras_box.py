@@ -108,6 +108,13 @@ def test_notification_tab_singIN(driver):
     assert disp_text == 'Invalid Email or password.'
 
 
+def test_title_site(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    title = driver.find_element(By.XPATH, "//h1")
+    assert title.text == "OpenWeather"
+
 
 
 
