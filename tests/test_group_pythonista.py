@@ -17,6 +17,7 @@ footer_panel = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 btn_allow_all = (By.CLASS_NAME, "stick-footer-panel__link")
 btn_go_home = (By.XPATH, "//a[contains(text(),'Home')]")
 # TODO (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+footer_copyright = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 
 # About As
 btn_about_us = (By.CSS_SELECTOR, 'a[href*="/about-us"]')
@@ -53,6 +54,14 @@ def open_page(driver):
     driver.get(URL)
     driver.maximize_window()
     assert 'openweathermap' in driver.current_url
+
+
+@pytest.fixture()
+def cookies_panel_w(driver, open_page):
+    btn_click_all = driver.find_element(*btn_allow_all)
+    cookies_panel = driver.find_element(*footer_panel)
+    if cookies_panel:
+        btn_click_all.click()
 
 
 def test_check_page_title(driver, wait, open_page):
@@ -177,11 +186,7 @@ def test_check_about(driver, open_page):
 '''About us / Verify "Products Documentation" button redirects to page'''
 
 
-def test_check_product_doc_btn(driver, open_page):
-    wait = WebDriverWait(driver, 15)
-    wait.until_not(EC.presence_of_element_located(load_div))
-    wait.until(EC.element_to_be_clickable(footer_panel))
-    driver.find_element(*btn_allow_all).click()
+def test_check_product_doc_btn(driver, open_page, wait, cookies_panel_w):
     driver.find_element(*btn_about_us).click()
     driver.find_element(*btn_product_doc).click()
     txt_title = driver.find_element(*weather_title_api).text
@@ -191,9 +196,7 @@ def test_check_product_doc_btn(driver, open_page):
 '''About us/ Verify "Buy by Subscription" button redirects to subscriptions page(logout)'''
 
 
-def test_check_buy_by_sub(driver, open_page):
-    wait = WebDriverWait(driver, 15)
-    wait.until_not(EC.presence_of_element_located(load_div))
+def test_check_buy_by_sub(driver, open_page, wait):
     wait.until(EC.element_to_be_clickable(footer_panel))
     driver.find_element(*btn_allow_all).click()
     driver.find_element(*btn_about_us).click()
@@ -202,7 +205,7 @@ def test_check_buy_by_sub(driver, open_page):
     assert alert.is_displayed()
 
 
-# TODO  Negative test?! (mark.skip)
+# TODO  Negative test!
 @pytest.mark.skip('negative test')
 def test_neg_check_buy_by_subs(driver, open_page):
     wait = WebDriverWait(driver, 15)
@@ -305,3 +308,12 @@ def test_support_ask_question(driver, open_page):
         assert driver.current_url == 'https://home.openweathermap.org/questions'
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+
+'''Footer / Copyright/  Visability, content '''
+
+
+def test_visability_copyright(driver, open_page, wait):
+    wait.until(EC.element_to_be_clickable(footer_panel))
+    driver.find_element(*btn_allow_all).click()
+    driver.find_element(*footer_copyright).is_displayed()
