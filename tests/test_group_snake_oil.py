@@ -1,4 +1,5 @@
 import pytest
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -106,3 +107,29 @@ def test_login(driver):
     submit_button = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
         (By.XPATH, "(//input)[13]")))
     submit_button.click()
+
+
+def test_fill_upper_search_field(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "input[placeholder='Weather in your city']"))
+    )
+    search_city_upper_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
+    search_city_upper_field.send_keys('Almaty')
+    search_city_upper_field.send_keys(Keys.ENTER)
+    # time.sleep(5)
+    # element = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
+    # action_chains = ActionChains(driver)
+    # action_chains.move_to_element(element)
+    # driver.execute_script("arguments[0].click();", element)
+    # element.send_keys('Almaty')
+    # element.send_keys(Keys.ENTER)
+    link_city = driver.find_element(By.XPATH, '//tbody/tr[1]/td[2]/b[1]/a[1]')
+    link_city.click()
+    expected_city = 'Almaty, KZ'
+    WebDriverWait(driver, 20).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'Almaty'))
+    result_city = driver.find_element(By.CSS_SELECTOR, '.grid-container.grid-4-5 h2').text
+    assert result_city == expected_city
