@@ -10,10 +10,32 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
 LOAD_COOKIE = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
+'''Support div bottoms'''
 SUPPORT_BTN = (By.CSS_SELECTOR, '#desktop-menu li:nth-child(12)>div')
+SUPPORT_FAQ = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(1)>a')
+FAQ_TITLE = (By.XPATH, "//h1[contains(text(),'Frequently Asked Questions')]")
+SUPPORT_HOW_TO_START = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(2)>a')
+SUPPORT_ASK_A_QUESTION = (By.CSS_SELECTOR, '#support-dropdown-menu li:nth-child(3)>a')
+SUPPORT = (By.CSS_SELECTOR, "# support-dropdown")
+
+@pytest.fixture()
+def open_page(driver):
+    driver.get(URL)
+    driver.maximize_window()
+    assert driver.current_url == URL, "Wrong page!"
 
 
-def test_should_open_given_link(driver):
+@pytest.fixture()
+def wait_upload(driver):
+    try:
+        wait = WebDriverWait(driver, 20)
+        wait.until_not(EC.presence_of_element_located(LOAD_COOKIE))
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+    yield wait
+
+def test_should_open_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
 
@@ -31,6 +53,18 @@ def test_compare_page_title(driver):
     driver.get('https://openweathermap.org')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
+
+def test_default_units(driver):
+
+    wait = WebDriverWait(driver, 10)
+    driver.get('https://openweathermap.org/')
+    wait.until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+
+    actual_units = driver.find_element(By.CSS_SELECTOR, 'div.current-temp > span').text[-2:]
+    assert actual_units == '°C'
+
+'''Testing Support menu'''
 def test_desktop_menu_support(driver):
     try:
         driver.get(URL)
@@ -44,3 +78,29 @@ def test_desktop_menu_support(driver):
         desk_support.click()
     except TimeoutException as e:
         print(f"TimeoutException occurred: {e}")
+
+def test_support_faq(driver, wait_upload, open_page):
+    try:
+        desk_support = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(SUPPORT_BTN))
+        desk_support.click()
+        faq = WebDriverWait(driver, 25).until(EC.element_to_be_clickable(SUPPORT_FAQ))
+        faq.click()
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
+    try:
+        exp_title = 'Frequently Asked Questions'
+        disp_title = WebDriverWait(driver, 25).until(EC.presence_of_element_located(FAQ_TITLE))
+        disp_title_text = disp_title.text
+        assert exp_title == disp_title_text
+    except TimeoutException as e:
+        print(f"TimeoutException occurred: {e}")
+
+def test_name_home_page(driver):
+    wait = WebDriverWait(driver, 10)
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located(LOAD_COOKIE))
+    title = driver.find_element(By.CSS_SELECTOR, "h1")
+    assert title.text == "OpenWeather"
+
+
