@@ -14,6 +14,7 @@ search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 city = "Los Angeles, US"
 
+
 def test_should_open_given_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
@@ -74,6 +75,7 @@ def test_check_meteorological_conditions_are_displayed(driver):
     assert driver.find_element(By.CSS_SELECTOR, "li .icon-pressure").is_displayed()
     assert driver.find_element(By.XPATH, '//span[text()="Dew point:"] ').is_displayed()
 
+
 def test_api_recommended_version(driver):
     driver.get(URL)
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
@@ -85,4 +87,14 @@ def test_api_recommended_version(driver):
     driver.execute_script("arguments[0].click();", button_api)
     api_recommended_version = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert api_recommended_version == "One Call API 3.0"
+
+
+def test_image_open_weather(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    assert driver.find_element(By.XPATH,
+                               "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
+
+
 
