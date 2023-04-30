@@ -8,8 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-# URL = 'https://openweathermap.org/'
+URL = 'https://openweathermap.org/'
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
