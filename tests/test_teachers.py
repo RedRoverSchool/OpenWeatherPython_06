@@ -98,6 +98,5 @@ def test_verify_new_page_link_contains_requested_city_name(driver, open_and_load
     query = 'Florida'
     search_city = driver.find_element(*weather_in_your_city)
     actions = ActionChains(driver)
-    actions.move_to_element(search_city).click().send_keys(query)
-    actions.send_keys(Keys.RETURN).perform()
+    actions.move_to_element(search_city).click().send_keys(query).send_keys(Keys.ENTER).perform()
     assert query in driver.current_url
