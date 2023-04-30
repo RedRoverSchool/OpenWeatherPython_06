@@ -86,3 +86,54 @@ def test_api_recommended_version(driver):
     api_recommended_version = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert api_recommended_version == "One Call API 3.0"
 
+
+def test_temperature_f_conversion(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys(city)
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 15).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), city))
+    f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(3)')
+    f_temp.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
+
+
+def test_temperature_c_conversion(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys(city)
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
+    f_temp.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°C')]").is_displayed()
+
+
+def test_support(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_support = driver.find_element(By.ID, 'support-dropdown')
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(click_support)
+    driver.execute_script("arguments[0].click();", click_support)
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/faq']").is_displayed()
+    assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/appid']").is_displayed()
+    assert driver.find_element(
+        By.CSS_SELECTOR, "#support-dropdown-menu a[href = 'https://home.openweathermap.org/questions']").is_displayed()
