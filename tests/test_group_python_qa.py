@@ -88,3 +88,11 @@ def test_api_recommended_version(driver):
     api_recommended_version = driver.find_element(By.XPATH, '//p/a[contains(text(), "One Call API 3.0")]').text
     assert api_recommended_version == "One Call API 3.0"
 
+
+def test_social_link_telegram(driver):
+    driver.get('https://openweathermap.org/')
+    click_telegram = driver.find_element(By.CSS_SELECTOR, 'a[href="https://t.me/openweathermap"]')
+    driver.execute_script("return arguments[0].scrollIntoView(true);", click_telegram)
+    click_telegram.click()
+    driver.switch_to.window(driver.window_handles[1])
+
