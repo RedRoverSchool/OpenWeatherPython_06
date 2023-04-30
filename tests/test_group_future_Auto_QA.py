@@ -3,6 +3,7 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
 URL2 = 'https://openweathermap.org/guide/'
@@ -23,9 +24,27 @@ def test_home_page_header(driver):
     assert header.text == "OpenWeather", "Wrong h1 Header"
 
 
-def test_should_open_url2(driver):
-    driver.get(URL2)
-    assert 'openweathermap' in driver.current_url
+
+# def test_should_refresh_link(driver):
+#     current_title = driver.title
+#     driver.get(URL)
+#     driver.refresh()
+#     WebDriverWait(driver, 60).until(EC.title_is('OpenWeatherMap'))
+#     assert current_title != driver.title
+
+def test_page_source(driver):
+    driver.get(URL)
+    page_source = driver.page_source
+    driver.quit()
+
+
+
+def test_get_name(driver):
+    driver.get(URL)
+    driver_name = driver.name
+    return driver_name
+
+
 
 
 def test_should_be_email_field_placeholder(driver):
@@ -45,3 +64,17 @@ def test_should_be_email_field_placeholder(driver):
             "Email field placeholder text is incorrect"
     except TimeoutException as e:
         print(f"error occurred: {e}")
+
+
+# @pytest.mark.skip()
+def test_change_measurement_systems_to_imperial(driver):
+    driver.get(URL)
+    radio_button = driver.find_element(*(By.XPATH, "//div[text()='Imperial: °F, mph']"))
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(radio_button)
+    driver.execute_script("arguments[0].click();", radio_button)
+    # WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'span[class="heading"]')))
+    # displayed_temperature = (By.CSS_SELECTOR, 'span[class="heading"]')
+    actual_temperature = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'span[class="heading"]'))).text
+    # actual_temperature = driver.find_element(*displayed_temperature).text
+    assert actual_temperature[-1] == 'F'
