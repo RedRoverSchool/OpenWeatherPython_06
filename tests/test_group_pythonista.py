@@ -317,3 +317,16 @@ def test_visability_copyright(driver, open_page, wait):
     wait.until(EC.element_to_be_clickable(footer_panel))
     driver.find_element(*btn_allow_all).click()
     driver.find_element(*footer_copyright).is_displayed()
+
+
+def test_home_page_header(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    header = driver.find_element(By.CSS_SELECTOR, "h1")
+    assert header.text == "OpenWeather", "Wrong h1 Header"
+
+
+
+
+
