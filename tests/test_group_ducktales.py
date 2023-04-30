@@ -114,6 +114,17 @@ class TestApiKeysPage:
         current_status = first_column_values_after_switch[2].text
         assert current_status == initial_status, "API Key status was changed"
 
+    def test_toggle_was_changed(self, driver, open_api_keys_page):
+        initial_toggle_icon = driver.find_element(By.CSS_SELECTOR,
+                                                  '.edit_key_btn[rel="nofollow"] i').get_attribute('class')
+        toggle_icon = driver.find_element(By.CSS_SELECTOR, '.edit_key_btn[rel="nofollow"]')
+        toggle_icon.click()
+        alert = driver.switch_to.alert
+        alert.accept()
+        current_toggle_icon = driver.find_element(By.CSS_SELECTOR,
+                                                  '.edit_key_btn[rel="nofollow"] i').get_attribute('class')
+        assert current_toggle_icon != initial_toggle_icon, "The toggle button icon has not changed"
+
 
 def test_check_page_title(driver):
     driver.get('https://openweathermap.org')
