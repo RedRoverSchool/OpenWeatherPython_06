@@ -1,3 +1,6 @@
+import time
+
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
@@ -118,7 +121,9 @@ def test_support(driver):
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     click_support = driver.find_element(By.ID, 'support-dropdown')
-    click_support.click()
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(click_support)
+    driver.execute_script("arguments[0].click();", click_support)
     assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/faq']").is_displayed()
     assert driver.find_element(By.CSS_SELECTOR, "#support-dropdown-menu a[href='/appid']").is_displayed()
     assert driver.find_element(
