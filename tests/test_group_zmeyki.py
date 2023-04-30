@@ -13,9 +13,7 @@ search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 sign_in_link = (By.CSS_SELECTOR, '.user-li a')
-pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
-price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
-accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
 
 
 def test_should_open_given_link(driver):
@@ -89,3 +87,5 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
+
+
