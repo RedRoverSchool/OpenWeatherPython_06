@@ -318,15 +318,15 @@ def test_visability_copyright(driver, open_page, wait):
     driver.find_element(*btn_allow_all).click()
     driver.find_element(*footer_copyright).is_displayed()
 
-@pytest.mark.parametrize('city', cities)
-def test_all_dropdown_options_should_contain_valid_city(driver, city):
+
+def test_home_page_header(driver):
     driver.get(URL)
-    wait = WebDriverWait(driver, 15)
-    wait.until_not(EC.presence_of_element_located(load_div))
-    search_city_input = driver.find_element(*search_city_field)
-    search_city_input.send_keys(city)
-    driver.find_element(*search_button).click()
-    options = driver.find_elements(*search_dropdown)
-    for option in options:
-        assert city in option.text
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    header = driver.find_element(By.CSS_SELECTOR, "h1")
+    assert header.text == "OpenWeather", "Wrong h1 Header"
+
+
+
+
 
