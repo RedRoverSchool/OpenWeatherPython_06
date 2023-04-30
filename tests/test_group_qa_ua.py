@@ -66,7 +66,17 @@ def test_fill_search_city_field(driver):
     # displayed_city_text = displayed_city.text
     # print(displayed_city_text)
     assert displayed_city == expected_city
+    
 
+def test_box_presence(driver):
+    driver.get("https://home.openweathermap.org/marketplace")
+    driver.maximize_window()
+    # marketplace_button = driver.find_element(By.CSS_SELECTOR, "ul:nth-child(1) li:nth-child(4)")
+    # marketplace_button.click()
+    boxes = driver.find_elements(By.CSS_SELECTOR,".product:nth-child(1), .product:nth-child(2), .product")
+    print(f'len boxes = {len(boxes)}')
+    assert len(boxes) == 3
+    
 
 def test_search_field_placeholder(driver):
     driver.get('https://openweathermap.org/')
@@ -82,3 +92,13 @@ def test_check_log_in(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
+
+def test_find_metric_buttons(driver):
+    driver.get(URL)
+    search_metric_button = driver.find_element(By.CSS_SELECTOR, 'div.switch-container > div:nth-child(2)')
+    search_imperial_button = driver.find_element(By.CSS_SELECTOR, 'div.switch-container > div:nth-child(3)')
+    expected_metric_button = 'Metric: °C, m/s'
+    expected_imperial_button = 'Imperial: °F, mph'
+    assert search_metric_button.text == expected_metric_button
+    assert search_imperial_button.text == expected_imperial_button
+
