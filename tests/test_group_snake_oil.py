@@ -2,9 +2,7 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
+
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -14,7 +12,6 @@ search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 
 def test_open_page(driver):
@@ -94,10 +91,12 @@ def test_captcha_sign_in_form(driver):
     assert search_failed_message.is_displayed()
 
 
-def test_sign_in_page():
+def test_sign_in_page(driver):
     driver.get('https://home.openweathermap.org/users/sign_in')
 
-def test_login():
+
+def test_login(driver):
+    driver.get('https://home.openweathermap.org/users/sign_in')
     search_email_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
         (By.XPATH, "(//input)[9]")))
     search_email_field.send_keys("tester1627283@gmail.com")
