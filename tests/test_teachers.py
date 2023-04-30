@@ -3,6 +3,8 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -95,6 +97,7 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
 def test_verify_new_page_link_contains_requested_city_name(driver, open_and_load_page, wait):
     query = 'Florida'
     search_city = driver.find_element(*weather_in_your_city)
-    search_city.send_keys(query)
-    search_city.submit()
+    actions = ActionChains(driver)
+    actions.move_to_element(search_city).click().send_keys(query)
+    actions.send_keys(Keys.RETURN).perform()
     assert query in driver.current_url
