@@ -1,5 +1,5 @@
 import pytest
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -115,8 +115,9 @@ def test_fill_upper_search_field(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     search_city_upper_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     search_city_upper_field.send_keys('Almaty')
-    search_city_upper_field.submit()
-    # time.sleep(5)
+    submit_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]')
+    driver.execute_script("arguments[0].removeAttribute('style')", submit_button)
+    submit_button.click()
     # element = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     # action_chains = ActionChains(driver)
     # action_chains.move_to_element(element)
