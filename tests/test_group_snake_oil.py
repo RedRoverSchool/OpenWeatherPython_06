@@ -116,7 +116,7 @@ def test_fill_upper_search_field(driver):
     search_city_upper_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     search_city_upper_field.send_keys('Almaty')
     submit_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]')
-    driver.execute_script("arguments[0].removeAttribute('style')", submit_button)
+    driver.execute_script("arguments[0].style.display = 'block';", submit_button)
     submit_button.click()
     # element = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     # action_chains = ActionChains(driver)
