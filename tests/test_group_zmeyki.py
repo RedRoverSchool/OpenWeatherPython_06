@@ -89,3 +89,5 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
+
+
