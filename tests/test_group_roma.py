@@ -26,4 +26,4 @@ def test_button_search_exist(driver):
 def test_open_page_map(driver):
     driver.get('https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5')
     driver.maximize_window()
-    assert 'weathermap' in driver.current_url
+    assert "weathermap" in driver.current_url
