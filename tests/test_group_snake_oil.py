@@ -113,18 +113,13 @@ def test_fill_upper_search_field(driver):
     driver.get('https://openweathermap.org/')
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
-    # search_city_upper_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
-    # search_city_upper_field.send_keys('Almaty')
-    # submit_button = driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]')
-    # driver.execute_script("arguments[0].style.display = 'block';", submit_button)
-    # submit_button.click()
     driver.set_window_size(1920, 1080)
     search_city = driver.find_element( By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     city = 'Almaty'
     search_city.send_keys(city)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER).perform()
-    link_city = driver.find_element(By.CSS_SELECTOR, 'tbody tr:first-child a[href*='/city/']')
+    link_city = driver.find_element(By.CSS_SELECTOR, 'tbody tr:first-child a[href*=\'/city/\']')
     link_city.click()
     expected_city = 'Almaty, KZ'
     WebDriverWait(driver, 20).until(EC.text_to_be_present_in_element(
