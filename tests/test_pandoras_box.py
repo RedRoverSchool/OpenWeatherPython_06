@@ -1,3 +1,5 @@
+import time
+from selenium.webdriver.common.action_chains import ActionChains
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -5,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import datetime
 from selenium.webdriver import ActionChains
+
 
 test_email = 'chosenonex1@gmail.com'
 test_password = 'gNrts5W?K_.qLFu'
@@ -115,6 +118,29 @@ def test_title_site(driver):
     title = driver.find_element(By.XPATH, "//h1")
     assert title.text == "OpenWeather"
 
+
+
+def test_open_pricing(driver):
+    driver.get("https://openweathermap.org/")
+    button_pricing = driver.find_element(By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_pricing)
+    driver.execute_script("arguments[0].click();", button_pricing)
+    expected_title = "Pricing"
+    displayed_title = driver.find_element(By.CSS_SELECTOR, 'h1.breadcrumb-title').text
+    assert displayed_title == expected_title
+
+
+def test_current_time(driver): # проверка текущей даты и времени
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    current_time = datetime.datetime.now().utcnow().strftime("%b %d, %I:%M%p")[:12]
+    current_time_from_page_str = driver.find_element(
+        By.XPATH, '//div[@id="weather-widget"]//descendant::span[@class="orange-text"]').text
+    current_time_from_page_obj = datetime.datetime.strptime(current_time_from_page_str, "%b %d, %I:%M%p").utcnow()
+    current_time_from_page_final = current_time_from_page_obj.strftime("%b %d, %I:%M%p")[:12]
+    assert current_time == current_time_from_page_final
 
 
 
