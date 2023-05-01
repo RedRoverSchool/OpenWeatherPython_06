@@ -97,7 +97,7 @@ def test_image_open_weather(driver):
                                "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
 
 
-def test_price():
+def test_price(driver):
     driver.get(URL)
     driver.maximize_window()
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
