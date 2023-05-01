@@ -95,8 +95,10 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
 
 
 def test_verify_new_page_link_contains_requested_city_name(driver, open_and_load_page, wait):
+    driver.set_window_size(1920, 1080)
     query = 'Florida'
     search_city = driver.find_element(*weather_in_your_city)
+    search_city.send_keys(query)
     actions = ActionChains(driver)
-    actions.move_to_element(search_city).click().send_keys(query).send_keys(Keys.ENTER).perform()
+    actions.send_keys(Keys.ENTER).perform()
     assert query in driver.current_url
