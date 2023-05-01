@@ -333,3 +333,11 @@ def test_should_refresh_link(driver):
     driver.refresh()
     title_after_refresh = driver.title
     assert current_title == title_after_refresh
+
+def test_should_open_given_link(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
+
+
+
+
