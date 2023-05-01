@@ -1,18 +1,11 @@
 from selenium.webdriver.common.by import By
-<<<<<<< HEAD
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
 from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
-=======
-import pytest
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 
-URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -24,7 +17,6 @@ sign_in_link = (By.CSS_SELECTOR, '.user-li a')
 pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
 price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
->>>>>>> 3c17b4f94d0a9b560252f42bf433a80974c13ec6
 
 
 def test_should_open_given_link(driver):
@@ -33,7 +25,6 @@ def test_should_open_given_link(driver):
 
 
 def test_check_page_title(driver):
-<<<<<<< HEAD
     driver.get(URL)
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
@@ -46,7 +37,6 @@ def test_section_where_to(driver):
     element_section_where_to_h2 = driver.find_element(By.CSS_SELECTOR, ".mobile-padding h2 .black-text")
     assert element_section_where_to_h2.text == 'Weather forecasts, nowcasts and history in a fast and elegant way'
 
-=======
     driver.get('https://openweathermap.org/')
     assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
@@ -112,4 +102,4 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
->>>>>>> 3c17b4f94d0a9b560252f42bf433a80974c13ec6
+
