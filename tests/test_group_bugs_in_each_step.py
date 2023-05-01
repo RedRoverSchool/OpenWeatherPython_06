@@ -50,3 +50,20 @@ def test_should_open_url2(driver):
     assert driver.current_url == URL2
 
 
+def test_documentation_button(driver):
+    driver.get('https://home.openweathermap.org/marketplace')
+    documentation_button = driver.find_element(By.XPATH,
+                                               "//div[@class = 'product' and contains(., 'History Bulk')]"
+                                               "//a[text()= 'Documentation']")
+    documentation_button.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert 'https://openweathermap.org/history-bulk' in driver.current_url
+
+
+def test_order_button(driver):
+    driver.get('https://home.openweathermap.org/marketplace')
+    order_button = driver.find_element(By.XPATH,
+                                       "//div[@class = 'product' and contains(., 'History Bulk')]"
+                                       "//a[text()= 'Place order']")
+    order_button.click()
+    assert 'https://home.openweathermap.org/history_bulks/new' in driver.current_url

@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -89,3 +89,20 @@ def test_captcha_sign_in_form(driver):
     search_btn_create_account.click()
     search_failed_message = driver.find_element(By.CSS_SELECTOR, "#new_user > div:nth-child(20) > div.has-error > div")
     assert search_failed_message.is_displayed()
+
+
+def test_sign_in_page(driver):
+    driver.get('https://home.openweathermap.org/users/sign_in')
+
+
+def test_login(driver):
+    driver.get('https://home.openweathermap.org/users/sign_in')
+    search_email_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "(//input)[9]")))
+    search_email_field.send_keys("tester1627283@gmail.com")
+    search_password_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "(//input)[10]")))
+    search_password_field.send_keys("tester123")
+    submit_button = WebDriverWait(driver, 15).until(EC.presence_of_element_located(
+        (By.XPATH, "(//input)[13]")))
+    submit_button.click()
