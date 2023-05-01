@@ -7,9 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import random
 import string
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
+
 import requests
 import re
 
@@ -240,12 +238,7 @@ SEARCH_OPTION_SELECTOR = '//span[contains(text(), "Reykjavík, IS")]'
 DISPLAYED_CITY_SELECTOR = '//h2[contains(text(), "Reykjavík, IS")]'
 DISPLAYED_PARAM_SELECTOR = 'span[class="heading"]'
 
-@pytest.fixture(scope='module')
-def driver():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.maximize_window()
-    yield driver
-    driver.quit()
+
 
 @pytest.fixture(scope='module')
 def api_geo():
@@ -278,6 +271,7 @@ def api_weather(api_geo):
     response_weather_data = response_weather.json()
     assert PARAM_WEATHER_KEY in response_weather_data.keys()
     return response_weather_data
+
 
 @pytest.fixture()
 def api_param(api_weather):
