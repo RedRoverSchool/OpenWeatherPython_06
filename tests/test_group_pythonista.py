@@ -326,7 +326,9 @@ def test_home_page_header(driver):
     header = driver.find_element(By.CSS_SELECTOR, "h1")
     assert header.text == "OpenWeather", "Wrong h1 Header"
 
-
+def test_should_open_given_link(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
 
 
 
