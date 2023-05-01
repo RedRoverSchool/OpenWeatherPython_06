@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service
 
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 
@@ -123,6 +124,7 @@ def test_open_initiatives_title(driver):
     assert driver.title == 'Our Initiatives - OpenWeatherMap'
 
 
+
 @pytest.mark.parametrize('city', cities)
 def test_fill_search_city_field(driver, city):
     driver.get('https://openweathermap.org/')
@@ -137,12 +139,23 @@ def test_fill_search_city_field(driver, city):
     actual_city = driver.find_element(*displayed_city).text
     assert expected_city in actual_city
 
+def test_open_marketplace(driver):
+    driver.get('https://openweathermap.org/')
+    element = driver.find_element(By.CSS_SELECTOR, 'div#desktop-menu a[href*=marketplace]')
+    actions = ActionChains(driver)
+    actions.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    WebDriverWait(driver, 15).until(
+        EC.number_of_windows_to_be(2))
+    driver.switch_to.window(driver.window_handles[1])
+    driver.find_element(By.XPATH, '//div//h5//a[@href="/history_bulks/new"]').click()
+    assert 'history_bulks/new' in driver.current_url
+
+
 
 def test_blog_title(driver):
     driver.get('https://openweather.co.uk/blog/category/weather')
     assert driver.title == 'Blog - OpenWeatherMap'
-
-
 
 
 

@@ -1,6 +1,7 @@
 import time
 
 import pytest
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -25,6 +26,8 @@ RECAPTCHA_CHECKBOX = (By.ID, 'recaptcha-anchor')
 CREATE_ACC_LINK = (By.XPATH, 'id("new_user")/following-sibling::p')
 CREATE_ACC_BTN = (By.CSS_SELECTOR, '.btn.btn-color.btn-submit')
 assert_msg = '\n================\nAssertion Error\n================\n'
+
+BLOG_BTN = (By.CSS_SELECTOR, '#desktop-menu>ul>li:nth-child(9)>a')
 
 
 # ############################ FIXTURES #################################
@@ -55,13 +58,6 @@ def random_word():  # https://flexiple.com/python/generate-random-string-python/
 #     driver.execute_script("return arguments[0].scrollIntoView(true);", signin_btn)
 #     signin_btn.click()
 #     wait.until(EC.url_to_be(URL_SignIN))
-#     # signin_btn.click()
-#     # footer = driver.find_element(*FOOTER_ACCEPT_BTN)
-#     # if footer.is_displayed():
-#     #     footer.click()
-#     # else:
-#     #     signin_btn = wait.until(EC.element_to_be_clickable([*SIGNIN_BTN]))
-#     #     signin_btn.click()
 #     assert "sign_in" in driver.current_url, assert_msg
 
 
@@ -107,4 +103,14 @@ def test_create_new_acc(driver, wait):
     error = driver.find_element(By.CLASS_NAME, 'has-error')
     assert error.is_displayed()
 
-    # d.wait_until_clickable(d.LOGIN_BUTTON).click()
+
+def test_go_to_blog_page(driver, open_page, wait):
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
+    element = driver.find_element(*BLOG_BTN)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    new_window = driver.window_handles[1]
+    driver.switch_to.window(new_window)
+    assert 'blog' in driver.current_url
