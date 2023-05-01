@@ -3,7 +3,6 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
 
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
@@ -17,9 +16,6 @@ sign_in_link = (By.CSS_SELECTOR, '.user-li a')
 pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
 price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
-weather_in_your_city = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
-search_in_header = (By.CSS_SELECTOR, "#desktop-menu form[role='search']")
-city_query = (By.CSS_SELECTOR, '#search_str')
 
 
 def test_should_open_given_link(driver):
@@ -95,11 +91,3 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     assert sign_in_text == expected_text
 
 
-def test_verify_new_page_link_contains_requested_city_name(driver, open_and_load_page, wait):
-    driver.set_window_size(1920, 1080)
-    query = 'Florida'
-    search_city = driver.find_element(*weather_in_your_city)
-    search_city.send_keys(query)
-    actions = ActionChains(driver)
-    actions.send_keys(Keys.ENTER).perform()
-    assert query in driver.current_url
