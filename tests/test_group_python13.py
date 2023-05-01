@@ -1,17 +1,16 @@
-import time
-import pytest
+# import time
+# import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.wait import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 def test_open_page(driver):
     driver.get('https://openweathermap.org/')
-    time.sleep(10)
     driver.maximize_window()
     assert 'openweathermap' in driver.current_url
     print(driver.current_url)
