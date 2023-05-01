@@ -1,6 +1,7 @@
 import time
 
 import pytest
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -101,10 +102,12 @@ def test_create_new_acc(driver, wait):
     error = driver.find_element(By.CLASS_NAME, 'has-error')
     assert error.is_displayed()
 
-
 def test_go_to_marketplace(driver, wait, open_page):
     wait.until_not(EC.presence_of_element_located([*LOAD_DIV]))
-    driver.find_element(*MARKETPLACE_BTN).click()
+    element = driver.find_element(*MARKETPLACE_BTN)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
     new_window = driver.window_handles[1]
     driver.switch_to.window(new_window)
     assert 'marketplace' in driver.current_url
