@@ -97,3 +97,4 @@ def test_signin_form_with_empty_fields(driver):
     text = element.get_attribute('placeholder')
     assert text == 'Password'
     driver.find_element(By.XPATH, "//input[@value='Submit']").click()
+
