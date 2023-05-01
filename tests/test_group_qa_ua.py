@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
@@ -93,6 +95,7 @@ def test_check_log_in(driver, open_and_load_page, wait):
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
 
+
 def test_find_metric_buttons(driver):
     driver.get(URL)
     search_metric_button = driver.find_element(By.CSS_SELECTOR, 'div.switch-container > div:nth-child(2)')
@@ -101,4 +104,47 @@ def test_find_metric_buttons(driver):
     expected_imperial_button = 'Imperial: °F, mph'
     assert search_metric_button.text == expected_metric_button
     assert search_imperial_button.text == expected_imperial_button
+
+
+def test_footer_social_links(driver):
+    driver.get(URL)
+    actions = ActionChains(driver)
+
+    social_links = driver.find_elements(by=By.XPATH, value="//div[@class='social']/a")
+    actions.move_to_element(social_links[0])
+    actions.perform()
+
+    allow_button = driver.find_element(by=By.XPATH, value="//button[@class='stick-footer-panel__link']")
+    allow_button.click()
+
+    links_array = [
+        'https://www.facebook.com/groups/270748973021342',
+        'https://twitter.com/OpenWeatherMap',
+        'https://www.linkedin.com/uas/login?session_redirect=%2Fcompany%2F9816754',
+        'https://openweathermap.medium.com/',
+        'https://t.me/openweathermap',
+        'https://github.com/search?q=openweathermap&ref=cmdform'
+    ]
+
+    for i in range(len(social_links)):
+        social_links[i].click()
+        time.sleep(3)
+
+        handles = driver.window_handles
+        driver.switch_to.window(handles[i+1])
+
+        assert driver.current_url == links_array[i], \
+            f'Social link url does not correspond with the needed one: current: {driver.current_url}, required: {links_array[i]}'
+
+        print(
+            f'current url = {driver.current_url}'
+        )
+
+        driver.switch_to.window(handles[0])
+
+
+
+
+
+
 
