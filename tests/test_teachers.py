@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-
 URL = 'https://openweathermap.org/'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
@@ -21,6 +20,8 @@ accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 weather_in_your_city = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 search_in_header = (By.CSS_SELECTOR, "#desktop-menu form[role='search']")
 city_query = (By.CSS_SELECTOR, '#search_str')
+
+
 def test_should_open_given_link(driver):
     driver.get(URL)
     assert 'openweathermap' in driver.current_url
