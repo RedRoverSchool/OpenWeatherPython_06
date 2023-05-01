@@ -97,4 +97,11 @@ def test_image_open_weather(driver):
                                "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
 
 
-
+def test_price(driver):
+    driver.get(URL)
+    driver.maximize_window()
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_pricing = driver.find_element(By.CSS_SELECTOR, "#desktop-menu ul li:nth-child(5)")
+    click_pricing.click()
+    assert 'price' in driver.current_url
