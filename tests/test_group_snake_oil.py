@@ -114,11 +114,13 @@ def test_fill_upper_search_field(driver):
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     driver.set_window_size(1920, 1080)
-    search_city = driver.find_element( By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
+    search_city = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Weather in your city']")
     city = 'Almaty'
     search_city.send_keys(city)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER).perform()
+    locator = (By.XPATH, "//*[@class='tab-pane active']")
+    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located(locator))
     link_city = driver.find_element(By.CSS_SELECTOR, "tbody tr:first-child a[href*='city']")
     link_city.click()
     expected_city = 'Almaty, KZ'
