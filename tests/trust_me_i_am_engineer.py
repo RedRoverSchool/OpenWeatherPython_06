@@ -9,7 +9,14 @@ def test_verify_temperature_switched_on_metric_system(driver):
 
     driver.find_element(By.CSS_SELECTOR, "button.stick-footer-panel__link").click()
 
-    driver.find_element(By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]").click()
+    metric_button = WebDriverWait(driver, 5).until(
+        EC.element_to_be_clickable((By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]"))
+    )
+
+    assert metric_button.is_displayed() and metric_button.is_enabled(), \
+        "The temperature switch button in the metric system is not displayed or is not available for clickability"
+
+    metric_button.click()
 
     WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
