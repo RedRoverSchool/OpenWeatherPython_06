@@ -97,4 +97,13 @@ def test_image_open_weather(driver):
                                "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
 
 
+def test_social_link_medium(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 10)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    click_medium = driver.find_element(By.CSS_SELECTOR, 'a[href="https://medium.com/@openweathermap"]')
+    driver.execute_script("return arguments[0].scrollIntoView(true);", click_medium)
+    click_medium.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert 'medium.com' in driver.current_url
 
