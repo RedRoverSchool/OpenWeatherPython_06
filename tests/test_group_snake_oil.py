@@ -119,7 +119,7 @@ def test_fill_upper_search_field(driver):
     search_city.send_keys(city)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER).perform()
-    link_city = driver.find_element(By.CSS_SELECTOR, 'tbody tr:first-child a[href*=\'/city/\']')
+    link_city = driver.find_element(By.CSS_SELECTOR, "tbody tr:first-child a[href*='city']")
     link_city.click()
     expected_city = 'Almaty, KZ'
     WebDriverWait(driver, 20).until(EC.text_to_be_present_in_element(
