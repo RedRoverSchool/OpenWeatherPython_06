@@ -114,3 +114,18 @@ def test_change_temp(driver):
     assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
 
 
+def test_find_cities(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search city']")
+    search_city_field.send_keys('San Diego, US')
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'San Diego, US'))
+    assert driver.find_element(By.XPATH, "//*[contains(text(), 'San Diego, US')]").is_displayed
+
