@@ -98,3 +98,19 @@ def test_image_open_weather(driver):
 
 
 
+def test_check_header_name(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    assert driver.find_element(By.XPATH, "/html/body/main/div[1]/div/div/div[1]/div/h1/span").text == 'OpenWeather'
+
+
+def test_change_temp(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    f_button = driver.find_element(By.CSS_SELECTOR, ".switch-container > div:nth-of-type(3)")
+    f_button.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
+
+
