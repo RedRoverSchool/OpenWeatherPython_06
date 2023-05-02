@@ -1,9 +1,11 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
+URL_TWITTER = 'https://twitter.com/OpenWeatherMap'
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -56,6 +58,9 @@ def test_social_link_twitter(driver):
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     click_twitter = driver.find_element(By.CSS_SELECTOR, 'a[href="https://twitter.com/OpenWeatherMap"]')
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(click_twitter)
+    driver.execute_script("arguments[0].click();", click_twitter)
     driver.execute_script("return arguments[0].scrollIntoView(true);", click_twitter)
     click_twitter.click()
     driver.switch_to.window(driver.window_handles[1])
