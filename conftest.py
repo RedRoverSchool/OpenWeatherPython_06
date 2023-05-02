@@ -14,8 +14,10 @@ def driver():
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver.maximize_window()
     else:
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver.maximize_window()
     yield driver
     print('\nquit browser...')
     driver.quit()
