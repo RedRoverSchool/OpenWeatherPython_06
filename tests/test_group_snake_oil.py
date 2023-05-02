@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
@@ -119,6 +121,7 @@ def test_fill_upper_search_field(driver):
     search_city.send_keys(city)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER).perform()
+    time.sleep(5)
     locator = (By.XPATH, "//*[@class='tab-pane active']")
     WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located(locator))
     search_results = driver.find_elements(By.CSS_SELECTOR, "tbody tr")
