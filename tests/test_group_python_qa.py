@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
 URL = 'https://openweathermap.org/'
+URL_TWITTER = "https://twitter.com/OpenWeatherMap"
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -114,3 +115,12 @@ def test_change_temp(driver):
     assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
 
 
+def test_social_link_twitter(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_twitter = driver.find_element(By.CSS_SELECTOR, 'a[href="https://twitter.com/OpenWeatherMap"]')
+    driver.execute_script("return arguments[0].scrollIntoView(true);", click_twitter)
+    click_twitter.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == URL_TWITTER, "Url is not presented"
