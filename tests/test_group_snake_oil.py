@@ -121,8 +121,16 @@ def test_fill_upper_search_field(driver):
     actions.send_keys(Keys.ENTER).perform()
     locator = (By.XPATH, "//*[@class='tab-pane active']")
     WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located(locator))
-    link_city = driver.find_element(By.CSS_SELECTOR, "tbody tr:first-child a[href*='city']")
-    link_city.click()
+    search_results = driver.find_elements(By.CSS_SELECTOR, "tbody tr")
+    link_city = search_results[0].find_element(By.CSS_SELECTOR, "a[href*='city']")
+    actions = ActionChains(driver)
+    actions.move_to_element(link_city).click().perform()
+    # driver.set_window_size(1920, 1080)
+    # locator = (By.XPATH, "//*[@class='tab-pane active']")
+    # WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located(locator))
+    # link_city = driver.find_element(By.CSS_SELECTOR, "tbody tr:first-child a[href*='city']")
+    # actions = ActionChains(driver)
+    # actions.send_keys(Keys.ENTER).perform()
     expected_city = 'Almaty, KZ'
     WebDriverWait(driver, 20).until(EC.text_to_be_present_in_element(
         (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), 'Almaty'))
