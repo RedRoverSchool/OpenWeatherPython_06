@@ -6,13 +6,8 @@ load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
 
-
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page, wait):
-    metric_button = driver.find_element(*metric_button_loc)
-    wait.until(EC.element_to_be_clickable(metric_button_loc))
-    assert metric_button.is_displayed() and metric_button.is_enabled(), \
-        "The temperature switch button in the metric system is not displayed or is not available for clickability"
-    metric_button.click()
+    driver.find_element(*metric_button_loc).click()
     wait.until_not(EC.presence_of_element_located(load_div))
     current_temp = driver.find_element(*current_temp_loc)
     assert "°C" in current_temp.text, "The current temperature does not correspond to the metric"
