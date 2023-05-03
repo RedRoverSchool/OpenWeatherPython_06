@@ -16,5 +16,3 @@ def test_YourAPIKey_YourCityName_fields_visible(driver):
     your_city_name = driver.find_element(By.CSS_SELECTOR, "#city-name")
     print(f'Your API Key field is displayed: {your_api_key.is_displayed()}')
     print(f'Your City Name field is displayed: {your_city_name.is_displayed()}')
-
-
