@@ -150,3 +150,8 @@ def test_temperature_c_conversion(driver):
     f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     f_temp.click()
     assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°C')]").is_displayed()
+
+def test_return_homepage(driver):
+    driver.get("https://home.openweathermap.org/users/sign_in")
+    driver.find_element(By.CSS_SELECTOR, ".logo").click()
+    assert driver.current_url == URL
