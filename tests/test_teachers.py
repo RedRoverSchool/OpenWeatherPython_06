@@ -24,8 +24,7 @@ city_query = (By.CSS_SELECTOR, '#search_str')
 def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_page, wait):
     driver.find_element(*accept_cookies).click()
     expected_text = 'Sign in'
-    element = driver.find_element(*sign_in_link)
-    sign_in_text = driver.execute_script("return arguments[0].textContent", element)
+    sign_in_text = driver.find_element(*sign_in_link).text
     assert sign_in_text == expected_text
 
 
@@ -36,16 +35,12 @@ def test_TC_000_00_02_verify_sign_in_link_is_clickable(driver, open_and_load_mai
 
 
 def test_TC_000_00_03_verify_pricing_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
-    element = driver.find_element(*pricing_link)
-    action_chains = ActionChains(driver)
-    action_chains.move_to_element(element)
-    driver.execute_script("arguments[0].click();", element)
+    driver.find_element(*pricing_link).click()
     pricing_text = driver.find_element(*price_page_title).text
     assert pricing_text == "Pricing"
 
 
 def test_TC_000_00_04_verify_new_page_link_contains_valid_city_name(driver, open_and_load_main_page, wait):
-    driver.set_window_size(1920, 1080)
     query = 'Florida'
     search_city = driver.find_element(*weather_in_your_city)
     search_city.send_keys(query)
