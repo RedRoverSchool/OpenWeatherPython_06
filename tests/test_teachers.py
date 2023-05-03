@@ -21,18 +21,20 @@ search_in_header = (By.CSS_SELECTOR, "#desktop-menu form[role='search']")
 city_query = (By.CSS_SELECTOR, '#search_str')
 
 
-def test_TC_000_00_01_verify_sign_link_text_is_valid(driver,open_and_load_main_page, wait):
+def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_page, wait):
     driver.find_element(*accept_cookies).click()
     expected_text = 'Sign in'
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
 
-def test_TC_000_00_02_verify_sign_in_link_is_clickable(driver,open_and_load_main_page, wait):
+
+def test_TC_000_00_02_verify_sign_in_link_is_clickable(driver, open_and_load_main_page, wait):
     driver.find_element(*accept_cookies).click()
     element = driver.find_element(*sign_in_link)
     wait.until(EC.element_to_be_clickable(sign_in_link))
     assert element.is_displayed() and element.is_enabled()
+
 
 def test_TC_000_00_03_verify_pricing_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
     element = driver.find_element(*pricing_link)
@@ -41,6 +43,7 @@ def test_TC_000_00_03_verify_pricing_link_redirects_to_valid_page(driver, open_a
     driver.execute_script("arguments[0].click();", element)
     pricing_text = driver.find_element(*price_page_title).text
     assert pricing_text == "Pricing"
+
 
 def test_TC_000_00_04_verify_new_page_link_contains_valid_city_name(driver, open_and_load_main_page, wait):
     driver.set_window_size(1920, 1080)
@@ -51,10 +54,12 @@ def test_TC_000_00_04_verify_new_page_link_contains_valid_city_name(driver, open
     actions.send_keys(Keys.ENTER).perform()
     assert query in driver.current_url
 
+
 def test_TC_000_00_05_verify_sign_in_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
     sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
     driver.execute_script("arguments[0].click();", sign_link)
     assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
+
 
 @pytest.mark.parametrize('city', cities)
 def test_TC_000_00_06_verify_result_of_city_searching_is_valid(driver, open_and_load_main_page, wait, city):
@@ -67,10 +72,13 @@ def test_TC_000_00_06_verify_result_of_city_searching_is_valid(driver, open_and_
     actual_city = driver.find_element(*displayed_city).text
     assert expected_city in actual_city
 
+
 def test_TC_000_00_07_verify_search_button_is_clickable(driver, open_and_load_main_page, wait):
     driver.set_window_size(1920, 1080)
     search_city_input = driver.find_element(*search_city_field)
     search_city_input.send_keys('Paris')
     element = driver.find_element(*search_button)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
     wait.until(EC.element_to_be_clickable(search_button))
     assert element.is_displayed() and element.is_enabled()
