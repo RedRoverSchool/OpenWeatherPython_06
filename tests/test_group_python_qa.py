@@ -121,6 +121,8 @@ def test_social_link_twitter(driver):
         (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
     click_twitter = driver.find_element(By.CSS_SELECTOR, 'a[href="https://twitter.com/OpenWeatherMap"]')
     driver.execute_script("return arguments[0].scrollIntoView(true);", click_twitter)
+    click_allow_in_stick_footer = driver.find_element(By.CLASS_NAME, 'stick-footer-panel__link')
+    click_allow_in_stick_footer.click()
     click_twitter.click()
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == URL_TWITTER, "Url is not presented"
