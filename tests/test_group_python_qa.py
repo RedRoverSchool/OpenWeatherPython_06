@@ -51,6 +51,18 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
     options = driver.find_elements(*search_dropdown)
     for option in options:
         assert city in option.text
+        
+        
+def test_link_in_nav_bar_Partners(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    element = driver.find_element(By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(8)>a")
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    nav_bar_partners_title_text = driver.find_element(By.CSS_SELECTOR, ".breadcrumb-title").text
+    assert nav_bar_partners_title_text == "Partners and solutions"
 
 
 def test_check_meteorological_conditions_are_displayed(driver):
@@ -97,7 +109,6 @@ def test_image_open_weather(driver):
                                "//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']").is_displayed()
 
 
-
 def test_check_header_name(driver):
     driver.get(URL)
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
@@ -112,7 +123,9 @@ def test_change_temp(driver):
     f_button = driver.find_element(By.CSS_SELECTOR, ".switch-container > div:nth-of-type(3)")
     f_button.click()
     assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
-
+    
+    
+    
 
 def test_temperature_f_conversion(driver):
     driver.get(URL)
