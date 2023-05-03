@@ -30,12 +30,7 @@ def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_
 
 
 def test_TC_000_00_02_verify_sign_in_link_is_clickable(driver, open_and_load_main_page, wait):
-    print(driver.get_window_size())
-    driver.set_window_size(1382, 754)
-    driver.find_element(*accept_cookies).click()
     element = driver.find_element(*sign_in_link)
-    action_chains = ActionChains(driver)
-    action_chains.move_to_element(element)
     wait.until(EC.element_to_be_clickable(sign_in_link))
     assert element.is_displayed() and element.is_enabled()
 
