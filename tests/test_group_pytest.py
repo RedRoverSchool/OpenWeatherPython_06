@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
@@ -22,7 +20,6 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
     how_to_start_block = driver.find_element(*Button_under_how_to_start)
     actions = ActionChains(driver)
     actions.move_to_element(how_to_start_block).perform()
-    time.sleep(2)
     How_to_Start_Sign_up = driver.find_element(*How_to_Start_Sign_up_link)
     How_to_Start_OpenWeather_username_and_password = driver.find_element(
         *How_to_Start_OpenWeather_username_and_password_link)
