@@ -11,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = 'https://openweathermap.org/'
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
-
 @pytest.fixture(scope='function')
 def driver():
     print('\nstart browser...')
@@ -21,12 +20,13 @@ def driver():
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver.set_window_size(1382, 754)
     else:
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver.maximize_window()
     yield driver
     print('\nquit browser...')
     driver.quit()
-
 
 @pytest.fixture()
 def open_and_load_main_page(driver, wait):
