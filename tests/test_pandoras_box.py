@@ -1,6 +1,8 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 URL = 'https://openweathermap.org/'
@@ -9,7 +11,6 @@ DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
-
 
 def test_TC_002_03_08_open_pricing(driver):
     driver.get(URL)
@@ -27,6 +28,7 @@ def test_TC_002_02_03_verify_result_of_search_for_invalid_city_name(driver, open
     search_weather_in_your_city.send_keys(entered_invalid_city_name)
     actions = ActionChains(driver)
     actions.send_keys(Keys.ENTER).perform()
+    wait.until(EC.presence_of_element_located(ALERT_NOTIFICATION))
     displayed_notification = driver.find_element(*ALERT_NOTIFICATION)
     notification = displayed_notification.text
     assert notification == "×\nNot found"
