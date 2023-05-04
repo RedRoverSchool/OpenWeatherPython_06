@@ -168,3 +168,17 @@ def test_return_homepage(driver):
     driver.get("https://home.openweathermap.org/users/sign_in")
     driver.find_element(By.CSS_SELECTOR, ".logo").click()
     assert driver.current_url == URL
+
+
+def test_social_link_telegram(driver):
+    driver.get('https://openweathermap.org/')
+    WebDriverWait(driver, 10).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    click_telegram = driver.find_element(By.CSS_SELECTOR, 'a[href="https://t.me/openweathermap"]')
+    driver.execute_script("return arguments[0].scrollIntoView(true);", click_telegram)
+    click_allow_in_stick_footer = driver.find_element(By.CLASS_NAME, 'stick-footer-panel__link')
+    click_allow_in_stick_footer.click()
+    click_telegram.click()
+    telegram_window = driver.switch_to.window(driver.window_handles[1])
+    assert 'https://t.me/openweathermap' == driver.current_url
+
