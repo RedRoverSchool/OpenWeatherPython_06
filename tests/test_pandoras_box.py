@@ -1,11 +1,12 @@
-import pytest
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
+import pytest
 
 URL = 'https://openweathermap.org/'
 BUTTON_PRICING = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
 DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
+logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide'
@@ -19,6 +20,7 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
 
+
 def test_TC_002_03_08_open_pricing(driver):
     driver.get(URL)
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -28,6 +30,12 @@ def test_TC_002_03_08_open_pricing(driver):
     expected_title = "Pricing"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+@pytest.mark.parametrize('URL', URLs)
+def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
+    driver.get(URL)
+    logo = driver.find_element(*logo_locator)
+    assert logo.is_displayed(), "Logo is not visible"
 
 
 @pytest.mark.parametrize('URL', URLs)
