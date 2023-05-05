@@ -115,6 +115,8 @@ def test_social_link_medium(driver):
     wait.until_not(EC.presence_of_element_located(load_div))
     click_medium = driver.find_element(By.CSS_SELECTOR, 'a[href="https://medium.com/@openweathermap"]')
     driver.execute_script("return arguments[0].scrollIntoView(true);", click_medium)
+    click_allow_in_stick_footer = driver.find_element(By.CLASS_NAME, 'stick-footer-panel__link')
+    click_allow_in_stick_footer.click()
     click_medium.click()
     driver.switch_to.window(driver.window_handles[1])
     assert 'medium.com' in driver.current_url
