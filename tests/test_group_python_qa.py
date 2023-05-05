@@ -53,6 +53,18 @@ def test_all_dropdown_options_should_contain_valid_city(driver, city):
         assert city in option.text
 
 
+def test_link_in_nav_bar_Partners(driver):
+    driver.get(URL)
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
+    element = driver.find_element(By.CSS_SELECTOR, "#desktop-menu>ul>li:nth-child(8)>a")
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    nav_bar_partners_title_text = driver.find_element(By.CSS_SELECTOR, ".breadcrumb-title").text
+    assert nav_bar_partners_title_text == "Partners and solutions"
+
+
 def test_check_meteorological_conditions_are_displayed(driver):
     driver.get(URL)
     WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
@@ -106,4 +118,62 @@ def test_social_link_medium(driver):
     click_medium.click()
     driver.switch_to.window(driver.window_handles[1])
     assert 'medium.com' in driver.current_url
+def test_check_header_name(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    assert driver.find_element(By.XPATH, "/html/body/main/div[1]/div/div/div[1]/div/h1/span").text == 'OpenWeather'
 
+
+def test_change_temp(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    f_button = driver.find_element(By.CSS_SELECTOR, ".switch-container > div:nth-of-type(3)")
+    f_button.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
+
+
+
+
+def test_temperature_f_conversion(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys(city)
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 15).until(EC.text_to_be_present_in_element(
+        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), city))
+    f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(3)')
+    f_temp.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°F')]").is_displayed()
+
+
+def test_temperature_c_conversion(driver):
+    driver.get(URL)
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    search_city_field = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, "input[placeholder='Search city']")))
+    search_city_field.send_keys(city)
+    search_button = driver.find_element(By.CSS_SELECTOR, "button[class ='button-round dark']")
+    search_button.click()
+    search_option = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')))
+    search_option.click()
+    WebDriverWait(driver, 15).until_not(EC.presence_of_element_located(
+        (By.CSS_SELECTOR, 'div.owm-loader-container > div')))
+    f_temp = driver.find_element(By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
+    f_temp.click()
+    assert driver.find_element(By.XPATH, "//div[@class='current-temp']/span[contains(text(), '°C')]").is_displayed()
+
+def test_return_homepage(driver):
+    driver.get("https://home.openweathermap.org/users/sign_in")
+    driver.find_element(By.CSS_SELECTOR, ".logo").click()
+    assert driver.current_url == URL
