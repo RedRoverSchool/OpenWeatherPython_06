@@ -20,17 +20,12 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
     how_to_start_block = driver.find_element(*BUTTON_UNDER_HOW_TO_START)
     actions = ActionChains(driver)
     actions.move_to_element(how_to_start_block).perform()
-    How_to_Start_Sign_up = driver.find_element(*HOW_TO_START_SIGN_UP_LINK)
-    How_to_Start_OpenWeather_username_and_password = driver.find_element(
-        *HOW_TO_START_OPENWEATHER_USERNAME_AND_PASSWORD_LINK)
-    How_to_Start_Go_to_the_Dashboard = driver.find_element(*HOW_TO_START_GO_TO_THE_DASHBOARD_LINK)
-    How_to_Start_Events_section = driver.find_element(*HOW_TO_START_EVENTS_SECTION_LINK)
-    How_to_Start_Go_to_the_New_trigger_section = driver.find_element(*HOW_TO_START_GO_TO_THE_NEW_TRIGGER_SECTION_LINK)
-    How_to_Start_here = driver.find_element(*HOW_TO_START_HERE_LINK)
-    How_to_Start_detailed_user_manual = driver.find_element(*HOW_TO_START_DETAILED_USER_MANUAL_LINK)
-    assert How_to_Start_Sign_up.is_displayed() and How_to_Start_OpenWeather_username_and_password.is_displayed() and \
-           How_to_Start_Go_to_the_Dashboard.is_displayed() and  How_to_Start_Events_section.is_displayed() and \
-           How_to_Start_Go_to_the_New_trigger_section.is_displayed() and How_to_Start_here.is_displayed() and \
-           How_to_Start_detailed_user_manual.is_displayed(), "One of the links are not visible"
-
-
+    list_of_links = [driver.find_element(*HOW_TO_START_SIGN_UP_LINK),
+                     driver.find_element(*HOW_TO_START_OPENWEATHER_USERNAME_AND_PASSWORD_LINK),
+                     driver.find_element(*HOW_TO_START_GO_TO_THE_DASHBOARD_LINK),
+                     driver.find_element(*HOW_TO_START_EVENTS_SECTION_LINK),
+                     driver.find_element(*HOW_TO_START_GO_TO_THE_NEW_TRIGGER_SECTION_LINK),
+                     driver.find_element(*HOW_TO_START_HERE_LINK),
+                     driver.find_element(*HOW_TO_START_DETAILED_USER_MANUAL_LINK)]
+    for item in list_of_links:
+        assert item.is_displayed(), f"{item.text} link not visible"
