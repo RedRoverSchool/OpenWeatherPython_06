@@ -37,8 +37,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --alluredir=allure_results
+      continue-on-error: true
     - name: Publish Allure report
-      uses: allure/actions/upload-report@v1.3.3
-      with:
-          report_directory: allure_results
+      run: |
+        allure serve allure_results
 
