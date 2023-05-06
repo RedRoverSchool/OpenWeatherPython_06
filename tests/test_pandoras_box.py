@@ -19,6 +19,9 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
 
+condition_URL = 'https://openweathermap.org/weather-conditions'
+thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
+
 def test_TC_002_03_08_open_pricing(driver):
     driver.get(URL)
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -34,3 +37,8 @@ def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
     driver.get(URL)
     logo = driver.find_element(*logo_locator)
     assert logo.is_displayed(), "Logo is not visible"
+
+def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
+    driver.get(condition_URL)
+    codes_number = driver.find_elements(*thunderstorm_locator)
+    assert len(codes_number) >= 3
