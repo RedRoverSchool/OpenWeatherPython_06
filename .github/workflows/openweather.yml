@@ -38,7 +38,7 @@ jobs:
       run: |
         pytest --alluredir=allure_results
     - name: Publish Allure report
-      uses: qameta/allure-github-action@v2
+      uses: qameta/allure-docker-compose
       with:
           report_directory: allure_results
 
