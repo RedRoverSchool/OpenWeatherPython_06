@@ -3,4 +3,4 @@ pytest==7.3.1
 selenium==4.8.3
 webdriver-manager==3.8.6
 allure-pytest==2.13.2
-
+allure-python-commons=2.13.2
