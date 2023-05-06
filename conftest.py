@@ -42,18 +42,20 @@ def open_and_load_main_page(driver, wait):
 def wait(driver):
     wait = WebDriverWait(driver, 25)
     yield wait
-
+def screenshot(driver):
+    screenshot = driver.save_screenshot("allure_results/screenshot.png")
+    return screenshot
 
 def pytest_runtest_makereport(item, call):
-    driver = item.funcargs["driver"]
     if call.when == 'call':
         # test_name = item.name
         if call.excinfo is not None:
             # status = 'failed'
             # logger.error(f'{status} - {test_name}. Reason: {str(call.excinfo)}')
             try:
-                driver.save_screenshot("allure_results/screenshot.png")
-                allure.attach.file("allure_results/screenshot.png", name='Screenshot',
+                driver = item.funcargs['driver']
+                driver.save_screenshot('allure_results/screenshot.png')
+                allure.attach.file('allure_results/screenshot.png', name='Screenshot',
                                    attachment_type=allure.attachment_type.PNG)
                 allure.attach(driver.page_source, name="HTML source", attachment_type=allure.attachment_type.HTML)
             except Exception as e:
