@@ -38,7 +38,7 @@ jobs:
       run: |
         pytest --alluredir=allure_results
     - name: Publish Allure report
-      uses: "mihalcea/gha-allure@v1"
+      uses: qameta/allure-github-action@v2
       with:
-          report_directory: allure-results
+          report_directory: allure_results
 
