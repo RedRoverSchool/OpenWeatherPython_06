@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 BUTTON_UNDER_HOW_TO_START = (By.XPATH, '(//a[@class="btn_like btn-orange owm-block-mainpage__btn"])[2]')
 DASHBOARD_HEADER_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[.="Dashboard"]')
@@ -12,6 +13,7 @@ HOW_TO_START_EVENTS_SECTION_LINK = (By.XPATH, '//a[contains(text(), "Events")]')
 HOW_TO_START_GO_TO_THE_NEW_TRIGGER_SECTION_LINK = (By.XPATH, '//b[contains(text(), "New trigger")]')
 HOW_TO_START_HERE_LINK = (By.XPATH, '//a[.="here"]')
 HOW_TO_START_DETAILED_USER_MANUAL_LINK = (By.XPATH, '//b[.="detailed user manual"]')
+MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
 
 
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
@@ -29,3 +31,9 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
                      driver.find_element(*HOW_TO_START_DETAILED_USER_MANUAL_LINK)]
     for item in list_of_links:
         assert item.is_displayed(), f"{item.text} link not visible"
+
+
+def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
+    driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
+    medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
+    assert medium_link, "The medium icon(link) is not clickable"
