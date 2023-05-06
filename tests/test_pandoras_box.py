@@ -2,6 +2,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 import pytest
 
 
@@ -11,7 +12,10 @@ DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
-
+SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
+SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
+DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 URLs = ['https://openweathermap.org/',
@@ -67,3 +71,16 @@ def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
     logo = driver.find_element(*logo_locator)
     assert logo.is_displayed(), "Logo is not visible"
 
+
+def test_TC_001_01_02_fill_city_field_in_cirillic(driver, load_div):
+    driver.get(URL)
+    wait_act = WebDriverWait(driver, 15)
+    wait_act.until_not(EC.presence_of_element_located(load_div))
+    search_city_input = driver.find_element(*SEARCH_CITY_FIELD)
+    search_city_input.send_keys('Кишинев')
+    driver.find_element(*SEARCH_BUTTON).click()
+    wait_act.until(EC.element_to_be_clickable(SEARCH_DROPDOWN_OPTION)).click()
+    expected_city = 'Chisinau, MD'
+    wait_act.until(EC.text_to_be_present_in_element(DISPLAYED_CITY, 'Chisinau'))
+    actual_city = driver.find_element(*DISPLAYED_CITY)
+    assert expected_city == actual_city.text
