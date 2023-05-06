@@ -59,7 +59,6 @@ def pytest_runtest_makereport(item, call):
             except Exception as e:
                 print(f"Failed to take screenshot: {e}")
 
-
 def pytest_sessionstart(session):
     allure_report_dir = "allure_results"
     if os.path.exists(allure_report_dir):

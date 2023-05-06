@@ -49,10 +49,12 @@ def test_TC_000_00_04_verify_new_page_link_contains_valid_city_name(driver, open
     assert query in driver.current_url
 
 
+@pytest.mark.usefixtures("driver")
 def test_TC_000_00_05_verify_sign_in_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
     sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
     driver.execute_script("arguments[0].click();", sign_link)
     assert "sign_ing" in driver.current_url, f"\nWrong URL - {driver.current_url}"
+
 
 @pytest.mark.skip
 @pytest.mark.parametrize('city', cities)
