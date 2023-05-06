@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  OpenWeather_06:
+  build:
 
     runs-on: ubuntu-latest
 
