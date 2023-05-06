@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  OpenWeather_06:
 
     runs-on: ubuntu-latest
 
@@ -38,7 +38,7 @@ jobs:
       run: |
         pytest --alluredir=allure_results
     - name: Publish Allure report
-      uses: qameta/allure-docker-compose
+      uses: allure/actions/upload-report@v1.3.3
       with:
           report_directory: allure_results
 
