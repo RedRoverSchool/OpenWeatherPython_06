@@ -41,8 +41,11 @@ jobs:
 
     - name: Get Allure history
       uses: actions/checkout@v3
-      run:
+      run: |
         allure serve allure_results
+
+
+
 
 
 
