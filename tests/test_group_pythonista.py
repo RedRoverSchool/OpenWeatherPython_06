@@ -24,3 +24,10 @@ def test_TC_002_03_05_dashboard_is_visible_and_clickable(driver, open_and_load_m
     dashboard_tab = driver.find_element(*DASHBOARD_LINK)
     expected_dashboard_label = 'Dashboard'
     assert dashboard_tab.is_displayed() and dashboard_tab.is_enabled() and expected_dashboard_label in dashboard_tab.text
+
+def test_TC_002_03_06_dashboard_link_opens_correct_page(driver,open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(DASHBOARD_LINK))
+    dashboard_tab = driver.find_element(*DASHBOARD_LINK)
+    dashboard_tab.click()
+    expected_url = 'https://openweathermap.org/weather-dashboard'
+    assert driver.current_url == expected_url
