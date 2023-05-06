@@ -38,6 +38,13 @@ jobs:
       run: |
         pytest --alluredir=allure_results
       continue-on-error: true
+
+    - name: Install Allure command-line tool
+      run: |
+        sudo apt-add-repository ppa:qameta/allure
+        sudo apt-get update
+        sudo apt-get install allure
+
     - name: Publish Allure report
       run: |
         allure serve allure_results
