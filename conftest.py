@@ -50,15 +50,15 @@ def pytest_runtest_makereport(item, call):
             # logger.error(f'{status} - {test_name}. Reason: {str(call.excinfo)}')
             try:
                 driver = item.funcargs['driver']
-                driver.save_screenshot('allure_results/screenshot.png')
-                allure.attach.file('allure_results/screenshot.png', name='Screenshot',
+                driver.save_screenshot('allure-results/screenshot.png')
+                allure.attach.file('allure-results/screenshot.png', name='Screenshot',
                                    attachment_type=allure.attachment_type.PNG)
                 allure.attach(driver.page_source, name="HTML source", attachment_type=allure.attachment_type.HTML)
             except Exception as e:
                 print(f"Failed to take screenshot: {e}")
 
 def pytest_sessionstart(session):
-    allure_report_dir = "allure_results"
+    allure_report_dir = "allure-results"
     if os.path.exists(allure_report_dir):
         for file_name in os.listdir(allure_report_dir):
             file_path = os.path.join(allure_report_dir, file_name)
