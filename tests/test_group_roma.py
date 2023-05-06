@@ -1,14 +1,15 @@
-import pytest
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+
+footer_website_locator = (By.ID, "footer-website")
+company_title_locator = (By.XPATH, "//p[@class='section-heading' and text()='Company']")
+company_content_locator = (By.CSS_SELECTOR, ".footer-section > div > p")
 
 
 
 def test_TC_003_07_01_visibility_of_the_company_module(driver, open_and_load_main_page, wait):
-    footer_website = driver.find_element(By.ID, "footer-website")
+    footer_website = driver.find_element(*footer_website_locator)
     driver.execute_script("arguments[0].scrollIntoView();", footer_website)
-    company_module = driver.find_element(By.XPATH, "//p[@class='section-heading' and text()='Company']")
-    assert company_module.is_displayed()
-    content = driver.find_element(By.CSS_SELECTOR, ".footer-section > div > p")
+    company_title = driver.find_element(*company_title_locator)
+    assert company_title.is_displayed()
+    content = driver.find_element(*company_content_locator)
     assert content.is_displayed()
