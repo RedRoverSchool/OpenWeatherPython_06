@@ -37,7 +37,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --alluredir=allure_results
-    - name: Allure report
-      run: |
-        allure serve allure_results
+    - name: Publish Allure report
+      uses: "mihalcea/gha-allure@v1"
+      with:
+          report_directory: allure-results
 
