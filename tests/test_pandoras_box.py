@@ -30,6 +30,30 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
 
+widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
+
+metric_toggle = (By.XPATH, '//span[@id="metric"]')
+imperial_units = (By.XPATH, '//span[text()="°F"]')
+# widget_11 = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]')
+# widget_12 = (By.XPATH, '//*[@id="container-openweathermap-widget-12"]')
+# widget_13 = (By.XPATH, '//*[@id="container-openweathermap-widget-13"]')
+# widget_14 = (By.XPATH, '//*[@id="container-openweathermap-widget-14"]')
+# widget_16 = (By.XPATH, '//*[@id="container-openweathermap-widget-15"]')
+# widget_17 = (By.XPATH, '//*[@id="container-openweathermap-widget-16"]')
+# widget_15 = (By.XPATH, '//*[@id="container-openweathermap-widget-17"]')
+# widget_18 = (By.XPATH, '//*[@id="container-openweathermap-widget-18"]')
+# widget_19 = (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')
+
+widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-14"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-15"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-16"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-17"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-18"]'),
+                    (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')]
+
 
 def test_TC_002_03_08_open_pricing(driver):
     driver.get(URL)
@@ -84,3 +108,18 @@ def test_TC_001_01_02_2_fill_city_field_in_cirillic(driver, load_div):
     wait_act.until(EC.text_to_be_present_in_element(DISPLAYED_CITY, 'Chisinau'))
     actual_city = driver.find_element(*DISPLAYED_CITY)
     assert expected_city == actual_city.text
+
+
+def test_TC_001_09_06_switched_on_Fahrenheit(driver):
+    driver.get(widget_constructor_URL)
+    toggle_position = driver.find_element(*metric_toggle)
+    expected_position = 'color: rgb(235, 110, 75);'
+    if toggle_position.get_attribute("style") == expected_position:
+        toggle_position.click()
+        for widget_locator in widgets_locators:
+            WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
+        imperial_units_number = driver.find_elements(*imperial_units)
+        assert len(imperial_units_number) == 14
+    else:
+        imperial_units_number = driver.find_elements(imperial_units)
+        assert len(imperial_units_number) == 14
