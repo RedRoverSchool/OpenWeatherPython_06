@@ -70,4 +70,3 @@ def test_TC_001_05_02_verify_current_location(driver, wait):
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
-
