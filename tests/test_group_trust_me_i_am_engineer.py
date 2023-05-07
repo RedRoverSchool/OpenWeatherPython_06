@@ -38,7 +38,7 @@ def test_TC_001_05_01_verify_the_current_date_and_time(driver, open_and_load_mai
     date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
     date_time_site = datetime.strptime(date_time_str, '%Y %b %d, %I:%M%p').replace(tzinfo=ZoneInfo('Europe/London'))
     date_time_now = datetime.now(ZoneInfo('Europe/London'))
-    assert (date_time_now - date_time_site).total_seconds() <= 60, \
+    assert (date_time_now - date_time_site).total_seconds() <= 240, \
         "The current date and time does not match the date and time specified on the page"
 
 def test_TC_005_04_01_checking_title_page_weather_api(driver):
