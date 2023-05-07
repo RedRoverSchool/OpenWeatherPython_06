@@ -5,6 +5,9 @@ from datetime import datetime
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 
+TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
+TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
+
 
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
 SEARCH_CITY_INPUT = By.CSS_SELECTOR, "input[placeholder='Search city']"
@@ -65,4 +68,5 @@ def test_TC_001_04_03_verify_in_day_list_first_element_day_by_week(driver, open_
     day_by_computer = datetime.now().weekday()
     today = WEEKDAYS[day_by_computer]
     assert day_by_weak == f'{today}'
-
+    
+    
