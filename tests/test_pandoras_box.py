@@ -28,6 +28,7 @@ URLs = ['https://openweathermap.org/',
         'https://home.openweathermap.org/questions']
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
+maps_URL = 'https://openweathermap.org/weathermap'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
@@ -131,3 +132,9 @@ def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     driver.get(condition_URL)
     codes_number = driver.find_elements(*thunderstorm_locator)
     assert len(codes_number) >= 3
+
+def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(driver):
+    driver.get(maps_URL)
+    driver.find_element(By.CSS_SELECTOR, '.logo > a > img').click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
