@@ -51,6 +51,8 @@ widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-18"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')]
 
+result_locator = (By.XPATH, '//a[contains(@href, "city")]')
+search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
@@ -114,6 +116,16 @@ def test_TC_003_03_01_Product_Collections_title_is_visible(driver, URL):
     driver.get(URL)
     module_title = driver.find_element(*title_locator)
     assert module_title.is_displayed(), "Product Collections title is not visible"
+
+def test_TC_002_02_01_search_result_contains_city(driver, open_and_load_main_page, wait):
+    search = driver.find_element(*search_field_locator)
+    search.click()
+    search.send_keys('Bangkok')
+    search.send_keys(Keys.ENTER)
+    driver.implicitly_wait(15)
+    cities = driver.find_elements(*result_locator)
+    for city in cities:
+        assert 'Bangkok' in city.text
 
 def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     driver.get(condition_URL)
