@@ -1,9 +1,11 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
-
+INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
+sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
 
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
 SEARCH_CITY_INPUT = By.CSS_SELECTOR, "input[placeholder='Search city']"
@@ -55,3 +57,12 @@ def test_tc_003_09_01_the_module_title_display(driver, open_and_load_main_page, 
     actual_module_title = module_download_openweather_app.text
     assert actual_module_title == expected_module_title
 
+
+@pytest.mark.parametrize("section", sections)
+def test_010_01_01_01_verify_sections(driver, open_and_load_main_page, section):
+
+    our_initiatives_link = driver.find_element(*INITIATIVES)
+    our_initiatives_link.click()
+
+    section_element = driver.find_element(By.XPATH, f"//span[contains(text(),'{section}')]")
+    assert section_element.is_displayed(), f"Section '{section}' not found on the page"
