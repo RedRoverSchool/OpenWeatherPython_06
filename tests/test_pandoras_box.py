@@ -18,6 +18,7 @@ SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
+title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
         'https://openweathermap.org/api',
@@ -123,3 +124,11 @@ def test_TC_001_09_06_switched_on_Fahrenheit(driver):
     else:
         imperial_units_number = driver.find_elements(imperial_units)
         assert len(imperial_units_number) == 14
+
+
+@pytest.mark.parametrize('URL', URLs)
+def test_TC_003_03_01_Product_Collections_title_is_visible(driver, URL):
+    driver.get(URL)
+    module_title = driver.find_element(*title_locator)
+    assert module_title.is_displayed(), "Product Collections title is not visible"
+
