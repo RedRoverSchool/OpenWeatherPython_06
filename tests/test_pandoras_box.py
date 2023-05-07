@@ -72,7 +72,7 @@ def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
     assert logo.is_displayed(), "Logo is not visible"
 
 
-def test_TC_001_01_02_fill_city_field_in_cirillic(driver, load_div):
+def test_TC_001_01_02_2_fill_city_field_in_cirillic(driver, load_div):
     driver.get(URL)
     wait_act = WebDriverWait(driver, 15)
     wait_act.until_not(EC.presence_of_element_located(load_div))
