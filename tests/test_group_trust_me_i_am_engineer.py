@@ -2,10 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
+URL_WEATHER_API = 'https://openweathermap.org/api'
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
+weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -26,3 +28,10 @@ def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(dri
     imperial_button = wait.until(EC.element_to_be_clickable(imperial_button_loc))
     assert imperial_button.is_displayed() and imperial_button.is_enabled(), \
         "The temperature switch button in the imperial system is not displayed or is not clickable"
+
+def test_TC_005_04_01_checking_title_page_weather_api(driver):
+    expected_weather_api_page_title = "Weather API"
+    driver.get(URL_WEATHER_API)
+    page_title = driver.find_element(*weather_api_page_title)
+    assert expected_weather_api_page_title == page_title.text, \
+        "The title of the Weather API page does not match the expected title"
