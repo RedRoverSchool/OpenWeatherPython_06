@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -6,6 +8,7 @@ load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
+city_name = (By.XPATH, "//*[@id='weather-widget']/div[2]/div[1]/div[1]/div[1]/h2")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -26,3 +29,17 @@ def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(dri
     imperial_button = wait.until(EC.element_to_be_clickable(imperial_button_loc))
     assert imperial_button.is_displayed() and imperial_button.is_enabled(), \
         "The temperature switch button in the imperial system is not displayed or is not clickable"
+
+def test_TC_001_05_02_verify_current_location(driver, wait):
+    expected_city_name = "Chicago, US"
+    map_coordinates = dict({
+        "latitude": 41.8781,
+        "longitude": -87.6298,
+        "accuracy": 100
+    })
+    driver.execute_cdp_cmd("Emulation.setGeolocationOverride", map_coordinates)
+    driver.get(URL)
+    current_city_name = driver.find_element(*city_name)
+    assert expected_city_name == current_city_name.text, \
+        "The current name of the city does not match the expected name of the city"
+
