@@ -1,9 +1,9 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-import pytest
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+import pytest
 
 URL = 'https://openweathermap.org/'
 BUTTON_PRICING = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
@@ -14,6 +14,7 @@ STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
 
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
+title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
         'https://openweathermap.org/api',
@@ -107,6 +108,12 @@ def test_TC_001_09_06_switched_on_Fahrenheit(driver):
     else:
         imperial_units_number = driver.find_elements(imperial_units)
         assert len(imperial_units_number) == 14
+
+@pytest.mark.parametrize('URL', URLs)
+def test_TC_003_03_01_Product_Collections_title_is_visible(driver, URL):
+    driver.get(URL)
+    module_title = driver.find_element(*title_locator)
+    assert module_title.is_displayed(), "Product Collections title is not visible"
 
 def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     driver.get(condition_URL)
