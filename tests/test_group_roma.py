@@ -3,13 +3,13 @@ from selenium.webdriver import Keys
 import pytest
 
 
-footer_website_locator = (By.ID, "footer-website")
+footer_website_locator = (By.CLASS_NAME, "inner-footer-container")
 company_title_locator = (By.XPATH, "//p[@class='section-heading' and text()='Company']")
 company_content_locator = (By.CSS_SELECTOR, ".footer-section > div > p")
 gitHub_icon_image = (By.XPATH, "//div[@class='social']//a[6]/img")
 logo = (By.CSS_SELECTOR, "#first-level-nav a")
 URL = 'https://openweathermap.org/'
-PAGES = ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'users/sign_in', 'faq', 'appid']
+PAGES = ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'home/sign_in', 'faq', 'appid']
 
 
 def test_TC_003_07_01_visibility_of_the_company_module(driver, open_and_load_main_page, wait):
@@ -40,5 +40,7 @@ def test_TC_002_01_02_verify_returning_from_API_page_to_main_page_by_clicking_on
 def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(driver, wait, page):
     driver.get(f'{URL}{page}')
     footer_website = driver.find_element(*footer_website_locator)
-    driver.execute_script("arguments[0].scrollIntoView();", footer_website)
-    assert footer_website.is_displayed(), f"\nFooter is not present on page - {driver.current_url}"
+    driver.execute_script('arguments[0].scrollIntoView();', footer_website)
+    # print(footer_website.is_displayed(), driver.current_url, driver.title)
+    assert footer_website.is_displayed() and driver.title not in 'Page not found (404) - OpenWeatherMap', \
+        f'\nFooter is not present on page - {driver.current_url}'
