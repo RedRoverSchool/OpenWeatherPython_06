@@ -9,10 +9,15 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from test_data.credentials import credentials
 
 URL = 'https://openweathermap.org/'
-load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+email_input = (By.CSS_SELECTOR, '#user_email')
+password_input = (By.CSS_SELECTOR, '#user_password')
+submit_button = (By.CSS_SELECTOR, "input[value='Submit']")
+sign_in_link = (By.CSS_SELECTOR, '.user-li a')
 @pytest.fixture(scope='function')
 def driver():
     print('\nstart browser...')
@@ -40,6 +45,13 @@ def open_and_load_main_page(driver, wait):
 def wait(driver):
     wait = WebDriverWait(driver, 25)
     yield wait
+
+@pytest.fixture()
+def sign_in(driver):
+    driver.find_element(*sign_in_link).click()
+    driver.find_element(*email_input).send_keys(credentials["email"])
+    driver.find_element(*password_input).send_keys(credentials["password"])
+    driver.find_element(*submit_button).click()
 
 
 def pytest_runtest_makereport(item, call):
@@ -69,3 +81,4 @@ def pytest_sessionstart(session):
                     shutil.rmtree(file_path)
             except Exception as e:
                 print(f"Failed to delete {file_path}. Reason: {e}")
+

@@ -19,6 +19,8 @@ accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 weather_in_your_city = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 search_in_header = (By.CSS_SELECTOR, "#desktop-menu form[role='search']")
 city_query = (By.CSS_SELECTOR, '#search_str')
+user_dropdown = (By.CSS_SELECTOR, '#user-dropdown')
+user_dropdown_menu_items = (By.CSS_SELECTOR, '#user-dropdown-menu li')
 
 
 def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_page, wait):
@@ -73,3 +75,9 @@ def test_TC_000_00_07_verify_search_button_is_clickable(driver, open_and_load_ma
     search_city_input.send_keys('Paris')
     element = driver.find_element(*search_button)
     assert element.is_displayed() and element.is_enabled()
+
+def test_TC_000_00_08_user_dropdown_contains_5_items(driver, open_and_load_main_page, sign_in):
+    items = driver.find_elements(*user_dropdown_menu_items)
+    assert len(items) == 5
+
+
