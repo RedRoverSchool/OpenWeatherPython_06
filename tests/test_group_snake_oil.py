@@ -1,4 +1,3 @@
-
 import pytest
 import requests
 from selenium.webdriver.common.by import By
@@ -49,6 +48,11 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/faq',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
+# Student Initiative page
+STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
+LEARN_MORE_LINK_DEVELOPER_PLAN = (By.CSS_SELECTOR, "center>a[href='/price']")
+PRICING_PAGE_URL_FOR_DEVELOPER_PLAN = "https://openweathermap.org/price"
+
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
     element = wait.until(EC.visibility_of_element_located(linkedIn_icon))
@@ -126,3 +130,13 @@ def test_tc_003_04_01_title_is_present(driver, wait, URL):
     footer = driver.find_element(*FOOTER_TECHNOLOGIES)
     assert footer.is_displayed() and expected_footer_text in footer.text, \
         "The footer is not displayed or does not contain the expected text"
+
+
+def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
+                                                                                    wait):
+    wait.until(EC.element_to_be_clickable(ALLOW_ALL_COOKIES)).click()
+    driver.get(STUDENT_INITIATIVE_PAGE_URL)
+    learn_more_link = driver.find_element(*LEARN_MORE_LINK_DEVELOPER_PLAN)
+    learn_more_link.click()
+    current_url = driver.current_url
+    assert current_url == PRICING_PAGE_URL_FOR_DEVELOPER_PLAN, "Incorrect page redirection for the Developer Plan"
