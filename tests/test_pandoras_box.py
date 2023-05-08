@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import pytest
 
-
 URL = 'https://openweathermap.org/'
 BUTTON_PRICING = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
 DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
@@ -54,6 +53,8 @@ widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
 
 result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
+condition_URL = 'https://openweathermap.org/weather-conditions'
+thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
 def test_TC_002_03_08_open_pricing(driver):
     driver.get(URL)
@@ -125,3 +126,8 @@ def test_TC_002_02_01_search_result_contains_city(driver, open_and_load_main_pag
     cities = driver.find_elements(*result_locator)
     for city in cities:
         assert 'Bangkok' in city.text
+
+def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
+    driver.get(condition_URL)
+    codes_number = driver.find_elements(*thunderstorm_locator)
+    assert len(codes_number) >= 3
