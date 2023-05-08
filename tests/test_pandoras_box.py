@@ -16,6 +16,7 @@ SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
+BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
@@ -164,3 +165,8 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
+    driver.find_element(*BUTTON_MAPS).click()
+    assert '/weathermap' in driver.current_url
+
