@@ -7,6 +7,7 @@ FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 DASHBOARD_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "/weather-dashboard")]')
 BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
+LOGO = (By.CSS_SELECTOR, ".logo > a > img")
 
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
@@ -31,10 +32,15 @@ def test_TC_006_02_01_Verify_display_of_How_to_Start_section(driver, open_and_lo
     assert section.is_displayed(), "Section not found"
 
 
-def test_TC_002_03_06_dashboard_link_opens_correct_page(driver,open_and_load_main_page, wait):
+def test_TC_002_03_06_dashboard_link_opens_correct_page(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(DASHBOARD_LINK))
     dashboard_tab = driver.find_element(*DASHBOARD_LINK)
     dashboard_tab.click()
     expected_url = 'https://openweathermap.org/weather-dashboard'
     assert driver.current_url == expected_url
 
+
+def test_TC_002_01_04_Header_Logo_Verify_logo_redirects_from_dashboard_page_to_main_page(driver):
+    driver.get('https://openweathermap.org/weather-dashboard/')
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'

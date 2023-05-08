@@ -56,3 +56,10 @@ def test_TC_005_04_01_checking_title_page_weather_api(driver):
     page_title = driver.find_element(*weather_api_page_title)
     assert expected_weather_api_page_title == page_title.text, \
         "The title of the Weather API page does not match the expected title"
+
+def test_TC_010_01_02_verify_learn_more_button_is_clickable(driver, open_and_load_main_page, wait):
+    driver.find_element(*our_initiatives_link).click()
+    wait.until(EC.element_to_be_clickable(our_initiatives_link))
+    driver.execute_script("window.scrollTo(0, 500)")
+    element = wait.until(EC.element_to_be_clickable(learn_more_link))
+    assert element.is_displayed() and element.is_enabled()
