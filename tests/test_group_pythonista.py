@@ -14,7 +14,7 @@ BTN_TRY_THE_DASHBOARD_2 = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
 BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
 HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
-
+WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#maps')]")
 
 URL_API = 'https://openweathermap.org/api'
 
@@ -77,3 +77,11 @@ def test_TC_005_04_03_professional_collection_historical_weather_is_visible_and_
     historical_link = driver.find_element(*HISTORICAL_WEATHER_DATA_COLLECTION_LINK)
     expected_historical_label = 'Historical weather data collection'
     assert historical_link.is_displayed() and historical_link.is_enabled() and expected_historical_label in historical_link.text
+
+def test_TC_005_04_04_professional_collection_weather_maps_link_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(WEATHER_MAPS_COLLECTION_LINK))
+    expected_weather_maps_label = 'Weather Maps collection'
+    weather_maps_link = driver.find_element(*WEATHER_MAPS_COLLECTION_LINK)
+    assert weather_maps_link.is_enabled() and weather_maps_link.is_displayed() and expected_weather_maps_label in weather_maps_link.text
+
