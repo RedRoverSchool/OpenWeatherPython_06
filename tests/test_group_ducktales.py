@@ -25,7 +25,7 @@ def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_ma
     search_option.click()
     expected_city = 'Atchison, US'
     wait.until(EC.text_to_be_present_in_element(SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 'Atchison'))
-    displayed_city = driver.find_element(* SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT).text
+    displayed_city = driver.find_element(*SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT).text
     assert displayed_city == expected_city
 
 
@@ -58,11 +58,15 @@ def test_tc_003_09_01_the_module_title_display(driver, open_and_load_main_page, 
     assert actual_module_title == expected_module_title
 
 
+def get_section_locator(section):
+    return (By.XPATH, f"//span[contains(text(), '{section}')]")
+
+
 @pytest.mark.parametrize("section", sections)
 def test_010_01_01_01_verify_sections(driver, open_and_load_main_page, section):
-
     our_initiatives_link = driver.find_element(*INITIATIVES)
     our_initiatives_link.click()
 
-    section_element = driver.find_element(By.XPATH, f"//span[contains(text(),'{section}')]")
+    section_locator = get_section_locator(section)
+    section_element = driver.find_element(*section_locator)
     assert section_element.is_displayed(), f"Section '{section}' not found on the page"
