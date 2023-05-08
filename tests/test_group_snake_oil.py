@@ -131,6 +131,7 @@ def test_tc_003_04_01_title_is_present(driver, wait, URL):
     assert footer.is_displayed() and expected_footer_text in footer.text, \
         "The footer is not displayed or does not contain the expected text"
 
+
 def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
                                                                                     wait):
     driver.get(STUDENT_INITIATIVE_PAGE_URL)
