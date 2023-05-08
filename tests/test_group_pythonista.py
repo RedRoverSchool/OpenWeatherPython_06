@@ -8,12 +8,12 @@ DASHBOARD_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "/weat
 BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
 PROFESSIONAL_COLLESTION_TITLE = (By.XPATH, "//section[@id='pro']/h2")
-
+CURRENT_FORECAST_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#current')]")
 LOGO = (By.CSS_SELECTOR, ".logo > a > img")
 BTN_TRY_THE_DASHBOARD_2 = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
 BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
-
+HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
 
 
 URL_API = 'https://openweathermap.org/api'
@@ -71,3 +71,9 @@ def test_TC_006_02_03_weather_dashboard_verify_the_transition_to_another_page(dr
     alert_mms = driver.find_element(*ALERT_PANEL_SINGIN)
     assert alert_mms.is_displayed(), 'WELCOME EVENTS'
 
+def test_TC_005_04_03_professional_collection_historical_weather_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(HISTORICAL_WEATHER_DATA_COLLECTION_LINK))
+    historical_link = driver.find_element(*HISTORICAL_WEATHER_DATA_COLLECTION_LINK)
+    expected_historical_label = 'Historical weather data collection'
+    assert historical_link.is_displayed() and historical_link.is_enabled() and expected_historical_label in historical_link.text
