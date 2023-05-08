@@ -4,11 +4,6 @@ from datetime import datetime
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
-
-TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
-TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
-
-
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
 SEARCH_CITY_INPUT = By.CSS_SELECTOR, "input[placeholder='Search city']"
 BTN_SEARCH = By.CSS_SELECTOR, "button[class ='button-round dark']"
@@ -68,5 +63,12 @@ def test_TC_001_04_03_verify_in_day_list_first_element_day_by_week(driver, open_
     day_by_computer = datetime.now().weekday()
     today = WEEKDAYS[day_by_computer]
     assert day_by_weak == f'{today}'
-    
-    
+
+
+def test_tc_001_04_05_main_page_search_city_widget_8_day_forecast_first_element_number_day(driver, open_and_load_main_page):
+    number_day = driver.find_element(*FIRST_DAY_IN_8_DAY_FORECAST).text[-2:]
+    if number_day.startswith('0'):
+        number_day = number_day[1:]
+    number_day_by_computer = datetime.now().day
+    assert number_day == f'{number_day_by_computer}'
+
