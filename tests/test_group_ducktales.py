@@ -17,6 +17,7 @@ MODULE_DOWNLOAD_OPENWEATHER_APP = By.XPATH, "//div[@class='my-5']/p"
 FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
 
 WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
 
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
@@ -87,3 +88,9 @@ def test_010_01_01_01_verify_sections(driver, open_and_load_main_page, section):
     section_locator = get_section_locator(section)
     section_element = driver.find_element(*section_locator)
     assert section_element.is_displayed(), f"Section '{section}' not found on the page"
+
+def test_TC_001_04_04_verify_in_day_list_first_element_month(driver, open_and_load_main_page):
+    month = driver.find_element(*FIRST_DAY_IN_8_DAY_FORECAST).text[5:-3]
+    month_by_computer = datetime.now().month
+    current_month = MONTHS[month_by_computer -1]
+    assert month == f'{current_month}'
