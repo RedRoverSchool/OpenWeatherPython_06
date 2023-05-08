@@ -28,3 +28,5 @@ def test_TC_002_01_02_verify_returning_from_API_page_to_main_page_by_clicking_on
     driver.get('https://openweathermap.org/api')
     driver.find_element(*logo).click()
     assert 'https://openweathermap.org/' in driver.current_url
+
+
