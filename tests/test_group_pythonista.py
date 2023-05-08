@@ -85,3 +85,9 @@ def test_TC_005_04_04_professional_collection_weather_maps_link_is_visible_and_c
     weather_maps_link = driver.find_element(*WEATHER_MAPS_COLLECTION_LINK)
     assert weather_maps_link.is_enabled() and weather_maps_link.is_displayed() and expected_weather_maps_label in weather_maps_link.text
 
+def test_TC_005_04_05_professional_collection_current_and_forecast_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(CURRENT_FORECAST_COLLECTION_LINK))
+    current_forecast_link = driver.find_element(*CURRENT_FORECAST_COLLECTION_LINK)
+    exp_current_forecast = 'Current & Forecasts collection'
+    assert current_forecast_link.is_enabled() and current_forecast_link.is_displayed() and exp_current_forecast in current_forecast_link.text
