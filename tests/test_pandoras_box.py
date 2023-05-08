@@ -169,8 +169,7 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
 
 
 
-def test_TC_010_01_04_check_open_page_our_initiative(driver):
-    driver.get(URL)
+def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_page):
     button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_initiatives)
