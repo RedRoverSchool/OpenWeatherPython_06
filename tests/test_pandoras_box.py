@@ -57,8 +57,7 @@ search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
-def test_TC_002_03_08_open_pricing(driver):
-    driver.get(URL)
+def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_pricing)
@@ -134,8 +133,7 @@ def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     assert len(codes_number) >= 3
 
 
-def test_TC_002_03_03_01_open_guide(driver):
-    driver.get(URL)
+def test_TC_002_03_03_01_open_guide(driver, open_and_load_main_page):
     button_guide = driver.find_element(*BUTTON_GUIDE)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_guide)
