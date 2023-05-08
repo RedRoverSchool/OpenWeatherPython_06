@@ -16,7 +16,9 @@ SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
-
+BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
+DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
+MENU_INITIATIVE = "arguments[0].click();"
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -164,3 +166,15 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+
+
+def test_TC_010_01_04_check_open_page_our_initiative(driver):
+    driver.get(URL)
+    button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_initiatives)
+    driver.execute_script(MENU_INITIATIVE, button_initiatives)
+    expected_title = "Our Initiatives"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
+    assert displayed_title == expected_title
