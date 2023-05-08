@@ -11,6 +11,8 @@ DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
+BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
+BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
@@ -131,3 +133,15 @@ def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     driver.get(condition_URL)
     codes_number = driver.find_elements(*thunderstorm_locator)
     assert len(codes_number) >= 3
+
+def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_faq = driver.find_element(*BUTTON_FAQ)
+    action_chains.move_to_element(button_faq)
+    driver.execute_script("arguments[0].click();", button_faq)
+    expected_title = "Frequently Asked Questions"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
