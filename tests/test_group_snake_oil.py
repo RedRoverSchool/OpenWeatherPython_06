@@ -134,9 +134,9 @@ def test_tc_003_04_01_title_is_present(driver, wait, URL):
 
 def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
                                                                                     wait):
+    wait.until(EC.element_to_be_clickable(ALLOW_ALL_COOKIES)).click()
     driver.get(STUDENT_INITIATIVE_PAGE_URL)
-    learn_more_link = wait.until(EC.presence_of_element_located(LEARN_MORE_LINK_DEVELOPER_PLAN))
-    driver.execute_script("window.scrollBy(0, 300);", learn_more_link)
+    learn_more_link = driver.find_element(*LEARN_MORE_LINK_DEVELOPER_PLAN)
     learn_more_link.click()
     current_url = driver.current_url
     assert current_url == PRICING_PAGE_URL_FOR_DEVELOPER_PLAN, "Incorrect page redirection for the Developer Plan"
