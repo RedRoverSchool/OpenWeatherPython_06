@@ -15,6 +15,7 @@ SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child
 SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
+BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
@@ -60,8 +61,7 @@ search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
-def test_TC_002_03_08_open_pricing(driver):
-    driver.get(URL)
+def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_pricing)
@@ -149,3 +149,11 @@ def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     codes_number = driver.find_elements(*thunderstorm_locator)
     assert len(codes_number) >= 3
 
+def test_TC_002_03_03_01_open_guide(driver, open_and_load_main_page):
+    button_guide = driver.find_element(*BUTTON_GUIDE)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_guide)
+    driver.execute_script("arguments[0].click();", button_guide)
+    expected_title = "Guide"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
