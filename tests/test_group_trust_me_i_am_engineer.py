@@ -1,10 +1,9 @@
+import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
-load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
@@ -16,7 +15,9 @@ our_initiatives_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
 learn_more_link = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
 learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
-city_name = (By.XPATH, "//*[@id='weather-widget']/div[2]/div[1]/div[1]/div[1]/h2")
+city_name = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
+loc = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -60,15 +61,24 @@ def test_TC_005_04_01_checking_title_page_weather_api(driver):
     assert expected_weather_api_page_title == page_title.text, \
         "The title of the Weather API page does not match the expected title"
 
-def test_TC_001_05_02_verify_current_location(driver, wait):
+def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
     expected_city_name = "Chicago, US"
-    map_coordinates = dict({
-        "latitude": 41.8781,
-        "longitude": -87.6298,
-        "accuracy": 100
-    })
-    driver.execute_cdp_cmd("Emulation.setGeolocationOverride", map_coordinates)
-    driver.get(URL)
+    driver.execute_cdp_cmd(
+        "Browser.grantPermissions",
+        {
+            "origin": URL,
+            "permissions": ["geolocation"]
+        },
+    )
+    driver.execute_cdp_cmd(
+        "Emulation.setGeolocationOverride",
+        {
+            "latitude": 41.8781,
+            "longitude": -87.6298,
+            "accuracy": 100,
+        },
+    )
+    driver.find_element(*loc).click()
     wait.until_not(EC.presence_of_element_located(load_div))
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
