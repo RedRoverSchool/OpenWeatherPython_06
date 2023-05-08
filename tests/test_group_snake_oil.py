@@ -34,6 +34,7 @@ all_link_locators = [SIGN_UP_LINK, USERNAME_AND_PASSWORD_LINK, GO_TO_DASHBOARD_L
 linkedIn_icon = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
 Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
+FAQ_url = "https://openweathermap.org/faq"
 
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
@@ -93,4 +94,14 @@ def test_tc_015_01_02_verify_support_faq_is_clickable(driver, open_and_load_main
     dropdown.click()
     element = wait.until(EC.element_to_be_clickable(FAQ_element))
     assert element.is_enabled(), "FAQ element is not clickable on the page"
+
+
+def test_tc_015_01_03_verify_support_faq_page_redirection(driver, open_and_load_main_page, wait):
+    dropdown = wait.until(EC.visibility_of_element_located(Support_dropdown))
+    dropdown.click()
+    element = wait.until(EC.visibility_of_element_located(FAQ_element))
+    element.click()
+    current_url = driver.current_url
+    wait.until(EC.url_to_be(FAQ_url))
+    assert current_url == FAQ_url, f"Page redirection failed. Expected: {FAQ_url}, Actual: {driver.current_url}"
 

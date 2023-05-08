@@ -9,6 +9,9 @@ BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
 PROFESSIONAL_COLLESTION_TITLE = (By.XPATH, "//section[@id='pro']/h2")
 
+LOGO = (By.CSS_SELECTOR, ".logo > a > img")
+
+
 
 URL_API = 'https://openweathermap.org/api'
 
@@ -34,7 +37,7 @@ def test_TC_006_02_01_Verify_display_of_How_to_Start_section(driver, open_and_lo
     assert section.is_displayed(), "Section not found"
 
 
-def test_TC_002_03_06_dashboard_link_opens_correct_page(driver,open_and_load_main_page, wait):
+def test_TC_002_03_06_dashboard_link_opens_correct_page(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(DASHBOARD_LINK))
     dashboard_tab = driver.find_element(*DASHBOARD_LINK)
     dashboard_tab.click()
@@ -49,8 +52,8 @@ def test_TC_005_04_02_Professional_collection_section_is_presented(driver, wait)
     assert expected_title in proffecional_collection_title.text
 
 
-
-
-
-
+def test_TC_002_01_04_Header_Logo_Verify_logo_redirects_from_dashboard_page_to_main_page(driver):
+    driver.get('https://openweathermap.org/weather-dashboard/')
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
 
