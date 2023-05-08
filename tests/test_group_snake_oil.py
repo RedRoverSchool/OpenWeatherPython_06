@@ -1,3 +1,5 @@
+import time
+
 import pytest
 import requests
 from selenium.webdriver.common.by import By
@@ -35,6 +37,11 @@ linkedIn_icon = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
 Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
 FAQ_url = "https://openweathermap.org/faq"
+
+# Student Initiative page
+STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
+LEARN_MORE_LINK_DEVELOPER_PLAN = (By.CSS_SELECTOR, "center>a[href='/price']")
+PRICING_PAGE_URL_FOR_DEVELOPER_PLAN = "https://openweathermap.org/price"
 
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
@@ -105,3 +112,12 @@ def test_tc_015_01_03_verify_support_faq_page_redirection(driver, open_and_load_
     wait.until(EC.url_to_be(FAQ_url))
     assert current_url == FAQ_url, f"Page redirection failed. Expected: {FAQ_url}, Actual: {driver.current_url}"
 
+
+def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
+                                                                                    wait):
+    driver.get(STUDENT_INITIATIVE_PAGE_URL)
+    learn_more_link = wait.until(EC.presence_of_element_located(LEARN_MORE_LINK_DEVELOPER_PLAN))
+    driver.execute_script("window.scrollBy(0, 300);", learn_more_link)
+    learn_more_link.click()
+    current_url = driver.current_url
+    assert current_url == PRICING_PAGE_URL_FOR_DEVELOPER_PLAN, "Incorrect page redirection for the Developer Plan"
