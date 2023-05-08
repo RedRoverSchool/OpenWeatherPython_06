@@ -37,15 +37,7 @@ maps_URL = 'https://openweathermap.org/weathermap'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
-# widget_11 = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]')
-# widget_12 = (By.XPATH, '//*[@id="container-openweathermap-widget-12"]')
-# widget_13 = (By.XPATH, '//*[@id="container-openweathermap-widget-13"]')
-# widget_14 = (By.XPATH, '//*[@id="container-openweathermap-widget-14"]')
-# widget_16 = (By.XPATH, '//*[@id="container-openweathermap-widget-15"]')
-# widget_17 = (By.XPATH, '//*[@id="container-openweathermap-widget-16"]')
-# widget_15 = (By.XPATH, '//*[@id="container-openweathermap-widget-17"]')
-# widget_18 = (By.XPATH, '//*[@id="container-openweathermap-widget-18"]')
-# widget_19 = (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')
+metric_units = (By.XPATH, '//span[text()="°C"]')
 
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
@@ -70,7 +62,6 @@ def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     expected_title = "Pricing"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
-
 
 def test_TC_002_02_03_verify_result_of_search_for_invalid_city_name(driver, open_and_load_main_page, wait):
     search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
@@ -164,3 +155,21 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+def test_TC_001_09_05_switched_on_Celsius(driver):
+    driver.get(widget_constructor_URL)
+    toggle_position = driver.find_element(*metric_toggle)
+    expected_position = 'color: rgb(235, 110, 75);'
+    if toggle_position.get_attribute("style") == expected_position:
+        driver.find_element(*metric_toggle).click()
+        driver.find_element(*metric_toggle).click()
+        for widget_locator in widgets_locators:
+            WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
+        metric_units_number = driver.find_elements(*metric_units)
+        assert len(metric_units_number) == 14
+    else:
+        driver.find_element(*metric_toggle).click()
+        for widget_locator in widgets_locators:
+            WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
+        metric_units_number = driver.find_elements(metric_units)
+        assert len(metric_units_number) == 14
