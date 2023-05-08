@@ -138,3 +138,4 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
 
+
