@@ -67,6 +67,6 @@ def test_TC_001_05_02_verify_current_location(driver, wait):
     })
     driver.execute_cdp_cmd("Emulation.setGeolocationOverride", map_coordinates)
     driver.get(URL)
-    current_city_name = driver.find_element(*city_name)
+    current_city_name = wait.until(EC.presence_of_element_located(city_name))
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
