@@ -56,5 +56,5 @@ def test_TC_006_02_03_weather_dashboard_verify_the_transition_to_another_page(dr
     driver.find_element(*BTN_TRY_THE_DASHBOARD_2).click()
     driver.switch_to.window(driver.window_handles[1])
     alert_mms = driver.find_element(*ALERT_PANEL_SINGIN)
-    assert alert_mms.is_displayed(), 'WELCOME EVENTS PAGE'
+    assert alert_mms.is_displayed(), 'WELCOME EVENTS'
 
