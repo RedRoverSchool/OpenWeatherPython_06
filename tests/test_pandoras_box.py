@@ -102,14 +102,12 @@ def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
 
 
 def test_TC_001_01_02_2_fill_city_field_in_cirillic(driver, open_and_load_main_page, wait):
-    driver.get(URL)
-    wait_act = WebDriverWait(driver, 15)
     search_city_input = driver.find_element(*SEARCH_CITY_FIELD)
     search_city_input.send_keys('Кишинев')
     driver.find_element(*SEARCH_BUTTON).click()
-    wait_act.until(EC.element_to_be_clickable(SEARCH_DROPDOWN_OPTION)).click()
+    wait.until(EC.element_to_be_clickable(SEARCH_DROPDOWN_OPTION)).click()
     expected_city = 'Chisinau, MD'
-    wait_act.until(EC.text_to_be_present_in_element(DISPLAYED_CITY, 'Chisinau'))
+    wait.until(EC.text_to_be_present_in_element(DISPLAYED_CITY, 'Chisinau'))
     actual_city = driver.find_element(*DISPLAYED_CITY)
     assert expected_city == actual_city.text
 
