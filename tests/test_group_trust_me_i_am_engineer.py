@@ -4,6 +4,8 @@ from zoneinfo import ZoneInfo
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
@@ -67,6 +69,7 @@ def test_TC_001_05_02_verify_current_location(driver, wait):
     })
     driver.execute_cdp_cmd("Emulation.setGeolocationOverride", map_coordinates)
     driver.get(URL)
-    current_city_name = wait.until(EC.presence_of_element_located(city_name))
+    wait.until_not(EC.presence_of_element_located(load_div))
+    current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
