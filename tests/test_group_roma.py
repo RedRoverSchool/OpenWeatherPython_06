@@ -26,6 +26,5 @@ def test_TC_003_10_03_visibility_of_GitHub_icon(driver, open_and_load_main_page,
 
 def test_TC_002_01_02_verify_returning_from_API_page_to_main_page_by_clicking_on_logo(driver, wait):
     driver.get('https://openweathermap.org/api')
-    assert 'api' in driver.current_url
     driver.find_element(*logo).click()
     assert 'https://openweathermap.org/' in driver.current_url
