@@ -11,6 +11,7 @@ DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
+BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
@@ -58,8 +59,7 @@ search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
-def test_TC_002_03_08_open_pricing(driver):
-    driver.get(URL)
+def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(button_pricing)
@@ -133,6 +133,18 @@ def test_TC_001_12_01_thunderstorm_group_contains_items(driver):
     driver.get(condition_URL)
     codes_number = driver.find_elements(*thunderstorm_locator)
     assert len(codes_number) >= 3
+
+
+def test_TC_002_03_03_01_open_guide(driver, open_and_load_main_page):
+    button_guide = driver.find_element(*BUTTON_GUIDE)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_guide)
+    driver.execute_script("arguments[0].click();", button_guide)
+    expected_title = "Guide"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
+
+
 
 def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     button_support = driver.find_element(*BUTTON_SUPPORT)
