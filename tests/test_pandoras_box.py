@@ -17,7 +17,6 @@ SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 
-
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
@@ -34,18 +33,10 @@ URLs = ['https://openweathermap.org/',
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
+dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
-# widget_11 = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]')
-# widget_12 = (By.XPATH, '//*[@id="container-openweathermap-widget-12"]')
-# widget_13 = (By.XPATH, '//*[@id="container-openweathermap-widget-13"]')
-# widget_14 = (By.XPATH, '//*[@id="container-openweathermap-widget-14"]')
-# widget_16 = (By.XPATH, '//*[@id="container-openweathermap-widget-15"]')
-# widget_17 = (By.XPATH, '//*[@id="container-openweathermap-widget-16"]')
-# widget_15 = (By.XPATH, '//*[@id="container-openweathermap-widget-17"]')
-# widget_18 = (By.XPATH, '//*[@id="container-openweathermap-widget-18"]')
-# widget_19 = (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')
 
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
@@ -61,6 +52,11 @@ result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
+pricing_plans_locators = [(By.XPATH, '//h4[text()="Free"]'),
+                          (By.XPATH, '//h4[text()="Startup"]'),
+                          (By.XPATH, '//h4[text()="Developer"]'),
+                          (By.XPATH, '//h4[text()="Professional"]'),
+                          (By.XPATH, '//h4[text()="Enterprise"]')]
 
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -164,3 +160,9 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+def test_TC_006_04_04_pricing_plans_are_visible(driver):
+    driver.get(dashboard_URL)
+    for plan_locator in pricing_plans_locators:
+        plan = driver.find_element(*plan_locator)
+        assert plan.is_displayed()
