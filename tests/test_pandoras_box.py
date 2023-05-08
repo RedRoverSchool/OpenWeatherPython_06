@@ -12,6 +12,7 @@ DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
+BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
@@ -112,3 +113,15 @@ def test_TC_003_03_01_Product_Collections_title_is_visible(driver, URL):
     driver.get(URL)
     module_title = driver.find_element(*title_locator)
     assert module_title.is_displayed(), "Product Collections title is not visible"
+
+
+def test_TC_002_03_03_01_open_guide(driver):
+    driver.get(URL)
+    button_guide = driver.find_element(*BUTTON_GUIDE)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_guide)
+    driver.execute_script("arguments[0].click();", button_guide)
+    expected_title = "Guide"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
+
