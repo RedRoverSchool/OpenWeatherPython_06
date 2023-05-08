@@ -29,6 +29,7 @@ URLs = ['https://openweathermap.org/',
         'https://home.openweathermap.org/questions']
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
+maps_URL = 'https://openweathermap.org/weathermap'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
@@ -141,4 +142,12 @@ def test_TC_002_03_03_01_open_guide(driver, open_and_load_main_page):
     expected_title = "Guide"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+
+
+def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(driver):
+    driver.get(maps_URL)
+    driver.find_element(*logo_locator).click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
 
