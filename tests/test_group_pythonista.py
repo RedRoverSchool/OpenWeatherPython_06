@@ -7,8 +7,13 @@ FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 DASHBOARD_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "/weather-dashboard")]')
 BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
+PROFESSIONAL_COLLESTION_TITLE = (By.XPATH, "//section[@id='pro']/h2")
+
 LOGO = (By.CSS_SELECTOR, ".logo > a > img")
 
+
+
+URL_API = 'https://openweathermap.org/api'
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(FOOTER_PANEL))
@@ -39,8 +44,16 @@ def test_TC_002_03_06_dashboard_link_opens_correct_page(driver, open_and_load_ma
     expected_url = 'https://openweathermap.org/weather-dashboard'
     assert driver.current_url == expected_url
 
+def test_TC_005_04_02_Professional_collection_section_is_presented(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(PROFESSIONAL_COLLESTION_TITLE))
+    proffecional_collection_title = driver.find_element(*PROFESSIONAL_COLLESTION_TITLE)
+    expected_title = 'Professional collections'
+    assert expected_title in proffecional_collection_title.text
+
 
 def test_TC_002_01_04_Header_Logo_Verify_logo_redirects_from_dashboard_page_to_main_page(driver):
     driver.get('https://openweathermap.org/weather-dashboard/')
     driver.find_element(*LOGO).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
