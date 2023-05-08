@@ -1,3 +1,4 @@
+
 import pytest
 import requests
 from selenium.webdriver.common.by import By
@@ -35,7 +36,19 @@ linkedIn_icon = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
 Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
 FAQ_url = "https://openweathermap.org/faq"
+FOOTER_TECHNOLOGIES = (By.XPATH, "//p[@class='section-heading' and text()='Technologies']")
 
+URLs = ['https://openweathermap.org/',
+        'https://openweathermap.org/guide',
+        'https://openweathermap.org/api',
+        'https://openweathermap.org/weather-dashboard',
+        'https://openweathermap.org/price',
+        'https://openweathermap.org/our-initiatives',
+        'https://openweathermap.org/examples',
+        'https://home.openweathermap.org/users/sign_in',
+        'https://openweathermap.org/faq',
+        'https://openweathermap.org/appid',
+        'https://home.openweathermap.org/questions']
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
     element = wait.until(EC.visibility_of_element_located(linkedIn_icon))
@@ -105,3 +118,11 @@ def test_tc_015_01_03_verify_support_faq_page_redirection(driver, open_and_load_
     wait.until(EC.url_to_be(FAQ_url))
     assert current_url == FAQ_url, f"Page redirection failed. Expected: {FAQ_url}, Actual: {driver.current_url}"
 
+
+@pytest.mark.parametrize('URL', URLs)
+def test_tc_003_04_01_title_is_present(driver, wait, URL):
+    driver.get(URL)
+    expected_footer_text = "Technologies"
+    footer = driver.find_element(*FOOTER_TECHNOLOGIES)
+    assert footer.is_displayed() and expected_footer_text in footer.text, \
+        "The footer is not displayed or does not contain the expected text"
