@@ -33,16 +33,18 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Prepare Allure history
-      run: |
-        cd ..
-        mkdir -p allure-results
+#    - name: Prepare Allure history
+#      run: |
+#        cd ..
+#        mkdir -p allure-results
 
     - name: Test with pytest
       run: |
-        pytest --alluredir=../allure-results -k 'marketplace'
+        pytest --alluredir=allure-results -k 'marketplace'
       continue-on-error: true
-
+      
+    - run: ls
+      
     - name: Get Allure history
       uses: actions/checkout@v2
       if: always()
