@@ -18,10 +18,10 @@ def testTC_001_01_02_01_displaying_requested_city_name_in_the_search_field(drive
     search_button = driver.find_element(*search_button_locator)
     search_button.click()
     search_option = wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')))
+        EC.element_to_be_clickable((search_option_locator)))
     search_option.click()
     expected_city = 'Minsk, BY'
     wait.until(EC.text_to_be_present_in_element(
-        (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'), expected_city))
+        (displayed_city_locator), expected_city))
     displayed_city = driver.find_element(*displayed_city_locator).text
     assert displayed_city == expected_city
