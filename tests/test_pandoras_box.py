@@ -23,7 +23,7 @@ BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
+BUTTON_LEARN_MORE = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -188,7 +188,6 @@ def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     assert '/weathermap' in driver.current_url
 
 
-
 def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     button_support = driver.find_element(*BUTTON_SUPPORT)
     action_chains = ActionChains(driver)
@@ -200,3 +199,14 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+
+def test_TC_010_01_01_1_button_learn_more(driver, open_and_load_main_page, wait):
+    button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_initiatives)
+    driver.execute_script(MENU_INITIATIVE, button_initiatives)
+    actual_button = wait.until(EC.element_to_be_clickable(BUTTON_LEARN_MORE))
+    expected_text_on_button = "Learn more"
+    assert actual_button.text == expected_text_on_button
+
