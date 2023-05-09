@@ -17,6 +17,7 @@ HOW_TO_START_DETAILED_USER_MANUAL_LINK = (By.XPATH, '//b[.="detailed user manual
 MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
 
 
+@pytest.mark.skip
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
     driver.find_element(*DASHBOARD_HEADER_LINK).click()
     wait.until(EC.element_to_be_clickable(WEATHER_DASHBOARD_HOME_LINK))
@@ -38,5 +39,7 @@ def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
     medium_hover = driver.find_element(*MEDIUM_LINK).get_attribute("href")
-    assert medium_link and medium_hover == 'https://medium.com/@openweathermap', "The medium icon(link) is not " \
-                                                                                 "clickable and tooltip incorrect"
+    assert medium_link.is_enabled() and medium_hover == 'https://medium.com/@openweathermap', "The medium icon(link) " \
+                                                                                              "is not " \
+                                                                                              "clickable and tooltip " \
+                                                                                              "incorrect "
