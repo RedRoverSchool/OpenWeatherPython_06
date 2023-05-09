@@ -17,6 +17,7 @@ learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -72,7 +73,7 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
     driver.get(URL_MARKETPLACE)
     driver.find_element(*history_bulk_title).click()
     driver.find_element(*history_bulk_search_location).click()
-    methods = driver.find_elements(By.XPATH, "//div[@class='search-pop-up']/button")
+    methods = driver.find_elements(*buttons_search_methods)
     actual_method_list = [el.text for el in methods]
     assert expected_method_list == actual_method_list, \
         "The actual list of methods does not match the expected list of methods"
