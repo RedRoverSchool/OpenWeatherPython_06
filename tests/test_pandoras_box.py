@@ -19,6 +19,8 @@ BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 MENU_INITIATIVE = "arguments[0].click();"
+BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
+DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -36,6 +38,8 @@ URLs = ['https://openweathermap.org/',
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
+student_initiative_URL = 'https://openweathermap.org/our-initiatives/student-initiative'
+
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
@@ -177,3 +181,15 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     expected_title = "Our Initiatives"
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
+
+
+def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load_main_page):
+    driver.get(student_initiative_URL)
+    button_get_access = driver.find_element(*BUTTON_GET_ACCESS)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_get_access)
+    driver.execute_script("arguments[0].click();", button_get_access)
+    expected_title = 'Sign In To Your Account'
+    displayed_title = driver.find_element(*DISPLAYED_AUTHORISATION_WINDOW).text
+    assert displayed_title == expected_title
+
