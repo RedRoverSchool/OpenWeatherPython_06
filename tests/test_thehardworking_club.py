@@ -9,6 +9,9 @@ city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (By.XPATH, '//img[contains(@src, "themes/openweathermap/assets/vendor/owm/img/widgets/type-brown.png")]')
 left_bottom_widget = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-menu--brown"]')
 widget_choose = (By.XPATH, "//li[@class = 'widget-choose__item']")
+celsius_button = (By.CSS_SELECTOR, 'span#metric')
+fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
@@ -31,4 +34,8 @@ def test_TC_001_09_02_Verify_that_3_widgets_are_displayed(driver, wait):
         assert widget.is_displayed(), "Some widget is not displayed"
 
 
+def test_TC_001_09_03_visibility_of_celsius(driver):
+    driver.get(URL)
+    celsius = driver.find_element(*celsius_button)
+    assert celsius.is_displayed() and celsius.is_enabled()
 
