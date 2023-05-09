@@ -19,6 +19,8 @@ BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 MENU_INITIATIVE = "arguments[0].click();"
+BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
+
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
@@ -180,6 +182,11 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     expected_title = "Our Initiatives"
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
+
+def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
+    driver.find_element(*BUTTON_MAPS).click()
+    assert '/weathermap' in driver.current_url
+
 
 
 def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
