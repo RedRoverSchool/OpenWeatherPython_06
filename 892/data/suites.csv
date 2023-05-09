@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue May 09 02:03:18 GMT 2023","Tue May 09 02:03:21 GMT 2023","2562","tests","test_group_qa_ua","","","","test_TC_002_03_07_verify_marketplace_link_redirects_to_valid_page",""
