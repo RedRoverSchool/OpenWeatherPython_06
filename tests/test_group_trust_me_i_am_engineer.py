@@ -87,3 +87,4 @@ def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
     actual_list_description = [el.text for el in list_description]
     difference = set(expected_list_description) - set(actual_list_description)
     assert len(difference) == 0
+
