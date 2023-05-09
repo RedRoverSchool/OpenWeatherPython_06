@@ -23,7 +23,8 @@ BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
+MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
+IMAGE = (By.XPATH, "//*[@class='responsive']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -200,3 +201,10 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+
+def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
+    driver.find_element(*MENU_DASHBOARD).click()
+    wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
+    image = driver.find_element(*IMAGE)
+    assert image.is_displayed(), "Image is not visible"
