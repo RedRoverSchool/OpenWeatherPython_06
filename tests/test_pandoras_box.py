@@ -201,6 +201,7 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
 def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
     driver.get(condition_URL)
     clouds_codes = driver.find_element(*clouds_locator)
