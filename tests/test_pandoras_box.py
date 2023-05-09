@@ -16,6 +16,13 @@ SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
 BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
+BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
+DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
+MENU_INITIATIVE = "arguments[0].click();"
+BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
+
+BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
+BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -160,6 +167,35 @@ def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(d
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+
+
+def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_page):
+    button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_initiatives)
+    driver.execute_script(MENU_INITIATIVE, button_initiatives)
+    expected_title = "Our Initiatives"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
+    assert displayed_title == expected_title
+
+def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
+    driver.find_element(*BUTTON_MAPS).click()
+    assert '/weathermap' in driver.current_url
+
+
+
+def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_faq = driver.find_element(*BUTTON_FAQ)
+    action_chains.move_to_element(button_faq)
+    driver.execute_script("arguments[0].click();", button_faq)
+    expected_title = "Frequently Asked Questions"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
 
 def test_TC_006_04_04_pricing_plans_are_visible(driver):
     driver.get(dashboard_URL)
