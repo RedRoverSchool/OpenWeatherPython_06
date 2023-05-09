@@ -21,6 +21,11 @@ DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 MENU_INITIATIVE = "arguments[0].click();"
 BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
+BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
+
+BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
+BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
+
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -194,3 +199,21 @@ def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load
     assert displayed_title == expected_title
 
 
+
+def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
+    driver.find_element(*BUTTON_MAPS).click()
+    assert '/weathermap' in driver.current_url
+
+
+
+def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_faq = driver.find_element(*BUTTON_FAQ)
+    action_chains.move_to_element(button_faq)
+    driver.execute_script("arguments[0].click();", button_faq)
+    expected_title = "Frequently Asked Questions"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
