@@ -20,9 +20,10 @@ weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
-# button_search_by_location = (By.XPATH, "//div[@class='search-pop-up']/button[contains(text(), 'By location')]")
+history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
-# search_items = (By.XPATH, "/html/body/div[6]")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
 
@@ -74,6 +75,16 @@ def test_TC_010_01_02_verify_learn_more_button_is_clickable(driver, open_and_loa
     driver.execute_script("window.scrollTo(0, 500)")
     element = wait.until(EC.element_to_be_clickable(learn_more_link))
     assert element.is_displayed() and element.is_enabled()
+
+def test_TC_007_02_01_verify_the_method_of_input_location(driver):
+    expected_method_list = ['By location', 'By coordinates', 'Import']
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    methods = driver.find_elements(*buttons_search_methods)
+    actual_method_list = [el.text for el in methods]
+    assert expected_method_list == actual_method_list, \
+        "The actual list of methods does not match the expected list of methods"
 
 def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     expected_location = "Moscow"
