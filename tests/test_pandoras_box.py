@@ -193,3 +193,4 @@ def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load
     displayed_title = driver.find_element(*DISPLAYED_AUTHORISATION_WINDOW).text
     assert displayed_title == expected_title
 
+
