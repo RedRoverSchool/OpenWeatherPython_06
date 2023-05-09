@@ -1,3 +1,4 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
@@ -36,4 +37,6 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
 def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
-    assert medium_link, "The medium icon(link) is not clickable"
+    medium_hover = driver.find_element(*MEDIUM_LINK).get_attribute("href")
+    assert medium_link and medium_hover == 'https://medium.com/@openweathermap', "The medium icon(link) is not " \
+                                                                                 "clickable and tooltip incorrect"
