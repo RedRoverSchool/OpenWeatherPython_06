@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
+URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
@@ -14,6 +15,8 @@ our_initiatives_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
 learn_more_link = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
 learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
+history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+history_bulk_search_location = (By.ID, "firstSearch")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -63,3 +66,13 @@ def test_TC_010_01_02_verify_learn_more_button_is_clickable(driver, open_and_loa
     driver.execute_script("window.scrollTo(0, 500)")
     element = wait.until(EC.element_to_be_clickable(learn_more_link))
     assert element.is_displayed() and element.is_enabled()
+
+def test_TC_007_02_01_verify_the_method_of_input_location(driver):
+    expected_method_list = ['By location', 'By coordinates', 'Import']
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    methods = driver.find_elements(By.XPATH, "//div[@class='search-pop-up']/button")
+    actual_method_list = [el.text for el in methods]
+    assert expected_method_list == actual_method_list, \
+        "The actual list of methods does not match the expected list of methods"
