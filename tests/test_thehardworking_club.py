@@ -9,6 +9,10 @@ city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (By.XPATH, '//img[contains(@src, "themes/openweathermap/assets/vendor/owm/img/widgets/type-brown.png")]')
 left_bottom_widget = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-menu--brown"]')
 widget_choose = (By.XPATH, "//li[@class = 'widget-choose__item']")
+XPATH_CITY_NAME = (By.XPATH, "//input[@id='city-name']")
+XPATH_SEARCH_FIELD_BUTTON = (By.XPATH, '//*[@id="search-city"]/i')
+XPATH_FIRST_BOTTOM_WIDGET_WINDOW = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]/div/div[1]/div/h2')
+
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
@@ -31,4 +35,14 @@ def test_TC_001_09_02_Verify_that_3_widgets_are_displayed(driver, wait):
         assert widget.is_displayed(), "Some widget is not displayed"
 
 
-
+def test_TC_001_09_08_select_the_specific_city(driver, wait):
+    driver.get(URL)
+    search_field = driver.find_element(*XPATH_CITY_NAME)
+    search_field.clear()
+    search_field.click()
+    search_field.send_keys("Foster city")
+    search_field_button = driver.find_element(*XPATH_SEARCH_FIELD_BUTTON)
+    search_field_button.click()
+    wait = WebDriverWait(driver, 10)
+    is_present = wait.until(EC.text_to_be_present_in_element(XPATH_FIRST_BOTTOM_WIDGET_WINDOW, 'Foster City'))
+    assert is_present
