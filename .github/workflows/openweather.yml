@@ -34,11 +34,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Prepare Allure history
-      run: mkdir -p allure-results
+      run: |
+        cd ..
+        mkdir -p allure-results
 
     - name: Test with pytest
       run: |
-        pytest --alluredir=allure-results -k 'marketplace'
+        pytest --alluredir=../allure-results -k 'marketplace'
       continue-on-error: true
 
     - name: Get Allure history
@@ -53,14 +55,14 @@ jobs:
       uses: simple-elf/allure-report-action@master
       if: always()
       with:
-        gh_pages: gh-pages
         allure_results: allure-results
         allure_history: allure-history
+        keep_reports: 20
 
     - name: Commit Allure report
       if: always()
-      uses: peaceiris/actions-gh-pages@v2
+      uses: peaceiris/actions-gh-pages@v3
       env:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: allure-history
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-history
