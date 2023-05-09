@@ -1,11 +1,14 @@
+import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
+URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
@@ -14,6 +17,13 @@ our_initiatives_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
 learn_more_link = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
 learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
+history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+button_search_by_location = (By.XPATH, "//div[@class='search-pop-up']/button[contains(text(), 'By location')]")
+search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
+search_items = (By.XPATH, "/html/body/div[6]")
+search_items_1 = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -63,3 +73,25 @@ def test_TC_010_01_02_verify_learn_more_button_is_clickable(driver, open_and_loa
     driver.execute_script("window.scrollTo(0, 500)")
     element = wait.until(EC.element_to_be_clickable(learn_more_link))
     assert element.is_displayed() and element.is_enabled()
+
+def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
+    expected_location = "Moscow"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    search_loc = driver.find_element(*history_bulk_search_location)
+    search_loc.click()
+    driver.find_element(*button_search_by_location).click()
+    search_loc.click()
+    wait.until_not(EC.visibility_of_element_located(search_pop_up))
+    # time.sleep(3)
+    search_loc.send_keys(expected_location)
+    # time.sleep(3)
+    # search_loc.click()
+    # search_loc.click()
+    wait.until(EC.visibility_of_element_located(search_items_1))
+    driver.find_element(*search_items_1).click()
+    # search_loc.send_keys(Keys.RETURN)
+    # driver.find_element(*button_search_by_location).click()
+
+    time.sleep(10)
+
