@@ -35,7 +35,7 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest --alluredir=allure-results -k 'marketplace'
+        pytest --alluredir=allure-results
       continue-on-error: true
       
     - name: Get Allure history
