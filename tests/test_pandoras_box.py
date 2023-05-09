@@ -68,6 +68,7 @@ result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
+clouds_locator = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
 
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -200,3 +201,8 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
+    driver.get(condition_URL)
+    clouds_codes = driver.find_element(*clouds_locator)
+    assert clouds_codes.is_displayed()
