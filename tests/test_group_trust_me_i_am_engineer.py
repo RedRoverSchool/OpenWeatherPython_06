@@ -1,11 +1,14 @@
+import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
+URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
@@ -14,6 +17,15 @@ our_initiatives_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
 learn_more_link = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
 learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
+history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
+first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
+search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -63,3 +75,26 @@ def test_TC_010_01_02_verify_learn_more_button_is_clickable(driver, open_and_loa
     driver.execute_script("window.scrollTo(0, 500)")
     element = wait.until(EC.element_to_be_clickable(learn_more_link))
     assert element.is_displayed() and element.is_enabled()
+
+def test_TC_007_02_01_verify_the_method_of_input_location(driver):
+    expected_method_list = ['By location', 'By coordinates', 'Import']
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    methods = driver.find_elements(*buttons_search_methods)
+    actual_method_list = [el.text for el in methods]
+    assert expected_method_list == actual_method_list, \
+        "The actual list of methods does not match the expected list of methods"
+
+def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
+    expected_location = "Moscow"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    search_loc = driver.find_element(*history_bulk_search_location)
+    for ch in expected_location:
+        search_loc.send_keys(ch)
+        time.sleep(0.01)
+    wait.until(EC.visibility_of_element_located(first_search_items))
+    driver.find_element(*first_search_items).click()
+    actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
+    assert expected_location == actual_search_result.text
