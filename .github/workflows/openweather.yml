@@ -43,7 +43,9 @@ jobs:
         pytest --alluredir=allure-results -k 'marketplace'
       continue-on-error: true
       
-    - run: ls
+    - run: |
+        cd allure-results
+        ls
       
     - name: Get Allure history
       uses: actions/checkout@v2
