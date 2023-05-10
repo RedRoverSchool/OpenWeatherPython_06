@@ -23,7 +23,8 @@ BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
+MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
+IMAGE = (By.XPATH, "//*[@class='responsive']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -60,6 +61,7 @@ result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
+clouds_locator = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
 
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -81,7 +83,6 @@ def test_TC_002_02_03_verify_result_of_search_for_invalid_city_name(driver, open
     notification = displayed_notification.text
     assert notification == "×\nNot found"
 
-
 def test_TC_002_02_04_verify_displaying_entered_city_name_in_Search_field(driver, open_and_load_main_page, wait):
     search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
     entered_city_name = "LJKJJ"
@@ -99,7 +100,6 @@ def test_TC_002_01_03_Logo_is_visible(driver, wait, URL):
     logo = driver.find_element(*logo_locator)
     assert logo.is_displayed(), "Logo is not visible"
 
-
 def test_TC_001_01_02_2_fill_city_field_in_cirillic(driver, open_and_load_main_page, wait):
     search_city_input = driver.find_element(*SEARCH_CITY_FIELD)
     search_city_input.send_keys('Кишинев')
@@ -109,7 +109,6 @@ def test_TC_001_01_02_2_fill_city_field_in_cirillic(driver, open_and_load_main_p
     wait.until(EC.text_to_be_present_in_element(DISPLAYED_CITY, 'Chisinau'))
     actual_city = driver.find_element(*DISPLAYED_CITY)
     assert expected_city == actual_city.text
-
 
 def test_TC_001_09_06_switched_on_Fahrenheit(driver):
     driver.get(widget_constructor_URL)
@@ -125,13 +124,11 @@ def test_TC_001_09_06_switched_on_Fahrenheit(driver):
         imperial_units_number = driver.find_elements(imperial_units)
         assert len(imperial_units_number) == 14
 
-
 @pytest.mark.parametrize('URL', URLs)
 def test_TC_003_03_01_Product_Collections_title_is_visible(driver, URL):
     driver.get(URL)
     module_title = driver.find_element(*title_locator)
     assert module_title.is_displayed(), "Product Collections title is not visible"
-
 
 def test_TC_002_02_01_search_result_contains_city(driver, open_and_load_main_page, wait):
     search = driver.find_element(*search_field_locator)
@@ -157,13 +154,10 @@ def test_TC_002_03_03_01_open_guide(driver, open_and_load_main_page):
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
 
-
 def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(driver):
     driver.get(maps_URL)
     driver.find_element(*logo_locator).click()
     assert driver.current_url == 'https://openweathermap.org/'
-
-
 
 def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_page):
     button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
@@ -178,8 +172,6 @@ def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     driver.find_element(*BUTTON_MAPS).click()
     assert '/weathermap' in driver.current_url
 
-
-
 def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     button_support = driver.find_element(*BUTTON_SUPPORT)
     action_chains = ActionChains(driver)
@@ -191,6 +183,17 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
+    driver.find_element(*MENU_DASHBOARD).click()
+    wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
+    image = driver.find_element(*IMAGE)
+    assert image.is_displayed(), "Image is not visible"
+
+def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
+    driver.get(condition_URL)
+    clouds_codes = driver.find_element(*clouds_locator)
+    assert clouds_codes.is_displayed()
 
 def test_TC_001_09_05_switched_on_Celsius(driver):
     driver.get(widget_constructor_URL)
