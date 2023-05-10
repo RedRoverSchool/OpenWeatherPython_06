@@ -2,6 +2,7 @@ import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -22,9 +23,11 @@ weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
-history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
-history_bulk_search_location = (By.ID, "firstSearch")
-buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+button_by_coordinates = (By.XPATH, "//button[contains(text(), 'By coordinates')]")
+input_latitude = (By.XPATH, "//input[@placeholder='Latitude']")
+input_longitude = (By.XPATH, "//input[@placeholder='Longitude']")
+latitude_on_map = (By.XPATH, "//div[@class='text']/p[1]")
+longitude_on_map = (By.XPATH, "//div[@class='text']/p[2]")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
@@ -111,6 +114,23 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
 
+def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
+    expected_latitude = "55.755826"
+    expected_longitude = "37.61173"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    driver.find_element(*button_by_coordinates).click()
+    latitude = driver.find_element(*input_latitude)
+    latitude.send_keys(expected_latitude)
+    longitude = driver.find_element(*input_longitude)
+    longitude.send_keys(expected_longitude)
+    longitude.send_keys(Keys.RETURN)
+    actual_latitude = driver.find_element(*latitude_on_map)
+    actual_longitude = driver.find_element(*longitude_on_map)
+    time.sleep(5)
+    assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
+
 def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
     datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
     driver.get(URL_OUR_INITIATIVES)
@@ -125,7 +145,6 @@ def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
     actual_list_description = [el.text for el in list_description]
     difference = set(expected_list_description) - set(actual_list_description)
     assert len(difference) == 0
-
 
 def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
     expected_city_name = "Chicago, US"
@@ -149,7 +168,6 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
-
 
 def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page, wait):
     city = "Tbilisi"
