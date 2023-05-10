@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
 URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
+URL_WEATHER_CONDITIONS = 'https://openweathermap.org/weather-conditions'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
@@ -20,12 +21,10 @@ weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
-history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
-history_bulk_search_location = (By.ID, "firstSearch")
-buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
+icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -98,3 +97,11 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
+
+def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
+    expected_list_description = ['clear sky', 'few clouds', 'scattered clouds', 'broken clouds', 'rain', 'snow']
+    driver.get(URL_WEATHER_CONDITIONS)
+    list_description = driver.find_elements(*icon_list_description)
+    actual_list_description = [el.text for el in list_description]
+    difference = set(expected_list_description) - set(actual_list_description)
+    assert len(difference) == 0
