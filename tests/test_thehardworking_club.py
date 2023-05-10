@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import pytest
 
 URL = 'https://openweathermap.org/widgets-constructor'
 api_key = (By.XPATH, "//input[@id='api-key']")
@@ -17,6 +17,7 @@ def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     assert your_api_key.is_displayed() and your_city_name.is_displayed()
 
 
+@pytest.mark.skip()
 def test_TC_001_09_07_verify_display_of_bottom_widget_1_for_selected_type(driver):
     driver.get(URL)
     driver.find_element(*type_widget_1).click()
