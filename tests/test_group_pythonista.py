@@ -7,8 +7,16 @@ FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 DASHBOARD_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "/weather-dashboard")]')
 BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
+PROFESSIONAL_COLLESTION_TITLE = (By.XPATH, "//section[@id='pro']/h2")
+CURRENT_FORECAST_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#current')]")
 LOGO = (By.CSS_SELECTOR, ".logo > a > img")
+BTN_TRY_THE_DASHBOARD_2 = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
+BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
+ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
+HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
+WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#maps')]")
 
+URL_API = 'https://openweathermap.org/api'
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(FOOTER_PANEL))
@@ -26,7 +34,7 @@ def test_TC_002_03_05_dashboard_is_visible_and_clickable(driver, open_and_load_m
     assert dashboard_tab.is_displayed() and dashboard_tab.is_enabled() and expected_dashboard_label in dashboard_tab.text
 
 
-def test_TC_006_02_01_Verify_display_of_How_to_Start_section(driver, open_and_load_main_page, wait):
+def test_TC_006_02_01_verify_display_of_how_to_start_section(driver, open_and_load_main_page, wait):
     driver.find_element(*BTN_DASHBOARD).click()
     section = driver.find_element(*TITLE_HOW_TO_START)
     assert section.is_displayed(), "Section not found"
@@ -40,7 +48,46 @@ def test_TC_002_03_06_dashboard_link_opens_correct_page(driver, open_and_load_ma
     assert driver.current_url == expected_url
 
 
-def test_TC_002_01_04_Header_Logo_Verify_logo_redirects_from_dashboard_page_to_main_page(driver):
+def test_TC_005_04_02_Professional_collection_section_is_presented(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(PROFESSIONAL_COLLESTION_TITLE))
+    proffecional_collection_title = driver.find_element(*PROFESSIONAL_COLLESTION_TITLE)
+    expected_title = 'Professional collections'
+    assert expected_title in proffecional_collection_title.text
+
+
+def test_TC_002_01_04_header_logo_verify_logo_redirects_from_dashboard_page_to_main_page(driver):
     driver.get('https://openweathermap.org/weather-dashboard/')
     driver.find_element(*LOGO).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_TC_006_02_03_weather_dashboard_verify_the_transition_to_another_page(driver, open_and_load_main_page, wait):
+    driver.find_element(*BTN_DASHBOARD).click()
+    cookie_close = driver.find_element(*BTN_COOKIES)
+    driver.execute_script("arguments[0].click();", cookie_close)
+    driver.find_element(*BTN_TRY_THE_DASHBOARD_2).click()
+    driver.switch_to.window(driver.window_handles[1])
+    alert_mms = driver.find_element(*ALERT_PANEL_SINGIN)
+    assert alert_mms.is_displayed(), 'WELCOME EVENTS'
+
+def test_TC_005_04_03_professional_collection_historical_weather_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(HISTORICAL_WEATHER_DATA_COLLECTION_LINK))
+    historical_link = driver.find_element(*HISTORICAL_WEATHER_DATA_COLLECTION_LINK)
+    expected_historical_label = 'Historical weather data collection'
+    assert historical_link.is_displayed() and historical_link.is_enabled() and expected_historical_label in historical_link.text
+
+def test_TC_005_04_04_professional_collection_weather_maps_link_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(WEATHER_MAPS_COLLECTION_LINK))
+    expected_weather_maps_label = 'Weather Maps collection'
+    weather_maps_link = driver.find_element(*WEATHER_MAPS_COLLECTION_LINK)
+    assert weather_maps_link.is_enabled() and weather_maps_link.is_displayed() and expected_weather_maps_label in weather_maps_link.text
+
+def test_TC_005_04_05_professional_collection_current_and_forecast_is_visible_and_clickable(driver, wait):
+    driver.get(URL_API)
+    wait.until(EC.presence_of_element_located(CURRENT_FORECAST_COLLECTION_LINK))
+    current_forecast_link = driver.find_element(*CURRENT_FORECAST_COLLECTION_LINK)
+    exp_current_forecast = 'Current & Forecasts collection'
+    assert current_forecast_link.is_enabled() and current_forecast_link.is_displayed() and exp_current_forecast in current_forecast_link.text
