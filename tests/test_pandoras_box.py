@@ -26,6 +26,8 @@ BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
 MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
 IMAGE = (By.XPATH, "//*[@class='responsive']")
+BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
+DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -174,6 +176,7 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
 
+
 def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     driver.find_element(*BUTTON_MAPS).click()
     assert '/weathermap' in driver.current_url
@@ -196,6 +199,7 @@ def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
     image = driver.find_element(*IMAGE)
     assert image.is_displayed(), "Image is not visible"
 
+
 def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
     driver.get(condition_URL)
     clouds_codes = driver.find_element(*clouds_locator)
@@ -206,3 +210,21 @@ def test_TC_006_04_04_pricing_plans_are_visible(driver):
     for plan_locator in pricing_plans_locators:
         plan = driver.find_element(*plan_locator)
         assert plan.is_displayed()
+
+
+
+def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    window_before = driver.window_handles[0]
+    button_ask_a_question = driver.find_element(*BUTTON_ASK_A_QUESTION)
+    action_chains.move_to_element(button_ask_a_question)
+    driver.execute_script("arguments[0].click();", button_ask_a_question)
+    window_after = driver.window_handles[1]
+    driver.switch_to.window(window_after)
+    expected_title = "Ask a question"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
+    assert displayed_title == expected_title
+
