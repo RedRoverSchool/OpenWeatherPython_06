@@ -20,14 +20,13 @@ BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 MENU_INITIATIVE = "arguments[0].click();"
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
-
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
-MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
-IMAGE = (By.XPATH, "//*[@class='responsive']")
+BUTTON_HOW_TO_START = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
 BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
 DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
+MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
+IMAGE = (By.XPATH, "//*[@class='responsive']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -226,5 +225,18 @@ def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     driver.switch_to.window(window_after)
     expected_title = "Ask a question"
     displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
+    assert displayed_title == expected_title
+
+
+def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_how_to_start = driver.find_element(*BUTTON_HOW_TO_START)
+    action_chains.move_to_element(button_how_to_start)
+    driver.execute_script("arguments[0].click();", button_how_to_start)
+    expected_title = "How to start using professional collections"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
 
