@@ -42,6 +42,7 @@ URLs = ['https://openweathermap.org/',
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
+dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
@@ -62,6 +63,11 @@ search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 clouds_locator = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
+pricing_plans_locators = [(By.XPATH, '//h4[text()="Free"]'),
+                          (By.XPATH, '//h4[text()="Startup"]'),
+                          (By.XPATH, '//h4[text()="Developer"]'),
+                          (By.XPATH, '//h4[text()="Professional"]'),
+                          (By.XPATH, '//h4[text()="Enterprise"]')]
 
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -194,6 +200,12 @@ def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
     driver.get(condition_URL)
     clouds_codes = driver.find_element(*clouds_locator)
     assert clouds_codes.is_displayed()
+
+def test_TC_006_04_04_pricing_plans_are_visible(driver):
+    driver.get(dashboard_URL)
+    for plan_locator in pricing_plans_locators:
+        plan = driver.find_element(*plan_locator)
+        assert plan.is_displayed()
 
 def test_TC_001_09_05_switched_on_Celsius(driver):
     driver.get(widget_constructor_URL)
