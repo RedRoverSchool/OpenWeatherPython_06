@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
 URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
+URL_OUR_INITIATIVES = 'https://openweathermap.org/our-initiatives'
 metric_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 imperial_button_loc = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
 current_temp_loc = (By.CSS_SELECTOR, "div.current-temp span.heading")
@@ -26,6 +27,7 @@ buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
+headers_selector = (By.XPATH, "//h2[@style='margin-top: 0;']")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -98,3 +100,10 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
+
+def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
+    datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
+    driver.get(URL_OUR_INITIATIVES)
+    find_all_headers = driver.find_elements(*headers_selector)
+    headers_on_page = [i.text for i in find_all_headers]
+    assert datas == headers_on_page
