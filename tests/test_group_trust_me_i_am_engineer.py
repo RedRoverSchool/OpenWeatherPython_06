@@ -20,9 +20,9 @@ learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
-buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
-history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
-history_bulk_search_location = (By.ID, "firstSearch")
+history_bulk_search_import = (By.XPATH, "//button[contains(text(), 'Import')]")
+button_import_csv = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
+input_field_upload_file = (By.ID, "importCSV")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
@@ -105,6 +105,35 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
 
+def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
+    expected_location = "Chicago"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    driver.find_element(*history_bulk_search_import).click()
+    # driver.find_element(*button_import_csv).click()
+    # driver.execute_script("document.getElementById('lga').style.display = 'none';")
+
+    input_file = driver.find_element(*input_field_upload_file)
+    print(input_file.get_dom_attribute("visibility"))
+    driver.execute_script(
+        "arguments[0].style.visibility = 'visible';",
+        input_file)
+    driver.execute_script("document.getElementById('importCSV').style.visibility = 'visible';")
+    print(input_file)
+    print(input_file.is_displayed())
+    # input_file.send_keys("test_search_by_import.csv")
+    # input_file.submit()
+    time.sleep(5)
+    # for ch in expected_location:
+    #     search_loc.send_keys(ch)
+    #     time.sleep(0.01)
+    # wait.until(EC.visibility_of_element_located(first_search_items))
+    # driver.find_element(*first_search_items).click()
+    # actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
+    # assert expected_location == actual_search_result.text
+
+
 def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
     datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
     driver.get(URL_OUR_INITIATIVES)
@@ -119,7 +148,6 @@ def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
     actual_list_description = [el.text for el in list_description]
     difference = set(expected_list_description) - set(actual_list_description)
     assert len(difference) == 0
-
 
 def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
     expected_city_name = "Chicago, US"
