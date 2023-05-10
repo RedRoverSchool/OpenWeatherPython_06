@@ -43,3 +43,9 @@ def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(
     # print(footer_website.is_displayed(), driver.current_url, driver.title)
     assert footer_website.is_displayed() and driver.title not in 'Page not found (404) - OpenWeatherMap', \
         f'\nFooter is not present on the page - {driver.current_url}'
+
+def test_TC_003_10_05_verify_visibility_of_github_icon(driver, open_and_load_main_page):
+    driver.get(URL)
+    github_icon = driver.find_element(*gitHub_icon_image)
+    assert github_icon.is_displayed() and github_icon.is_enabled(), "GitHub icon is not clickable"
+
