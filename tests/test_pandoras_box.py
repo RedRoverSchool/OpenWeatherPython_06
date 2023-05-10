@@ -212,8 +212,8 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
     toggle_position = driver.find_element(*metric_toggle)
     expected_position = 'color: rgb(235, 110, 75);'
     if toggle_position.get_attribute("style") == expected_position:
-        driver.find_element(*metric_toggle).click()
-        driver.find_element(*metric_toggle).click()
+        action = ActionChains(driver)
+        action.double_click(toggle_position).perform()
         for widget_locator in widgets_locators:
             WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
         metric_units_number = driver.find_elements(*metric_units)
