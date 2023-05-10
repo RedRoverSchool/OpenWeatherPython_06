@@ -19,6 +19,12 @@ FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span
 WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
 MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
 
+COOKIES_LINK_SELECTOR = By.XPATH, "//button[@type='button']"
+API_LINK_SELECTOR = By.XPATH, "//div/ul/li/a[@href='/api']"
+LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/api/one-call-3#list1']"
+WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/weather-conditions']"
+ID_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[1]"
+DESC_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[3]"
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
     search_city_field = driver.find_element(*SEARCH_CITY_INPUT)
@@ -77,6 +83,7 @@ def test_tc_001_04_05_main_page_search_city_widget_8_day_forecast_first_element_
     assert number_day == f'{number_day_by_computer}'
 
 
+
 def get_section_locator(section):
     return (By.XPATH, f"//span[contains(text(), '{section}')]")
 
@@ -94,3 +101,15 @@ def test_TC_001_04_04_verify_in_day_list_first_element_month(driver, open_and_lo
     month_by_computer = datetime.now().month
     current_month = MONTHS[month_by_computer -1]
     assert month == f'{current_month}'
+
+def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group (driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
+    ids_list = driver.find_elements(*ID_SELECTOR)
+    descs_list = driver.find_elements(*DESC_SELECTOR)
+    total_list = ids_list + descs_list
+    for item in total_list:
+        assert item.is_displayed()
+
