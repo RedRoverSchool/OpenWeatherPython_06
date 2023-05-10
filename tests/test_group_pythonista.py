@@ -2,7 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL_API = 'https://openweathermap.org/api'
+
 URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
+TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
 
 FOOTER_PANEL = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 BTN_ALLOW_ALL = (By.CLASS_NAME, "stick-footer-panel__link")
@@ -18,7 +20,8 @@ BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
 HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
 WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#maps')]")
-TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
+
+
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(FOOTER_PANEL))
