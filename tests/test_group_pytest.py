@@ -60,11 +60,21 @@ def test_tc_001_12_02_verify_that_rain_group_of_codes_is_visible(driver, open_an
         assert item.is_displayed(), f"{number} row not visible"
 
 
+def get_section_locator_for_tc_008_01_04(section):
+    return (By.XPATH, f'//section[@id="{section}"]')
+
+
+def get_section_title_locator_for_tc_008_01_04(section):
+    return (By.CSS_SELECTOR, f'#{section} h2')
+
+
 @pytest.mark.parametrize('section', sections)
 def test_tc_008_01_04_check_6_sections_are_visible(driver, open_and_load_main_page, wait, section):
     driver.find_element(*HEADER_PRICING_LINK).click()
     wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
-    actual_section = driver.find_element(By.XPATH, f'//section[@id="{section}"]')
+    section_locator = get_section_locator_for_tc_008_01_04(section)
+    actual_section = driver.find_element(*section_locator)
     actual_section.location_once_scrolled_into_view
+    section_title_locator = get_section_title_locator_for_tc_008_01_04(section)
     assert actual_section.is_displayed(), \
-        f"Section {driver.find_element((By.CSS_SELECTOR, f'#{section} h2')).text} is not visible"
+        f"Section {driver.find_element(*section_title_locator).text} is not visible"
