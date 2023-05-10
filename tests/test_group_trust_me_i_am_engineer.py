@@ -1,9 +1,10 @@
 import time
-from datetime import datetime
+from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
@@ -32,6 +33,11 @@ icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tb
 city_name = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
 loc = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
+search_city_field_locator = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
+search_button_locator = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
+search_option_locator = (By.XPATH, "//span[contains(text(), city)]")
+weekday_8_days_forecast_locator = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -143,3 +149,32 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
+
+
+def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page, wait):
+    city = "Tbilisi"
+    search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(search_city_field_locator))
+    search_city_field.send_keys(city)
+    search_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(search_button_locator))
+    search_button.click()
+    searched_option_in_dropdown_list = WebDriverWait(driver, 15).until(
+        EC.element_to_be_clickable(search_option_locator))
+    searched_option_in_dropdown_list.click()
+    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+    today = datetime.now()
+    num_today_weekday = date.weekday(today)
+    weekdays_expected = []
+    num_next_day_weekday = num_today_weekday
+    for i in range(9):
+        if num_next_day_weekday > 6:
+            num_next_day_weekday -= 6 + num_today_weekday
+        else:
+            weekdays_expected.append(list_weekdays[num_next_day_weekday])
+        num_next_day_weekday += 1
+
+    week_day_8_days_forecast = driver.find_elements(*weekday_8_days_forecast_locator)
+    weekdays_on_app = []
+    for day in week_day_8_days_forecast:
+        weekdays_on_app.append(day.text[:3])
+
+    assert weekdays_expected == weekdays_on_app
