@@ -23,7 +23,8 @@ BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
+MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
+IMAGE = (By.XPATH, "//*[@class='responsive']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -68,6 +69,7 @@ result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 search_field_locator = (By.XPATH, '//*[@placeholder="Weather in your city"]')
 condition_URL = 'https://openweathermap.org/weather-conditions'
 thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
+clouds_locator = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
 
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
@@ -183,10 +185,10 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
 
+    
 def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     driver.find_element(*BUTTON_MAPS).click()
     assert '/weathermap' in driver.current_url
-
 
 
 def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
@@ -200,3 +202,17 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     expected_title = "Frequently Asked Questions"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
+
+def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
+    driver.find_element(*MENU_DASHBOARD).click()
+    wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
+    image = driver.find_element(*IMAGE)
+    assert image.is_displayed(), "Image is not visible"
+
+    
+def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
+    driver.get(condition_URL)
+    clouds_codes = driver.find_element(*clouds_locator)
+    assert clouds_codes.is_displayed()
+
