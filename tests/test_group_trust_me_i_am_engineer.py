@@ -2,7 +2,6 @@ import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -25,6 +24,9 @@ search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
 icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
+city_name = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
+loc = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -105,3 +107,27 @@ def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
     actual_list_description = [el.text for el in list_description]
     difference = set(expected_list_description) - set(actual_list_description)
     assert len(difference) == 0
+
+
+def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
+    expected_city_name = "Chicago, US"
+    driver.execute_cdp_cmd(
+        "Browser.grantPermissions",
+        {
+            "origin": URL,
+            "permissions": ["geolocation"]
+        },
+    )
+    driver.execute_cdp_cmd(
+        "Emulation.setGeolocationOverride",
+        {
+            "latitude": 41.8781,
+            "longitude": -87.6298,
+            "accuracy": 100,
+        },
+    )
+    driver.find_element(*loc).click()
+    wait.until_not(EC.presence_of_element_located(load_div))
+    current_city_name = driver.find_element(*city_name)
+    assert expected_city_name == current_city_name.text, \
+        "The current name of the city does not match the expected name of the city"
