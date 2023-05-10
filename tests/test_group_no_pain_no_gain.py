@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 logo_locator = (By.CSS_SELECTOR, ".logo > a > img")
 allow_all_cookies_locator = (By.XPATH, '//*[contains(text(), "Allow all")]')
 
+
 def test_TC_002_01_01_return_from_guide_page_to_main_page_by_clicking_on_logo(driver):
     driver.get('https://openweathermap.org/guide')
     driver.find_element(*logo_locator).click()
