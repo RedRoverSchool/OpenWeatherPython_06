@@ -4,6 +4,7 @@ from datetime import datetime
 import pytest
 from selenium.webdriver.common.keys import Keys
 import time
+from selenium.webdriver import ActionChains
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
@@ -145,8 +146,7 @@ def test_tc_017_03_10_verify_the_api_key_name_on_the_api_keys_tab_does_not_chang
     driver.get(API_KEY_NAME_URL)
     wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
     api_key_name_before = driver.find_element(*API_KEY_NAME_SELECTOR).text
-    api_key_enter = driver.find_element(*API_KEY_ENTER_SELECTOR)
-    time.sleep(5)
+    api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
     api_key_enter.click()
     api_key_enter.send_keys(Keys.CONTROL, 'a')
     api_key_enter.send_keys(Keys.BACKSPACE)
