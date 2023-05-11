@@ -146,6 +146,7 @@ def test_TC_001_10_04_weather_conditions_verify_list_of_description(driver):
     difference = set(expected_list_description) - set(actual_list_description)
     assert len(difference) == 0
 
+
 def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
     expected_city_name = "Chicago, US"
     driver.execute_cdp_cmd(
@@ -169,7 +170,8 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
 
-def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page, wait):
+
+def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page):
     city = "Tbilisi"
     search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(search_city_field_locator))
     search_city_field.send_keys(city)
@@ -178,14 +180,17 @@ def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver
     searched_option_in_dropdown_list = WebDriverWait(driver, 15).until(
         EC.element_to_be_clickable(search_option_locator))
     searched_option_in_dropdown_list.click()
-    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+
+    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
     today = datetime.now()
     num_today_weekday = date.weekday(today)
     weekdays_expected = []
     num_next_day_weekday = num_today_weekday
-    for i in range(9):
-        if num_next_day_weekday > 6:
-            num_next_day_weekday -= 6 + num_today_weekday
+
+    for i in range(8):
+        if num_next_day_weekday > 7:
+            num_next_day_weekday = num_next_day_weekday - 7
+            weekdays_expected.append(list_weekdays[num_next_day_weekday])
         else:
             weekdays_expected.append(list_weekdays[num_next_day_weekday])
         num_next_day_weekday += 1
@@ -195,4 +200,5 @@ def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver
     for day in week_day_8_days_forecast:
         weekdays_on_app.append(day.text[:3])
 
-    assert weekdays_expected == weekdays_on_app
+    assert weekdays_on_app == weekdays_expected
+
