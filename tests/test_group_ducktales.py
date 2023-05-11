@@ -137,6 +137,17 @@ def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_we
         assert item.is_displayed()
 
 
+
+
+
+
+
+
+
+
+
+
+
 # TC_010.01_02_02 | Our Initiatives > Verify the functionality of 'Our Initiatives' section
 def test_010_01_02_02_functionality(driver, open_and_load_main_page, wait):
     initiatives_link = driver.find_element(*INITIATIVES)
