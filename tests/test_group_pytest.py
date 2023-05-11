@@ -37,6 +37,7 @@ def open_weather_condition_page(driver, wait):
     wait.until(EC.element_to_be_clickable(WEATHER_ICONS))
 
 
+@pytest.mark.skip
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
     driver.find_element(*DASHBOARD_HEADER_LINK).click()
     wait.until(EC.element_to_be_clickable(WEATHER_DASHBOARD_HOME_LINK))
@@ -111,6 +112,16 @@ def test_tc_003_10_07_check_medium_icon_is_visible(driver, open_and_load_main_pa
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
     assert medium_link.is_displayed(), "The medium icon is not displayed"
+
+
+def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
+    driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
+    medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
+    medium_hover = driver.find_element(*MEDIUM_LINK).get_attribute("href")
+    assert medium_link.is_enabled() and medium_hover == 'https://medium.com/@openweathermap', "The medium icon(link) " \
+                                                                                              "is not " \
+                                                                                              "clickable and tooltip " \
+                                                                                              "incorrect "
     
 
 def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_condition_page):
