@@ -23,6 +23,9 @@ BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
+NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
+NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
@@ -245,3 +248,14 @@ def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
     assert displayed_title == expected_title
 
+def test_TC_002_02_06_verify_closing_of_NotFound_notification(driver, open_and_load_main_page, wait):
+    search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
+    entered_invalid_city_name = "LJKJJ"
+    search_weather_in_your_city.send_keys(entered_invalid_city_name)
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.ENTER).perform()
+    wait.until(EC.presence_of_element_located(ALERT_NOTIFICATION))
+    close_not = driver.find_element(*NOTIFICATION_BUTTON)
+    close_not.click()
+    pane = driver.find_element(*NOTIFICATION_PANE)
+    assert len(pane.get_attribute("innerHTML")) == 0
