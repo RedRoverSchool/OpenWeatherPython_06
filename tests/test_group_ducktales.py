@@ -153,3 +153,4 @@ def test_tc_017_03_10_verify_the_api_key_name_on_the_api_keys_tab_does_not_chang
     driver.find_element(*SAVE_BUTTON_SELECTOR).click()
     api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
     assert api_key_name_after == api_key_name_before
+
