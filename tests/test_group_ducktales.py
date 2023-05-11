@@ -27,6 +27,7 @@ LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/api/one-c
 WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/weather-conditions']"
 ID_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[1]"
 DESC_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[3]"
+GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
 
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
@@ -122,7 +123,10 @@ def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_
     assert actual_page_number == initial_page_number + 1, \
         "The new web tab does not opened after click App Store brand-link's"
 
-def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group (driver, open_and_load_main_page, wait):
+
+def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group(driver,
+                                                                                                      open_and_load_main_page,
+                                                                                                      wait):
     wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
@@ -133,3 +137,12 @@ def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_we
     for item in total_list:
         assert item.is_displayed()
 
+
+def test_tc_003_09_04_google_play_brand_link_clickable(driver, open_and_load_main_page):
+    initial_page_number = len(driver.window_handles)
+    driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
+    google_play_brand_link = driver.find_element(*GOOGLE_PLAY_BRAND_LINK)
+    google_play_brand_link.click()
+    actual_page_number = len(driver.window_handles)
+    assert actual_page_number == initial_page_number + 1, \
+        "The new web tab does not opened after click Google Play brand-link's"
