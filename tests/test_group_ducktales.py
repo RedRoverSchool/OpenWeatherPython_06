@@ -106,3 +106,14 @@ def test_tc_003_09_02_app_store_brand_link_display(driver, open_and_load_main_pa
     assert app_store_brand_link.is_displayed(), "The brand-link for Download on the App Store is not displaying"
 
 
+def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_page):
+    initial_page_number = len(driver.window_handles)
+    driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
+    app_store_brand_link = driver.find_element(*APP_STORE_BRAND_LINK)
+    app_store_brand_link.click()
+    actual_page_number = len(driver.window_handles)
+    assert actual_page_number == initial_page_number + 1, \
+        "The new web tab does not opened after click App Store brand-link's"
+
+
+
