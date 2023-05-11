@@ -75,3 +75,4 @@ def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(dri
     driver.find_element(*CONTINUE_TO_PAYMENT_BUTTON).click()
     WebDriverWait(driver, 10).until(EC.title_is('Openweather Ltd.'))
     assert 'checkout.stripe.com' in driver.current_url
+
