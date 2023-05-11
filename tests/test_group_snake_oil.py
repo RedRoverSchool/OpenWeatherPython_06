@@ -36,6 +36,12 @@ Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
 FAQ_url = "https://openweathermap.org/faq"
 FOOTER_TECHNOLOGIES = (By.XPATH, "//p[@class='section-heading' and text()='Technologies']")
+FOOTER_SOCIAL_MEDIA_MODULE_ICONS = [(By.CSS_SELECTOR, 'div[class="social"] a:nth-child(1)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(2)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(3)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(4)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(5)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(6)')]
 
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
@@ -140,3 +146,14 @@ def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_p
     learn_more_link.click()
     current_url = driver.current_url
     assert current_url == PRICING_PAGE_URL_FOR_DEVELOPER_PLAN, "Incorrect page redirection for the Developer Plan"
+
+
+@pytest.mark.parametrize('icon', FOOTER_SOCIAL_MEDIA_MODULE_ICONS)
+@pytest.mark.parametrize('url', URLs)
+def test_tc_003_10_02_verify_the_visibility_and_clickability_of_all_icon_links_for_several_pages(driver, wait, url,
+                                                                                                 icon):
+    driver.get(url)
+    element = driver.find_element(*icon)
+    element_link = element.get_attribute('href')
+    assert element.is_displayed() and element.is_enabled(), f"Link {element_link} interactive icon is not visible on" \
+                                                            f" a page or not clickable"
