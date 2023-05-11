@@ -25,8 +25,8 @@ WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@h
 
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
-    wait.until(EC.element_to_be_clickable(FOOTER_PANEL))
-    driver.find_element(*BTN_ALLOW_ALL).click()
+    cookie_close = driver.find_element(*BTN_COOKIES)
+    driver.execute_script("arguments[0].click();", cookie_close)
     expected_footer_text = "© 2012 — 2023 OpenWeather"
     footer = driver.find_element(*FOOTER_COPYRIGHT)
     assert footer.is_displayed() and expected_footer_text in footer.text, \
@@ -115,3 +115,9 @@ def test_TC_005_06_02_redirect_to_the_how_to_make_an_API_call_section_of_the_pag
     assert new_page_title.is_displayed(), 'The title of the page does not match the expected value'
 
 
+def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_page(driver):
+    driver.get(URL_API)
+    expected_footer_text = "© 2012 — 2023 OpenWeather"
+    footer = driver.find_element(*FOOTER_COPYRIGHT)
+    assert footer.is_displayed() and expected_footer_text in footer.text, \
+        "The footer is not displayed or does not contain the expected text"
