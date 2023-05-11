@@ -41,6 +41,7 @@ search_city_field_locator = (By.CSS_SELECTOR, 'input[placeholder="Search city"]'
 search_button_locator = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
 search_option_locator = (By.XPATH, "//span[contains(text(), city)]")
 weekday_8_days_forecast_locator = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
+map_button_loc = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -130,6 +131,13 @@ def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
     actual_longitude = driver.find_element(*longitude_on_map)
     time.sleep(5)
     assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
+
+def test_TC_007_02_05_verify_visibility_clickability_map_btn(driver, wait):
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    map_button = wait.until(EC.element_to_be_clickable(map_button_loc))
+    assert map_button.is_displayed() and map_button.is_enabled(), \
+        "The 'Map' button is not displayed on the map or is not clickable"
 
 def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
     datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
