@@ -151,18 +151,7 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
 
-
-@pytest.mark.skip('Build failed')
-def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page, wait):
-    city = "Tbilisi"
-    search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(search_city_field_locator))
-    search_city_field.send_keys(city)
-    search_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(search_button_locator))
-    search_button.click()
-    searched_option_in_dropdown_list = WebDriverWait(driver, 15).until(
-        EC.element_to_be_clickable(search_option_locator))
-    searched_option_in_dropdown_list.click()
-
+def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page):
     list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
     today = datetime.now()
     num_today_weekday = date.weekday(today)
