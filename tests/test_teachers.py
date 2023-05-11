@@ -80,4 +80,3 @@ def test_TC_000_00_08_user_dropdown_contains_5_items(driver, open_and_load_main_
     items = driver.find_elements(*user_dropdown_menu_items)
     assert len(items) == 5
 
-

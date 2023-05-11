@@ -1,0 +1,54 @@
+Metadata-Version: 2.1
+Name: allure-pytest
+Version: 2.13.2
+Summary: Allure pytest integration
+Home-page: https://github.com/allure-framework/allure-python
+Author: QAMetaSoftware, Stanislav Seliverstov
+Author-email: sseliverstov@qameta.io
+License: Apache-2.0
+Keywords: allure reporting pytest
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Pytest
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Software Development :: Testing
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Dist: pytest (>=4.5.0)
+Requires-Dist: allure-python-commons (==2.13.2)
+
+Allure Pytest Plugin
+====================
+.. image:: https://img.shields.io/pypi/v/allure-pytest
+        :alt: Release Status
+        :target: https://pypi.python.org/pypi/allure-pytest
+.. image:: https://img.shields.io/pypi/dm/allure-pytest
+        :alt: Downloads
+        :target: https://pypi.python.org/pypi/allure-pytest
+
+- `Source <https://github.com/allure-framework/allure-python>`_
+
+- `Documentation <https://docs.qameta.io/allure-report/>`_
+
+- `Gitter <https://gitter.im/allure-framework/allure-core>`_
+
+
+Installation and Usage
+======================
+
+.. code:: bash
+
+    $ pip install allure-pytest
+    $ py.test --alluredir=%allure_result_folder% ./tests
+    $ allure serve %allure_result_folder%
+
+Usage examples
+--------------
+
+See usage examples `here <examples>`_.
