@@ -127,7 +127,7 @@ def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_
 
 
 
-def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group(driver,
+def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group(driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
