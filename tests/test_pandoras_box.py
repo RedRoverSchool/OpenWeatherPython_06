@@ -52,6 +52,7 @@ dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
+metric_units = (By.XPATH, '//span[text()="°C"]')
 
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
@@ -179,7 +180,6 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
 
-
 def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load_main_page):
     driver.get(student_initiative_URL)
     button_get_access = driver.find_element(*BUTTON_GET_ACCESS)
@@ -189,9 +189,6 @@ def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load
     expected_title = 'Sign In To Your Account'
     displayed_title = driver.find_element(*DISPLAYED_AUTHORISATION_WINDOW).text
     assert displayed_title == expected_title
-
-
-
 
 def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     driver.find_element(*BUTTON_MAPS).click()
@@ -215,7 +212,6 @@ def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
     image = driver.find_element(*IMAGE)
     assert image.is_displayed(), "Image is not visible"
 
-
 def test_TC_001_12_05_Clouds_group_of_codes_visible(driver):
     driver.get(condition_URL)
     clouds_codes = driver.find_element(*clouds_locator)
@@ -226,8 +222,6 @@ def test_TC_006_04_04_pricing_plans_are_visible(driver):
     for plan_locator in pricing_plans_locators:
         plan = driver.find_element(*plan_locator)
         assert plan.is_displayed()
-
-
 
 def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     button_support = driver.find_element(*BUTTON_SUPPORT)
@@ -257,3 +251,20 @@ def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
 
+def test_TC_001_09_05_switched_on_Celsius(driver):
+    driver.get(widget_constructor_URL)
+    toggle_position = driver.find_element(*metric_toggle)
+    expected_position = 'color: rgb(235, 110, 75);'
+    if toggle_position.get_attribute("style") == expected_position:
+        action = ActionChains(driver)
+        action.double_click(toggle_position).perform()
+        for widget_locator in widgets_locators:
+            WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
+        metric_units_number = driver.find_elements(*metric_units)
+        assert len(metric_units_number) == 14
+    else:
+        driver.find_element(*metric_toggle).click()
+        for widget_locator in widgets_locators:
+            WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
+        metric_units_number = driver.find_elements(metric_units)
+        assert len(metric_units_number) == 14
