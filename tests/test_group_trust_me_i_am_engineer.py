@@ -2,6 +2,7 @@ import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -22,9 +23,11 @@ weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
-history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
-history_bulk_search_location = (By.ID, "firstSearch")
-buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+button_by_coordinates = (By.XPATH, "//button[contains(text(), 'By coordinates')]")
+input_latitude = (By.XPATH, "//input[@placeholder='Latitude']")
+input_longitude = (By.XPATH, "//input[@placeholder='Longitude']")
+latitude_on_map = (By.XPATH, "//div[@class='text']/p[1]")
+longitude_on_map = (By.XPATH, "//div[@class='text']/p[2]")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
@@ -111,6 +114,23 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
 
+def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
+    expected_latitude = "55.755826"
+    expected_longitude = "37.61173"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    driver.find_element(*button_by_coordinates).click()
+    latitude = driver.find_element(*input_latitude)
+    latitude.send_keys(expected_latitude)
+    longitude = driver.find_element(*input_longitude)
+    longitude.send_keys(expected_longitude)
+    longitude.send_keys(Keys.RETURN)
+    actual_latitude = driver.find_element(*latitude_on_map)
+    actual_longitude = driver.find_element(*longitude_on_map)
+    time.sleep(5)
+    assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
+
 def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
     datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
     driver.get(URL_OUR_INITIATIVES)
@@ -151,23 +171,17 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
         "The current name of the city does not match the expected name of the city"
 
 
-def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page, wait):
-    city = "Tbilisi"
-    search_city_field = WebDriverWait(driver, 15).until(EC.presence_of_element_located(search_city_field_locator))
-    search_city_field.send_keys(city)
-    search_button = WebDriverWait(driver, 15).until(EC.element_to_be_clickable(search_button_locator))
-    search_button.click()
-    searched_option_in_dropdown_list = WebDriverWait(driver, 15).until(
-        EC.element_to_be_clickable(search_option_locator))
-    searched_option_in_dropdown_list.click()
-    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page):
+    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
     today = datetime.now()
     num_today_weekday = date.weekday(today)
     weekdays_expected = []
     num_next_day_weekday = num_today_weekday
-    for i in range(9):
-        if num_next_day_weekday > 6:
-            num_next_day_weekday -= 6 + num_today_weekday
+
+    for i in range(8):
+        if num_next_day_weekday > 7:
+            num_next_day_weekday = num_next_day_weekday - 7
+            weekdays_expected.append(list_weekdays[num_next_day_weekday])
         else:
             weekdays_expected.append(list_weekdays[num_next_day_weekday])
         num_next_day_weekday += 1
@@ -177,4 +191,5 @@ def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver
     for day in week_day_8_days_forecast:
         weekdays_on_app.append(day.text[:3])
 
-    assert weekdays_expected == weekdays_on_app
+    assert weekdays_on_app == weekdays_expected
+
