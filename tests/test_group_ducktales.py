@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
@@ -7,6 +8,8 @@ TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
 sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
+EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
 SEARCH_CITY_INPUT = By.CSS_SELECTOR, "input[placeholder='Search city']"
 BTN_SEARCH = By.CSS_SELECTOR, "button[class ='button-round dark']"
@@ -59,8 +62,7 @@ def test_tc_001_02_04_01_switch_toggle_buttons(driver, open_and_load_main_page, 
     metric_button = driver.find_element(*TO_METRIC_BTN)
     metric_button.click()
     # Verify that toggle buttons are displayed and clickable
-    assert metric_button.is_displayed() and imperial_button.is_displayed()
-    assert metric_button.is_enabled() and imperial_button.is_enabled()
+    assert all(button.is_displayed() and button.is_enabled() for button in [metric_button, imperial_button])
 
 
 def test_tc_003_09_01_the_module_title_display(driver, open_and_load_main_page, wait):
@@ -132,4 +134,14 @@ def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_we
     total_list = ids_list + descs_list
     for item in total_list:
         assert item.is_displayed()
+
+
+# TC_010.01_02_02 | Our Initiatives > Verify the functionality of 'Our Initiatives' section
+def test_010_01_02_02_functionality(driver, open_and_load_main_page, wait):
+    initiatives_link = driver.find_element(*INITIATIVES)
+    initiatives_link.click()
+    education_learn_more = wait.until(EC.element_to_be_clickable(EDUCATION_LEARN_MORE))
+    driver.execute_script("window.scrollBy(0, 500);")
+    ActionChains(driver).move_to_element(education_learn_more).click(education_learn_more).perform()
+    assert driver.current_url == EDUCATION_SECTION_PAGE and initiatives_link.text == "Our Initiatives"
 
