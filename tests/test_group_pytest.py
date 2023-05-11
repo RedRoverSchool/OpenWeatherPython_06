@@ -42,11 +42,8 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
 
 
 def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_condition_page):
-    counter = 0
     minimum_icons_for_daytime = 8
     driver.find_element(*WEATHER_ICONS).click()
     actual_icons_daytime = driver.find_elements(*ICONS_FOR_DAYTIME)
-    actual_list_icons_daytime = [icon.text for icon in actual_icons_daytime]
-    for _ in actual_list_icons_daytime:
-        counter += 1
-    assert counter >= minimum_icons_for_daytime, f"Count of daytime icons less then 8 and equal {counter}"
+    quantity = len(actual_icons_daytime)
+    assert quantity >= minimum_icons_for_daytime, f"Count of daytime icons less then 8 and equal {quantity}"
