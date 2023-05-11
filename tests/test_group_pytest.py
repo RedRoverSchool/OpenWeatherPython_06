@@ -99,6 +99,12 @@ def test_tc_008_01_04_check_6_sections_are_visible(driver, open_and_load_main_pa
         f"Section {driver.find_element(*section_title_locator).text} is not visible"
 
 
+def test_tc_003_10_07_check_medium_icon_is_visible(driver, open_and_load_main_page, wait):
+    driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
+    medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
+    assert medium_link.is_displayed(), "The medium icon is not displayed"
+
+
 def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
