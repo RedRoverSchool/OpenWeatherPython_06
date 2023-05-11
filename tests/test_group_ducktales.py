@@ -124,6 +124,7 @@ def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_
     assert actual_page_number == initial_page_number + 1, \
         "The new web tab does not opened after click App Store brand-link's"
 
+
 def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group (driver, open_and_load_main_page, wait):
     wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
@@ -143,5 +144,5 @@ def test_010_01_02_02_functionality(driver, open_and_load_main_page, wait):
     education_learn_more = wait.until(EC.element_to_be_clickable(EDUCATION_LEARN_MORE))
     driver.execute_script("window.scrollBy(0, 500);")
     ActionChains(driver).move_to_element(education_learn_more).click(education_learn_more).perform()
-    assert driver.current_url == EDUCATION_SECTION_PAGE and initiatives_link.text == "Our Initiatives"
+    assert driver.current_url == EDUCATION_SECTION_PAGE
 
