@@ -13,7 +13,3 @@ def test_TC_002_01_01_return_from_guide_page_to_main_page_by_clicking_on_logo(dr
 def test_TC_003_08_02_ask_a_question_link_is_visible(driver, open_and_load_main_page, wait):
     element = wait.until(EC.visibility_of_element_located(ASK_A_QUESTION_LINK))
     assert element.is_displayed(), "Ask a question link is not visible in the footer"
-
-
-
-
