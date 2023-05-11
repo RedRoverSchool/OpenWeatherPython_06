@@ -23,16 +23,17 @@ BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
+
 NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
 NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
 
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
-MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
-IMAGE = (By.XPATH, "//*[@class='responsive']")
+BUTTON_HOW_TO_START = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
 BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
 DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
+MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
+IMAGE = (By.XPATH, "//*[@class='responsive']")
 
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
@@ -259,3 +260,18 @@ def test_TC_002_02_06_verify_closing_of_NotFound_notification(driver, open_and_l
     close_not.click()
     pane = driver.find_element(*NOTIFICATION_PANE)
     assert len(pane.get_attribute("innerHTML")) == 0
+
+
+def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_how_to_start = driver.find_element(*BUTTON_HOW_TO_START)
+    action_chains.move_to_element(button_how_to_start)
+    driver.execute_script("arguments[0].click();", button_how_to_start)
+    expected_title = "How to start using professional collections"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
+
+
