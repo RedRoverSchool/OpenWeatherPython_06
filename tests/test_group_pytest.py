@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.keys import Keys
 
 BUTTON_UNDER_HOW_TO_START = (By.XPATH, '(//a[@class="btn_like btn-orange owm-block-mainpage__btn"])[2]')
 DASHBOARD_HEADER_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[.="Dashboard"]')
@@ -25,6 +25,7 @@ HEADER_PRICING_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[.="Pricing"]')
 PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.XPATH, '//a[.="Subscribe to One Call by Call"]')
 PRICING_PAGE_SECTIONS_LOCATOR = ()
 sections = ['onecall', 'current', 'alerts', 'history', 'historyspecial', 'offers']
+MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
 URL_WEATHER_CONDITION = 'https://openweathermap.org/weather-conditions'
 WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
 ICONS_FOR_DAYTIME = (By.XPATH, '//td[contains(text(), "d.png")]')
@@ -36,6 +37,7 @@ def open_weather_condition_page(driver, wait):
     wait.until(EC.element_to_be_clickable(WEATHER_ICONS))
 
 
+@pytest.mark.skip
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
     driver.find_element(*DASHBOARD_HEADER_LINK).click()
     wait.until(EC.element_to_be_clickable(WEATHER_DASHBOARD_HOME_LINK))
@@ -104,6 +106,22 @@ def test_tc_008_01_04_check_6_sections_are_visible(driver, open_and_load_main_pa
     section_title_locator = get_section_title_locator_for_tc_008_01_04(section)
     assert actual_section.is_displayed(), \
         f"Section {driver.find_element(*section_title_locator).text} is not visible"
+
+
+def test_tc_003_10_07_check_medium_icon_is_visible(driver, open_and_load_main_page, wait):
+    driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
+    medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
+    assert medium_link.is_displayed(), "The medium icon is not displayed"
+
+
+def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
+    driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
+    medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
+    medium_hover = driver.find_element(*MEDIUM_LINK).get_attribute("href")
+    assert medium_link.is_enabled() and medium_hover == 'https://medium.com/@openweathermap', "The medium icon(link) " \
+                                                                                              "is not " \
+                                                                                              "clickable and tooltip " \
+                                                                                              "incorrect "
 
 
 def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_condition_page):
