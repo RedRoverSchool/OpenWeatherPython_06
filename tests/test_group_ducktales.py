@@ -21,6 +21,13 @@ MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augus
           'December')
 APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
 
+COOKIES_LINK_SELECTOR = By.XPATH, "//button[@type='button']"
+API_LINK_SELECTOR = By.XPATH, "//div/ul/li/a[@href='/api']"
+LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/api/one-call-3#list1']"
+WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/weather-conditions']"
+ID_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[1]"
+DESC_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[3]"
+
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
     search_city_field = driver.find_element(*SEARCH_CITY_INPUT)
@@ -115,5 +122,14 @@ def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_
     assert actual_page_number == initial_page_number + 1, \
         "The new web tab does not opened after click App Store brand-link's"
 
-
+def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group (driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
+    wait.until(EC.element_to_be_clickable(WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
+    ids_list = driver.find_elements(*ID_SELECTOR)
+    descs_list = driver.find_elements(*DESC_SELECTOR)
+    total_list = ids_list + descs_list
+    for item in total_list:
+        assert item.is_displayed()
 
