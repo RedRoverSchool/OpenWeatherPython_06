@@ -19,10 +19,14 @@ BUTTON_GUIDE = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Guide']")
 BUTTON_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 DISPLAYED_TITLE_INITIATIVE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 MENU_INITIATIVE = "arguments[0].click();"
+BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
+DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
-
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
+BUTTON_HOW_TO_START = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
+BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
+DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
 MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
 IMAGE = (By.XPATH, "//*[@class='responsive']")
 
@@ -42,6 +46,8 @@ URLs = ['https://openweathermap.org/',
 
 widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
+student_initiative_URL = 'https://openweathermap.org/our-initiatives/student-initiative'
+
 dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
@@ -174,6 +180,16 @@ def test_TC_010_01_04_check_open_page_our_initiative(driver, open_and_load_main_
     displayed_title = driver.find_element(*DISPLAYED_TITLE_INITIATIVE).text
     assert displayed_title == expected_title
 
+def test_TC_010_02_05_Get_access_open_authorization_window(driver, open_and_load_main_page):
+    driver.get(student_initiative_URL)
+    button_get_access = driver.find_element(*BUTTON_GET_ACCESS)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_get_access)
+    driver.execute_script("arguments[0].click();", button_get_access)
+    expected_title = 'Sign In To Your Account'
+    displayed_title = driver.find_element(*DISPLAYED_AUTHORISATION_WINDOW).text
+    assert displayed_title == expected_title
+
 def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
     driver.find_element(*BUTTON_MAPS).click()
     assert '/weathermap' in driver.current_url
@@ -206,6 +222,34 @@ def test_TC_006_04_04_pricing_plans_are_visible(driver):
     for plan_locator in pricing_plans_locators:
         plan = driver.find_element(*plan_locator)
         assert plan.is_displayed()
+
+def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    window_before = driver.window_handles[0]
+    button_ask_a_question = driver.find_element(*BUTTON_ASK_A_QUESTION)
+    action_chains.move_to_element(button_ask_a_question)
+    driver.execute_script("arguments[0].click();", button_ask_a_question)
+    window_after = driver.window_handles[1]
+    driver.switch_to.window(window_after)
+    expected_title = "Ask a question"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
+    assert displayed_title == expected_title
+
+
+def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
+    button_support = driver.find_element(*BUTTON_SUPPORT)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_support)
+    driver.execute_script("arguments[0].click();", button_support)
+    button_how_to_start = driver.find_element(*BUTTON_HOW_TO_START)
+    action_chains.move_to_element(button_how_to_start)
+    driver.execute_script("arguments[0].click();", button_how_to_start)
+    expected_title = "How to start using professional collections"
+    displayed_title = driver.find_element(*DISPLAYED_TITLE).text
+    assert displayed_title == expected_title
 
 def test_TC_001_09_05_switched_on_Celsius(driver):
     driver.get(widget_constructor_URL)
