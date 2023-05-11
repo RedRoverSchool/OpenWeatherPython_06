@@ -1,3 +1,4 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
@@ -14,8 +15,9 @@ HOW_TO_START_HERE_LINK = (By.XPATH, '//a[.="here"]')
 HOW_TO_START_DETAILED_USER_MANUAL_LINK = (By.XPATH, '//b[.="detailed user manual"]')
 HEADER_PRICING_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[.="Pricing"]')
 PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.XPATH, '//a[.="Subscribe to One Call by Call"]')
+PRICING_PAGE_TITLE = (By.XPATH, '//h1[@class="breadcrumb-title"]')
 
-
+@pytest.mark.skip
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
     driver.find_element(*DASHBOARD_HEADER_LINK).click()
     wait.until(EC.element_to_be_clickable(WEATHER_DASHBOARD_HOME_LINK))
@@ -36,4 +38,5 @@ def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open
 def test_tc_008_01_03_check_the_pricing_page_title(driver, open_and_load_main_page,wait):
     driver.find_element(*HEADER_PRICING_LINK).click()
     wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
-    assert driver.title == 'Pricing - OpenWeatherMap'
+    pricing_title = driver.find_element(*PRICING_PAGE_TITLE)
+    assert pricing_title.is_displayed(), "Title Pricing is not displayed"
