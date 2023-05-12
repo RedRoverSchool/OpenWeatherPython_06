@@ -23,6 +23,7 @@ BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
+chart_weather = (By.XPATH, "//*[@id='chart-component']")
 
 NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
 NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
@@ -287,3 +288,7 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
         metric_units_number = driver.find_elements(metric_units)
         assert len(metric_units_number) == 14
         
+
+def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
+    chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
+    assert chart_present
