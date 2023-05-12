@@ -69,7 +69,7 @@ def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
     expected_text = "The OpenWeather Dashboard is a lightweight and flexible visual " \
                     "tool for our customers who would like to be notified weather " \
                     "events to make informed decisions and plan actions based on the weather input."
-    displayed_text = driver.find_element(By.CSS_SELECTOR, 'div.row.weather p big').text
+    displayed_text = dashboard_full_description_text.text
     assert expected_text == displayed_text
 
 
