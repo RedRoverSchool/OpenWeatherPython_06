@@ -1,4 +1,3 @@
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -23,3 +22,8 @@ def test_TC_007_01_01_Select_state_from_dropdown_list(driver, wait):
     expected_state = "Texas"
     selected_state = driver.find_element(*STATE_TEXAS).text
     assert expected_state == selected_state, '\n======== WRONG STATE! ========\n'
+
+
+def test_TC_003_05_03_verify_how_to_start_link_is_clickable(driver, open_and_load_main_page, wait):
+    how_to_start = wait.until(EC.element_to_be_clickable(how_to_start_footer_loc))
+    assert how_to_start.is_enabled(), "The 'How to start' link does not clickable"
