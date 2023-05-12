@@ -159,5 +159,14 @@ def test_tc_003_09_04_google_play_brand_link_clickable(driver, open_and_load_mai
     assert actual_page_number == initial_page_number + 1, \
         "The new web tab does not opened after click Google Play brand-link's"
 
+
+def test_tc_003_09_04_google_play_brand_link_display(driver, open_and_load_main_page):
+    driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
+    google_play_brand_link = driver.find_element(*GOOGLE_PLAY_BRAND_LINK)
+    assert google_play_brand_link.is_displayed(), "Google Play brand-link is not displaying"
+
+
+
+
                                                                                                       
                                                                                                       

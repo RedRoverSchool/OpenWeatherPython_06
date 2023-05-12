@@ -1,7 +1,7 @@
 import pytest
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 BUTTON_UNDER_HOW_TO_START = (By.XPATH, '(//a[@class="btn_like btn-orange owm-block-mainpage__btn"])[2]')
@@ -26,6 +26,15 @@ PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.XPATH, '//a[.="Subscribe to O
 PRICING_PAGE_SECTIONS_LOCATOR = ()
 sections = ['onecall', 'current', 'alerts', 'history', 'historyspecial', 'offers']
 MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
+URL_WEATHER_CONDITION = 'https://openweathermap.org/weather-conditions'
+WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
+ICONS_FOR_DAYTIME = (By.XPATH, '//td[contains(text(), "d.png")]')
+
+
+@pytest.fixture()
+def open_weather_condition_page(driver, wait):
+    driver.get(URL_WEATHER_CONDITION)
+    wait.until(EC.element_to_be_clickable(WEATHER_ICONS))
 
 
 @pytest.mark.skip
@@ -62,7 +71,7 @@ def test_tc_001_12_02_verify_that_rain_group_of_codes_is_visible(driver, open_an
     for number, item in enumerate(list_of_elements):
         assert item.is_displayed(), f"{number} row not visible"
 
-
+        
 def test_tc_001_12_03_verify_that_rain_group_of_codes_contains_more_than_1_item(driver, open_and_load_main_page, wait):
     driver.find_element(*COOKIES_ALLOW_ALL_BUTTON_LINK).click()
     driver.find_element(*HEADER_API_LINK).click()
@@ -113,3 +122,11 @@ def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_
                                                                                               "is not " \
                                                                                               "clickable and tooltip " \
                                                                                               "incorrect "
+
+
+def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_condition_page):
+    minimum_icons_for_daytime = 8
+    driver.find_element(*WEATHER_ICONS).click()
+    actual_icons_daytime = driver.find_elements(*ICONS_FOR_DAYTIME)
+    quantity = len(actual_icons_daytime)
+    assert quantity >= minimum_icons_for_daytime, f"Count of daytime icons less then 8 and equal {quantity}"
