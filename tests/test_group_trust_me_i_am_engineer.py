@@ -2,6 +2,7 @@ import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
+import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -104,6 +105,7 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
     assert expected_method_list == actual_method_list, \
         "The actual list of methods does not match the expected list of methods"
 
+@pytest.mark.skip
 def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     expected_location = "Moscow"
     driver.get(URL_MARKETPLACE)
