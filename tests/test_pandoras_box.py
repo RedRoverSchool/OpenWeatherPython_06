@@ -22,6 +22,12 @@ MENU_INITIATIVE = "arguments[0].click();"
 BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
+BUTTON_LEARN_MORE = "//div[2]/div/div/div[2]/div/div[1]/center/a"
+chart_weather = (By.XPATH, "//*[@id='chart-component']")
+
+NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
+NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+
 BUTTON_SUPPORT = (By.XPATH, "//*[@id='support-dropdown']")
 BUTTON_FAQ = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 BUTTON_HOW_TO_START = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
@@ -29,7 +35,7 @@ BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='h
 DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
 MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
 IMAGE = (By.XPATH, "//*[@class='responsive']")
-
+MENU_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
@@ -238,6 +244,18 @@ def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
     assert displayed_title == expected_title
 
+def test_TC_002_02_06_verify_closing_of_NotFound_notification(driver, open_and_load_main_page, wait):
+    search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
+    entered_invalid_city_name = "LJKJJ"
+    search_weather_in_your_city.send_keys(entered_invalid_city_name)
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.ENTER).perform()
+    wait.until(EC.presence_of_element_located(ALERT_NOTIFICATION))
+    close_not = driver.find_element(*NOTIFICATION_BUTTON)
+    close_not.click()
+    pane = driver.find_element(*NOTIFICATION_PANE)
+    assert len(pane.get_attribute("innerHTML")) == 0
+
 
 def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
     button_support = driver.find_element(*BUTTON_SUPPORT)
@@ -250,6 +268,7 @@ def test_TC_002_03_03_10_open_how_to_start(driver, open_and_load_main_page):
     expected_title = "How to start using professional collections"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
+
 
 def test_TC_001_09_05_switched_on_Celsius(driver):
     driver.get(widget_constructor_URL)
@@ -268,3 +287,19 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
             WebDriverWait(driver, 15).until(EC.visibility_of_element_located(widget_locator))
         metric_units_number = driver.find_elements(metric_units)
         assert len(metric_units_number) == 14
+        
+
+def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
+    chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
+    assert chart_present
+
+
+def test_TC_010_01_01_1_check_button_learn_more(driver):
+    driver.get(URL)
+    menu_initiatives = driver.find_element(*MENU_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(menu_initiatives)
+    driver.execute_script("arguments[0].click();", menu_initiatives)
+    actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
+    expected_text_on_button = "Learn more"
+    assert actual_button.text == expected_text_on_button
