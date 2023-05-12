@@ -294,7 +294,7 @@ def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wai
     assert chart_present
 
 
-def test_check_button_learn_more(driver):
+def test_TC_010_01_01_1_check_button_learn_more(driver):
     driver.get(URL)
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
     action_chains = ActionChains(driver)
