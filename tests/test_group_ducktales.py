@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import pytest
+from selenium.webdriver.common.keys import Keys
+
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
@@ -41,6 +43,11 @@ def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
     api_key_tab = driver.find_element(*TAB_API_KEYS)
     api_key_tab.click()
 
+API_KEY_NAME_URL = 'https://home.openweathermap.org/api_keys'
+API_KEY_EDIT_SELECTOR = By.CSS_SELECTOR, "i[class='fa fa-edit']"
+API_KEY_NAME_SELECTOR = By.XPATH, "//table/tbody/tr/td[2]"
+API_KEY_ENTER_SELECTOR = By.CSS_SELECTOR, "input[name='edit_key_form[name]']"
+SAVE_BUTTON_SELECTOR = By.CSS_SELECTOR, "button[class='button-round dark']"
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
     search_city_field = driver.find_element(*SEARCH_CITY_INPUT)
@@ -149,6 +156,21 @@ def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_we
         assert item.is_displayed()
 
 
+
+def test_tc_017_03_10_verify_the_api_key_name_on_the_api_keys_tab_does_not_change_if_the_input_is_empty(driver, open_and_load_main_page, wait, sign_in):
+    driver.get(API_KEY_NAME_URL)
+    wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
+    api_key_name_before = driver.find_element(*API_KEY_NAME_SELECTOR).text
+    api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
+    api_key_enter.click()
+    api_key_enter.send_keys(Keys.CONTROL, 'a')
+    api_key_enter.send_keys(Keys.BACKSPACE)
+    driver.find_element(*SAVE_BUTTON_SELECTOR).click()
+    api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
+    assert api_key_name_after == api_key_name_before
+
+
+
 # TC_010.01_02_02 | Our Initiatives > Verify the functionality of 'Our Initiatives' section
 def test_010_01_02_02_functionality(driver, open_and_load_main_page, wait):
     initiatives_link = driver.find_element(*INITIATIVES)
@@ -178,3 +200,7 @@ def test_tc_003_09_04_google_play_brand_link_display(driver, open_and_load_main_
 def test_tc_017_04_01_module_create_api_key_is_visible(driver, open_api_keys_page, wait):
     module_create_api_key = driver.find_element(*MODULE_API_KEY_CREATE)
     assert module_create_api_key.is_displayed(), "module with title “Create key“ does not visible"
+
+
+
+
