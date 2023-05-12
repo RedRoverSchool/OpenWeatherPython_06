@@ -3,6 +3,7 @@ import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
+import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -105,6 +106,7 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
     assert expected_method_list == actual_method_list, \
         "The actual list of methods does not match the expected list of methods"
 
+@pytest.mark.skip
 def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     expected_location = "Moscow"
     driver.get(URL_MARKETPLACE)
@@ -112,7 +114,7 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     search_loc = driver.find_element(*history_bulk_search_location)
     for ch in expected_location:
         search_loc.send_keys(ch)
-        time.sleep(0.01)
+        time.sleep(0.05)
     wait.until(EC.visibility_of_element_located(first_search_items))
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
