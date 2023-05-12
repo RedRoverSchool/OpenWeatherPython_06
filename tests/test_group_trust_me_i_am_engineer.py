@@ -1,10 +1,12 @@
 import os
 import time
-from datetime import datetime
+from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
@@ -21,6 +23,12 @@ learn_more_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
+buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+button_by_coordinates = (By.XPATH, "//button[contains(text(), 'By coordinates')]")
+input_latitude = (By.XPATH, "//input[@placeholder='Latitude']")
+input_longitude = (By.XPATH, "//input[@placeholder='Longitude']")
+latitude_on_map = (By.XPATH, "//div[@class='text']/p[1]")
+longitude_on_map = (By.XPATH, "//div[@class='text']/p[2]")
 history_bulk_search_import = (By.XPATH, "//button[contains(text(), 'Import')]")
 button_import_csv = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
 input_field_upload_file = (By.ID, "importCSV")
@@ -28,7 +36,6 @@ div_field_upload_file = (By.XPATH, "//*[@id='app']/div[2]/div")
 location_name_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[2]")
 latitude_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[3]")
 longitude_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
-buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
@@ -37,6 +44,11 @@ icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tb
 city_name = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
 loc = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
+search_city_field_locator = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
+search_button_locator = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
+search_option_locator = (By.XPATH, "//span[contains(text(), city)]")
+weekday_8_days_forecast_locator = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -110,6 +122,23 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
     assert expected_location == actual_search_result.text
 
+def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
+    expected_latitude = "55.755826"
+    expected_longitude = "37.61173"
+    driver.get(URL_MARKETPLACE)
+    driver.find_element(*history_bulk_title).click()
+    driver.find_element(*history_bulk_search_location).click()
+    driver.find_element(*button_by_coordinates).click()
+    latitude = driver.find_element(*input_latitude)
+    latitude.send_keys(expected_latitude)
+    longitude = driver.find_element(*input_longitude)
+    longitude.send_keys(expected_longitude)
+    longitude.send_keys(Keys.RETURN)
+    actual_latitude = driver.find_element(*latitude_on_map)
+    actual_longitude = driver.find_element(*longitude_on_map)
+    time.sleep(5)
+    assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
+
 def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
     csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/test_search_by_import.csv")
     f = open(csv_file_path, 'r')
@@ -174,3 +203,27 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
+
+
+def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page):
+    list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
+    today = datetime.now()
+    num_today_weekday = date.weekday(today)
+    weekdays_expected = []
+    num_next_day_weekday = num_today_weekday
+
+    for i in range(8):
+        if num_next_day_weekday > 7:
+            num_next_day_weekday = num_next_day_weekday - 7
+            weekdays_expected.append(list_weekdays[num_next_day_weekday])
+        else:
+            weekdays_expected.append(list_weekdays[num_next_day_weekday])
+        num_next_day_weekday += 1
+
+    week_day_8_days_forecast = driver.find_elements(*weekday_8_days_forecast_locator)
+    weekdays_on_app = []
+    for day in week_day_8_days_forecast:
+        weekdays_on_app.append(day.text[:3])
+
+    assert weekdays_on_app == weekdays_expected
+
