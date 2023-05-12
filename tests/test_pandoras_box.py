@@ -22,7 +22,8 @@ MENU_INITIATIVE = "arguments[0].click();"
 BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
-
+BUTTON_LEARN_MORE = "//div[2]/div/div/div[2]/div/div[1]/center/a"
+chart_weather = (By.XPATH, "//*[@id='chart-component']")
 
 NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
 NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
@@ -34,7 +35,7 @@ BUTTON_ASK_A_QUESTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='h
 DISPLAYED_TITLE_ASK_A_QUESTION = (By.CSS_SELECTOR, "h4.headline")
 MENU_DASHBOARD = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(3)')
 IMAGE = (By.XPATH, "//*[@class='responsive']")
-
+MENU_INITIATIVES = (By.XPATH, '//*[@id="mobile-menu"]/li[8]/a')
 logo_locator = (By.XPATH, '//*[@class="logo"]/a/img')
 title_locator = (By.XPATH, '//p[text()="Product Collections"]')
 URLs = ['https://openweathermap.org/',
@@ -287,3 +288,18 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
         metric_units_number = driver.find_elements(metric_units)
         assert len(metric_units_number) == 14
         
+
+def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
+    chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
+    assert chart_present
+
+
+def test_TC_010_01_01_1_check_button_learn_more(driver):
+    driver.get(URL)
+    menu_initiatives = driver.find_element(*MENU_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(menu_initiatives)
+    driver.execute_script("arguments[0].click();", menu_initiatives)
+    actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
+    expected_text_on_button = "Learn more"
+    assert actual_button.text == expected_text_on_button
