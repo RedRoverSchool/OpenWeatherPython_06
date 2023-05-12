@@ -13,6 +13,7 @@ pricing_plans_subscribe_loc = [(By.XPATH, '//html/body/main/div[2]/section/div/t
                                (By.XPATH, '//html/body/main/div[2]/section/div/table/tbody/tr[1]/th[4]/p/a'),
                                (By.XPATH, '//html/body/main/div[2]/section/div/table/tbody/tr[1]/th[5]/p/a'),
                                (By.XPATH, '//html/body/main/div[2]/section/div/table/tbody/tr[1]/th[6]/p/a')]
+pricing_plans_sign_up_loc = (By.XPATH, "//a[text()='Sign Up']")
 
 
 def test_TC_001_02_02_verify_temperature_switched_to_imperial_system(driver, open_and_load_main_page):
@@ -40,3 +41,9 @@ def test_006_04_03_Verify_that_the_Subscribe_button_is_clickable_in_the_Pricing_
     for subscribe in pricing_and_limits_module_loc:
         subscribe_button = driver.find_element(*subscribe)
         assert subscribe_button.is_enabled(), "Subscribe link is not clickable"
+
+
+def test_006_04_02_Verify_that_the_Sign_up_button_is_clickable_in_the_Pricing_and_limits_section(driver, open_and_load_main_page):
+    driver.find_element(*dashboard_button_loc).click()
+    sign_up_button = driver.find_element(*pricing_plans_sign_up_loc)
+    assert sign_up_button.is_enabled(), "Sign up link is not clickable"
