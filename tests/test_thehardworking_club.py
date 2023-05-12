@@ -49,3 +49,4 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     driver.get(URL_1)
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
+
