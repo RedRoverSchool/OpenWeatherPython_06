@@ -46,6 +46,8 @@ weekday_8_days_forecast_locator = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
 map_button_loc = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
 
 footer_pricing_link = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
+header_pricing = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Pricing']")
+pricing_page_title = (By.XPATH, "//h1[text()='Pricing']")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -210,3 +212,10 @@ def test_TC_003_12_09_verify_pricing_link_leads_to_a_correct_page(driver, open_a
     driver.find_element(*footer_pricing_link).click()
     assert '/price' in driver.current_url, \
         "The link 'Pricing' leads to incorrect page"
+
+def test_TC_008_01_03_01_check_a_visibility_of_Pricing_page_title(driver, open_and_load_main_page, wait):
+    expected_pricing_page_title = "Pricing"
+    driver.find_element(*header_pricing).click()
+    pricing_page_title_text = driver.find_element(*pricing_page_title).text
+    assert pricing_page_title_text == expected_pricing_page_title, \
+        "The title of the Pricing page does not match the expected title"
