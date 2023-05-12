@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL_API = 'https://openweathermap.org/api'
+URL_WEATHER_MODEL = 'https://openweathermap.org/technology'
 
 URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
 TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
@@ -121,3 +122,9 @@ def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_pa
     footer = driver.find_element(*FOOTER_COPYRIGHT)
     assert footer.is_displayed() and expected_footer_text in footer.text, \
         "The footer is not displayed or does not contain the expected text"
+
+
+def test_TC_002_01_08_header_logo_verify_logo_redirects_from_weather_model_page_to_main_page(driver):
+    driver.get(URL_WEATHER_MODEL)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
