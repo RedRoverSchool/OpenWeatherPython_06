@@ -43,6 +43,8 @@ search_option_locator = (By.XPATH, "//span[contains(text(), city)]")
 weekday_8_days_forecast_locator = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
 map_button_loc = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
 
+footer_pricing_link = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
+
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
     current_temp = driver.find_element(*current_temp_loc)
@@ -201,3 +203,8 @@ def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver
 
     assert weekdays_on_app == weekdays_expected
 
+def test_TC_003_12_09_verify_pricing_link_leads_to_a_correct_page(driver, open_and_load_main_page, wait):
+    driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+    driver.find_element(*footer_pricing_link).click()
+    assert '/price' in driver.current_url, \
+        "The link 'Pricing' leads to incorrect page"
