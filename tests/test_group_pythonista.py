@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -8,6 +10,9 @@ URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
 TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
 LINK_HOW_TO_MAKE = (By.CSS_SELECTOR, "a[href$='geo-year']")
 TITLE_HOW_TO_MAKE = (By.XPATH, '//*[@id="geo-year"]/h3')
+
+URL_ROAD_RISK ='https://openweathermap.org/api/road-risk'
+SECTION_R_CONCEPTS = (By.XPATH, "//*[@id='concept']")
 
 FOOTER_PANEL = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 BTN_ALLOW_ALL = (By.CLASS_NAME, "stick-footer-panel__link")
@@ -124,7 +129,14 @@ def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_pa
         "The footer is not displayed or does not contain the expected text"
 
 
+
+def test_TC_005_08_03_road_risk_api_visibility_of_road_risk_api_concept_section(driver):
+    driver.get(URL_ROAD_RISK)
+    section_road_risk = driver.find_element(*SECTION_R_CONCEPTS)
+    assert section_road_risk.is_displayed(),'Section - NOT FOUND'
+
 def test_TC_002_01_08_header_logo_verify_logo_redirects_from_weather_model_page_to_main_page(driver):
     driver.get(URL_WEATHER_MODEL)
     driver.find_element(*LOGO).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
