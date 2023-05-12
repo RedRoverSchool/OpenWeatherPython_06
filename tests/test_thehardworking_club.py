@@ -11,7 +11,8 @@ left_bottom_widget = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-me
 widget_choose = (By.XPATH, "//li[@class = 'widget-choose__item']")
 CURRENT_URL = "https://openweather.co.uk/privacy-policy"
 XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
-
+subscribe_button = (By.XPATH, '//a[contains(text(), "Subscribe to One Call by Call")]')
+cookie_button = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
@@ -39,3 +40,14 @@ def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_a
     driver.execute_script("arguments[0].click();", privacy_policy_button)
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == CURRENT_URL
+
+
+def test_TC_008_01_01_subscribe_button_redirects(driver):
+    driver.get('https://openweathermap.org/price')
+    cookie_button_click = driver.find_element(*cookie_button)
+    cookie_button_click.click()
+    subscribe_button_click = driver.find_element(*subscribe_button)
+    subscribe_button_click.click()
+    assert 'home.openweathermap.org/subscriptions' in driver.current_url and 'onecall_30/base' in driver.current_url
+
+
