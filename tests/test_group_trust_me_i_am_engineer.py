@@ -1,3 +1,4 @@
+import pytest
 import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -179,7 +180,6 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
     current_city_name = driver.find_element(*city_name)
     assert expected_city_name == current_city_name.text, \
         "The current name of the city does not match the expected name of the city"
-
 
 def test_TC_001_04_06_1_verify_visibility_of_week_days_in_8_days_forecast(driver, open_and_load_main_page):
     list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
