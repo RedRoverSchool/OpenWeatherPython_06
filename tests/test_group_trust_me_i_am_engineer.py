@@ -1,3 +1,4 @@
+import os
 import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -23,6 +24,10 @@ history_bulk_search_location = (By.ID, "firstSearch")
 history_bulk_search_import = (By.XPATH, "//button[contains(text(), 'Import')]")
 button_import_csv = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
 input_field_upload_file = (By.ID, "importCSV")
+div_field_upload_file = (By.XPATH, "//*[@id='app']/div[2]/div")
+location_name_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[2]")
+latitude_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[3]")
+longitude_table = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
@@ -106,33 +111,31 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     assert expected_location == actual_search_result.text
 
 def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
-    expected_location = "Chicago"
+    csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/test_search_by_import.csv")
+    f = open(csv_file_path, 'r')
+    try:
+        csv_str = f.readline()
+    finally:
+        f.close()
+    expected_location, expected_latitude, expected_longitude = csv_str.split(";")
+
     driver.get(URL_MARKETPLACE)
     driver.find_element(*history_bulk_title).click()
-    driver.find_element(*history_bulk_search_location).click()
-    driver.find_element(*history_bulk_search_import).click()
-    # driver.find_element(*button_import_csv).click()
-    # driver.execute_script("document.getElementById('lga').style.display = 'none';")
 
     input_file = driver.find_element(*input_field_upload_file)
-    print(input_file.get_dom_attribute("visibility"))
-    driver.execute_script(
-        "arguments[0].style.visibility = 'visible';",
-        input_file)
-    driver.execute_script("document.getElementById('importCSV').style.visibility = 'visible';")
-    print(input_file)
-    print(input_file.is_displayed())
-    # input_file.send_keys("test_search_by_import.csv")
-    # input_file.submit()
-    time.sleep(5)
-    # for ch in expected_location:
-    #     search_loc.send_keys(ch)
-    #     time.sleep(0.01)
-    # wait.until(EC.visibility_of_element_located(first_search_items))
-    # driver.find_element(*first_search_items).click()
-    # actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
-    # assert expected_location == actual_search_result.text
+    div_input_file = driver.find_element(*div_field_upload_file)
 
+    driver.execute_script("arguments[0].setAttribute('class','visible')", input_file)
+    driver.execute_script("arguments[0].setAttribute('class','visible')", div_input_file)
+
+    input_file.send_keys(csv_file_path)
+
+    actual_location = driver.find_element(*location_name_table)
+    actual_latitude = driver.find_element(*latitude_table)
+    actual_longitude = driver.find_element(*longitude_table)
+    assert actual_location.text.strip() == expected_location \
+           and actual_latitude.text.strip() == expected_latitude \
+           and actual_longitude.text.strip() == expected_longitude
 
 def test_TC_010_01_02_verify_that_headers_are_visible_on_the_Our_initiatives_page(driver):
     datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
