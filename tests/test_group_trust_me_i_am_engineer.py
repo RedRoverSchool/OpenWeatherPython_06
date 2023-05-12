@@ -216,4 +216,4 @@ def test_TC_008_01_03_01_check_a_visibility_of_Pricing_page_title(driver, open_a
     driver.find_element(*header_pricing).click()
     pricing_page_title_text = driver.find_element(*pricing_page_title).text
     assert pricing_page_title_text == expected_pricing_page_title, \
-        "The title of the Weather API page does not match the expected title"
+        "The title of the Pricing page does not match the expected title"
