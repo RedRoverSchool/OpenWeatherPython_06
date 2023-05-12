@@ -23,3 +23,9 @@ def test_TC_007_01_01_Select_state_from_dropdown_list(driver, wait):
     expected_state = "Texas"
     selected_state = driver.find_element(*STATE_TEXAS).text
     assert expected_state == selected_state, '\n======== WRONG STATE! ========\n'
+
+weather_symbol = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
+
+def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(driver, open_and_load_main_page, wait):
+    humidity_symbol = driver.find_element(*weather_symbol)
+    assert humidity_symbol.is_displayed()
