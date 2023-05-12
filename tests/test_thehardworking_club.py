@@ -9,6 +9,9 @@ type_widget_1 = (
 By.XPATH, '//img[contains(@src, "themes/openweathermap/assets/vendor/owm/img/widgets/type-brown.png")]')
 left_bottom_widget = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-menu--brown"]')
 widget_choose = (By.XPATH, "//li[@class = 'widget-choose__item']")
+celsius_button = (By.CSS_SELECTOR, 'span#metric')
+fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+
 CURRENT_URL = "https://openweather.co.uk/privacy-policy"
 XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
 
@@ -46,6 +49,12 @@ def test_TC_001_09_02_Verify_that_3_widgets_are_displayed(driver, wait):
         assert widget.is_displayed(), "Some widget is not displayed"
 
 
+
+def test_TC_001_09_03_visibility_of_celsius(driver):
+    driver.get(URL)
+    celsius = driver.find_element(*celsius_button)
+    assert celsius.is_displayed() and celsius.is_enabled()
+
 def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_and_load_main_page, wait):
     privacy_policy_button = wait.until(EC.element_to_be_clickable(XPATH_PRIVACY_POLICY_BUTTON))
     driver.execute_script("arguments[0].click();", privacy_policy_button)
@@ -75,4 +84,5 @@ def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(dri
     driver.find_element(*CONTINUE_TO_PAYMENT_BUTTON).click()
     WebDriverWait(driver, 10).until(EC.title_is('Openweather Ltd.'))
     assert 'checkout.stripe.com' in driver.current_url
+
 
