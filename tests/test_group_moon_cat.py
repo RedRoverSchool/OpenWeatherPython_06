@@ -14,3 +14,4 @@ def test_TC_004_04_01_verify_visibility_and_clickability_of_the_link(driver):
     driver.get(URL_guide)
     element = driver.find_element(*how_to_start_link)
     assert element.is_enabled() and element.is_displayed()
+
