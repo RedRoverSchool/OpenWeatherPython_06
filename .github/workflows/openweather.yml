@@ -39,7 +39,7 @@ jobs:
 
     - name: Get list of changed files
       run: |
-        changed_files=$(git diff --name-only origin/$GITHUB_HEAD_REF $(git merge-base origin/$GITHUB_HEAD_REF origin/main))
+        changed_files=$(git diff --name-only origin/$GITHUB_HEAD_REF -- $(git merge-base origin/$GITHUB_HEAD_REF origin/main) -- tests/)
         echo "LIST_OF_CHANGED_FILES=$changed_files"
 
     - name: Test with pytest
