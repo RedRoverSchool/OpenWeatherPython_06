@@ -118,7 +118,6 @@ def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
     driver.find_element(*button_by_location).click()
     search_loc.click()
     search_loc.send_keys(expected_location + Keys.ARROW_DOWN)
-    # wait.until(EC.visibility_of_element_located(search_results))
     wait.until(EC.visibility_of_element_located(first_search_items))
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
