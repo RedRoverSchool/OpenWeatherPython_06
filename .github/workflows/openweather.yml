@@ -35,9 +35,8 @@ jobs:
 
     - name: Get list of changed files
       run: |
-        base=$(echo ${{ github.event.pull-request.base.sha }} | cut -ci-8)
-        head=$(echo ${{ github.event.pull-request.head.sha }} | cut -ci-8)
-        changed_file=$(git diff --name-only $base $head)
+        base_commit=$(git merge-base origin/main HEAD)
+        changed_files=$(git diff --name-only $base_commit HEAD)
 
     - name: Test with pytest
       run: |
