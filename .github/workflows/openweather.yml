@@ -15,6 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Delete invalid branch
+      uses: peter-evans/delete-branch@v2
+      with:
+        branches: |
+          $(git ls-remote --exit-code --heads origin | awk -F'/' '{print $3}' | grep -vE "^[a-zA-Z0-9/._-]{3,20}$")
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
