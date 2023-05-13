@@ -80,7 +80,9 @@ pricing_plans_locators = [(By.XPATH, '//h4[text()="Free"]'),
                           (By.XPATH, '//h4[text()="Developer"]'),
                           (By.XPATH, '//h4[text()="Professional"]'),
                           (By.XPATH, '//h4[text()="Enterprise"]')]
-
+pricing_URL = 'https://openweathermap.org/price'
+button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
+                                    (By.XPATH, '//*[@id="history"]//a[2]')]
 def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     button_pricing = driver.find_element(*BUTTON_PRICING)
     action_chains = ActionChains(driver)
@@ -212,6 +214,8 @@ def test_TC_002_03_03_09_open_faq(driver, open_and_load_main_page):
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
 
+
+
 def test_TC_006_01_05_image_on_dashboard(driver, open_and_load_main_page, wait):
     driver.find_element(*MENU_DASHBOARD).click()
     wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
@@ -243,6 +247,15 @@ def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     expected_title = "Ask a question"
     displayed_title = driver.find_element(*DISPLAYED_TITLE_ASK_A_QUESTION).text
     assert displayed_title == expected_title
+
+
+def test_TC_006_01_06_3_icons_on_dashboard(driver, open_and_load_main_page, wait):
+    driver.find_element(*MENU_DASHBOARD).click()
+    wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
+    icon1 = driver.find_element(By.XPATH, '//div[3]/div[1]/div/img')
+    icon2 = driver.find_element(By.XPATH, '//div[3]/div[2]/div/img')
+    icon3 = driver.find_element(By.XPATH, '//div[3]/div[3]/div/img')
+    assert icon1.is_displayed() and icon2.is_displayed() and icon3.is_displayed()
 
 def test_TC_002_02_06_verify_closing_of_NotFound_notification(driver, open_and_load_main_page, wait):
     search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
@@ -303,3 +316,10 @@ def test_TC_010_01_01_1_check_button_learn_more(driver):
     actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
     expected_text_on_button = "Learn more"
     assert actual_button.text == expected_text_on_button
+
+
+def test_TC_008_03_01_button_detailing_pricing(driver):
+    driver.get(pricing_URL)
+    for button_locator in button_detailed_pricing_locators:
+        button_p = driver.find_element(*button_locator)
+        assert button_p.is_displayed()
