@@ -1,3 +1,4 @@
+from selenium.common import ElementClickInterceptedException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -226,5 +227,22 @@ def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
     for heading in question_headings:
-        assert heading.is_displayed(), "Error: FAQ header not displayed"
+        assert heading.is_displayed(), "Error: FAQ section is not displayed"
 
+
+def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_page):
+    driver.get(EDUCATION_SECTION_PAGE)
+    question_headings = []
+    for i in range(1, 10):
+
+        question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
+        question_headings.append(question_heading)
+
+    for heading in question_headings:
+        try:
+            driver.execute_script("arguments[0].click();", heading)
+        except ElementClickInterceptedException:
+            driver.execute_script("window.scrollTo(0, arguments[0].scrollHeight);", heading)
+            driver.execute_script("arguments[0].click();", heading)
+
+        assert heading.is_enabled(), "Error: FAQ section is not clickable"
