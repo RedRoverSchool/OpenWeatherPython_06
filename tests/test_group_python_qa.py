@@ -10,6 +10,8 @@ search_1st_option_locator = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-
 loading_screen_locator = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 c_temp_locator = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
 line_in_8_days_forecast_locator = (By.XPATH, "(//div[@class='day-list-values']/div/span[contains(text(), '°C')])")
+quality_info_page = "https://openweathermap.org/accuracy-and-quality"
+nwp_model = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
 
 
 @pytest.mark.parametrize('city', cities)
@@ -28,3 +30,9 @@ def test_TC_001_04_01_visibility_of_8_lines_in_8_day_forecast_block(driver, open
         assert line.is_displayed()
 
 
+
+
+def test_001_017_01_visibility_of_nwp_block(driver):
+    driver.get(quality_info_page)
+    nwp = driver.find_element(*nwp_model)
+    assert nwp.is_displayed()
