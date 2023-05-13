@@ -18,6 +18,6 @@ def test_TC_004_04_01_verify_visibility_and_clickability_of_the_link(driver):
     assert element.is_enabled() and element.is_displayed()
 
 def test_AT_005_05_07_weatherAPI_Daily_forecast_16_days_Visibility_and_clickability(driver):
-    driver.get('https://openweathermap.org/forecast16')
+    driver.get(URL_forecast)
     element = driver.find_element(*weathefieldsapi)
     assert element.is_displayed() and element.is_enabled()
