@@ -9,6 +9,7 @@ TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
 sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
 EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
@@ -212,4 +213,18 @@ def test_TC_001_04_06_verify_in_day_list_days_of_the_week(driver, open_and_load_
     number_day = datetime.now().weekday()
     days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
     assert days_by_page == days_by_computer
+
+
+def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main_page):
+    driver.get(EDUCATION_SECTION_PAGE)
+    question_headings = []
+    for i in range(1, 10):
+
+        question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
+        question_headings.append(question_heading)
+
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    for heading in question_headings:
+        assert heading.is_displayed(), "Error: FAQ header not displayed"
 
