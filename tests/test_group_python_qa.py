@@ -10,7 +10,8 @@ search_1st_option_locator = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-
 loading_screen_locator = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 c_temp_locator = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
 line_in_8_days_forecast_locator = (By.XPATH, "(//div[@class='day-list-values']/div/span[contains(text(), '°C')])")
-
+subscription_module_button = (By.CSS_SELECTOR, ".inner-footer-container div:first-of-type "
+                                               ".footer-section:nth-child(2) p.section-heading")
 
 @pytest.mark.parametrize('city', cities)
 def test_TC_001_04_01_visibility_of_8_lines_in_8_day_forecast_block(driver, open_and_load_main_page, city):
@@ -27,4 +28,10 @@ def test_TC_001_04_01_visibility_of_8_lines_in_8_day_forecast_block(driver, open
     for line in lines:
         assert line.is_displayed()
 
+
+
+def test_TC_003_05_01_subscription_module_title_displayed(driver, open_and_load_main_page):
+    subscription_title = driver.find_element(*subscription_module_button)
+    driver.execute_script("arguments[0].click();", subscription_title)
+    assert subscription_title.is_displayed()
 
