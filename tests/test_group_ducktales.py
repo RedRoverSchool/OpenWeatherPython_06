@@ -215,7 +215,7 @@ def test_TC_001_04_06_verify_in_day_list_days_of_the_week(driver, open_and_load_
     assert days_by_page == days_by_computer
 
 
-def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main_page, wait):
+def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main_page):
     driver.get(EDUCATION_SECTION_PAGE)
     question_headings = []
     for i in range(1, 10):
