@@ -3,6 +3,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/widgets-constructor'
+URL_1 = 'https://openweathermap.org/weather-dashboard'
+CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
+FITTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 api_key = (By.XPATH, "//input[@id='api-key']")
 city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (
@@ -82,8 +85,6 @@ def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
     assert expected_text == displayed_text
 
 
-
-
 def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(driver, open_and_load_main_page, wait, sign_in):
     driver.get(URL_subscription_base)
     first_name = driver.find_element(*FIRST_NAME)
@@ -108,4 +109,10 @@ def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(dri
     WebDriverWait(driver, 10).until(EC.title_is('Openweather Ltd.'))
     assert 'checkout.stripe.com' in driver.current_url
 
+
+def test_TC_006_05_03_button_Contact_Us_works(driver):
+
+    driver.get(URL_1)
+    my_CONTACT_US = driver.find_element(*CONTACT_US)
+    assert my_CONTACT_US.is_enabled()
 
