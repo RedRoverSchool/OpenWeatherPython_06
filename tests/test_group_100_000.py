@@ -1,6 +1,6 @@
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
 
 search_sky_in_words = (By.XPATH, "//div[@class='day-list-values']/span[contains(@class,'sub')]")
 how_to_start_footer_loc = (By.CSS_SELECTOR, "div.section-content ul>li>a[href='/appid']")
@@ -11,6 +11,10 @@ weather_symbol = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
 SELECT_YEAR_FIELD = (By.CSS_SELECTOR, "#__BVID__13 .form-control.dropdown-selector")
 YEAR_2019 = (By.CSS_SELECTOR, "#__BVID__13 li:last-child")
 EXPECTED_YEAR = (By.CSS_SELECTOR, "#__BVID__13 .res")
+
+URL_ROAD_RISK = 'https://openweathermap.org/api/road-risk'
+LINK_HOW_TO_REQUEST_RR_API = (By.CSS_SELECTOR, 'a[href="#how"]')
+TITLE_HOW_TO_RR_API = (By.XPATH, "//*[@id='how']/h2")
 
 
 def test_TC_001_04_02_Verify_state_of_sky_in_words_for_each_day_is_displayed(driver, open_and_load_main_page, wait):
@@ -48,3 +52,10 @@ def test_TC_007_01_02_Select_year_from_dropdown_list(driver, wait):
     expected_year = "2019"
     selected_year = driver.find_element(*EXPECTED_YEAR).text
     assert expected_year == selected_year, '\n======== WRONG YEAR! ========\n'
+
+
+def test_TC_005_08_04_redirection_to_the_how_to_request_road_risk_API_section_of_the_page(driver):
+    driver.get(URL_ROAD_RISK)
+    driver.find_element(*LINK_HOW_TO_REQUEST_RR_API).click()
+    section_title = driver.find_element(*TITLE_HOW_TO_RR_API)
+    assert section_title.is_displayed(), 'Title Not Found'
