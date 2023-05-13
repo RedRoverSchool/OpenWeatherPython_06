@@ -227,3 +227,4 @@ def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main
 
     for heading in question_headings:
         assert heading.is_displayed(), "Error: FAQ header not displayed"
+
