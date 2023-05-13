@@ -25,6 +25,3 @@ def test_link(browser):
 def test_check_title(browser):
     browser.get("https://openweathermap.org/cookies-settings")
     assert browser.title == 'Cookies settings - OpenWeatherMap'
-
-
-
