@@ -10,6 +10,7 @@ TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
 sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+section_locator = lambda section: (By.XPATH, f"//span[contains(text(), '{section}')]")
 QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
 EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
@@ -109,16 +110,11 @@ def test_tc_001_04_05_main_page_search_city_widget_8_day_forecast_first_element_
     assert number_day == f'{number_day_by_computer}'
 
 
-def get_section_locator(section):
-    return (By.XPATH, f"//span[contains(text(), '{section}')]")
-
-
 @pytest.mark.parametrize("section", sections)
 def test_010_01_01_01_verify_sections(driver, open_and_load_main_page, section):
     our_initiatives_link = driver.find_element(*INITIATIVES)
     our_initiatives_link.click()
-    section_locator = get_section_locator(section)
-    section_element = driver.find_element(*section_locator)
+    section_element = driver.find_element(*section_locator(section))
     assert section_element.is_displayed(), f"Section '{section}' not found on the page"
 
 
