@@ -22,6 +22,7 @@ city_query = (By.CSS_SELECTOR, '#search_str')
 user_dropdown = (By.CSS_SELECTOR, '#user-dropdown')
 user_dropdown_menu_items = (By.CSS_SELECTOR, '#user-dropdown-menu li')
 marketplace_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='marketplace']")
+guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
 
 
 def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_page, wait):
@@ -86,3 +87,8 @@ def test_TC_000_00_09_verify_marketplace_link_redirects_on_valid_page(driver, op
     driver.find_element(*marketplace_link).click()
     driver.switch_to.window(driver.window_handles[1])
     assert 'marketplace' in driver.current_url
+
+
+def test_TC_000_00_10_verify_guide_link_redirects_on_valid_page(driver, open_and_load_main_page):
+    driver.find_element(*guide_link).click()
+    assert 'guide' in driver.current_url

@@ -33,16 +33,8 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Set GITHUB_HEAD_REF
-      run: |
-        echo "GITHUB_HEAD_REF=${{ github.head_ref }}" >> $GITHUB_ENV
-
-    - name: Get list of changed files
-      run: |
-        changed_files=$(git diff --name-only origin/$GITHUB_HEAD_REF $(git merge-base origin/$GITHUB_HEAD_REF origin/main) | tr '\n' ';')
-        echo "LIST_OF_CHANGED_FILES=$changed_files"
 
     - name: Test with pytest
       run: |
-        pytest --alluredir=allure-results $changed_files
+        pytest --alluredir=allure-results --testmon
 
