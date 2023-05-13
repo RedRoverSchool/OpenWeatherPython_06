@@ -3,6 +3,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/widgets-constructor'
+URL_1 = 'https://openweathermap.org/weather-dashboard'
+CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
+FITTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 api_key = (By.XPATH, "//input[@id='api-key']")
 city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (
@@ -26,6 +29,10 @@ CITY = (By.CSS_SELECTOR, '#invoice_form_city')
 POSTAL_CODE = (By.CSS_SELECTOR, '#invoice_form_postal_code')
 PHONE = (By.CSS_SELECTOR, '#invoice_form_phone')
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
+
+fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
+dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
 
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
@@ -61,6 +68,23 @@ def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_a
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == CURRENT_URL
 
+def test_TC_001_09_04_verify_visibility_of_fahrenheit(driver):
+    driver.get(URL)
+    fahrenheit = driver.find_element(*fahrenheit_button)
+    assert fahrenheit.is_displayed() and fahrenheit.is_enabled()
+
+
+def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
+    driver.get(URL_weather_dashboard)
+    dashboard_full_description_text = driver.find_element(*dashboard_full_description)
+    assert dashboard_full_description_text.is_displayed()
+    expected_text = "The OpenWeather Dashboard is a lightweight and flexible visual " \
+                    "tool for our customers who would like to be notified weather " \
+                    "events to make informed decisions and plan actions based on the weather input."
+    displayed_text = dashboard_full_description_text.text
+    assert expected_text == displayed_text
+
+
 def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(driver, open_and_load_main_page, wait, sign_in):
     driver.get(URL_subscription_base)
     first_name = driver.find_element(*FIRST_NAME)
@@ -85,4 +109,10 @@ def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(dri
     WebDriverWait(driver, 10).until(EC.title_is('Openweather Ltd.'))
     assert 'checkout.stripe.com' in driver.current_url
 
+
+def test_TC_006_05_03_button_Contact_Us_works(driver):
+
+    driver.get(URL_1)
+    my_CONTACT_US = driver.find_element(*CONTACT_US)
+    assert my_CONTACT_US.is_enabled()
 

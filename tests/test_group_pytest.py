@@ -141,6 +141,12 @@ def test_tc_008_01_03_check_the_pricing_page_title(driver, open_and_load_main_pa
     assert pricing_title.is_displayed(), "Title Pricing is not displayed"
 
 
+def test_tc_008_01_02_check_pricing_page_is_open(driver, open_and_load_main_page, wait):
+    driver.find_element(*HEADER_PRICING_LINK).click()
+    wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
+    assert driver.current_url == 'https://openweathermap.org/price'
+
+    
 def test_tc_001_11_01_verify_existing_of_example_api_response(driver, open_weather_condition_page):
     driver.find_element(*TITLE_EXAMPLE_API_RESPONSE)
     example = driver.find_element(*EXAMPLE_API_RESPONSE)
