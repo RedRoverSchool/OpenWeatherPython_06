@@ -4,4 +4,3 @@ selenium==4.8.3
 webdriver-manager==3.8.6
 allure-pytest==2.13.2
 allure-python-commons==2.13.2
-pytest-testmon==2.0.6
