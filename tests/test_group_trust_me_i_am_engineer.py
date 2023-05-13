@@ -138,7 +138,6 @@ def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
     longitude.send_keys(Keys.RETURN)
     actual_latitude = driver.find_element(*latitude_on_map)
     actual_longitude = driver.find_element(*longitude_on_map)
-    time.sleep(5)
     assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
 
 def test_TC_007_02_05_verify_visibility_clickability_map_btn(driver, wait):
