@@ -1,4 +1,3 @@
-import pytest
 import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -7,7 +6,6 @@ import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
@@ -32,6 +30,7 @@ latitude_on_map = (By.XPATH, "//div[@class='text']/p[1]")
 longitude_on_map = (By.XPATH, "//div[@class='text']/p[2]")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
+search_results = (By.CSS_SELECTOR, "div.pac-container.pac-logo.hdpi")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
 headers_selector = (By.XPATH, "//h2[@style='margin-top: 0;']")
 icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
@@ -108,15 +107,14 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
     assert expected_method_list == actual_method_list, \
         "The actual list of methods does not match the expected list of methods"
 
-@pytest.mark.skip
 def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
-    expected_location = "Moscow"
+    expected_location = "Malta"
     driver.get(URL_MARKETPLACE)
     driver.find_element(*history_bulk_title).click()
     search_loc = driver.find_element(*history_bulk_search_location)
-    for ch in expected_location:
-        search_loc.send_keys(ch)
-        time.sleep(0.05)
+    wait.until(EC.element_to_be_clickable(map_button_loc))
+    search_loc.send_keys(expected_location + Keys.ARROW_DOWN)
+    wait.until(EC.visibility_of_element_located(search_results))
     wait.until(EC.visibility_of_element_located(first_search_items))
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
