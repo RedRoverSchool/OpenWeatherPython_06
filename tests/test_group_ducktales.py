@@ -253,5 +253,3 @@ def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consi
     api_key_name_before = get_api_key_name_before(driver, open_api_keys_page)
     api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
     assert api_key_name_after == api_key_name_before
-    print(api_key_name_after)
-    print(api_key_name_before)
