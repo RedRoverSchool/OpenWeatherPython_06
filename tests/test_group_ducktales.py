@@ -58,9 +58,7 @@ def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
 def api_key_delete_name(driver, open_api_keys_page, wait):
     wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
     api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
-    api_key_enter.click()
-    api_key_enter.send_keys(Keys.CONTROL, 'a')
-    api_key_enter.send_keys(Keys.BACKSPACE)
+    api_key_enter.clear()
     return api_key_enter
 
 def get_api_key_name_before(driver, open_api_keys_page):
