@@ -28,6 +28,9 @@ DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
 WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
           'December')
+
+SPACEKITS = [' ', '          ', '                    ']
+
 APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
 
 COOKIES_LINK_SELECTOR = By.XPATH, "//button[@type='button']"
@@ -47,10 +50,22 @@ TAB_API_KEYS = By.CSS_SELECTOR, '#myTab [href="/api_keys"]'
 MODULE_API_KEY_CREATE = By.CSS_SELECTOR, '.col-md-4 h4'
 
 
+
 @pytest.fixture()
 def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
     api_key_tab = driver.find_element(*TAB_API_KEYS)
     api_key_tab.click()
+
+@pytest.fixture()
+def api_key_delete_name(driver, open_api_keys_page, wait):
+    wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
+    api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
+    api_key_enter.clear()
+    return api_key_enter
+
+def get_api_key_name_before(driver, open_api_keys_page):
+    return driver.find_element(*API_KEY_NAME_SELECTOR).text
+
 
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
@@ -241,4 +256,15 @@ def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_
             driver.execute_script("window.scrollTo(0, arguments[0].scrollHeight);", heading)
             driver.execute_script("arguments[0].click();", heading)
 
+
         assert heading.is_enabled(), "Error: FAQ section is not clickable"
+
+
+@pytest.mark.parametrize('spacekit', SPACEKITS)
+def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consists_of_spaces(driver, spacekit, api_key_delete_name, wait):
+    api_key_delete_name.send_keys(spacekit)
+    driver.find_element(*SAVE_BUTTON_SELECTOR).click()
+    api_key_name_before = get_api_key_name_before(driver, open_api_keys_page)
+    api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
+    assert api_key_name_after == api_key_name_before
+
