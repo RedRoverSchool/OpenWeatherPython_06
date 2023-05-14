@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL_API = 'https://openweathermap.org/api'
 URL_WEATHER_MODEL = 'https://openweathermap.org/technology'
+URL_WEATHER_STATIONS = 'https://openweathermap.org/stations'
 
 URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
 TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
@@ -26,6 +27,7 @@ BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
 HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
 WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#maps')]")
+API_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "api")]')
 
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
@@ -137,3 +139,16 @@ def test_TC_002_01_08_header_logo_verify_logo_redirects_from_weather_model_page_
     driver.get(URL_WEATHER_MODEL)
     driver.find_element(*LOGO).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_TC_002_01_10_header_logo_verify_logo_redirects_from_weather_stations_page_to_main_page(driver):
+    driver.get(URL_WEATHER_STATIONS)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_TC_002_03_16_api_link_redirects_to_api_page(driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(API_LINK))
+    driver.find_element(*API_LINK).click()
+    assert driver.current_url == URL_API
+    

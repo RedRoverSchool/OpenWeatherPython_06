@@ -30,6 +30,8 @@ MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
 URL_WEATHER_CONDITION = 'https://openweathermap.org/weather-conditions'
 WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
 ICONS_FOR_DAYTIME = (By.XPATH, '//td[contains(text(), "d.png")]')
+TITLE_EXAMPLE_API_RESPONSE = (By.XPATH, '(//h3)[1]')
+EXAMPLE_API_RESPONSE = (By.XPATH, '//pre')
 
 
 @pytest.fixture()
@@ -143,3 +145,9 @@ def test_tc_008_01_02_check_pricing_page_is_open(driver, open_and_load_main_page
     driver.find_element(*HEADER_PRICING_LINK).click()
     wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
     assert driver.current_url == 'https://openweathermap.org/price'
+
+    
+def test_tc_001_11_01_verify_existing_of_example_api_response(driver, open_weather_condition_page):
+    driver.find_element(*TITLE_EXAMPLE_API_RESPONSE)
+    example = driver.find_element(*EXAMPLE_API_RESPONSE)
+    assert example.is_displayed(), "Example of API-response doesn't exist"

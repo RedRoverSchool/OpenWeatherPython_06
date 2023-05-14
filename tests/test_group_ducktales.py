@@ -9,6 +9,7 @@ TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
 sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
 EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
@@ -19,8 +20,10 @@ SEARCH_DROPDOWN_MENU_FIRST_CHILD = By.CSS_SELECTOR, 'ul.search-dropdown-menu li:
 SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT = By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'
 MODULE_DOWNLOAD_OPENWEATHER_APP = By.XPATH, "//div[@class='my-5']/p"
 FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
+LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
+DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
 
-WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
           'December')
 APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
@@ -201,4 +204,27 @@ def test_tc_017_04_01_module_create_api_key_is_visible(driver, open_api_keys_pag
     assert module_create_api_key.is_displayed(), "module with title “Create key“ does not visible"
 
 
+def test_TC_001_04_06_verify_in_day_list_days_of_the_week(driver, open_and_load_main_page):
+    driver.find_element(*LIST_DAYS_IN_8_DAY_FORECAST).location_once_scrolled_into_view
+    days_by_page = []
+    days = driver.find_elements(*DAYS_IN_8_DAY_FORECAST)
+    for day in days:
+        days_by_page.append(day.text[:3])
+    number_day = datetime.now().weekday()
+    days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
+    assert days_by_page == days_by_computer
+
+
+def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main_page):
+    driver.get(EDUCATION_SECTION_PAGE)
+    question_headings = []
+    for i in range(1, 10):
+
+        question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
+        question_headings.append(question_heading)
+
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    for heading in question_headings:
+        assert heading.is_displayed(), "Error: FAQ header not displayed"
 
