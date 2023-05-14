@@ -12,6 +12,9 @@ c_temp_locator = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
 line_in_8_days_forecast_locator = (By.XPATH, "(//div[@class='day-list-values']/div/span[contains(text(), '°C')])")
 subscription_module_button = (By.CSS_SELECTOR, ".inner-footer-container div:first-of-type "
                                                ".footer-section:nth-child(2) p.section-heading")
+quality_info_page = "https://openweathermap.org/accuracy-and-quality"
+nwp_model = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+
 
 @pytest.mark.parametrize('city', cities)
 def test_TC_001_04_01_visibility_of_8_lines_in_8_day_forecast_block(driver, open_and_load_main_page, city):
@@ -35,3 +38,9 @@ def test_TC_003_05_01_subscription_module_title_displayed(driver, open_and_load_
     driver.execute_script("arguments[0].click();", subscription_title)
     assert subscription_title.is_displayed()
 
+
+
+def test_001_017_01_visibility_of_nwp_block(driver):
+    driver.get(quality_info_page)
+    nwp = driver.find_element(*nwp_model)
+    assert nwp.is_displayed()
