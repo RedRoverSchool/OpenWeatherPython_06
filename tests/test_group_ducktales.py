@@ -3,11 +3,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import pytest
+from selenium.webdriver.common.keys import Keys
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
 TO_METRIC_BTN = By.XPATH, "//div[contains(text(),'Metric: °C, m/s')]"
 INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
 sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
 EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
 LOADER_CONTAINER = By.CSS_SELECTOR, 'div.owm-loader-container > div'
@@ -18,8 +20,10 @@ SEARCH_DROPDOWN_MENU_FIRST_CHILD = By.CSS_SELECTOR, 'ul.search-dropdown-menu li:
 SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT = By.CSS_SELECTOR, '.grid-container.grid-4-5 h2'
 MODULE_DOWNLOAD_OPENWEATHER_APP = By.XPATH, "//div[@class='my-5']/p"
 FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
+LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
+DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
 
-WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
           'December')
 APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
@@ -31,6 +35,20 @@ WEATHER_CONDITION_CODES_LINK_SELECTOR = By.XPATH, "//a[@href='/weather-condition
 ID_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[1]"
 DESC_SELECTOR = By.XPATH, "//table[@class='table table-bordered'][not (position() < 2)]/tbody/tr/td[3]"
 GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
+
+API_KEY_NAME_URL = 'https://home.openweathermap.org/api_keys'
+API_KEY_EDIT_SELECTOR = By.CSS_SELECTOR, "i[class='fa fa-edit']"
+API_KEY_NAME_SELECTOR = By.XPATH, "//table/tbody/tr/td[2]"
+API_KEY_ENTER_SELECTOR = By.CSS_SELECTOR, "input[name='edit_key_form[name]']"
+SAVE_BUTTON_SELECTOR = By.CSS_SELECTOR, "button[class='button-round dark']"
+TAB_API_KEYS = By.CSS_SELECTOR, '#myTab [href="/api_keys"]'
+MODULE_API_KEY_CREATE = By.CSS_SELECTOR, '.col-md-4 h4'
+
+
+@pytest.fixture()
+def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
+    api_key_tab = driver.find_element(*TAB_API_KEYS)
+    api_key_tab.click()
 
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
@@ -126,8 +144,9 @@ def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_
         "The new web tab does not opened after click App Store brand-link's"
 
 
-
-def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group(driver, open_and_load_main_page, wait):
+def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_weather_condition_group(driver,
+                                                                                                      open_and_load_main_page,
+                                                                                                      wait):
     wait.until(EC.element_to_be_clickable(COOKIES_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(API_LINK_SELECTOR)).click()
     wait.until(EC.element_to_be_clickable(LIST_OF_WEATHER_CONDITION_CODES_LINK_SELECTOR)).click()
@@ -138,6 +157,20 @@ def test_tc_001_12_07_verify_that_codes_and_descriptions_are_visible_for_each_we
     for item in total_list:
         assert item.is_displayed()
 
+
+def test_tc_017_03_10_verify_the_api_key_name_on_the_api_keys_tab_does_not_change_if_the_input_is_empty(driver,
+                                                                                                        open_and_load_main_page,
+                                                                                                        wait, sign_in):
+    driver.get(API_KEY_NAME_URL)
+    wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
+    api_key_name_before = driver.find_element(*API_KEY_NAME_SELECTOR).text
+    api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
+    api_key_enter.click()
+    api_key_enter.send_keys(Keys.CONTROL, 'a')
+    api_key_enter.send_keys(Keys.BACKSPACE)
+    driver.find_element(*SAVE_BUTTON_SELECTOR).click()
+    api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
+    assert api_key_name_after == api_key_name_before
 
 
 # TC_010.01_02_02 | Our Initiatives > Verify the functionality of 'Our Initiatives' section
@@ -166,7 +199,32 @@ def test_tc_003_09_04_google_play_brand_link_display(driver, open_and_load_main_
     assert google_play_brand_link.is_displayed(), "Google Play brand-link is not displaying"
 
 
+def test_tc_017_04_01_module_create_api_key_is_visible(driver, open_api_keys_page, wait):
+    module_create_api_key = driver.find_element(*MODULE_API_KEY_CREATE)
+    assert module_create_api_key.is_displayed(), "module with title “Create key“ does not visible"
 
 
-                                                                                                      
-                                                                                                      
+def test_TC_001_04_06_verify_in_day_list_days_of_the_week(driver, open_and_load_main_page):
+    driver.find_element(*LIST_DAYS_IN_8_DAY_FORECAST).location_once_scrolled_into_view
+    days_by_page = []
+    days = driver.find_elements(*DAYS_IN_8_DAY_FORECAST)
+    for day in days:
+        days_by_page.append(day.text[:3])
+    number_day = datetime.now().weekday()
+    days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
+    assert days_by_page == days_by_computer
+
+
+def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main_page):
+    driver.get(EDUCATION_SECTION_PAGE)
+    question_headings = []
+    for i in range(1, 10):
+
+        question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
+        question_headings.append(question_heading)
+
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    for heading in question_headings:
+        assert heading.is_displayed(), "Error: FAQ header not displayed"
+

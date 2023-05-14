@@ -23,12 +23,15 @@ GROUP_5XX_RAIN_ROWS_LINK = (By.XPATH, '//h3[.="Group 5xx: Rain"]/../following-si
 COOKIES_ALLOW_ALL_BUTTON_LINK = (By.XPATH, '//button[.="Allow all"]')
 HEADER_PRICING_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[.="Pricing"]')
 PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.XPATH, '//a[.="Subscribe to One Call by Call"]')
+PRICING_PAGE_TITLE = (By.XPATH, '//h1[@class="breadcrumb-title"]')
 PRICING_PAGE_SECTIONS_LOCATOR = ()
 sections = ['onecall', 'current', 'alerts', 'history', 'historyspecial', 'offers']
 MEDIUM_LINK = (By.XPATH, '//a[@href="https://medium.com/@openweathermap"]')
 URL_WEATHER_CONDITION = 'https://openweathermap.org/weather-conditions'
 WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
 ICONS_FOR_DAYTIME = (By.XPATH, '//td[contains(text(), "d.png")]')
+TITLE_EXAMPLE_API_RESPONSE = (By.XPATH, '(//h3)[1]')
+EXAMPLE_API_RESPONSE = (By.XPATH, '//pre')
 
 
 @pytest.fixture()
@@ -37,7 +40,6 @@ def open_weather_condition_page(driver, wait):
     wait.until(EC.element_to_be_clickable(WEATHER_ICONS))
 
 
-@pytest.mark.skip
 def test_tc_006_02_02_verify_how_to_start_block_7_links_are_visible(driver, open_and_load_main_page, wait):
     driver.find_element(*DASHBOARD_HEADER_LINK).click()
     wait.until(EC.element_to_be_clickable(WEATHER_DASHBOARD_HOME_LINK))
@@ -130,3 +132,22 @@ def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_con
     actual_icons_daytime = driver.find_elements(*ICONS_FOR_DAYTIME)
     quantity = len(actual_icons_daytime)
     assert quantity >= minimum_icons_for_daytime, f"Count of daytime icons less then 8 and equal {quantity}"
+
+
+def test_tc_008_01_03_check_the_pricing_page_title(driver, open_and_load_main_page,wait):
+    driver.find_element(*HEADER_PRICING_LINK).click()
+    wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
+    pricing_title = driver.find_element(*PRICING_PAGE_TITLE)
+    assert pricing_title.is_displayed(), "Title Pricing is not displayed"
+
+
+def test_tc_008_01_02_check_pricing_page_is_open(driver, open_and_load_main_page, wait):
+    driver.find_element(*HEADER_PRICING_LINK).click()
+    wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
+    assert driver.current_url == 'https://openweathermap.org/price'
+
+    
+def test_tc_001_11_01_verify_existing_of_example_api_response(driver, open_weather_condition_page):
+    driver.find_element(*TITLE_EXAMPLE_API_RESPONSE)
+    example = driver.find_element(*EXAMPLE_API_RESPONSE)
+    assert example.is_displayed(), "Example of API-response doesn't exist"
