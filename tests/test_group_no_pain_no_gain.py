@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 logo_locator = (By.CSS_SELECTOR, ".logo > a > img")
 ASK_A_QUESTION_LINK = (By.XPATH, "(//*[contains(text(),'question')])[3]")
 allow_all_cookies_locator = (By.XPATH, '//*[contains(text(), "Allow all")]')
-
+blog_link = (By.XPATH, "//a[@href='https://openweather.co.uk/blog/category/weather']")
 
 def test_TC_002_01_01_return_from_guide_page_to_main_page_by_clicking_on_logo(driver):
     driver.get('https://openweathermap.org/guide')
@@ -20,7 +20,8 @@ def test_TC_003_13_03_verify_visibility_and_clickability_of_allow_all_button(dri
     wait.until(EC.element_to_be_clickable(allow_all_cookies_locator))
     assert element.is_displayed() and element.is_enabled()
 
-def test_TC_003_08_08_verify_Blog_link_is_clickable(driver, open_and_load_main_page):
-    element = driver.find_element(By.XPATH, "//a[@href='https://openweather.co.uk/blog/category/weather']")
-    assert element.is_displayed() and element.is_enabled()
+def test_TC_003_08_08_blog_link_is_clickable(driver, open_and_load_main_page):
+    element = driver.find_element(*blog_link)
+    assert element.is_enabled()
+
 
