@@ -158,3 +158,10 @@ def test_tc_002_01_09_header_logo_verify_logo_redirects_from_weather_data_page_t
     driver.get(URL_WEATHER_DATA)
     driver.find_element(*LOGO).click()
     assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_tc_002_03_15_api_link_is_visible_and_clickable_on_main_page(driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(API_LINK))
+    api_link = driver.find_element(*API_LINK)
+    expected_api_link = 'API'
+    assert api_link.is_displayed() and api_link.is_enabled() and expected_api_link in api_link.text
