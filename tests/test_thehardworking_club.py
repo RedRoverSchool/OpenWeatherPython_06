@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 URL = 'https://openweathermap.org/widgets-constructor'
 URL_1 = 'https://openweathermap.org/weather-dashboard'
@@ -17,6 +19,25 @@ fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
 
 CURRENT_URL = "https://openweather.co.uk/privacy-policy"
 XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
+
+# locators and URL for subscription page
+
+URL_subscription_base = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
+
+FIRST_NAME = (By.CSS_SELECTOR, '#invoice_form_first_name')
+LAST_NAME = (By.CSS_SELECTOR, '#invoice_form_last_name')
+ADDRESS_LINE_1 = (By.CSS_SELECTOR, '#invoice_form_address_line_1')
+CITY = (By.CSS_SELECTOR, '#invoice_form_city')
+POSTAL_CODE = (By.CSS_SELECTOR, '#invoice_form_postal_code')
+PHONE = (By.CSS_SELECTOR, '#invoice_form_phone')
+CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
+
+fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
+dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
+
+arrow_top_button = (By.CSS_SELECTOR,'div#topcontrol i')
+accept_coockies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
 
 # locators and URL for subscription page
 
@@ -116,3 +137,65 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
 
+
+def test_TC_001_09_04_verify_visibility_of_fahrenheit(driver):
+    driver.get(URL)
+    fahrenheit = driver.find_element(*fahrenheit_button)
+    assert fahrenheit.is_displayed() and fahrenheit.is_enabled()
+
+
+def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
+    driver.get(URL_weather_dashboard)
+    dashboard_full_description_text = driver.find_element(*dashboard_full_description)
+    assert dashboard_full_description_text.is_displayed()
+    expected_text = "The OpenWeather Dashboard is a lightweight and flexible visual " \
+                    "tool for our customers who would like to be notified weather " \
+                    "events to make informed decisions and plan actions based on the weather input."
+    displayed_text = dashboard_full_description_text.text
+    assert expected_text == displayed_text
+
+
+def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(driver, open_and_load_main_page, wait, sign_in):
+    driver.get(URL_subscription_base)
+    first_name = driver.find_element(*FIRST_NAME)
+    first_name.clear()
+    first_name.send_keys('Testing')
+    last_name = driver.find_element(*LAST_NAME)
+    last_name.clear()
+    last_name.send_keys('Uitesting')
+    address_line_1 = driver.find_element(*ADDRESS_LINE_1)
+    address_line_1.clear()
+    address_line_1.send_keys('1100 Testing St')
+    city = driver.find_element(*CITY)
+    city.clear()
+    city.send_keys('Test')
+    postal_code = driver.find_element(*POSTAL_CODE)
+    postal_code.clear()
+    postal_code.send_keys('99500')
+    phone = driver.find_element(*PHONE)
+    phone.clear()
+    phone.send_keys('+79071110099')
+    driver.find_element(*CONTINUE_TO_PAYMENT_BUTTON).click()
+    WebDriverWait(driver, 10).until(EC.title_is('Openweather Ltd.'))
+    assert 'checkout.stripe.com' in driver.current_url
+
+
+def test_TC_006_05_03_button_Contact_Us_works(driver):
+
+    driver.get(URL_1)
+    my_CONTACT_US = driver.find_element(*CONTACT_US)
+    assert my_CONTACT_US.is_enabled()
+
+
+def test_tc_001_14_01_verify_functionality_of_navigation_arrow_button(driver,open_and_load_main_page):
+    element = driver.find_element(*accept_coockies)
+    actions = ActionChains(driver)
+    actions.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element) #accepting coockies
+    driver.execute_script("window.scrollTo(0,document.body.scrollHeight)") #scrolling down
+    element = driver.find_element(*arrow_top_button)
+    actions = ActionChains(driver)
+    actions.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    WebDriverWait(driver, 15).until(
+        EC.invisibility_of_element(element))
