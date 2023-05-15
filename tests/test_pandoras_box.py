@@ -293,7 +293,9 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
 def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
     chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
     assert chart_present
+        
 
+        
 
 def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page):
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
@@ -303,7 +305,9 @@ def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page)
     actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
     expected_text_on_button = "Learn more"
     assert actual_button.text == expected_text_on_button
+        
 
+        
 
 def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
     # 3 redirection in 1 test
