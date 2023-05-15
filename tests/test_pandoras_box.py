@@ -58,6 +58,7 @@ widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
 student_initiative_URL = 'https://openweathermap.org/our-initiatives/student-initiative'
 
+title_free_data_for_students = (By.XPATH, "//span[text()='Free Data for Students']")
 dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
@@ -298,8 +299,7 @@ def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wai
     assert chart_present
 
 
-def test_TC_010_01_01_1_check_button_learn_more(driver):
-    driver.get(URL)
+def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page):
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(menu_initiatives)
@@ -319,6 +319,19 @@ def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(driver, open_
     expected_title = 'OpenWeather'
     # displayed_title = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]//div//h1/span').text
     assert '/play.google' in driver.current_url and expected_title in driver.title
+
+
+def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
+    # 3 redirection in 1 test
+    menu_initiatives = driver.find_element(*MENU_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(menu_initiatives)
+    driver.execute_script("arguments[0].click();", menu_initiatives)
+    button_learn = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
+    driver.execute_script("arguments[0].click();", button_learn)
+    expected_title = "Free Data for Students"
+    actual_title = driver.find_element(*title_free_data_for_students)
+    assert expected_title == actual_title.text
 
 
 def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
