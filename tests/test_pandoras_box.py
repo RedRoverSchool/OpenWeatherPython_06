@@ -60,7 +60,9 @@ dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
 metric_units = (By.XPATH, '//span[text()="°C"]')
-
+pricing_URL = 'https://openweathermap.org/price'
+button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
+                                    (By.XPATH, '//*[@id="history"]//a[2]')]
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
@@ -295,8 +297,6 @@ def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wai
     assert chart_present
         
 
-        
-
 def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page):
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
     action_chains = ActionChains(driver)
@@ -306,9 +306,7 @@ def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page)
     expected_text_on_button = "Learn more"
     assert actual_button.text == expected_text_on_button
         
-
         
-
 def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
     # 3 redirection in 1 test
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
@@ -320,3 +318,10 @@ def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_pa
     expected_title = "Free Data for Students"
     actual_title = driver.find_element(*title_free_data_for_students)
     assert expected_title == actual_title.text
+
+        
+def test_TC_008_03_01_button_detailing_pricing(driver):
+    driver.get(pricing_URL)
+    for button_locator in button_detailed_pricing_locators:
+        button_p = driver.find_element(*button_locator)
+        assert button_p.is_displayed() 
