@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL_API = 'https://openweathermap.org/api'
 URL_WEATHER_MODEL = 'https://openweathermap.org/technology'
+URL_WEATHER_DATA = 'https://openweathermap.org/accuracy-and-quality'
 URL_WEATHER_STATIONS = 'https://openweathermap.org/stations'
 
 URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
@@ -151,4 +152,9 @@ def test_TC_002_03_16_api_link_redirects_to_api_page(driver, open_and_load_main_
     wait.until(EC.element_to_be_clickable(API_LINK))
     driver.find_element(*API_LINK).click()
     assert driver.current_url == URL_API
-    
+
+
+def test_tc_002_01_09_header_logo_verify_logo_redirects_from_weather_data_page_to_main_page(driver):
+    driver.get(URL_WEATHER_DATA)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
