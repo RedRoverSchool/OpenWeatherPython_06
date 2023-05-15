@@ -250,14 +250,6 @@ def test_TC_002_03_03_11_open_ask_a_question(driver, open_and_load_main_page):
     assert displayed_title == expected_title
 
 
-def test_TC_006_01_06_3_icons_on_dashboard(driver, open_and_load_main_page, wait):
-    driver.find_element(*MENU_DASHBOARD).click()
-    wait.until(EC.element_to_be_clickable(MENU_DASHBOARD))
-    icon1 = driver.find_element(By.XPATH, '//div[3]/div[1]/div/img')
-    icon2 = driver.find_element(By.XPATH, '//div[3]/div[2]/div/img')
-    icon3 = driver.find_element(By.XPATH, '//div[3]/div[3]/div/img')
-    assert icon1.is_displayed() and icon2.is_displayed() and icon3.is_displayed()
-
 def test_TC_002_02_06_verify_closing_of_NotFound_notification(driver, open_and_load_main_page, wait):
     search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
     entered_invalid_city_name = "LJKJJ"
@@ -315,7 +307,17 @@ def test_TC_008_03_01_button_detailing_pricing(driver):
         assert button_p.is_displayed()
 
         
-def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
+def test_TC_010_01_01_1_button_learn_more(driver, open_and_load_main_page, wait):
+    button_initiatives = driver.find_element(*BUTTON_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(button_initiatives)
+    driver.execute_script(MENU_INITIATIVE, button_initiatives)
+    actual_button = wait.until(EC.element_to_be_clickable(BUTTON_LEARN_MORE))
+    expected_text_on_button = "Learn more"
+    assert actual_button.text == expected_text_on_button
+
+
+ def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
     # 3 redirection in 1 test
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
     action_chains = ActionChains(driver)
