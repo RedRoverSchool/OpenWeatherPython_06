@@ -55,6 +55,11 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
 
+FOOTER_TECHNOLOGIES_ICONS = [
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[1]/a"),
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[2]/a"),
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[3]/a")]
+
 # Student Initiative page
 STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
 LEARN_MORE_LINK_DEVELOPER_PLAN = (By.CSS_SELECTOR, "center>a[href='/price']")
@@ -170,3 +175,13 @@ def test_tc_003_10_02_verify_the_visibility_and_clickability_of_all_icon_links_f
     element_link = element.get_attribute('href')
     assert element.is_displayed() and element.is_enabled(), f"Link {element_link} interactive icon is not visible on" \
                                                             f" a page or not clickable"
+
+
+@pytest.mark.parametrize('icon', FOOTER_TECHNOLOGIES_ICONS)
+@pytest.mark.parametrize('url', URLs)
+def test_tc_003_04_02_visibility_clickability_links_technology_module(driver, wait, url, icon):
+    driver.get(url)
+    element = driver.find_element(*icon)
+    element_link = element.get_attribute('href')
+    assert element.is_displayed() and element.is_enabled(), \
+        f"Link {element_link} link is not visible/clickable on a page"
