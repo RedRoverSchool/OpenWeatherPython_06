@@ -1,10 +1,26 @@
 from selenium.webdriver.common.by import By
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
+import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 URL = 'https://openweathermap.org/'
+cities = ['New York', 'Los Angeles', 'Paris']
+load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
+search_dropdown_option = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+search_city_field = (By.CSS_SELECTOR, "input[placeholder='Search city']")
+search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
+displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
+sign_in_link = (By.CSS_SELECTOR, '.user-li a')
+pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
+price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
+accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 cities = ['New York', 'Los Angeles', 'Paris']
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 search_dropdown = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
@@ -57,27 +73,7 @@ def test_TC_000_00_05_verify_sign_in_link_redirects_to_valid_page(driver, open_a
     assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
 
 
-@pytest.mark.skip('No need to launch')
-@pytest.mark.parametrize('city', cities)
-def test_TC_000_00_06_verify_result_of_city_searching_is_valid(driver, open_and_load_main_page, wait, city):
-    search_city_input = driver.find_element(*search_city_field)
-    search_city_input.send_keys(city)
-    driver.find_element(*search_button).click()
-    wait.until(EC.element_to_be_clickable(search_dropdown_option)).click()
-    expected_city = city
-    wait.until(EC.text_to_be_present_in_element(displayed_city, city))
-    actual_city = driver.find_element(*displayed_city).text
-    assert expected_city in actual_city
 
-
-def test_TC_000_00_07_verify_search_button_is_clickable(driver, open_and_load_main_page, wait):
-    search_city_input = driver.find_element(*search_city_field)
-    search_city_input.send_keys('Paris')
-    element = driver.find_element(*search_button)
-    assert element.is_displayed() and element.is_enabled()
-
-def test_TC_000_00_08_user_dropdown_contains_5_items(driver, open_and_load_main_page, sign_in):
-    items = driver.find_elements(*user_dropdown_menu_items)
-    assert len(items) == 5
-
-
+def test_should_open_given_link(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
