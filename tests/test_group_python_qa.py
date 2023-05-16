@@ -18,6 +18,11 @@ subscription_module_button = (By.CSS_SELECTOR, ".inner-footer-container div:firs
                                                ".footer-section:nth-child(2) p.section-heading")
 quality_info_page = "https://openweathermap.org/accuracy-and-quality"
 nwp_model = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
+CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
+EXPECTED_NUMBER_OF_FIELDS = 7
+URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
+
 
 
 
@@ -55,3 +60,13 @@ def test_001_017_01_visibility_of_nwp_block(driver):
     nwp = driver.find_element(*nwp_model)
     assert nwp.is_displayed()
 
+
+def test_TC_018_01_02_Verify_error_messages_for_empty_required_fields(driver):
+    driver.get(URL_SUBSCRIPTION_BASE)
+    driver.find_element(*CONTINUE_TO_PAYMENT_BUTTON).click()
+    error_messages = driver.find_elements(*CANT_BE_BLANK)
+    checks = 0
+    for i in error_messages:
+        assert i.is_displayed()
+        checks += 1
+    assert checks == EXPECTED_NUMBER_OF_FIELDS
