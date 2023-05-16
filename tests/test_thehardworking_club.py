@@ -36,8 +36,8 @@ CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
 URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
 dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
 
-arrow_top_button = (By.CSS_SELECTOR,'div#topcontrol i')
-accept_coockies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
+navigation_arrow_button = (By.CSS_SELECTOR,'div#topcontrol i')
+allow_all_cookies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
 
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
@@ -122,16 +122,12 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     assert my_CONTACT_US.is_enabled()
 
 
-def test_tc_001_14_01_verify_functionality_of_navigation_arrow_button(driver,open_and_load_main_page):
-    element = driver.find_element(*accept_coockies)
-    actions = ActionChains(driver)
-    actions.move_to_element(element)
-    driver.execute_script("arguments[0].click();", element) #accepting coockies
+def test_TC_001_14_01_Verify_functionality_of_navigation_arrow_button(driver, open_and_load_main_page, wait):
+    element = driver.find_element(*allow_all_cookies)
+    ActionChains(driver).move_to_element(element)
+    driver.execute_script("arguments[0].click();", element) #accepting cookies
     driver.execute_script("window.scrollTo(0,document.body.scrollHeight)") #scrolling down
-    element = driver.find_element(*arrow_top_button)
-    actions = ActionChains(driver)
-    actions.move_to_element(element)
-    driver.execute_script("arguments[0].click();", element)
-    WebDriverWait(driver, 15).until(
-        EC.invisibility_of_element(element))
+    driver.find_element(*navigation_arrow_button).click()
+    wait.until(EC.invisibility_of_element(element))
     assert not element.is_displayed()
+
