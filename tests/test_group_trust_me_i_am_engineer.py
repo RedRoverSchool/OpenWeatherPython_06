@@ -172,7 +172,6 @@ def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
     driver.execute_script("arguments[0].setAttribute('class','visible')", div_input_file)
 
     input_file.send_keys(csv_file_path)
-
     actual_location = driver.find_element(*location_name_table)
     actual_latitude = driver.find_element(*latitude_table)
     actual_longitude = driver.find_element(*longitude_table)
