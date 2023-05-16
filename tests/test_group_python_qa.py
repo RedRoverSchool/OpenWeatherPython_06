@@ -84,7 +84,7 @@ def test_002_01_11_verify_main_logo(driver):
     assert response.status_code == 200
 
 
-def test_TC_005_10_03_correct_redirection_for_how_to_get_access_link(driver, wait):
+def test_TC_005_10_03_correct_redirection_for_how_to_get_access_link(driver):
     """Checking for correct redirection when clicking on How to get access link from the side menu"""
     driver.get(URL_SOLAR_API)
     how_to_get_access_link = driver.find_element(*HOW_TO_GET_ACCESS_LINK_LOCATOR)
