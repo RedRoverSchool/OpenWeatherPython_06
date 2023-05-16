@@ -175,7 +175,6 @@ def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
     actual_location = driver.find_element(*location_name_table)
     actual_latitude = driver.find_element(*latitude_table)
     actual_longitude = driver.find_element(*longitude_table)
-
     assert actual_location.text.strip() == expected_location \
            and actual_latitude.text.strip() == expected_latitude \
            and actual_longitude.text.strip() == expected_longitude
