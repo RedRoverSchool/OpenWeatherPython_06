@@ -63,7 +63,9 @@ dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
 metric_units = (By.XPATH, '//span[text()="°C"]')
-
+pricing_URL = 'https://openweathermap.org/price'
+button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
+                                    (By.XPATH, '//*[@id="history"]//a[2]')]
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
@@ -296,7 +298,7 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
 def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
     chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
     assert chart_present
-
+        
 
 def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page):
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
@@ -306,6 +308,26 @@ def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page)
     actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
     expected_text_on_button = "Learn more"
     assert actual_button.text == expected_text_on_button
+        
+        
+def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
+    # 3 redirection in 1 test
+    menu_initiatives = driver.find_element(*MENU_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(menu_initiatives)
+    driver.execute_script("arguments[0].click();", menu_initiatives)
+    button_learn = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
+    driver.execute_script("arguments[0].click();", button_learn)
+    expected_title = "Free Data for Students"
+    actual_title = driver.find_element(*title_free_data_for_students)
+    assert expected_title == actual_title.text
+
+        
+def test_TC_008_03_01_button_detailing_pricing(driver):
+    driver.get(pricing_URL)
+    for button_locator in button_detailed_pricing_locators:
+        button_p = driver.find_element(*button_locator)
+        assert button_p.is_displayed() 
 
 
 def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(driver, open_and_load_main_page, wait):
@@ -318,5 +340,4 @@ def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(driver, open_
     expected_title = 'OpenWeather'
     # displayed_title = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]//div//h1/span').text
     assert '/play.google' in driver.current_url and expected_title in driver.title
-
 
