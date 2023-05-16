@@ -36,3 +36,11 @@ def test_TC_003_03_09_weather_map_link_in_footer_to_be_clickable(driver, open_an
     element = driver.find_element(*WEATHER_MAP)
     wait.until(EC.element_to_be_clickable(WEATHER_MAP))
     assert element.is_enabled()
+
+
+def test_TC_003_12_05_ask_a_question_link_leads_to_correct_page(driver, open_and_load_main_page):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    driver.find_element(*ASK_A_QUESTION_LINK).click()
+    window_question_page = driver.window_handles[1]
+    driver.switch_to.window(window_question_page)
+    assert driver.current_url == "https://home.openweathermap.org/questions"
