@@ -4,8 +4,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 URL = 'https://openweathermap.org/widgets-constructor'
 URL_1 = 'https://openweathermap.org/weather-dashboard'
+URL_2 = 'https://openweathermap.org/guide'
+
 CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
 FITTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+SOLAR = (By.CSS_SELECTOR, "li a[href*='solar-energy-prediction']")
+GLOBAL_WEATHER = (By.CSS_SELECTOR, "li a[href*='push-weather-alerts']")
+ROAD_RISK = (By.CSS_SELECTOR, "li a[href*='road-risk']")
+GLOBAL_PRECIP = (By.CSS_SELECTOR, "li a[href*='global-precipitation-map-forecast']")
+WEATHER_MAPS = (By.CSS_SELECTOR, "li a[href*='weather-map-1h']")
+
 api_key = (By.XPATH, "//input[@id='api-key']")
 city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (
@@ -31,6 +39,7 @@ PHONE = (By.CSS_SELECTOR, '#invoice_form_phone')
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
 
 fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+
 URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
 dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
 
@@ -115,4 +124,16 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     driver.get(URL_1)
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
+
+def test_TC_004_03_01_all_links_are_visibility(driver):
+    driver.get(URL_2)
+    link_text_list = [
+        driver.find_element(*SOLAR),
+        driver.find_element(*GLOBAL_WEATHER),
+        driver.find_element(*ROAD_RISK),
+        driver.find_element(*GLOBAL_PRECIP),
+        driver.find_element(*WEATHER_MAPS)
+    ]
+    for link_text in link_text_list:
+        assert link_text.is_displayed()
 
