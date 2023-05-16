@@ -17,6 +17,8 @@ fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
 
 CURRENT_URL = "https://openweather.co.uk/privacy-policy"
 XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
+subscribe_button = (By.XPATH, '//a[contains(text(), "Subscribe to One Call by Call")]')
+cookie_button = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 
 # locators and URL for subscription page
 
@@ -56,17 +58,26 @@ def test_TC_001_09_02_Verify_that_3_widgets_are_displayed(driver, wait):
         assert widget.is_displayed(), "Some widget is not displayed"
 
 
-
 def test_TC_001_09_03_visibility_of_celsius(driver):
     driver.get(URL)
     celsius = driver.find_element(*celsius_button)
     assert celsius.is_displayed() and celsius.is_enabled()
 
+    
 def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_and_load_main_page, wait):
     privacy_policy_button = wait.until(EC.element_to_be_clickable(XPATH_PRIVACY_POLICY_BUTTON))
     driver.execute_script("arguments[0].click();", privacy_policy_button)
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == CURRENT_URL
+
+
+def test_TC_008_01_01_subscribe_button_redirects(driver):
+    driver.get('https://openweathermap.org/price')
+    cookie_button_click = driver.find_element(*cookie_button)
+    cookie_button_click.click()
+    subscribe_button_click = driver.find_element(*subscribe_button)
+    subscribe_button_click.click()
+    assert 'home.openweathermap.org/subscriptions' in driver.current_url and 'onecall_30/base' in driver.current_url
 
 def test_TC_001_09_04_verify_visibility_of_fahrenheit(driver):
     driver.get(URL)
@@ -84,7 +95,7 @@ def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
     displayed_text = dashboard_full_description_text.text
     assert expected_text == displayed_text
 
-
+    
 def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(driver, open_and_load_main_page, wait, sign_in):
     driver.get(URL_subscription_base)
     first_name = driver.find_element(*FIRST_NAME)
