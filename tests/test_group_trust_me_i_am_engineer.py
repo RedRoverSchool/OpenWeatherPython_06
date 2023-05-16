@@ -1,4 +1,5 @@
 import os
+import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
@@ -154,6 +155,7 @@ def test_TC_007_02_05_verify_visibility_clickability_map_btn(driver, wait):
 
 def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
     csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/test_search_by_import.csv")
+    # print(os.getcwd())
     f = open(csv_file_path, 'r')
     try:
         csv_str = f.readline()
@@ -175,6 +177,7 @@ def test_TC_007_02_04_verify_search_by_import_csv(driver, wait):
     actual_location = driver.find_element(*location_name_table)
     actual_latitude = driver.find_element(*latitude_table)
     actual_longitude = driver.find_element(*longitude_table)
+    time.sleep(3)
     assert actual_location.text.strip() == expected_location \
            and actual_latitude.text.strip() == expected_latitude \
            and actual_longitude.text.strip() == expected_longitude
