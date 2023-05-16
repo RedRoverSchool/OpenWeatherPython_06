@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import requests
 
 
 URL_SOLAR_API = "https://openweathermap.org/api/solar-energy-prediction"
@@ -22,7 +23,9 @@ CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to paymen
 CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
 EXPECTED_NUMBER_OF_FIELDS = 7
 URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
-
+MAIN_LOGO = (By.CSS_SELECTOR, 'img[src="/themes/openweathermap/assets/img/logo_white_cropped.png"]')
+OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
+MAIN_PAGE = 'https://openweathermap.org/'
 
 
 
@@ -70,3 +73,12 @@ def test_TC_018_01_02_Verify_error_messages_for_empty_required_fields(driver):
         assert i.is_displayed()
         checks += 1
     assert checks == EXPECTED_NUMBER_OF_FIELDS
+
+def test_002_01_11_verify_main_logo(driver):
+    driver.get(OUR_INITIATIVES_PAGE)
+    m_logo = driver.find_element(*MAIN_LOGO)
+    m_logo.click()
+    response = requests.get(MAIN_PAGE)
+    assert response.status_code == 200
+
+
