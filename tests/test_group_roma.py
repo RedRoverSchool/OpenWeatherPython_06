@@ -12,6 +12,7 @@ logo = (By.CSS_SELECTOR, "#first-level-nav a")
 copyright_locator = (By.CSS_SELECTOR, "div.inner-footer-container div.horizontal-section.my-5 span:nth-child(3)")
 copyright_expected_result = ['©', '2012 — 2023', 'OpenWeather', '® All rights reserved']
 map_info_block = ("css selector", 'a.map-info-block .minutely-section')
+URL = 'https://openweathermap.org/'
 #The page 'Maps' (/weathermap) doesn't include because it hasn't website footer
 PAGES = ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'home/sign_in', 'faq', 'appid']
 
