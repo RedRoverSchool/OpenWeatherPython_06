@@ -134,3 +134,4 @@ def test_tc_001_14_01_verify_functionality_of_navigation_arrow_button(driver,ope
     driver.execute_script("arguments[0].click();", element)
     WebDriverWait(driver, 15).until(
         EC.invisibility_of_element(element))
+    assert not element.is_displayed()
