@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 URL = 'https://openweathermap.org/widgets-constructor'
 URL_1 = 'https://openweathermap.org/weather-dashboard'
 CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
-FITTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+FOOTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 api_key = (By.XPATH, "//input[@id='api-key']")
 city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (
@@ -115,4 +115,16 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     driver.get(URL_1)
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
+
+def test_006_05_04_button_Contact_Us_works(driver, wait):
+
+    driver.get(URL_1)
+    my_CONTACT_US = driver.find_element(*CONTACT_US)
+    my_FOOTER_PANEL = driver.find_element(*FOOTER_PANEL)
+    my_FOOTER_PANEL.click()
+    my_CONTACT_US.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == 'https://home.openweathermap.org/questions'
+
+
 
