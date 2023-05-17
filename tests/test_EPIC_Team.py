@@ -89,3 +89,18 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     element = driver.find_element(*sign_in_link)
     sign_in_text = driver.execute_script("return arguments[0].textContent", element)
     assert sign_in_text == expected_text
+
+
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+Locator = '#first-level-nav > li.logo > a > img'
+
+def test_002_01_12():
+    driver.get('https://home.openweathermap.org/users/sign_in')
+    element = driver.find_element(By.CSS_SELECTOR, Locator)
+    element.click()
+    assert "openweathermap" in driver.current_url
