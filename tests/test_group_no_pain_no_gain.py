@@ -49,3 +49,9 @@ def test_TC_003_12_05_ask_a_question_link_leads_to_correct_page(driver, open_and
 def test_TC_002_03_22_partners_link_is_visible_and_clickable(driver, open_and_load_main_page, wait):
     element = wait.until(EC.visibility_of_element_located(PARTNERS_LINK))
     assert element.is_displayed() and element.is_enabled(), '"Partners" link is not visible or clickable'
+
+
+def test_TC_003_08_03_ask_a_question_link_is_clickable(driver,open_and_load_main_page, wait):
+    element = driver.find_element(*ASK_A_QUESTION_LINK)
+    wait.until(EC.element_to_be_clickable(ASK_A_QUESTION_LINK))
+    assert element.is_enabled(), "Ask a question link is not clickable"
