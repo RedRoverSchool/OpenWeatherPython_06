@@ -16,6 +16,7 @@ sign_in_link = (By.CSS_SELECTOR, '.user-li a')
 pricing_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/price"]')
 price_page_title = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
 accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+Locator_002_01_12 = (By.CSS_SELECTOR, '#first-level-nav > li.logo > a > img')
 
 
 def test_should_open_given_link(driver):
@@ -91,16 +92,8 @@ def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
     assert sign_in_text == expected_text
 
 
-from selenium.webdriver.common.by import By
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
-Locator = '#first-level-nav > li.logo > a > img'
-
-def test_002_01_12():
+def test_002_01_12(driver):
     driver.get('https://home.openweathermap.org/users/sign_in')
-    element = driver.find_element(By.CSS_SELECTOR, Locator)
+    element = driver.find_element(*Locator_002_01_12)
     element.click()
     assert "openweathermap" in driver.current_url
