@@ -11,6 +11,7 @@ URL_forecast30 = 'https://openweathermap.org/api/forecast30'
 # Locators
 how_to_start_link = (By.XPATH, "//a[contains(text(),'‘How to start and operate with API more efficientl')]")
 call_16_day_daily_forecast_data = (By.XPATH, "//a[@href='#16days']")
+call_16_day_daily_forecast_data_section = (By.XPATH, "(//div/section/h2)[1]")
 weathefieldsapi = (By.CSS_SELECTOR, "a[href='#parameter']")
 other_features_link = (By.XPATH, "//a[normalize-space()='Other features']")
 other_features = (By.XPATH, "//h2[normalize-space()='Other features']")
@@ -74,4 +75,8 @@ def test_TC_005_04_06_verify_how_to_start_link_is_visible_and_clickable(driver, 
 #     driver.find_element(*how_to_start_link_1).click()
 #     assert 'appid' in driver.current_url
 
-
+def test_TC_005_05_02_redirect_to_call_16_section_title(driver):
+    driver.get(URL_forecast)
+    driver.find_element(*call_16_day_daily_forecast_data).click()
+    call_16_section_title = driver.find_element(*call_16_day_daily_forecast_data_section)
+    assert call_16_section_title.is_displayed(), 'Title "Call 16 day / daily forecast data" Not Found'
