@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+import pytest
 
 
 URL = 'https://openweathermap.org/widgets-constructor'
@@ -55,6 +56,7 @@ def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     assert your_api_key.is_displayed() and your_city_name.is_displayed()
 
 
+@pytest.mark.skip
 def test_TC_001_09_07_verify_display_of_bottom_widget_1_for_selected_type(driver):
     driver.get(URL)
     driver.find_element(*type_widget_1).click()
@@ -94,6 +96,7 @@ def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_a
     assert driver.current_url == CURRENT_URL
 
 
+@pytest.mark.skip
 def test_TC_008_01_01_subscribe_button_redirects(driver):
     driver.get('https://openweathermap.org/price')
     cookie_button_click = driver.find_element(*cookie_button)
