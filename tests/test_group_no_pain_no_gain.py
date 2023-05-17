@@ -26,7 +26,7 @@ def test_TC_003_13_03_verify_visibility_and_clickability_of_allow_all_button(dri
     assert element.is_displayed() and element.is_enabled()
 
 
-def test_TC_002_03_21_verify_that_the_partners_link_leads_to_the_correct_page(driver, open_and_load_main_page):
+def test_TC_002_03_21_partners_link_leads_to_correct_page(driver, open_and_load_main_page):
     driver.find_element(*PARTNERS_LINK).click()
     partners_title_text = driver.find_element(*PARTNERS_PAGE_TITLE).text
     assert partners_title_text == "Partners and solutions"
@@ -44,3 +44,8 @@ def test_TC_003_12_05_ask_a_question_link_leads_to_correct_page(driver, open_and
     window_question_page = driver.window_handles[1]
     driver.switch_to.window(window_question_page)
     assert driver.current_url == "https://home.openweathermap.org/questions"
+
+
+def test_TC_002_03_22_partners_link_is_visible_and_clickable(driver, open_and_load_main_page, wait):
+    element = wait.until(EC.visibility_of_element_located(PARTNERS_LINK))
+    assert element.is_displayed() and element.is_enabled(), '"Partners" link is not visible or clickable'
