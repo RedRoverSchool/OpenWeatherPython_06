@@ -43,7 +43,7 @@ def open_and_load_main_page(driver, wait):
 
 @pytest.fixture()
 def wait(driver):
-    wait = WebDriverWait(driver, 25)
+    wait = WebDriverWait(driver, 15)
     yield wait
 
 @pytest.fixture()
@@ -81,4 +81,3 @@ def pytest_sessionstart(session):
                     shutil.rmtree(file_path)
             except Exception as e:
                 print(f"Failed to delete {file_path}. Reason: {e}")
-

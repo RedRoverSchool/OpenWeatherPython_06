@@ -36,6 +36,12 @@ Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
 FAQ_url = "https://openweathermap.org/faq"
 FOOTER_TECHNOLOGIES = (By.XPATH, "//p[@class='section-heading' and text()='Technologies']")
+FOOTER_SOCIAL_MEDIA_MODULE_ICONS = [(By.CSS_SELECTOR, 'div[class="social"] a:nth-child(1)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(2)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(3)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(4)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(5)'),
+                                    (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(6)')]
 
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
@@ -48,10 +54,18 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/faq',
         'https://openweathermap.org/appid',
         'https://home.openweathermap.org/questions']
+
+FOOTER_TECHNOLOGIES_ICONS = [
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[1]/a"),
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[2]/a"),
+    (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[3]/a")]
+
 # Student Initiative page
 STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
 LEARN_MORE_LINK_DEVELOPER_PLAN = (By.CSS_SELECTOR, "center>a[href='/price']")
 PRICING_PAGE_URL_FOR_DEVELOPER_PLAN = "https://openweathermap.org/price"
+LEARN_MORE_LINK_MEDIUM_PLAN = (By.CSS_SELECTOR, "center>a[href='/price#history']")
+PRICING_PAGE_URL_FOR_MEDIUM_PLAN = "https://openweathermap.org/price#history"
 
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
@@ -132,7 +146,7 @@ def test_tc_003_04_01_title_is_present(driver, wait, URL):
         "The footer is not displayed or does not contain the expected text"
 
 
-def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
+def test_tc_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_plan(driver, open_and_load_main_page,
                                                                                     wait):
     wait.until(EC.element_to_be_clickable(ALLOW_ALL_COOKIES)).click()
     driver.get(STUDENT_INITIATIVE_PAGE_URL)
@@ -140,3 +154,34 @@ def test_TC_010_02_03_verify_the_learn_more_link_redirection_for_the_developer_p
     learn_more_link.click()
     current_url = driver.current_url
     assert current_url == PRICING_PAGE_URL_FOR_DEVELOPER_PLAN, "Incorrect page redirection for the Developer Plan"
+
+
+def test_tc_010_02_04_verify_the_learn_more_link_redirection_for_the_medium_plan(driver, open_and_load_main_page,
+                                                                                 wait):
+    wait.until(EC.element_to_be_clickable(ALLOW_ALL_COOKIES)).click()
+    driver.get(STUDENT_INITIATIVE_PAGE_URL)
+    learn_more_link = driver.find_element(*LEARN_MORE_LINK_MEDIUM_PLAN)
+    learn_more_link.click()
+    current_url = driver.current_url
+    assert current_url == PRICING_PAGE_URL_FOR_MEDIUM_PLAN, "Incorrect page redirection for the Medium Plan"
+
+
+@pytest.mark.parametrize('icon', FOOTER_SOCIAL_MEDIA_MODULE_ICONS)
+@pytest.mark.parametrize('url', URLs)
+def test_tc_003_10_02_verify_the_visibility_and_clickability_of_all_icon_links_for_several_pages(driver, wait, url,
+                                                                                                 icon):
+    driver.get(url)
+    element = driver.find_element(*icon)
+    element_link = element.get_attribute('href')
+    assert element.is_displayed() and element.is_enabled(), f"Link {element_link} interactive icon is not visible on" \
+                                                            f" a page or not clickable"
+
+
+@pytest.mark.parametrize('icon', FOOTER_TECHNOLOGIES_ICONS)
+@pytest.mark.parametrize('url', URLs)
+def test_tc_003_04_02_visibility_clickability_links_technology_module(driver, wait, url, icon):
+    driver.get(url)
+    element = driver.find_element(*icon)
+    element_link = element.get_attribute('href')
+    assert element.is_displayed() and element.is_enabled(), \
+        f"Link {element_link} link is not visible/clickable on a page"
