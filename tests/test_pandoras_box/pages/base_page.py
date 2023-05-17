@@ -17,4 +17,3 @@ class BasePage:
                 button_pricing = self.driver.find_element(*self.LINK_PRICING)
                 action_chains.move_to_element(button_pricing)
                 self.driver.execute_script("arguments[0].click();", button_pricing)
-
