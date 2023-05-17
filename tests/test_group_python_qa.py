@@ -15,8 +15,8 @@ LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/di
 product_concept_title_locator = (By.CSS_SELECTOR, "#concept h2")
 subscription_module_button = (By.CSS_SELECTOR, ".inner-footer-container div:first-of-type "
                                                ".footer-section:nth-child(2) p.section-heading")
-quality_info_page = "https://openweathermap.org/accuracy-and-quality"
-nwp_model = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+QUALITY_INFO_PAGE = "https://openweathermap.org/accuracy-and-quality"
+NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
 CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
 EXPECTED_NUMBER_OF_FIELDS = 7
@@ -26,6 +26,8 @@ OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
 MAIN_PAGE = 'https://openweathermap.org/'
 HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
 HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
+GUIDE_PAGE = "https://openweathermap.org/guide"
+HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
 
 
 
@@ -61,8 +63,8 @@ def test_TC_003_05_01_subscription_module_title_displayed(driver, open_and_load_
 
 
 def test_001_017_01_visibility_of_nwp_block(driver):
-    driver.get(quality_info_page)
-    nwp = driver.find_element(*nwp_model)
+    driver.get(QUALITY_INFO_PAGE)
+    nwp = driver.find_element(*NWP_MODEL)
     assert nwp.is_displayed()
 
 
@@ -91,3 +93,13 @@ def test_TC_005_10_03_correct_redirection_for_how_to_get_access_link(driver):
     how_to_get_access_link.click()
     how_to_get_access_title = driver.find_element(*HOW_TO_GET_ACCESS_TITLE_LOCATOR)
     assert how_to_get_access_title.is_displayed()
+
+
+
+def test_TC_004_08_01_historical_collection_block_visibility(driver):
+    driver.get(GUIDE_PAGE)
+    historical_collection = driver.find_element(*HISTORICAL_COLLECTION_MODULE)
+    driver.execute_script("arguments[0].scrollIntoView(true);", historical_collection)
+    assert historical_collection.is_displayed(), "The Historical Weather collection is not displaying"
+
+
