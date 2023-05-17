@@ -12,4 +12,4 @@ def test_002_01_12_Verify_clicking_on_a_logo_from_the_Signin_page(driver):
     driver.get('https://home.openweathermap.org/users/sign_in')
     element = driver.find_element(*Locator_002_01_12_Logo)
     element.click()
-    assert "openweathermap" in driver.current_url
+    assert "openweathermap" in driver.current_url=='https://openweathermap.org/'
