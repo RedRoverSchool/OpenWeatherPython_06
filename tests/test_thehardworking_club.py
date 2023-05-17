@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 URL = 'https://openweathermap.org/widgets-constructor'
 URL_1 = 'https://openweathermap.org/weather-dashboard'
@@ -32,9 +34,12 @@ POSTAL_CODE = (By.CSS_SELECTOR, '#invoice_form_postal_code')
 PHONE = (By.CSS_SELECTOR, '#invoice_form_phone')
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
 
-fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+
 URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
 dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
+
+navigation_arrow_button = (By.CSS_SELECTOR,'div#topcontrol i')
+allow_all_cookies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
 
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
@@ -127,6 +132,17 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
 
+
+def test_TC_001_14_01_Verify_functionality_of_navigation_arrow_button(driver, open_and_load_main_page, wait):
+    element = driver.find_element(*allow_all_cookies)
+    ActionChains(driver).move_to_element(element)
+    driver.execute_script("arguments[0].click();", element) #accepting cookies
+    driver.execute_script("window.scrollTo(0,document.body.scrollHeight)") #scrolling down
+    driver.find_element(*navigation_arrow_button).click()
+    wait.until(EC.invisibility_of_element(element))
+    assert not element.is_displayed()
+
+   
 def test_006_05_04_button_Contact_Us_works(driver, wait):
 
     driver.get(URL_1)
