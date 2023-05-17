@@ -1,6 +1,6 @@
 from datetime import datetime, date
 from selenium.webdriver.common.by import By
-from .base_page import BasePage
+from pages.base_page import BasePage
 
 class MainPage(BasePage):
 
