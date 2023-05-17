@@ -48,11 +48,11 @@ def test_TC_005_04_06_verify_how_to_start_link_is_visible_and_clickable(driver, 
     assert how_to_start.is_displayed() and how_to_start.is_enabled(), \
         "The 'How to start' link is not displayed on the page or is not clickable"
 
-# def test_TC_005_04_07_verify_sign_up_link_is_visible_and_clickable(driver, wait):
-#     driver.get(URL_WEATHER_API)
-#     sign_up = wait.until(EC.element_to_be_clickable(sign_up_link))
-#     assert sign_up.is_displayed() and sign_up.is_enabled(), \
-#         "The 'Sign up' link is not displayed on the page or is not clickable"
+def test_TC_005_04_07_verify_sign_up_link_is_visible_and_clickable(driver, wait):
+    driver.get(URL_WEATHER_API)
+    sign_up = wait.until(EC.element_to_be_clickable(sign_up_link))
+    assert sign_up.is_displayed() and sign_up.is_enabled(), \
+        "The 'Sign up' link is not displayed on the page or is not clickable"
 
 # def test_TC_005_04_08_verify_learn_more_link_is_visible_and_clickable(driver, wait):
 #     driver.get(URL_WEATHER_API)
