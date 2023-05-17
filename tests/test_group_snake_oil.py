@@ -34,7 +34,9 @@ all_link_locators = [SIGN_UP_LINK, USERNAME_AND_PASSWORD_LINK, GO_TO_DASHBOARD_L
 linkedIn_icon = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
 Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
+ABOUT_US = (By.XPATH, "//a[contains(text(), 'About us')]")
 FAQ_url = "https://openweathermap.org/faq"
+ABOUT_US_URL = "https://openweathermap.org/about-us"
 FOOTER_TECHNOLOGIES = (By.XPATH, "//p[@class='section-heading' and text()='Technologies']")
 FOOTER_SOCIAL_MEDIA_MODULE_ICONS = [(By.CSS_SELECTOR, 'div[class="social"] a:nth-child(1)'),
                                     (By.CSS_SELECTOR, 'div[class="social"] a:nth-child(2)'),
@@ -185,3 +187,11 @@ def test_tc_003_04_02_visibility_clickability_links_technology_module(driver, wa
     element_link = element.get_attribute('href')
     assert element.is_displayed() and element.is_enabled(), \
         f"Link {element_link} link is not visible/clickable on a page"
+
+
+def test_tc_001_15_03_verify_redirection_to_about_us_page(driver, open_and_load_main_page, wait):
+    element = wait.until(EC.presence_of_element_located(ABOUT_US))
+    driver.execute_script("arguments[0].scrollIntoView();", element)
+    element.click()
+    wait.until(EC.url_to_be(ABOUT_US_URL))
+    assert driver.current_url == ABOUT_US_URL
