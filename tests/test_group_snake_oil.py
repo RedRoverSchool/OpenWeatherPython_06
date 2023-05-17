@@ -14,7 +14,7 @@ SIGNED_IN_SUCCESSFULLY = (By.XPATH, "//div[contains(text(), 'Signed in successfu
 
 # Homepage
 ALLOW_ALL_COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-DASHBOARD_BUTTON = (By.XPATH, "//ul[@class='desktop']/li/a[text()='Dashboard']")
+DASHBOARD_BUTTON = (By.CSS_SELECTOR, "div[id='desktop-menu'] > ul > li:nth-child(3) a")
 
 # 'How to Start' section links
 SIGN_UP_LINK = (By.XPATH, ".//a[b='Sign up']")
