@@ -12,10 +12,10 @@ URL_forecast30 = 'https://openweathermap.org/api/forecast30'
 how_to_start_link = (By.XPATH, "//a[contains(text(),'‘How to start and operate with API more efficientl')]")
 call_16_day_daily_forecast_data = (By.XPATH, "//a[@href='#16days']")
 call_16_day_daily_forecast_data_section = (By.XPATH, "(//div/section/h2)[1]")
-weathefieldsapi = (By.CSS_SELECTOR, "a[href='#parameter']")
+weather_fields_api = (By.CSS_SELECTOR, "a[href='#parameter']")
 other_features_link = (By.XPATH, "//a[normalize-space()='Other features']")
 other_features = (By.XPATH, "//h2[normalize-space()='Other features']")
-how_to_start_link_1 = (By.XPATH, "//a[normalize-space()='How to Start']")
+how_to_start_link_1 = (By.CSS_SELECTOR, "section[id='pro'] p[class='lead'] a")
 sign_up_link = (By.CSS_SELECTOR, "a[href='/home/sign_up']")
 learn_more_link = (By.XPATH, "//a[normalize-space()='Learn more']")
 api_doc_button = (By.XPATH, "//section[@id='current']//div[2]//div[1]//a[1]")
@@ -33,7 +33,7 @@ def test_TC_004_04_01_verify_visibility_and_clickability_of_the_link(driver):
 
 def test_AT_005_05_07_weatherAPI_Daily_forecast_16_days_Visibility_and_clickability(driver):
     driver.get(URL_forecast)
-    element = driver.find_element(*weathefieldsapi)
+    element = driver.find_element(*weather_fields_api)
     assert element.is_displayed() and element.is_enabled()
 
 def test_TC_005_06_03_redirect_to_other_features_section(driver):
@@ -60,10 +60,10 @@ def test_TC_005_04_08_verify_learn_more_link_is_visible_and_clickable(driver, wa
     assert learn_more.is_displayed() and learn_more.is_enabled(), \
         "The 'Learn more' link is not displayed on the page or is not clickable"
 
-# def test_TC_005_04_09_verify_api_doc_btn_is_visible_and_clickable(driver):
-#     driver.get(URL_WEATHER_API)
-#     api_doc = driver.find_element(*api_doc_button)
-#     assert api_doc.is_displayed() and api_doc.is_enabled()
+def test_TC_005_04_09_verify_api_doc_btn_is_visible_and_clickable(driver):
+    driver.get(URL_WEATHER_API)
+    api_doc = driver.find_element(*api_doc_button)
+    assert api_doc.is_displayed() and api_doc.is_enabled()
 
 # def test_TC_005_04_10_verify_subscribe_button_is_visible_and_clickable(driver):
 #     driver.get(URL_WEATHER_API)
@@ -73,7 +73,7 @@ def test_TC_005_04_08_verify_learn_more_link_is_visible_and_clickable(driver, wa
 # def test_TC_005_04_11_verify_how_to_start_link_redirecting(driver):
 #     driver.get(URL_WEATHER_API)
 #     driver.find_element(*how_to_start_link_1).click()
-#     assert 'appid' in driver.current_url
+#     assert driver.current_url == 'https://openweathermap.org/appid/'
 
 def test_TC_005_05_02_redirect_to_call_16_section_title(driver):
     driver.get(URL_forecast)
