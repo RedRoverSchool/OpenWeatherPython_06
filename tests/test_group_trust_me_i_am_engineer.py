@@ -50,6 +50,16 @@ header_pricing = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Pricing']")
 pricing_page_title = (By.XPATH, "//h1[text()='Pricing']")
 openweather_for_business_link = (By.XPATH, "//a[text()='OpenWeather for Business']")
 
+def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
+    driver.find_element(*metric_button_loc).click()
+    current_temp = driver.find_element(*current_temp_loc)
+    assert "°C" in current_temp.text, "The current temperature does not correspond to the metric system"
+
+def test_TC_001_02_02_verify_temperature_switched_on_imperial_system(driver, open_and_load_main_page):
+    driver.find_element(*imperial_button_loc).click()
+    current_temp = driver.find_element(*current_temp_loc)
+    assert "°F" in current_temp.text, "The current temperature does not correspond to the imperial system"
+
 def test_TC_001_02_03_verify_temperature_metric_button_displayed_clickable(driver, open_and_load_main_page, wait):
     metric_button = wait.until(EC.element_to_be_clickable(metric_button_loc))
     assert metric_button.is_displayed() and metric_button.is_enabled(), \
