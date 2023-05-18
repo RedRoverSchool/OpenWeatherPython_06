@@ -17,3 +17,5 @@ def test_tc_000_00_02_verify_no_results_displayed_for_invalid_input(driver, open
 def test_tc_000_00_02_verify_sing_in_link_opens_valid_page(driver, open_and_load_main_page):
     page = MainPage(driver)
     page.check_header_link('sign')
+
+

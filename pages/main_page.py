@@ -22,7 +22,7 @@ class MainPage(BasePage):
         self.click_search_button(city)
         expected_city = city
         expected_error_message = f'No results for {city}'
-        if self.element_is_displayed(*self.no_results_notification, wait):
+        if self.element_is_displayed(self.no_results_notification, wait):
             actual_error_message = wait.until(EC.visibility_of_element_located(self.no_results_notification))
             actual_error_message_text = actual_error_message.text
             assert actual_error_message_text == expected_error_message

@@ -27,9 +27,9 @@ class BasePage:
         self.click_header_link(link_name)
         assert link_name in self.driver.current_url
 
-    def element_is_displayed(self, method, locator, wait):
+    def element_is_displayed(self, locator, wait):
         try:
-            wait.until(EC.visibility_of_element_located((method, locator)))
+            wait.until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             return False
         return True
