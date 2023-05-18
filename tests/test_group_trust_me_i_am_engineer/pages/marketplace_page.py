@@ -34,3 +34,19 @@ class MarketplacePage(BasePage):
         self.element_is_clickable(self.locators.FIRST_SEARCH_ITEMS).click()
         actual_search_result = self.element_is_visible(self.locators.SEARCH_POP_UP_HEADER)
         assert expected_location == actual_search_result.text
+
+    def verify_search_by_coordinates(self):
+        expected_latitude = "55.755826"
+        expected_longitude = "37.61173"
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.driver.find_element(*self.locators.HISTORY_BULK_SEARCH_LOCATION).click()
+        self.driver.find_element(*self.locators.BUTTON_BY_COORDINATES).click()
+        latitude = self.driver.find_element(*self.locators.INPUT_LATITUDE)
+        latitude.send_keys(expected_latitude)
+        longitude = self.driver.find_element(*self.locators.INPUT_LONGITUDE)
+        longitude.send_keys(expected_longitude)
+        longitude.send_keys(Keys.RETURN)
+        actual_latitude = self.driver.find_element(*self.locators.LATITUDE_ON_MAP)
+        actual_longitude = self.driver.find_element(*self.locators.LONGITUDE_ON_MAP)
+        assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
