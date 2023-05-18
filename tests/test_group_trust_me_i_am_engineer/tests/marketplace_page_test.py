@@ -8,3 +8,7 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
 def test_TC_007_02_02_verify_search_by_location_name(driver):
     page = MarketplacePage(driver)
     page.verify_search_by_location_name()
+
+def test_TC_007_02_03_verify_search_by_coordinates(driver):
+    page = MarketplacePage(driver)
+    page.verify_search_by_coordinates()
