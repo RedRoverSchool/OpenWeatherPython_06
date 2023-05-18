@@ -10,6 +10,10 @@ class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 
 class MarketplacePageLocators:
-    HISTORY_BILK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
-    HISTORY_BILK_SEARCH_LOCATION = (By.ID, "firstSearch")
+    HISTORY_BULK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+    HISTORY_BULK_SEARCH_LOCATION = (By.ID, "firstSearch")
     BUTTON_SEARCH_METHODS = (By.XPATH, "//div[@class='search-pop-up']/button")
+    MAP_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
+    BUTTON_BY_LOCATION = (By.XPATH, "//button[contains(text(), 'By location')]")
+    FIRST_SEARCH_ITEMS = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
+    SEARCH_POP_UP_HEADER = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
