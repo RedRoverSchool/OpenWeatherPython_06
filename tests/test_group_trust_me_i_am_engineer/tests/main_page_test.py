@@ -12,3 +12,7 @@ def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_
 def test_TC_001_02_02_verify_temperature_switched_on_imperial_system(driver, open_and_load_main_page):
     page = MainPage(driver)
     page.checking_the_temperature_system_switching("°F")
+
+def test_TC_001_02_03_verify_temperature_metric_button_displayed_clickable(driver, open_and_load_main_page):
+    page = MainPage(driver)
+    page.verify_temperature_button_displayed_clickable("°C")

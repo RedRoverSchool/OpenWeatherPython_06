@@ -42,3 +42,12 @@ class MainPage(BasePage):
         current_temp = self.driver.find_element(*self.locators.CURRENT_TEMP)
         assert system in current_temp.text, f"The current temperature does not correspond to the {system} system"
 
+    def verify_temperature_button_displayed_clickable(self, system):
+        match system:
+            case "°C":
+                metric_button = self.locators.METRIC_BUTTON
+            case "°F":
+                metric_button = self.locators.IMPERIAL_BUTTON
+        assert self.element_is_clickable(metric_button) \
+               and self.element_is_visible(metric_button), \
+            "The temperature switch button in the metric system is not displayed or is not clickable"
