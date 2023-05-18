@@ -1,8 +1,11 @@
 from datetime import datetime, date
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 
 class MainPage(BasePage):
+
+    locators = MainPageLocators()
 
     search_city_field = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
     search_button = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
@@ -30,5 +33,12 @@ class MainPage(BasePage):
 
         assert weekdays_on_app == weekdays_expected
 
-
+    def checking_the_temperature_system_switching(self, system):
+        match system:
+            case "°C":
+                self.driver.find_element(*self.locators.METRIC_BUTTON).click()
+            case "°F":
+                self.driver.find_element(*self.locators.IMPERIAL_BUTTON).click()
+        current_temp = self.driver.find_element(*self.locators.CURRENT_TEMP)
+        assert system in current_temp.text, f"The current temperature does not correspond to the {system} system"
 
