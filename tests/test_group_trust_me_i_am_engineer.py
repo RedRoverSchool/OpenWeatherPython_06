@@ -48,6 +48,7 @@ map_button_loc = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text()
 footer_pricing_link = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
 header_pricing = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Pricing']")
 pricing_page_title = (By.XPATH, "//h1[text()='Pricing']")
+openweather_for_business_link = (By.XPATH, "//a[text()='OpenWeather for Business']")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -219,3 +220,9 @@ def test_TC_008_01_03_01_check_a_visibility_of_Pricing_page_title(driver, open_a
     pricing_page_title_text = driver.find_element(*pricing_page_title).text
     assert pricing_page_title_text == expected_pricing_page_title, \
         "The title of the Pricing page does not match the expected title"
+
+def test_TC_003_08_04_Verify_the_link_OpenWeather_for_Business_is_visible(driver,open_and_load_main_page, wait):
+    driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+    element = wait.until(EC.visibility_of_element_located(openweather_for_business_link))
+    assert element.is_displayed(), \
+        "OpenWeather for Business is not visible on the page"
