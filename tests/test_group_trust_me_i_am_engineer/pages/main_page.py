@@ -2,6 +2,8 @@ from datetime import datetime, date
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
+from datetime import datetime, date
+from zoneinfo import ZoneInfo
 
 class MainPage(BasePage):
 
@@ -51,3 +53,11 @@ class MainPage(BasePage):
         assert self.element_is_clickable(metric_button) \
                and self.element_is_visible(metric_button), \
             "The temperature switch button in the metric system is not displayed or is not clickable"
+
+    def verify_the_current_date_and_time(self):
+        date_time = self.driver.find_element(*self.locators.LOC_DATE_TIME)
+        date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
+        date_time_site = datetime.strptime(date_time_str, '%Y %b %d, %I:%M%p').replace(tzinfo=ZoneInfo('Europe/London'))
+        date_time_now = datetime.now(ZoneInfo('Europe/London'))
+        assert (date_time_now - date_time_site).total_seconds() <= 240, \
+            "The current date and time does not match the date and time specified on the page"

@@ -20,3 +20,7 @@ def test_TC_001_02_03_verify_temperature_metric_button_displayed_clickable(drive
 def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(driver, open_and_load_main_page):
     page = MainPage(driver)
     page.verify_temperature_button_displayed_clickable("°F")
+
+def test_TC_001_05_01_verify_the_current_date_and_time(driver, open_and_load_main_page):
+    page = MainPage(driver)
+    page.verify_the_current_date_and_time()
