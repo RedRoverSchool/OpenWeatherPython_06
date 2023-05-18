@@ -8,7 +8,7 @@ REQUESTED_CITY = 'London, GB'
 DISPLAYED_CITY = (By.CSS_SELECTOR, "table b a:nth-child(1)")
 
 
-def test_search_city_results_are_visible(driver, wait, open_and_load_main_page):
+def test_tc_002_02_01_01_search_city_results_are_visible(driver, wait, open_and_load_main_page):
     weather_in_your_city_field = driver.find_element(*WEATHER_IN_YOUR_CITY_FLD)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(weather_in_your_city_field)
