@@ -6,5 +6,8 @@ class MainPageLocators:
     CURRENT_TEMP = (By.CSS_SELECTOR, "div.current-temp span.heading")
     LOC_DATE_TIME = (By.XPATH, "//div[@class='current-container mobile-padding']/div/span[@class='orange-text']")
 
+class WeatherAPIPageLocators:
+    WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
+
 class MarketplacePageLocators:
     pass
