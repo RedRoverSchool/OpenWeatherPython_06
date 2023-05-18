@@ -10,4 +10,6 @@ class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 
 class MarketplacePageLocators:
-    pass
+    HISTORY_BILK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+    HISTORY_BILK_SEARCH_LOCATION = (By.ID, "firstSearch")
+    BUTTON_SEARCH_METHODS = (By.XPATH, "//div[@class='search-pop-up']/button")
