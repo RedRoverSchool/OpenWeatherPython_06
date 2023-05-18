@@ -8,6 +8,7 @@ from selenium.webdriver import ActionChains
 class BasePage:
     sign_in_link = (By.CSS_SELECTOR, '.user-li a')
     guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
+    dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -22,6 +23,8 @@ class BasePage:
                 self.driver.find_element(*self.sign_in_link).click()
             case 'guide':
                 self.driver.find_element(*self.guide_link)
+            case 'dashboard':
+                self.driver.find_element(*self.dashboard_link).click()
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
