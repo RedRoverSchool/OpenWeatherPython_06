@@ -14,7 +14,7 @@ SIGNED_IN_SUCCESSFULLY = (By.XPATH, "//div[contains(text(), 'Signed in successfu
 
 # Homepage
 ALLOW_ALL_COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-DASHBOARD_BUTTON = (By.CSS_SELECTOR, "a[href='/weather-dashboard']")
+DASHBOARD_BUTTON = (By.CSS_SELECTOR, "div[id='desktop-menu'] > ul > li:nth-child(3) a")
 
 # 'How to Start' section links
 SIGN_UP_LINK = (By.XPATH, ".//a[b='Sign up']")
@@ -26,12 +26,38 @@ HERE_LINK = (By.XPATH, "//a[text()='here']")
 DETAILED_USER_MANUAL_LINK = (By.XPATH, ".//a[b='detailed user manual']")
 TRY_THE_DASHBOARD_BUTTON = (By.XPATH, "(//a[text()='Try the Dashboard'])[2]")
 # 7 links + 1 button
-all_link_locators = [SIGN_UP_LINK, USERNAME_AND_PASSWORD_LINK, GO_TO_DASHBOARD_LINK, EVENTS_SECTION_LINK,
+ALL_LINK_LOCATORS = [SIGN_UP_LINK, USERNAME_AND_PASSWORD_LINK, GO_TO_DASHBOARD_LINK, EVENTS_SECTION_LINK,
                      NEW_TRIGGER_SECTION_LINK,
                      HERE_LINK, DETAILED_USER_MANUAL_LINK, TRY_THE_DASHBOARD_BUTTON]
 
+EXPEXTED_LINKS_SIGNED_IN_LIST = \
+    ['https://home.openweathermap.org/', 'https://home.openweathermap.org/',
+     'https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website',
+     'https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website',
+     'https://home.openweathermap.org/dashboard/triggers/create?campaign_id=weather_dashboard_website',
+     'https://openweathermap.org/weather-dashboard/dashboard-documentation#setup',
+     'https://openweathermap.org/weather-dashboard/dashboard-documentation',
+     'https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website']
+
+EXPECTED_LINKS_SIGNED_OUT_LIST = \
+    ['https://home.openweathermap.org/users/sign_up?campaign_id=weather_dashboard_website',
+     'https://home.openweathermap.org/users/sign_in?campaign_id=weather_dashboard_website',
+     'https://home.openweathermap.org/users/sign_in',
+     'https://home.openweathermap.org/users/sign_in',
+     'https://home.openweathermap.org/users/sign_in',
+     'https://openweathermap.org/weather-dashboard/dashboard-documentation#setup',
+
+     'https://openweathermap.org/weather-dashboard/dashboard-documentation',
+     'https://home.openweathermap.org/users/sign_in']
+
+EXPECTED_LINKS_AND_LOCATORS_SIGNED_OUT = [(ALL_LINK_LOCATORS[i], EXPECTED_LINKS_SIGNED_OUT_LIST[i])
+                                          for i in range(len(ALL_LINK_LOCATORS))]
+
+EXPECTED_LINKS_AND_LOCATORS_SIGNED_IN = [(ALL_LINK_LOCATORS[i], EXPEXTED_LINKS_SIGNED_IN_LIST[i])
+                                         for i in range(len(ALL_LINK_LOCATORS))]
+
 # Footer
-linkedIn_icon = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
+LINKEDIN_ICON = (By.CSS_SELECTOR, "div[class='social'] a:nth-child(3)")
 Support_dropdown = (By.XPATH, "//*[@id='support-dropdown']")
 FAQ_element = (By.XPATH, "//*[@id='support-dropdown-menu']/li[1]/a")
 ABOUT_US = (By.XPATH, "//a[contains(text(), 'About us')]")
@@ -71,48 +97,37 @@ PRICING_PAGE_URL_FOR_MEDIUM_PLAN = "https://openweathermap.org/price#history"
 
 
 def test_tc_003_10_06_verify_linkedIn_link_is_visible(driver, open_and_load_main_page, wait):
-    element = wait.until(EC.visibility_of_element_located(linkedIn_icon))
+    element = wait.until(EC.visibility_of_element_located(LINKEDIN_ICON))
     assert element.is_displayed(), "LinkedIn interactive icon is not visible on a page"
 
 
 def test_tc_003_10_08_verify_clickability_of_linkedIn_link(driver, open_and_load_main_page, wait):
-    element = wait.until(EC.element_to_be_clickable(linkedIn_icon))
+    element = wait.until(EC.element_to_be_clickable(LINKEDIN_ICON))
     assert element.is_enabled(), "LinkedIn interactive icon is not clickable on a page"
 
 
-@pytest.mark.parametrize('locator', all_link_locators)
-def test_TC_006_02_04_verify_all_links_redirecting_to_the_respective_pages(driver, open_and_load_main_page, wait,
-                                                                           locator):
+@pytest.mark.parametrize('locator, expected_url', EXPECTED_LINKS_AND_LOCATORS_SIGNED_OUT)
+def test_TC_006_02_04_verify_all_links_redirecting_to_the_respective_pages_signed_out(driver, open_and_load_main_page,
+                                                                                      wait, locator, expected_url):
     wait.until(EC.element_to_be_clickable(ALLOW_ALL_COOKIES)).click()
     wait.until(EC.element_to_be_clickable(DASHBOARD_BUTTON)).click()
     element = wait.until(EC.element_to_be_clickable(locator))
     href_link = element.get_attribute('href')
     new_tab = element.get_attribute('target') == '_blank'
-    response = requests.head(href_link)
-    status_code = response.status_code
-    if status_code == 302:
-        driver.execute_script('window.open("");')
-        driver.switch_to.window(driver.window_handles[1])
-        driver.get(response.headers['Location'])
-        wait.until(EC.presence_of_element_located(EMAIL_INPUT)).send_keys(user_name)
-        wait.until(EC.presence_of_element_located(PASSWORD_INPUT)).send_keys(password)
-        wait.until(EC.presence_of_element_located(SUBMIT_BUTTON)).click()
-        wait.until(EC.presence_of_element_located(SIGNED_IN_SUCCESSFULLY))
-        driver.close()
-    driver.switch_to.window(driver.window_handles[0])
     try:
-        request = requests.get(href_link)
+        response = requests.get(href_link)
     except Exception:
         current_url = "NOT VALID",
         status_code = "no_status_code"
     else:
-        wait.until(EC.element_to_be_clickable(locator)).click()
+        element.click()
         if new_tab:
             driver.switch_to.window(driver.window_handles[1])
         current_url = driver.current_url
-        status_code = request.status_code
-    assert href_link == current_url and status_code == 200, \
-        f"This URL '{href_link}' is redirecting to '{current_url}' URL. Status code = {status_code}"
+        status_code = response.status_code
+    assert current_url == expected_url and status_code == 200, \
+        f"This URL '{href_link}' is redirecting to '{current_url}' URL. " \
+        f"Expected URL is {expected_url}. Status code = {status_code}"
 
 
 def test_tc_015_01_01_verify_support_faq_is_visible(driver, open_and_load_main_page, wait):
