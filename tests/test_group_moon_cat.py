@@ -54,11 +54,11 @@ def test_TC_005_04_07_verify_sign_up_link_is_visible_and_clickable(driver, wait)
     assert sign_up.is_displayed() and sign_up.is_enabled(), \
         "The 'Sign up' link is not displayed on the page or is not clickable"
 
-# def test_TC_005_04_08_verify_learn_more_link_is_visible_and_clickable(driver, wait):
-#     driver.get(URL_WEATHER_API)
-#     learn_more = wait.until(EC.element_to_be_clickable(learn_more_link))
-#     assert learn_more.is_displayed() and learn_more.is_enabled(), \
-#         "The 'Learn more' link is not displayed on the page or is not clickable"
+def test_TC_005_04_08_verify_learn_more_link_is_visible_and_clickable(driver, wait):
+    driver.get(URL_WEATHER_API)
+    learn_more = wait.until(EC.element_to_be_clickable(learn_more_link))
+    assert learn_more.is_displayed() and learn_more.is_enabled(), \
+        "The 'Learn more' link is not displayed on the page or is not clickable"
 
 # def test_TC_005_04_09_verify_api_doc_btn_is_visible_and_clickable(driver):
 #     driver.get(URL_WEATHER_API)
