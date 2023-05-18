@@ -66,7 +66,6 @@ def test_TC_003_10_05_verify_visibility_of_github_icon(driver, open_and_load_mai
     assert github_icon.is_displayed() and github_icon.is_enabled()
 
 def test_TC_001_06_01_redirect_to_interactive_world_weather_map(driver, open_and_load_main_page, wait):
-    driver.current_window_handle
     driver.find_element(*map_info_block).click()
     driver.switch_to.window(driver.window_handles[1])
     wait.until(EC.title_is("Interactive weather maps - OpenWeatherMap"))
