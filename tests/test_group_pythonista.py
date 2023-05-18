@@ -2,11 +2,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
 URL_API = 'https://openweathermap.org/api'
+URL_WEATHER_MODEL = 'https://openweathermap.org/technology'
+URL_WEATHER_DATA = 'https://openweathermap.org/accuracy-and-quality'
+URL_WEATHER_STATIONS = 'https://openweathermap.org/stations'
 
 URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
 TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
 LINK_HOW_TO_MAKE = (By.CSS_SELECTOR, "a[href$='geo-year']")
 TITLE_HOW_TO_MAKE = (By.XPATH, '//*[@id="geo-year"]/h3')
+
+URL_ROAD_RISK = 'https://openweathermap.org/api/road-risk'
+SECTION_R_CONCEPTS = (By.XPATH, "//*[@id='concept']")
 
 FOOTER_PANEL = (By.XPATH, '//*[@id="stick-footer-panel"]/div')
 BTN_ALLOW_ALL = (By.CLASS_NAME, "stick-footer-panel__link")
@@ -22,6 +28,7 @@ BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 ALERT_PANEL_SINGIN = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
 HISTORICAL_WEATHER_DATA_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#history')]")
 WEATHER_MAPS_COLLECTION_LINK = (By.XPATH, "//section[@id='pro']//p/a[contains(@href, '#maps')]")
+API_LINK = (By.XPATH, '//div[@id="desktop-menu"]//a[contains(@href, "api")]')
 
 
 def test_TC_003_11_01_verify_the_copyright_information_is_present_on_the_page(driver, open_and_load_main_page, wait):
@@ -121,3 +128,40 @@ def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_pa
     footer = driver.find_element(*FOOTER_COPYRIGHT)
     assert footer.is_displayed() and expected_footer_text in footer.text, \
         "The footer is not displayed or does not contain the expected text"
+
+
+def test_TC_005_08_03_road_risk_api_visibility_of_road_risk_api_concept_section(driver):
+    driver.get(URL_ROAD_RISK)
+    section_road_risk = driver.find_element(*SECTION_R_CONCEPTS)
+    assert section_road_risk.is_displayed(), 'Section - NOT FOUND'
+
+
+def test_TC_002_01_08_header_logo_verify_logo_redirects_from_weather_model_page_to_main_page(driver):
+    driver.get(URL_WEATHER_MODEL)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_TC_002_01_10_header_logo_verify_logo_redirects_from_weather_stations_page_to_main_page(driver):
+    driver.get(URL_WEATHER_STATIONS)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_TC_002_03_16_api_link_redirects_to_api_page(driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(API_LINK))
+    driver.find_element(*API_LINK).click()
+    assert driver.current_url == URL_API
+
+
+def test_tc_002_01_09_header_logo_verify_logo_redirects_from_weather_data_page_to_main_page(driver):
+    driver.get(URL_WEATHER_DATA)
+    driver.find_element(*LOGO).click()
+    assert driver.current_url == 'https://openweathermap.org/'
+
+
+def test_tc_002_03_15_api_link_is_visible_and_clickable_on_main_page(driver, open_and_load_main_page, wait):
+    wait.until(EC.element_to_be_clickable(API_LINK))
+    api_link = driver.find_element(*API_LINK)
+    expected_api_link = 'API'
+    assert api_link.is_displayed() and api_link.is_enabled() and expected_api_link in api_link.text
