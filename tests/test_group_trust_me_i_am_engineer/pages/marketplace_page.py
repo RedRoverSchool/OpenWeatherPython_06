@@ -50,3 +50,10 @@ class MarketplacePage(BasePage):
         actual_latitude = self.driver.find_element(*self.locators.LATITUDE_ON_MAP)
         actual_longitude = self.driver.find_element(*self.locators.LONGITUDE_ON_MAP)
         assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
+
+    def verify_visibility_clickability_map_btn(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        map_button = self.element_is_clickable(self.locators.MAP_BUTTON_LOC)
+        assert map_button.is_displayed() and map_button.is_enabled(), \
+            "The 'Map' button is not displayed on the map or is not clickable"
