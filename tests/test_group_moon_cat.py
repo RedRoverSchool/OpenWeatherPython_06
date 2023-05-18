@@ -65,10 +65,10 @@ def test_TC_005_04_09_verify_api_doc_btn_is_visible_and_clickable(driver):
     api_doc = driver.find_element(*api_doc_button)
     assert api_doc.is_displayed() and api_doc.is_enabled()
 
-# def test_TC_005_04_10_verify_subscribe_button_is_visible_and_clickable(driver):
-#     driver.get(URL_WEATHER_API)
-#     subscribe_btn = driver.find_element(*subscribe_button)
-#     assert subscribe_btn.is_displayed() and subscribe_btn.is_enabled()
+def test_TC_005_04_10_verify_subscribe_button_is_visible_and_clickable(driver):
+    driver.get(URL_WEATHER_API)
+    subscribe_btn = driver.find_element(*subscribe_button)
+    assert subscribe_btn.is_displayed() and subscribe_btn.is_enabled()
 
 # def test_TC_005_04_11_verify_how_to_start_link_redirecting(driver):
 #     driver.get(URL_WEATHER_API)
