@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from pages.base_page import BasePage
 from tests.test_group_ducktales.locators.main_locators import MainLocator
 from tests.test_group_ducktales.test_data.main_page_data import *
 from datetime import datetime
