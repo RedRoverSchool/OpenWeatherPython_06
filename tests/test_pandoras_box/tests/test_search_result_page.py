@@ -11,3 +11,6 @@ def test_TC_002_02_03_verify_result_of_search_for_invalid_city_name(driver, open
     search_result_page.check_notification_display()
 
 
+
+
+
