@@ -32,4 +32,3 @@ def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, w
 def test_TC_003_12_09_verify_pricing_link_leads_to_a_correct_page(driver, open_and_load_main_page):
     page = MainPage(driver)
     page.verify_pricing_link_leads_to_a_correct_page()
-

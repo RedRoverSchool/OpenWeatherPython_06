@@ -93,3 +93,4 @@ class MainPage(BasePage):
         self.driver.find_element(*self.locators.FOOTER_PRICING_LINK).click()
         assert '/price' in self.driver.current_url, \
             "The link 'Pricing' leads to incorrect page"
+
