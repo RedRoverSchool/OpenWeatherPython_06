@@ -32,4 +32,5 @@ class MainPage(BasePage):
     def check_buttons_displayed_and_enabled(self):
         imperial_button = self.driver.find_element(*MainLocator.TO_IMPERIAL_BTN)
         metric_button = self.driver.find_element(*MainLocator.TO_METRIC_BTN)
-        return all(button.is_displayed() and button.is_enabled() for button in [metric_button, imperial_button])
+        assert all(button.is_displayed() and button.is_enabled() for button in [metric_button, imperial_button]),\
+            "Toggle buttons are not displayed or enabled"
