@@ -61,8 +61,8 @@ class MarketplacePage(BasePage):
 
     def verify_search_by_import_csv(self):
         print(os.getcwd())
-        csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/test_search_by_import.csv")
-        with open("../test_data/test_search_by_import.csv", 'r') as f:
+        csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/search_by_import.csv")
+        with open("../test_data/search_by_import.csv", 'r') as f:
             csv_str = f.readline()
         expected_location, expected_latitude, expected_longitude = csv_str.split(";")
 
