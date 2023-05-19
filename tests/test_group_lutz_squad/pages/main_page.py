@@ -1,4 +1,4 @@
-from tests.test_group_lutz_squad.pages.base_page import BasePage
+from pages.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from tests.test_group_lutz_squad.locators.main_page_locators import MainPageLocators
 
