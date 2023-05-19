@@ -1,12 +1,15 @@
+import time
 from datetime import datetime, date
+
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
 class MainPage(BasePage):
-
+    URL = 'https://openweathermap.org/'
     locators = MainPageLocators()
 
     search_city_field = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
@@ -61,3 +64,26 @@ class MainPage(BasePage):
         date_time_now = datetime.now(ZoneInfo('Europe/London'))
         assert (date_time_now - date_time_site).total_seconds() <= 240, \
             "The current date and time does not match the date and time specified on the page"
+
+    def verify_current_location(self, wait):
+        expected_city_name = "Chicago, US"
+        self.driver.execute_cdp_cmd(
+            "Browser.grantPermissions",
+            {
+                "origin": self.URL,
+                "permissions": ["geolocation"]
+            },
+        )
+        self.driver.execute_cdp_cmd(
+            "Emulation.setGeolocationOverride",
+            {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "accuracy": 100,
+            },
+        )
+        self.driver.find_element(*self.locators.LOC).click()
+        wait.until_not(EC.presence_of_element_located(self.locators.LOAD_DIV))
+        current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
+        assert expected_city_name == current_city_name.text, \
+            "The current name of the city does not match the expected name of the city"

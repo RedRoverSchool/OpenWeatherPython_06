@@ -5,6 +5,9 @@ class MainPageLocators:
     IMPERIAL_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
     CURRENT_TEMP = (By.CSS_SELECTOR, "div.current-temp span.heading")
     LOC_DATE_TIME = (By.XPATH, "//div[@class='current-container mobile-padding']/div/span[@class='orange-text']")
+    CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
+    LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
+    LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
