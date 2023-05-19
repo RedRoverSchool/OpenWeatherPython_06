@@ -15,6 +15,12 @@ class TestMainPage:
         page.open_page()
         page.check_module_title_download_openweather_app()
 
+    def test_tc_003_09_02_app_store_brand_link_display(self, driver):
+        page = MainPage(driver, LINK_MAIN_PAGE)
+        page.open_page()
+        page.check_app_store_brand_link_display()
+
+
 
 
 

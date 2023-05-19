@@ -15,9 +15,19 @@ class MainPage(BasePage):
         today = WEEKDAYS[day_by_computer]
         return today
 
-    def check_module_title_download_openweather_app(self):
+    def go_to_module_download_openweather_app(self):
         module_download_openweather_app = self.driver.find_element(*MainLocator.MODULE_DOWNLOAD_OPENWEATHER_APP)
         self.go_to_element(module_download_openweather_app)
+        return module_download_openweather_app
+
+    def check_module_title_download_openweather_app(self):
+        module_download_openweather_app = self.go_to_module_download_openweather_app()
         assert module_download_openweather_app.is_displayed(), "Module title Download openweather app is not display"
+
+    def check_app_store_brand_link_display(self):
+        self.go_to_module_download_openweather_app()
+        # driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
+        app_store_brand_link = self.driver.find_element(*MainLocator.APP_STORE_BRAND_LINK)
+        assert app_store_brand_link.is_displayed(), "The brand-link for Download on the App Store is not displaying"
 
 
