@@ -26,7 +26,6 @@ class MainPage(BasePage):
 
     def check_app_store_brand_link_display(self):
         self.go_to_module_download_openweather_app()
-        # driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
         app_store_brand_link = self.driver.find_element(*MainLocator.APP_STORE_BRAND_LINK)
         assert app_store_brand_link.is_displayed(), "The brand-link for Download on the App Store is not displaying"
 
