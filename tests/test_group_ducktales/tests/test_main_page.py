@@ -20,7 +20,9 @@ class TestMainPage:
         page.open_page()
         page.check_app_store_brand_link_display()
 
-
-
+    def test_tc_001_02_04_01_switch_toggle_buttons(self, driver):
+        page = MainPage(driver, LINK_MAIN_PAGE)
+        page.open_page()
+        assert page.check_buttons_displayed_and_enabled()
 
 
