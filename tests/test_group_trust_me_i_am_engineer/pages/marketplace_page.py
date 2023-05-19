@@ -1,3 +1,4 @@
+import os
 import time
 
 from selenium.webdriver import Keys
@@ -57,3 +58,29 @@ class MarketplacePage(BasePage):
         map_button = self.element_is_clickable(self.locators.MAP_BUTTON_LOC)
         assert map_button.is_displayed() and map_button.is_enabled(), \
             "The 'Map' button is not displayed on the map or is not clickable"
+
+    def verify_search_by_import_csv(self):
+        csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/test_search_by_import.csv")
+        f = open("../test_data/test_search_by_import.csv", 'r')
+        try:
+            csv_str = f.readline()
+        finally:
+            f.close()
+        expected_location, expected_latitude, expected_longitude = csv_str.split(";")
+
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+
+        input_file = self.driver.find_element(*input_field_upload_file)
+        div_input_file = driver.find_element(*div_field_upload_file)
+
+        driver.execute_script("arguments[0].setAttribute('class','visible')", input_file)
+        driver.execute_script("arguments[0].setAttribute('class','visible')", div_input_file)
+
+        input_file.send_keys(csv_file_path)
+        actual_location = driver.find_element(*location_name_table)
+        actual_latitude = driver.find_element(*latitude_table)
+        actual_longitude = driver.find_element(*longitude_table)
+        assert actual_location.text.strip() == expected_location \
+               and actual_latitude.text.strip() == expected_latitude \
+               and actual_longitude.text.strip() == expected_longitude
