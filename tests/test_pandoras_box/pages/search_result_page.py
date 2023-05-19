@@ -4,7 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
 
 
-
 class SearchResultPage(BasePage):
     ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")

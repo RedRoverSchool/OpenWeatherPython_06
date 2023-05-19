@@ -1,8 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver import Keys
-from selenium.common.exceptions import TimeoutException
 from pages.base_page import BasePage
 
 class MainPage(BasePage):
