@@ -55,14 +55,12 @@ def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
     api_key_tab = driver.find_element(*TAB_API_KEYS)
     api_key_tab.click()
 
-
 @pytest.fixture()
 def api_key_delete_name(driver, open_api_keys_page, wait):
     wait.until(EC.element_to_be_clickable(API_KEY_EDIT_SELECTOR)).click()
     api_key_enter = wait.until(EC.element_to_be_clickable(API_KEY_ENTER_SELECTOR))
     api_key_enter.clear()
     return api_key_enter
-
 
 def get_api_key_name_before(driver, open_api_keys_page):
     return driver.find_element(*API_KEY_NAME_SELECTOR).text
@@ -101,14 +99,6 @@ def test_tc_001_02_04_01_switch_toggle_buttons(driver, open_and_load_main_page, 
     assert all(button.is_displayed() and button.is_enabled() for button in [metric_button, imperial_button])
 
 
-def test_tc_003_09_01_the_module_title_display(driver, open_and_load_main_page, wait):
-    expected_module_title = "Download OpenWeather app"
-    module_download_openweather_app = driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP)
-    module_download_openweather_app.location_once_scrolled_into_view
-    actual_module_title = module_download_openweather_app.text
-    assert actual_module_title == expected_module_title
-
-
 def test_TC_001_04_03_verify_in_day_list_first_element_day_by_week(driver, open_and_load_main_page):
     day_by_weak = driver.find_element(*FIRST_DAY_IN_8_DAY_FORECAST).text[:3]
     day_by_computer = datetime.now().weekday()
@@ -138,6 +128,12 @@ def test_TC_001_04_04_verify_in_day_list_first_element_month(driver, open_and_lo
     month_by_computer = datetime.now().month
     current_month = MONTHS[month_by_computer - 1]
     assert month == f'{current_month}'
+
+
+def test_tc_003_09_02_app_store_brand_link_display(driver, open_and_load_main_page):
+    driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
+    app_store_brand_link = driver.find_element(*APP_STORE_BRAND_LINK)
+    assert app_store_brand_link.is_displayed(), "The brand-link for Download on the App Store is not displaying"
 
 
 def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_page):
@@ -225,6 +221,7 @@ def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main
     driver.get(EDUCATION_SECTION_PAGE)
     question_headings = []
     for i in range(1, 10):
+
         question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
         question_headings.append(question_heading)
 
@@ -238,6 +235,7 @@ def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_
     driver.get(EDUCATION_SECTION_PAGE)
     question_headings = []
     for i in range(1, 10):
+
         question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
         question_headings.append(question_heading)
 
@@ -248,15 +246,15 @@ def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_
             driver.execute_script("window.scrollTo(0, arguments[0].scrollHeight);", heading)
             driver.execute_script("arguments[0].click();", heading)
 
+
         assert heading.is_enabled(), "Error: FAQ section is not clickable"
 
 
 @pytest.mark.parametrize('spacekit', SPACEKITS)
-def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consists_of_spaces(driver, spacekit,
-                                                                                              api_key_delete_name,
-                                                                                              wait):
+def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consists_of_spaces(driver, spacekit, api_key_delete_name, wait):
     api_key_delete_name.send_keys(spacekit)
     driver.find_element(*SAVE_BUTTON_SELECTOR).click()
     api_key_name_before = get_api_key_name_before(driver, open_api_keys_page)
     api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
     assert api_key_name_after == api_key_name_before
+
