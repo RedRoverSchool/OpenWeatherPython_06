@@ -8,6 +8,7 @@ class MainPageLocators:
     CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
     LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
     LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+    FOOTER_PRICING_LINK = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")

@@ -87,3 +87,9 @@ class MainPage(BasePage):
         current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
         assert expected_city_name == current_city_name.text, \
             "The current name of the city does not match the expected name of the city"
+
+    def verify_pricing_link_leads_to_a_correct_page(self):
+        self.driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+        self.driver.find_element(*self.locators.FOOTER_PRICING_LINK).click()
+        assert '/price' in self.driver.current_url, \
+            "The link 'Pricing' leads to incorrect page"
