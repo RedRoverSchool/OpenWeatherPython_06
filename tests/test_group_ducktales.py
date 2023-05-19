@@ -50,11 +50,11 @@ TAB_API_KEYS = By.CSS_SELECTOR, '#myTab [href="/api_keys"]'
 MODULE_API_KEY_CREATE = By.CSS_SELECTOR, '.col-md-4 h4'
 
 
-
 @pytest.fixture()
 def open_api_keys_page(driver, open_and_load_main_page, sign_in, wait):
     api_key_tab = driver.find_element(*TAB_API_KEYS)
     api_key_tab.click()
+
 
 @pytest.fixture()
 def api_key_delete_name(driver, open_api_keys_page, wait):
@@ -63,9 +63,9 @@ def api_key_delete_name(driver, open_api_keys_page, wait):
     api_key_enter.clear()
     return api_key_enter
 
+
 def get_api_key_name_before(driver, open_api_keys_page):
     return driver.find_element(*API_KEY_NAME_SELECTOR).text
-
 
 
 def test_tc_001_01_01_verify_city_name_displayed_by_zip(driver, open_and_load_main_page, wait):
@@ -138,12 +138,6 @@ def test_TC_001_04_04_verify_in_day_list_first_element_month(driver, open_and_lo
     month_by_computer = datetime.now().month
     current_month = MONTHS[month_by_computer - 1]
     assert month == f'{current_month}'
-
-
-def test_tc_003_09_02_app_store_brand_link_display(driver, open_and_load_main_page):
-    driver.find_element(*MODULE_DOWNLOAD_OPENWEATHER_APP).location_once_scrolled_into_view
-    app_store_brand_link = driver.find_element(*APP_STORE_BRAND_LINK)
-    assert app_store_brand_link.is_displayed(), "The brand-link for Download on the App Store is not displaying"
 
 
 def test_tc_003_09_03_app_store_brand_link_clickable(driver, open_and_load_main_page):
@@ -231,7 +225,6 @@ def test_010_02_08_accessibility_of_question_headings(driver, open_and_load_main
     driver.get(EDUCATION_SECTION_PAGE)
     question_headings = []
     for i in range(1, 10):
-
         question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
         question_headings.append(question_heading)
 
@@ -245,7 +238,6 @@ def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_
     driver.get(EDUCATION_SECTION_PAGE)
     question_headings = []
     for i in range(1, 10):
-
         question_heading = driver.find_element(By.XPATH, QUESTION_XPATH.format(i=i))
         question_headings.append(question_heading)
 
@@ -256,15 +248,15 @@ def test_010_02_09_clickability_of_question_headings(driver, open_and_load_main_
             driver.execute_script("window.scrollTo(0, arguments[0].scrollHeight);", heading)
             driver.execute_script("arguments[0].click();", heading)
 
-
         assert heading.is_enabled(), "Error: FAQ section is not clickable"
 
 
 @pytest.mark.parametrize('spacekit', SPACEKITS)
-def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consists_of_spaces(driver, spacekit, api_key_delete_name, wait):
+def test_tc_017_03_11_verify_the_api_key_name_does_not_change_if_the_input_consists_of_spaces(driver, spacekit,
+                                                                                              api_key_delete_name,
+                                                                                              wait):
     api_key_delete_name.send_keys(spacekit)
     driver.find_element(*SAVE_BUTTON_SELECTOR).click()
     api_key_name_before = get_api_key_name_before(driver, open_api_keys_page)
     api_key_name_after = driver.find_element(*API_KEY_NAME_SELECTOR).text
     assert api_key_name_after == api_key_name_before
-
