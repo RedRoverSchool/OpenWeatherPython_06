@@ -1,4 +1,3 @@
-import pytest
 import time
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -7,7 +6,6 @@ import pytest
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 URL = 'https://openweathermap.org/'
 URL_WEATHER_API = 'https://openweathermap.org/api'
@@ -25,6 +23,7 @@ weather_api_page_title = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 history_bulk_title = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
 history_bulk_search_location = (By.ID, "firstSearch")
 buttons_search_methods = (By.XPATH, "//div[@class='search-pop-up']/button")
+button_by_location = (By.XPATH, "//button[contains(text(), 'By location')]")
 button_by_coordinates = (By.XPATH, "//button[contains(text(), 'By coordinates')]")
 input_latitude = (By.XPATH, "//input[@placeholder='Latitude']")
 input_longitude = (By.XPATH, "//input[@placeholder='Longitude']")
@@ -32,6 +31,7 @@ latitude_on_map = (By.XPATH, "//div[@class='text']/p[1]")
 longitude_on_map = (By.XPATH, "//div[@class='text']/p[2]")
 search_pop_up = (By.CSS_SELECTOR, "div.search-pop-up")
 first_search_items = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
+search_results = (By.CSS_SELECTOR, "div.pac-container.pac-logo.hdpi")
 search_pop_up_header = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
 headers_selector = (By.XPATH, "//h2[@style='margin-top: 0;']")
 icon_list_description = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
@@ -48,6 +48,7 @@ map_button_loc = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text()
 footer_pricing_link = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
 header_pricing = (By.XPATH, "//div[@id='desktop-menu']//a[text()='Pricing']")
 pricing_page_title = (By.XPATH, "//h1[text()='Pricing']")
+openweather_for_business_link = (By.XPATH, "//a[text()='OpenWeather for Business']")
 
 def test_TC_001_02_01_verify_temperature_switched_on_metric_system(driver, open_and_load_main_page):
     driver.find_element(*metric_button_loc).click()
@@ -108,15 +109,16 @@ def test_TC_007_02_01_verify_the_method_of_input_location(driver):
     assert expected_method_list == actual_method_list, \
         "The actual list of methods does not match the expected list of methods"
 
-@pytest.mark.skip
 def test_TC_007_02_02_verify_search_by_location_name(driver, wait):
-    expected_location = "Moscow"
+    expected_location = "Malta"
     driver.get(URL_MARKETPLACE)
     driver.find_element(*history_bulk_title).click()
     search_loc = driver.find_element(*history_bulk_search_location)
-    for ch in expected_location:
-        search_loc.send_keys(ch)
-        time.sleep(0.05)
+    wait.until(EC.element_to_be_clickable(map_button_loc))
+    search_loc.click()
+    driver.find_element(*button_by_location).click()
+    search_loc.click()
+    search_loc.send_keys(expected_location + Keys.ARROW_DOWN)
     wait.until(EC.visibility_of_element_located(first_search_items))
     driver.find_element(*first_search_items).click()
     actual_search_result = wait.until(EC.visibility_of_element_located(search_pop_up_header))
@@ -136,7 +138,6 @@ def test_TC_007_02_03_verify_search_by_coordinates(driver, wait):
     longitude.send_keys(Keys.RETURN)
     actual_latitude = driver.find_element(*latitude_on_map)
     actual_longitude = driver.find_element(*longitude_on_map)
-    time.sleep(5)
     assert expected_latitude in actual_latitude.text and expected_longitude in actual_longitude.text
 
 def test_TC_007_02_05_verify_visibility_clickability_map_btn(driver, wait):
@@ -219,3 +220,9 @@ def test_TC_008_01_03_01_check_a_visibility_of_Pricing_page_title(driver, open_a
     pricing_page_title_text = driver.find_element(*pricing_page_title).text
     assert pricing_page_title_text == expected_pricing_page_title, \
         "The title of the Pricing page does not match the expected title"
+
+def test_TC_003_08_04_Verify_the_link_OpenWeather_for_Business_is_visible(driver,open_and_load_main_page, wait):
+    driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+    element = wait.until(EC.visibility_of_element_located(openweather_for_business_link))
+    assert element.is_displayed(), \
+        "OpenWeather for Business is not visible on the page"

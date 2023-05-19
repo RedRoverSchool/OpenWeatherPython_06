@@ -1,3 +1,4 @@
+
 from selenium.webdriver import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -12,6 +13,7 @@ FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder=
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
 SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+SEARCH_DROPDOWN_MENU = By.CLASS_NAME, 'search-dropdown-menu'
 SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
@@ -24,6 +26,9 @@ DISPLAYED_AUTHORISATION_WINDOW = (By.XPATH, '//h3[text()="Sign In To Your Accoun
 BUTTON_MAPS = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 BUTTON_LEARN_MORE = "//div[2]/div/div/div[2]/div/div[1]/center/a"
 chart_weather = (By.XPATH, "//*[@id='chart-component']")
+FOOTER_WEBSITE = (By.XPATH, '//*[@id="footer-website"]')
+GOOGLE_PLAY_LINK = (By.XPATH, '//*[@id="footer-website"]/div/div[3]/div/a[2]/img')
+METRIC_SWITCH = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 
 NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
 NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
@@ -54,12 +59,15 @@ widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
 maps_URL = 'https://openweathermap.org/weathermap'
 student_initiative_URL = 'https://openweathermap.org/our-initiatives/student-initiative'
 
+title_free_data_for_students = (By.XPATH, "//span[text()='Free Data for Students']")
 dashboard_URL = 'https://openweathermap.org/weather-dashboard'
 
 metric_toggle = (By.XPATH, '//span[@id="metric"]')
 imperial_units = (By.XPATH, '//span[text()="°F"]')
 metric_units = (By.XPATH, '//span[text()="°C"]')
-
+pricing_URL = 'https://openweathermap.org/price'
+button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
+                                    (By.XPATH, '//*[@id="history"]//a[2]')]
 widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
                     (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
@@ -292,10 +300,9 @@ def test_TC_001_09_05_switched_on_Celsius(driver):
 def test_TC_001_08_03_chart_current_weather(driver, open_and_load_main_page, wait):
     chart_present = wait.until(EC.visibility_of_element_located(chart_weather))
     assert chart_present
+        
 
-
-def test_TC_010_01_01_1_check_button_learn_more(driver):
-    driver.get(URL)
+def test_TC_010_01_01_1_check_button_learn_more(driver, open_and_load_main_page):
     menu_initiatives = driver.find_element(*MENU_INITIATIVES)
     action_chains = ActionChains(driver)
     action_chains.move_to_element(menu_initiatives)
@@ -303,3 +310,51 @@ def test_TC_010_01_01_1_check_button_learn_more(driver):
     actual_button = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
     expected_text_on_button = "Learn more"
     assert actual_button.text == expected_text_on_button
+        
+        
+def test_TC_010_02_02_check_free_data_for_students(driver, open_and_load_main_page):
+    # 3 redirection in 1 test
+    menu_initiatives = driver.find_element(*MENU_INITIATIVES)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(menu_initiatives)
+    driver.execute_script("arguments[0].click();", menu_initiatives)
+    button_learn = driver.find_element(By.XPATH, BUTTON_LEARN_MORE)
+    driver.execute_script("arguments[0].click();", button_learn)
+    expected_title = "Free Data for Students"
+    actual_title = driver.find_element(*title_free_data_for_students)
+    assert expected_title == actual_title.text
+
+        
+def test_TC_008_03_01_button_detailing_pricing(driver):
+    driver.get(pricing_URL)
+    for button_locator in button_detailed_pricing_locators:
+        button_p = driver.find_element(*button_locator)
+        assert button_p.is_displayed() 
+
+
+def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(driver, open_and_load_main_page, wait):
+    driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+    google_play = driver.find_element(*GOOGLE_PLAY_LINK)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(google_play)
+    driver.execute_script("arguments[0].click();", google_play)
+    driver.switch_to.window(driver.window_handles[1])
+    expected_title = 'OpenWeather'
+    # displayed_title = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]//div//h1/span').text
+    assert '/play.google' in driver.current_url and expected_title in driver.title
+
+def test_TC_001_01_08_dropdown_list_contain_city_temperature_celsius(driver, open_and_load_main_page, wait):
+    metric_button = wait.until(EC.element_to_be_clickable(METRIC_SWITCH))
+    assert metric_button.is_displayed() and metric_button.is_enabled()
+    search_city_input = driver.find_element(*SEARCH_CITY_FIELD)
+    search_city_input.click()
+    search_city_input.send_keys('Saint Petersburg')
+    driver.find_element(*SEARCH_BUTTON).click()
+    wait.until(EC.element_to_be_clickable(SEARCH_DROPDOWN_MENU))
+    dropdown_list = driver.find_element(*SEARCH_DROPDOWN_MENU)
+    for city in dropdown_list.find_elements(By.CSS_SELECTOR, 'li'):
+        assert '°C' in city.text
+
+
+
+

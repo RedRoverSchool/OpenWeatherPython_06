@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
 import pytest
+from selenium.webdriver.support import expected_conditions as EC
 
 
 footer_website_locator = (By.CLASS_NAME, "inner-footer-container")
@@ -10,6 +11,7 @@ gitHub_icon_image = (By.XPATH, "//div[@class='social']//a[6]/img")
 logo = (By.CSS_SELECTOR, "#first-level-nav a")
 copyright_locator = (By.CSS_SELECTOR, "div.inner-footer-container div.horizontal-section.my-5 span:nth-child(3)")
 copyright_expected_result = ['©', '2012 — 2023', 'OpenWeather', '® All rights reserved']
+map_info_block = ("css selector", 'a.map-info-block .minutely-section')
 URL = 'https://openweathermap.org/'
 #The page 'Maps' (/weathermap) doesn't include because it hasn't website footer
 PAGES = ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'home/sign_in', 'faq', 'appid']
@@ -62,4 +64,11 @@ def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_da
 def test_TC_003_10_05_verify_visibility_of_github_icon(driver, open_and_load_main_page):
     github_icon = driver.find_element(*gitHub_icon_image)
     assert github_icon.is_displayed() and github_icon.is_enabled()
+
+def test_TC_001_06_01_redirect_to_interactive_world_weather_map(driver, open_and_load_main_page, wait):
+    driver.find_element(*map_info_block).click()
+    driver.switch_to.window(driver.window_handles[1])
+    wait.until(EC.title_is("Interactive weather maps - OpenWeatherMap"))
+    assert driver.title == "Interactive weather maps - OpenWeatherMap"
+
 
