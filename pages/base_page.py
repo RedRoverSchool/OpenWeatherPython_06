@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
-
+from selenium.webdriver import Keys
 
 class BasePage:
     sign_in_link = (By.CSS_SELECTOR, '.user-li a')
@@ -115,3 +115,6 @@ class BasePage:
         action = ActionChains(self.driver)
         action.move_to_element(element)
         action.perform()
+    def press_enter_button(self):
+        actions = ActionChains(self.driver)
+        actions.send_keys(Keys.ENTER).perform()
