@@ -22,3 +22,6 @@ class MarketplacePageLocators:
     INPUT_LONGITUDE = (By.XPATH, "//input[@placeholder='Longitude']")
     LATITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[1]")
     LONGITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[2]")
+
+class WeatherConditionsLocators:
+    ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
