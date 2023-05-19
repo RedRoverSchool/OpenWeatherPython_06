@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from tests.test_pandoras_box.pages.base_page import BasePage
+from pages.base_page import BasePage
 
 
 class GuidePage(BasePage):
