@@ -15,3 +15,9 @@ class MainPage(BasePage):
         today = WEEKDAYS[day_by_computer]
         return today
 
+    def check_module_title_download_openweather_app(self):
+        module_download_openweather_app = self.driver.find_element(*MainLocator.MODULE_DOWNLOAD_OPENWEATHER_APP)
+        self.go_to_element(module_download_openweather_app)
+        assert module_download_openweather_app.is_displayed(), "Module title Download openweather app is not display"
+
+
