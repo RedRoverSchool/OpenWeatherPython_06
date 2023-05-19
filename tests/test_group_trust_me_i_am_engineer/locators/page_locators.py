@@ -25,6 +25,12 @@ class MarketplacePageLocators:
     INPUT_LONGITUDE = (By.XPATH, "//input[@placeholder='Longitude']")
     LATITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[1]")
     LONGITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[2]")
+    BUTTON_IMPORT_CSV = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
+    INPUT_FIELD_UPLOAD_FILE = (By.ID, "importCSV")
+    DIV_FIELD_UPLOAD_FILE = (By.XPATH, "//*[@id='app']/div[2]/div")
+    LOCATION_NAME_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[2]")
+    LATITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[3]")
+    LONGITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
 
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
