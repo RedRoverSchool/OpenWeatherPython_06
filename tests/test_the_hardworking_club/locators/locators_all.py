@@ -16,4 +16,9 @@ class WidgetsPageLocators():
     XPATH_FIRST_BOTTOM_WIDGET_WINDOW = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]/div/div[1]/div/h2')
     WIDGET_CHOOSE = (By.XPATH, "//li[@class = 'widget-choose__item']")
 
+class PricePageLocators():
+
+    SUBSCRIBE_BUTTON = (By.XPATH, '//center/a[@class="ow-btn round btn-orange"]')
+    COOKIE_BUTTON = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
 
