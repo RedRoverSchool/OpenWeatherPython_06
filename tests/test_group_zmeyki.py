@@ -30,8 +30,8 @@ dashboard_img_locator = (By.CSS_SELECTOR, '.col-md-6 img')
 
 def test_tc_006_01_01_verify_description_of_open_weather_dashboard(driver, open_and_load_main_page, wait):
     driver.get(URL)
-    button_dashboard = driver.find_element(*button_dashboard_locator)
-    button_dashboard.click()
+    driver.find_element(*button_dashboard_locator).click()
+    driver.implicitly_wait(5)
 
     expected_dashboard_h1 = 'OpenWeather\nDashboard'
     actual_dashboard_h1 = driver.find_element(*dashboard_h1_locator)
