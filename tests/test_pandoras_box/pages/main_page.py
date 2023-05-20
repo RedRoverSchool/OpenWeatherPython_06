@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 
 
 class MainPage(BasePage):
-
     FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 
     def enter_city_in_weather_in_your_city_field(self, city):
