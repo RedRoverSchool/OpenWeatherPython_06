@@ -7,4 +7,4 @@ class TestHeader:
 
     def test_TC_002_03_22_partners_link_is_visible_and_clickable(self, driver, open_and_load_main_page):
         page = Header(driver)
-        page.element_visibility_and_clickability(HL.PARTNERS_LINK)
+        page.element_visibility_and_clickability(HL.PARTNERS_LINK, links.PARTNERS_AND_SOLUTIONS)
