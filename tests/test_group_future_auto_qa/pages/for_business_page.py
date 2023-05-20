@@ -12,7 +12,7 @@ class ForBusinessPage(BasePage):
             for_business = self.element_is_clickable(self.locators.FOR_BUSINESS, 25)
             self.driver.execute_script("arguments[0].click();", for_business)
             self.driver.switch_to.window(self.driver.window_handles[1])
-            products = self.element_is_visible(self.locators.PRODUCTS_IN_HEADER, 20)
+            products = self.element_is_clickable(self.locators.PRODUCTS_IN_HEADER, 20)
             self.driver.execute_script("arguments[0].click();", products)
             return self.elements_are_present(self.locators.PRODUCTS_HEADINGS, 20)
         except TimeoutException:
