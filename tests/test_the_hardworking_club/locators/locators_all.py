@@ -14,5 +14,6 @@ class WidgetsPageLocators():
     XPATH_CITY_NAME = (By.XPATH, "//input[@id='city-name']")
     XPATH_SEARCH_FIELD_BUTTON = (By.XPATH, '//*[@id="search-city"]/i')
     XPATH_FIRST_BOTTOM_WIDGET_WINDOW = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]/div/div[1]/div/h2')
+    WIDGET_CHOOSE = (By.XPATH, "//li[@class = 'widget-choose__item']")
 
 
