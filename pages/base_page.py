@@ -23,11 +23,6 @@ class BasePage:
                 self.driver.find_element(*self.sign_in_link).click()
             case 'guide':
                 self.driver.find_element(*self.guide_link)
-<<<<<<< HEAD
-=======
-            case 'dashboard':
-                self.driver.find_element(*self.dashboard_link).click()
->>>>>>> 8b776a95e7254af00800e2c902de35e7e3b7f574
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
