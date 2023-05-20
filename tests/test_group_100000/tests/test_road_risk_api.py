@@ -7,3 +7,8 @@ def test_TC_005_08_04_redirection_to_the_how_to_request_road_risk_API_section_of
     page.open_page()
     page.check_redirect_to_page_section()
 
+
+def test_TC_005_08_03_road_risk_api_visibility_of_road_risk_api_concept_section(driver):
+    page = RoadRiskApi(driver, link=R.ROAD_RISK_API_LINK)
+    page.open_page()
+    page.check_visibility_concept_section()
