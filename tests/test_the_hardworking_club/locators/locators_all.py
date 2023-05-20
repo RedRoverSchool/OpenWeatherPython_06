@@ -11,6 +11,8 @@ class WidgetsPageLocators():
     TYPE_WIDGET_1 = (
         By.XPATH, '//img[contains(@src, "themes/openweathermap/assets/vendor/owm/img/widgets/type-brown.png")]')
     LEFT_BOTTOM_WIDGET = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-menu--brown"]')
-
+    XPATH_CITY_NAME = (By.XPATH, "//input[@id='city-name']")
+    XPATH_SEARCH_FIELD_BUTTON = (By.XPATH, '//*[@id="search-city"]/i')
+    XPATH_FIRST_BOTTOM_WIDGET_WINDOW = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]/div/div[1]/div/h2')
 
 

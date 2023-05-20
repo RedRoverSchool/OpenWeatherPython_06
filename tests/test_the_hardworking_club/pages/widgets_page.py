@@ -1,6 +1,8 @@
 from pages.base_page import BasePage
 from tests.test_the_hardworking_club.locators.locators_all import WidgetsPageLocators
 from conftest import driver
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class WidgetsPage(BasePage):
@@ -18,6 +20,20 @@ class WidgetsPage(BasePage):
         self.driver.find_element(*self.locators.TYPE_WIDGET_1).click()
         left_bottom_widget_appeared = self.element_is_visible(self.locators.LEFT_BOTTOM_WIDGET)
         assert left_bottom_widget_appeared.is_displayed()
+
+    def check_the_specific_city_is_present(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        search_field = self.driver.find_element(*self.locators.XPATH_CITY_NAME)
+        search_field.clear()
+        search_field.click()
+        search_field.send_keys("Foster city")
+        search_field_button = self.driver.find_element(*self.locators.XPATH_SEARCH_FIELD_BUTTON)
+        search_field_button.click()
+        wait = WebDriverWait(self.driver, 10)
+        is_present = wait.until(EC.text_to_be_present_in_element(self.locators.XPATH_FIRST_BOTTOM_WIDGET_WINDOW, 'Foster City'))
+        assert is_present
+
+
 
 
 
