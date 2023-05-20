@@ -11,5 +11,5 @@ class ForBusinessPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[1])
         products = self.element_is_visible(self.locators.PRODUCTS_IN_HEADER, 25)
         products.click()
-        headings = self.elements_are_present(self.locators.PRODUCTS_HEADINGS, 25)
-        return headings
+        return self.elements_are_present(self.locators.PRODUCTS_HEADINGS, 25)
+
