@@ -11,3 +11,6 @@ class MainPage(BasePage):
         return self
 
 
+    def get_header_search_field_attribute(self, attribute):
+        search_placeholder = self.driver.find_element(*MainPageLocators.HEADER_SEARCH_FIELD)
+        return search_placeholder.get_attribute(attribute)
