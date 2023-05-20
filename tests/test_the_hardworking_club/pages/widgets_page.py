@@ -34,6 +34,13 @@ class WidgetsPage(BasePage):
         assert is_present
 
 
+    def verify_that_3_widgets_are_displayed(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        widget_choose_item = self.driver.find_elements(*self.locators.WIDGET_CHOOSE)
+        for widget in widget_choose_item:
+            assert widget.is_displayed(), "Some widget is not displayed"
+
+
 
 
 
