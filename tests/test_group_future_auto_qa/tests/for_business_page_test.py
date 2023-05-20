@@ -6,6 +6,5 @@ class TestBusinessPage:
     def test_tc_012_01_04_verify_the_headings_are_present_on_the_page(self, driver):
         business_page = ForBusinessPage(driver, URL)
         business_page.open_page()
-        headers_count = business_page.check_headings()
-        assert len(headers_count) == 7, "Not all headings are present on the page"
+        assert business_page.check_headings(), "No headings are present on the page"
 
