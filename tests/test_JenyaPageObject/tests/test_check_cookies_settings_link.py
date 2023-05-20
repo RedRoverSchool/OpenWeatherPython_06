@@ -52,27 +52,29 @@ class TestCookiesSettingsLink():
         button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
         assert button.is_displayed()
 
-    def saved_cookies_message_is_visible(self, driver, open):
+    def test_cookies_settings_scroll_and_save(self, driver, open):
+
         first_button = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)
         driver.execute_script("arguments[0].scrollIntoView();", first_button)
-        first_button.click()
-        second_button =driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)
+        assert first_button.is_displayed() and first_button.is_enabled()
+        driver.execute_script("arguments[0].click();", first_button)
+
+        second_button = driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)
         driver.execute_script("arguments[0].scrollIntoView();", second_button)
-        second_button.click()
+        assert second_button.is_displayed() and second_button.is_enabled()# Выбрать вторую радиокнопку
+        driver.execute_script("arguments[0].click();", second_button)
+
         save_button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
         driver.execute_script("arguments[0].scrollIntoView();", save_button)
-        save_button.click()
+
+        assert save_button.is_displayed() and save_button.is_enabled()
+
+        driver.execute_script("arguments[0].click();", save_button)
+
         message = driver.find_element(*CookiesSettingsPageLocators.COOKIES_SAVED_MESSAGE)
-        saved = message.check_cookies_settings_page_title()
-        assert saved == True
+        assert message.text == "Your cookie settings were saved"
 
 
-
-
-
-        # def test_TC_001_13_01_cookies_settings_Save_changes_button_presence(self, driver, open):
-        # save = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
-        # assert save.
 
 
 
