@@ -25,3 +25,9 @@ class TestMainPage:
         page.open_page()
         page.check_buttons_displayed_and_enabled()
 
+    def test_tc_003_09_03_app_store_brand_link_clickable(self, driver):
+        page = MainPage(driver, LINK_MAIN_PAGE)
+        page.open_page()
+        page.check_app_store_brand_link_clickable()
+
+
