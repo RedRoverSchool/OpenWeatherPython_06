@@ -52,20 +52,18 @@ class TestCookiesSettingsLink():
         button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
         assert button.is_displayed()
 
-
-
-
-
-
-    def test_TC_001_13_01_cookies_settings_action(self, driver, open, wait):
-        ON_button1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)
-        ON_button1.click()
-        ON_button2 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)
-        ON_button2.click()
-        button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
-        button.click()
+    def saved_cookies_message_is_visible(self, driver, open):
+        first_button = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)
+        driver.execute_script("arguments[0].scrollIntoView();", first_button)
+        first_button.click()
+        second_button =driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)
+        driver.execute_script("arguments[0].scrollIntoView();", second_button)
+        second_button.click()
+        save_button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
+        driver.execute_script("arguments[0].scrollIntoView();", save_button)
+        save_button.click()
         message = driver.find_element(*CookiesSettingsPageLocators.COOKIES_SAVED_MESSAGE)
-        saved =message.check_cookies_settings_page_title()
+        saved = message.check_cookies_settings_page_title()
         assert saved == True
 
 
