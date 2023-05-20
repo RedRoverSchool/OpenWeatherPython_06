@@ -2,4 +2,4 @@ from selenium.webdriver.common.by import By
 
 
 class GuidePageLocators:
-    pass
+    LOGO_LOCATOR = (By.CSS_SELECTOR, ".logo > a > img")
