@@ -43,3 +43,14 @@ class MainPage(BasePage):
         actual_page_number = len(self.driver.window_handles)
         assert actual_page_number == initial_page_number + 1, \
             "The new web tab does not opened after click App Store brand-link's"
+
+    def check_google_play_brand_link_clickable(self):
+        initial_page_number = len(self.driver.window_handles)
+        self.go_to_module_download_openweather_app()
+        google_play_brand_link = self.driver.find_element(*MainLocator.GOOGLE_PLAY_BRAND_LINK)
+        google_play_brand_link.click()
+        actual_page_number = len(self.driver.window_handles)
+        assert actual_page_number == initial_page_number + 1, \
+            "The new web tab does not opened after click Google Play brand-link's"
+
+

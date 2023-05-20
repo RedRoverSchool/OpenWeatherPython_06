@@ -21,5 +21,7 @@ class MainLocator:
     LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
     DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
     APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
+    GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
+
 
 

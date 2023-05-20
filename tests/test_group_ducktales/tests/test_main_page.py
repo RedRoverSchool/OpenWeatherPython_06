@@ -30,4 +30,11 @@ class TestMainPage:
         page.open_page()
         page.check_app_store_brand_link_clickable()
 
+    def test_tc_003_09_04_google_play_brand_link_clickable(self, driver):
+        page = MainPage(driver, LINK_MAIN_PAGE)
+        page.open_page()
+        page.check_google_play_brand_link_clickable()
+
+
+
 
