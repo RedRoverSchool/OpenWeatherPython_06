@@ -43,7 +43,7 @@ def open_and_load_main_page(driver, wait):
 
 @pytest.fixture()
 def wait(driver):
-    wait = WebDriverWait(driver, 25)
+    wait = WebDriverWait(driver, 5)
     yield wait
 
 @pytest.fixture()
