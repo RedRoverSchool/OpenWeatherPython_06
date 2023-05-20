@@ -3,12 +3,13 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
-
+from selenium.webdriver import Keys
 
 class BasePage:
     sign_in_link = (By.CSS_SELECTOR, '.user-li a')
     guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
+    pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -22,7 +23,11 @@ class BasePage:
             case 'sign':
                 self.driver.find_element(*self.sign_in_link).click()
             case 'guide':
-                self.driver.find_element(*self.guide_link)
+                self.driver.find_element(*self.guide_link).click()
+            case 'dashboard':
+                self.driver.find_element(*self.dashboard_link).click()
+            case 'pricing':
+                self.driver.find_element(*self.pricing_link).click()
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
@@ -113,3 +118,7 @@ class BasePage:
         action = ActionChains(self.driver)
         action.move_to_element(element)
         action.perform()
+
+    def press_enter_button(self):
+        actions = ActionChains(self.driver)
+        actions.send_keys(Keys.ENTER).perform()
