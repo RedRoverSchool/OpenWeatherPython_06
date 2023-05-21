@@ -6,4 +6,4 @@ from tests.test_pandoras_box.pages.header import Header
 def test_TC_002_01_03_Logo_is_visible(driver, URL):
     page = Header(driver, link=URL)
     page.open_page()
-    page.check_logo_is_visible(Header.logo_locator)
+    page.check_logo_is_visible()
