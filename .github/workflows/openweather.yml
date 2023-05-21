@@ -38,7 +38,7 @@ jobs:
       uses: tj-actions/changed-files@v23
       with:
         files: |
-          tests/
+          **/*.py
 
     - name: Run Pytest on changed files
       if: steps.changed-py-files.outputs.any_changed == 'true'
