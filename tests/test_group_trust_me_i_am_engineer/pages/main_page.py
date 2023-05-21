@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
-from pages.base_page import BasePage
-from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
+from OpenWeatherPython_06.pages import base_page
+from OpenWeatherPython_06.pages.base_page import BasePage
+from OpenWeatherPython_06.tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
@@ -78,3 +79,10 @@ class MainPage(BasePage):
         current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
         assert expected_city_name == current_city_name.text, \
             "The current name of the city does not match the expected name of the city"
+
+    def verify_pricing_link_leads_to_a_correct_page(self):
+        pricing_link = self.driver.find_element(*self.locators.FOOTER_PRICING_LINK)
+        self.go_to_element(pricing_link)
+        pricing_link.click()
+        assert '/price' in self.driver.current_url, \
+            "The link 'Pricing' leads to incorrect page"
