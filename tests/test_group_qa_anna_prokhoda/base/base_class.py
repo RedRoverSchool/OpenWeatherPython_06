@@ -1,8 +1,8 @@
 '''
 Basic methods that could be used among the project
 '''
-
-from selenium.webdriver.common.by import By
+from selenium.common import WebDriverException
+from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -18,14 +18,14 @@ class Base:
 
     def find_element(self, locator):
         return WebDriverWait(self.driver, 30).until(
-            EC.element_to_be_clickable((By.XPATH, locator)))
+            EC.visibility_of_element_located(locator))
 
     """
     Method: find group of elements (array of elements)
     """
 
     def find_elements_array(self, locator):
-        return self.driver.find_elements(by=By.XPATH, value=locator)
+        return self.driver.find_elements(locator)
 
     """
     Method: input values, send_keys
@@ -81,24 +81,60 @@ class Base:
     fields, radio buttons, etc.
     """
 
-    def check_element_enabled(self, element):
-        result = element.is_enabled()
-        print(f'Is element enabled: {result})')
+    def check_element_selected(self, element):
+        result = self.find_element(element).is_selected()
+        print(f'Is element selected: {result}')
         return result
 
     """
-    Method: check value of the elements attribute (
-    e.g. checked="checked" for radio buttons; disabled="disabled" for fields)
+    Method: check if the element is clickable or not
     """
 
-    def check_attributes(self, element, attribute, value):
+    def check_clickable(self, element):
         try:
-            result = element.get_attribute(attribute)
-            assert result == value, \
-                                f'Wrong {attribute} value, the actual one is {result}, the required is {value}'
-            return result
-        except Exception:
-            print("No such attribute")
+            self.find_element(element).click()
+        except WebDriverException:
+            print('Element is not clickable')
+
+    """
+    Method: select value from drop-down list
+    For the web-elements: 
+    <select>
+        <option>
+        <option>
+    </select>
+    """
+
+    def select_option_from_list(self, locator, option):
+        select = Select(self.find_element(locator))
+        select.select_by_index(option)
+        print(f'Item from drop-down selected')
+
+    """
+    Method: check element has property
+    ("checked", "disabled", etc.)
+    """
+
+    def check_property(self, element, value):
+        result = self.find_element(element).get_property(value)
+        print(f'Is element has property {value}: {result}')
+        return result
+
+    """
+    Method: verify preselected option:
+    For the web-elements: 
+    <select>
+        <option>
+        <option>
+    </select> 
+    """
+
+    def check_preselected_option(self, element):
+        select = Select(self.find_element(element))
+        selected_option = select.first_selected_option
+        return selected_option
+
+
 
 
 

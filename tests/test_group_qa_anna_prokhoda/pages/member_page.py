@@ -1,4 +1,10 @@
+import time
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
+
 from tests.test_group_qa_anna_prokhoda.base.base_class import Base
+from tests.test_group_qa_anna_prokhoda.locators.member_page_loc import MemberPageLocators as locator
 
 
 class MemberPage(Base):
@@ -11,30 +17,6 @@ class MemberPage(Base):
 
     URL = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/'
     pages = {"startup": "startup", "dev": "dev", "pro": "pro", "ent": "ent"}
-
-    # Locators
-
-    email = '//input[@id="unauth_subscription_form_email"]'
-
-    title = '//select[@id="unauth_subscription_form_title"]'
-    title_options = '//select[@id="unauth_subscription_form_title"]//option'
-
-    first_name = '//input[@id="unauth_subscription_form_first_name"]'
-    last_name = '//input[@id="unauth_subscription_form_last_name"]'
-    country = '//select[@id="unauth_subscription_form_country"]'
-    address_1 = '//input[@id="unauth_subscription_form_address_line_1"]'
-    address_2 = '//input[@id="unauth_subscription_form_address_line_2"]'
-    city = '//input[@id="unauth_subscription_form_city"]'
-    postal_code = '//input[@id="unauth_subscription_form_postal_code"]'
-    state = '//input[@id="unauth_subscription_form_state"]'
-    phone = '//input[@id="unauth_subscription_form_phone"]'
-
-    continue_payment_button = '//input[@value="Continue to payment"]'
-
-    legal_form_individual = '//span[@class="radio-inline"]//input[1]'
-    legal_form_organization = '//span[@class="radio-inline"]//input[2]'
-
-    error_message = '//span[@class="help-block"]'
 
     # Methods
 
@@ -55,40 +37,45 @@ class MemberPage(Base):
     """
 
     def choose_title_option(self, option):
-        self.find_elements_array(self.title_options)[option].click()
-        print(f'Title option {self.find_elements_array(self.title_options)[option].text} clicked')
+        self.select_option_from_list(locator.title, option)
 
     """
     Method: verify the preselected country in the 'Country' field
     """
 
-    def verify_country_text(self):
-        result = self.find_element(self.country).text
-        return result
+    def verify_country_text(self, value):
+        select_option = self.check_preselected_option(locator.country)
+        self.assert_text(select_option, value)
 
     """
-    Method: verify is the error message corresponds with the message from the requirements;
+    Method: verify is the error message in concrete field corresponds with the message from the requirements;
     Error message is the message, which appears when the form field is left bank
     Error message = "can't be blank"
     """
 
-    def verify_error_message_text(self, number):
-        error_text = self.find_element(self.error_message)[number].text
-        print(f'Error message text: {error_text}')
-        return error_text
+    def verify_error_message_text(self, field, value):
+        required_fields = {"email": "email",
+                           "first_name": "first_name",
+                           "last_name": "last_name",
+                           "address_line_1": "address_line_1",
+                           "city": "city",
+                           "postal_code": "postal_code",
+                           "phone": "phone"}
+        error_message_in_field = (By.XPATH, f'//div[contains(@class, {required_fields.get(field)})]//span[@class="help-block"]')
+        self.assert_text(self.find_element(error_message_in_field), value)
 
     """
     Method: fill in only the required fields of the subscription form
     """
 
     def fill_in_required_fields(self):
-        self.input_value(self.email, "test@test.com")
-        self.input_value(self.first_name, "Test")
-        self.input_value(self.last_name, "Test")
-        self.input_value(self.address_1, "ul. Test, 1-11")
-        self.input_value(self.city, "Test")
-        self.input_value(self.postal_code, "11-111")
-        self.input_value(self.phone, "111111111")
+        self.input_value(locator.email, "test@test.com")
+        self.input_value(locator.first_name, "Test")
+        self.input_value(locator.last_name, "Test")
+        self.input_value(locator.address_1, "ul. Test, 1-11")
+        self.input_value(locator.city, "Test")
+        self.input_value(locator.postal_code, "11-111")
+        self.input_value(locator.phone, "111111111")
 
     """
     Method: check error message if every block (field), where it is necessary;
@@ -100,9 +87,9 @@ class MemberPage(Base):
         required_fields = ["email", "first_name", "last_name", "address_line_1", "city", "postal_code", "phone"]
 
         for i in range(len(required_fields)):
-            error_message_in_field = f'//div[contains(@class, {required_fields[i]})]//span[@class="help-block"]'
+            error_message_in_field = (By.XPATH, f'//div[contains(@class, {required_fields[i]})]//span[@class="help-block"]')
             error_message = self.find_element(error_message_in_field)
-            self.assert_text(error_message.text, "can't be blank")
+            self.assert_text(error_message, "can't be blank")
             print(f'Error message {i} - OK')
 
     """
@@ -110,22 +97,35 @@ class MemberPage(Base):
     """
 
     def click_continue_button(self):
-        self.click_element(self.continue_payment_button)
+        self.click_element(locator.continue_payment_button)
 
+    """
+    Method: if 'Legal from' radio button is chosen by default
+    """
 
+    def check_radio_button_legal_form_selected(self):
+        individual = self.check_element_selected(locator.legal_form_individual)
+        organization = self.check_element_selected(locator.legal_form_organization)
 
+        assert individual is True, \
+            'Radio button "Individual" is not selected by default'
+        assert organization is False, \
+            'Radio button "Organization" is not selected by default'
 
+    """
+    Method: if 'Country' field is disabled
+    """
 
+    def check_country_field_disabled(self):
+        result = self.check_property(locator.country, 'disabled')
+        assert result is True, \
+            'Country field is enabled'
 
+    """
+    Method: if the URL contain 'checkout.stripe.com' after transitioning to payment page
+    """
 
-
-
-
-
-
-
-
-
-
-
-
+    def check_payment_url(self):
+        current_url = self.driver.current_url
+        assert 'checkout.stripe.com' in current_url, \
+            'The payment url is incorrect, no "checkout.stripe.com" inside'
