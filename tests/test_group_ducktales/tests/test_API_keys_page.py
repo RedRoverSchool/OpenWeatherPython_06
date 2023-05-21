@@ -1,6 +1,4 @@
-import time
 
-from tests.test_group_ducktales.pages.API_keys_page import ApiKeysPage
 from tests.test_group_ducktales.pages.sign_in_page import SignInPage
 from tests.test_group_ducktales.test_data.sign_in_page_data import *
 from tests.test_group_ducktales.pages.API_keys_page import ApiKeysPage

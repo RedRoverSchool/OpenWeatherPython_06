@@ -1,5 +1,4 @@
 from pages.base_page import BasePage
-from selenium.webdriver.support import expected_conditions as EC
 from ..locators.API_keys_locators import ApiKeysLocator
 
 
