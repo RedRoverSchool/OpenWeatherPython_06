@@ -11,3 +11,10 @@ class RoadRiskApi(BasePage):
     def check_visibility_concept_section(self):
         section_road_risk = self.driver.find_element(*R.SECTION_R_CONCEPTS)
         assert section_road_risk.is_displayed(), 'Section - NOT FOUND'
+
+    def check_module_title_road_risk_page(self):
+        expected_title = 'Road Risk API'
+        title_module = self.driver.find_element(*R.TITLE_ROAD_RISK)
+        assert expected_title in title_module.text, 'Title Not Found'
+
+
