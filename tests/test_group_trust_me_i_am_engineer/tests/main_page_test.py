@@ -33,4 +33,3 @@ def test_TC_003_12_09_verify_pricing_link_leads_to_a_correct_page(driver, open_a
     page = MainPage(driver)
     page.verify_pricing_link_leads_to_a_correct_page()
 
-
