@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
@@ -28,6 +29,7 @@ HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
 HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
 GUIDE_PAGE = "https://openweathermap.org/guide"
 HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
+LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
 
 
 
@@ -102,4 +104,11 @@ def test_TC_004_08_01_historical_collection_block_visibility(driver):
     driver.execute_script("arguments[0].scrollIntoView(true);", historical_collection)
     assert historical_collection.is_displayed(), "The Historical Weather collection is not displaying"
 
+
+def test_TC_004_08_02_link_to_history_archive_is_clickable(driver):
+    driver.get(GUIDE_PAGE)
+    archive_link = driver.find_element(*LINK_HISTORICAL_ARCHIVE)
+    actions = ActionChains(driver)
+    actions.move_to_element(archive_link).perform()
+    assert archive_link.is_enabled(), "The link is not clickable"
 

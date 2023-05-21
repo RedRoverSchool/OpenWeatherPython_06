@@ -1,20 +1,15 @@
-from datetime import datetime, date
-from selenium.webdriver.common.by import By
-from pages.base_page import BasePage
-from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
+from selenium.webdriver.support import expected_conditions as EC
+from OpenWeatherPython_06.pages import base_page
+from OpenWeatherPython_06.pages.base_page import BasePage
+from OpenWeatherPython_06.tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
 class MainPage(BasePage):
-
+    URL = 'https://openweathermap.org/'
     locators = MainPageLocators()
 
-    search_city_field = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
-    search_button = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
-    search_option = (By.XPATH, "//span[contains(text(), city)]")
-    weekday_8_days_forecast = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
-
-    def verify_weekdays_8days_forecast(self):
+    def verify_weekdays_in_8_days_forecast(self):
         list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
         today = datetime.now()
         num_today_weekday = date.weekday(today)
@@ -28,7 +23,7 @@ class MainPage(BasePage):
                 weekdays_expected.append(list_weekdays[num_next_day_weekday])
             num_next_day_weekday += 1
 
-        week_day_8_days_forecast = self.driver.find_elements(*self.weekday_8_days_forecast)
+        week_day_8_days_forecast = self.driver.find_elements(*self.locators.WEEKDAY_IN_8_DAYS_FORECAST)
         weekdays_on_app = []
         for day in week_day_8_days_forecast:
             weekdays_on_app.append(day.text[:3])
@@ -61,3 +56,33 @@ class MainPage(BasePage):
         date_time_now = datetime.now(ZoneInfo('Europe/London'))
         assert (date_time_now - date_time_site).total_seconds() <= 240, \
             "The current date and time does not match the date and time specified on the page"
+
+    def verify_current_location(self, wait):
+        expected_city_name = "Chicago, US"
+        self.driver.execute_cdp_cmd(
+            "Browser.grantPermissions",
+            {
+                "origin": self.URL,
+                "permissions": ["geolocation"]
+            },
+        )
+        self.driver.execute_cdp_cmd(
+            "Emulation.setGeolocationOverride",
+            {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "accuracy": 100,
+            },
+        )
+        self.driver.find_element(*self.locators.LOC).click()
+        wait.until_not(EC.presence_of_element_located(self.locators.LOAD_DIV))
+        current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
+        assert expected_city_name == current_city_name.text, \
+            "The current name of the city does not match the expected name of the city"
+
+    def verify_pricing_link_leads_to_a_correct_page(self):
+        pricing_link = self.driver.find_element(*self.locators.FOOTER_PRICING_LINK)
+        self.go_to_element(pricing_link)
+        pricing_link.click()
+        assert '/price' in self.driver.current_url, \
+            "The link 'Pricing' leads to incorrect page"
