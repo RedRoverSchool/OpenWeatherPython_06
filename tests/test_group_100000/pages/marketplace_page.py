@@ -12,4 +12,3 @@ class MarketplacePage(BasePage):
     def select_year_field(self):
         self.element_is_clickable(M.SELECT_YEAR_FIELD).click()
 
-
