@@ -74,6 +74,7 @@ class MarketplacePage(BasePage):
 
         self.driver.execute_script("arguments[0].setAttribute('class','visible')", input_file)
         self.driver.execute_script("arguments[0].setAttribute('class','visible')", div_input_file)
+
         input_file.send_keys(csv_file_path)
         actual_location = self.driver.find_element(*self.locators.LOCATION_NAME_TABLE)
         actual_latitude = self.driver.find_element(*self.locators.LATITUDE_TABLE)
