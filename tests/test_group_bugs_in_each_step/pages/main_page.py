@@ -9,3 +9,7 @@ class MainPage(BasePage):
     def sample_function(self):
         return self
 
+    def check_historical_weather_data_link_is_visible(self):
+        historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA)
+        return historical_weather_data_link.is_displayed()
+
