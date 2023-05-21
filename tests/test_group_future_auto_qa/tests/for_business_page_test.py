@@ -1,5 +1,5 @@
-from tests.test_group_future_auto_qa.locators.for_business_page_locators import ForBusinessPageLocators
-from tests.test_group_future_auto_qa.pages.for_business_page import ForBusinessPage
+from tests.old.test_group_future_auto_qa import ForBusinessPageLocators
+from tests.old.test_group_future_auto_qa import ForBusinessPage
 
 
 class TestBusinessPage:

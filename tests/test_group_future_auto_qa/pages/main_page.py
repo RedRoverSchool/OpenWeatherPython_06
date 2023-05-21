@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from tests.test_group_future_auto_qa.locators.main_page_locators import MainPageLocators
+from tests.old.test_group_future_auto_qa import MainPageLocators
 
 
 class MainPage(BasePage):

@@ -1,5 +1,4 @@
-from tests.test_group_future_auto_qa.pages.main_page import MainPage
-import pytest
+from tests.old.test_group_future_auto_qa import MainPage
 
 
 class TestMainPageHeader:

@@ -1,5 +1,5 @@
-from tests.test_pandoras_box.pages.search_result_page import SearchResultPage
-from tests.test_pandoras_box.pages.main_page import MainPage
+from tests.old.test_pandoras_box import SearchResultPage
+from tests.old.test_pandoras_box import MainPage
 
 
 

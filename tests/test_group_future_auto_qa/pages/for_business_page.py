@@ -1,6 +1,4 @@
-from selenium.common import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
-from tests.test_group_future_auto_qa.locators.for_business_page_locators import ForBusinessPageLocators
+from tests.old.test_group_future_auto_qa import ForBusinessPageLocators
 from pages.base_page import BasePage
 
 
