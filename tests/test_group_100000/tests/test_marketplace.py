@@ -9,6 +9,7 @@ def test_RF_TC_007_01_01_Select_state_from_dropdown_list(driver, locator):
     page.open_page()
     page.select_state_field()
     page.select_element_from_dropdown_list(locator)
+
     expected_state = "Texas"
     selected_state = driver.find_element(*M.STATE_TEXAS).text
     assert expected_state == selected_state, '\n======== WRONG STATE! ========\n'
@@ -20,7 +21,20 @@ def test_RF_TC_007_01_02_Select_year_from_dropdown_list(driver, locator):
     page.open_page()
     page.select_year_field()
     page.select_element_from_dropdown_list(locator)
+
     expected_year = "2019"
     selected_year = driver.find_element(*M.EXPECTED_YEAR).text
     assert expected_year == selected_year, '\n======== WRONG YEAR! ========\n'
 
+
+@pytest.mark.parametrize('locator', [M.WEATHER_PAR_LIST])
+def test_RF_TC_007_01_03_Verify_Weather_parameters_to_be_provided(driver, locator):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    elements = page.elements_are_present(locator)
+    actual_list = [element.text for element in elements]
+
+    expected_list = ['Temperature', 'Min temperature', 'Max temperature',
+                    'Feels like', 'Wind (speed, direction)', 'Pressure',
+                     'Humidity', 'Clouds', 'Weather conditions', 'Rain', 'Snow']
+    assert expected_list == actual_list

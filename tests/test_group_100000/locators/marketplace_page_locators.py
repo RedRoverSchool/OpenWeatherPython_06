@@ -8,5 +8,6 @@ class MarketplaceLocators:
     SELECT_YEAR_FIELD = (By.CSS_SELECTOR, "#__BVID__13 .form-control.dropdown-selector")
     YEAR_2019 = (By.CSS_SELECTOR, "#__BVID__13 li:last-child")
     EXPECTED_YEAR = (By.CSS_SELECTOR, "#__BVID__13 .res")
+    WEATHER_PAR_LIST = (By.XPATH, "//*[@class='section']//ul[@class='owm-list']/li")
 
 
