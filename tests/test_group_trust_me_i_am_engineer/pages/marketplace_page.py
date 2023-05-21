@@ -60,9 +60,9 @@ class MarketplacePage(BasePage):
             "The 'Map' button is not displayed on the map or is not clickable"
 
     def verify_search_by_import_csv(self):
-        print(os.getcwd())
-        csv_file_path = os.path.abspath(os.getcwd() + "/../test_data/search_by_import.csv")
-        with open("../test_data/search_by_import.csv", 'r') as f:
+        csv_file_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', 'test_data/search_by_import.csv'))
+        with open(csv_file_path, 'r') as f:
             csv_str = f.readline()
         expected_location, expected_latitude, expected_longitude = csv_str.split(";")
 
