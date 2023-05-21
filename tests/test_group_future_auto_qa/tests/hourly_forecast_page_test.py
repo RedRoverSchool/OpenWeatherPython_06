@@ -13,4 +13,6 @@ class TestHourlyForecastPage:
 
     def test_tc_005_07_02_visibility_of_hourly_forecast_page_title(self, driver):
         page = HourlyForecastPage(driver)
-        page.check_page_title()
+        page_title = 'Hourly Weather Forecast 4 days - OpenWeatherMap'
+        page.check_page_title(page_title)
+
