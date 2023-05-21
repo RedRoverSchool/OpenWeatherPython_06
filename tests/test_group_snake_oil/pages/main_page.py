@@ -11,3 +11,6 @@ class MainPage(BasePage):
 
     def check_visibility_of_linkedIn_icon(self):
         return self.element_is_visible(self.locators.LINKEDIN_ICON)
+
+    def check_clickability_of_linkedIn_icon(self):
+        return self.element_is_clickable(self.locators.LINKEDIN_ICON)

@@ -1,7 +1,3 @@
-import time
-from datetime import datetime, date
-
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
@@ -12,12 +8,7 @@ class MainPage(BasePage):
     URL = 'https://openweathermap.org/'
     locators = MainPageLocators()
 
-    search_city_field = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
-    search_button = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
-    search_option = (By.XPATH, "//span[contains(text(), city)]")
-    weekday_8_days_forecast = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
-
-    def verify_weekdays_8days_forecast(self):
+    def verify_weekdays_in_8_days_forecast(self):
         list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
         today = datetime.now()
         num_today_weekday = date.weekday(today)
@@ -31,7 +22,7 @@ class MainPage(BasePage):
                 weekdays_expected.append(list_weekdays[num_next_day_weekday])
             num_next_day_weekday += 1
 
-        week_day_8_days_forecast = self.driver.find_elements(*self.weekday_8_days_forecast)
+        week_day_8_days_forecast = self.driver.find_elements(*self.locators.WEEKDAY_IN_8_DAYS_FORECAST)
         weekdays_on_app = []
         for day in week_day_8_days_forecast:
             weekdays_on_app.append(day.text[:3])
