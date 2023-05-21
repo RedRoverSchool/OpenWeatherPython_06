@@ -86,3 +86,4 @@ class MainPage(BasePage):
         pricing_link.click()
         assert '/price' in self.driver.current_url, \
             "The link 'Pricing' leads to incorrect page"
+
