@@ -17,9 +17,9 @@ class WidgetsConstructor(BasePage):
                         (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')]
 
     def check_switched_temperature_units(self, temperature_units):
+        expected_position = 'color: rgb(235, 110, 75);'
         match temperature_units:
             case 'celsius':
-                expected_position = 'color: rgb(235, 110, 75);'
                 toggle_position = self.driver.find_element(*self.metric_toggle)
                 if toggle_position.get_attribute("style") == expected_position:
                     action = ActionChains(self.driver)
