@@ -37,4 +37,15 @@ def test_RF_TC_007_01_03_Verify_Weather_parameters_to_be_provided(driver, locato
     expected_list = ['Temperature', 'Min temperature', 'Max temperature',
                     'Feels like', 'Wind (speed, direction)', 'Pressure',
                      'Humidity', 'Clouds', 'Weather conditions', 'Rain', 'Snow']
-    assert expected_list == actual_list
+    assert expected_list == actual_list, '\n======== WRONG WEATHER PARAMETERS! ========\n'
+
+
+@pytest.mark.parametrize('locator', [M.UNITS_INFO])
+def test_RF_TC_007_01_04_Verify_Units_of_measurement(driver, locator):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    units = page.element_is_present(locator)
+    actual_units = units.text
+
+    expected = 'Standard (Kelvin, hPa, meter/sec, mm/h)'
+    assert expected == actual_units, '\n======== WRONG UNITS! ========\n'
