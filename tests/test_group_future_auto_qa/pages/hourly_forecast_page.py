@@ -25,4 +25,7 @@ class HourlyForecastPage(BasePage):
         print(position_of_title['left'], " ", position_of_title['top'])
         assert position_of_title['left'] <= 280 and position_of_title['top'] <= 100
 
-
+    def check_page_title(self):
+        self.driver.get("https://openweathermap.org/api/hourly-forecast")
+        print(self.driver.title)
+        assert self.driver.title == 'Hourly Weather Forecast 4 days - OpenWeatherMap', "The title of the page is incorrect!"
