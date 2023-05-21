@@ -12,3 +12,9 @@ def test_TC_005_08_03_road_risk_api_visibility_of_road_risk_api_concept_section(
     page = RoadRiskApi(driver, link=R.ROAD_RISK_API_LINK)
     page.open_page()
     page.check_visibility_concept_section()
+
+
+def test_TC_005_08_01_road_risk_api_verify_page_title_for_road_risk_api(driver):
+    page = RoadRiskApi(driver, link=R.ROAD_RISK_API_LINK)
+    page.open_page()
+    page.check_module_title_road_risk_page()
