@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 WEATHER_IN_YOUR_CITY_FLD = (By.CSS_SELECTOR, "#desktop-menu input:nth-child(1)")
 REQUESTED_CITY = 'London, GB'
-DISPLAYED_CITY = (By.CSS_SELECTOR, "table b a:nth-child(1)")
+DISPLAYED_CITY = (By.XPATH, '//*[@id="forecast_list_ul"]/table/tbody/tr/td[2]/b[1]/a')
 
 
 def test_tc_002_02_01_01_search_city_results_are_visible(driver, wait, open_and_load_main_page):
