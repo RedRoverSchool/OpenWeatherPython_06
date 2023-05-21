@@ -61,6 +61,8 @@ allow_all_cookies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container butt
 
 AGRICULTURE_ANALYTICS_LINK = (By.XPATH,"//a[normalize-space()='Agriculture analytics']")
 
+telegram_icon_is_displayed = (By.XPATH,'//*[@id="footer-website"]/div/div[4]/div[2]/a[5]')
+
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
     your_api_key = driver.find_element(*api_key)
@@ -207,4 +209,15 @@ def test_TC_021_01_2_Main_page_Agriculture_analytics(driver, wait, open_and_load
     agriculture_analytics.click()
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == 'https://openagro.uk/'
+
+
+def test_TC_003_12_15_Verify_that_the_telegram_icon_is_displayed(driver, wait, open_and_load_main_page):
+
+    agriculture_analytics = driver.find_element(*telegram_icon_is_displayed)
+    your_FOOTER_PANEL = driver.find_element(*FOOTER_PANEL)
+    your_FOOTER_PANEL.click()
+    agriculture_analytics.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == 'https://t.me/openweathermap'
+
 
