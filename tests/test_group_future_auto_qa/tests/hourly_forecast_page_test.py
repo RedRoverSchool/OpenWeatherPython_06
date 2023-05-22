@@ -10,3 +10,9 @@ class TestHourlyForecastPage:
     def test_tc_005_07_01_redirects_of_anchor_links_in_a_block_on_right_side(self, driver, wait, link_locator):
         page = HourlyForecastPage(driver)
         page.check_redirects_of_anchor_links(wait, link_locator)
+
+    def test_tc_005_07_02_visibility_of_hourly_forecast_page_title(self, driver):
+        page = HourlyForecastPage(driver)
+        page_title = 'Hourly Weather Forecast 4 days - OpenWeatherMap'
+        page.check_page_title(page_title)
+
