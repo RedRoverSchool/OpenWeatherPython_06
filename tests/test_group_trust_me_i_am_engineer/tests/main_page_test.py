@@ -33,3 +33,7 @@ def test_TC_003_12_09_verify_pricing_link_leads_to_a_correct_page(driver, open_a
     page = MainPage(driver)
     page.verify_pricing_link_leads_to_a_correct_page()
 
+def test_TC_008_01_03_01_check_a_visibility_of_pricing_page_title(driver, open_and_load_main_page):
+    page = MainPage(driver)
+    page.check_a_visibility_of_pricing_page_title()
+

@@ -13,6 +13,7 @@ class MainPageLocators:
     SEARCH_BUTTON = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
     SEARCH_OPTION_FROM_DROPDOWN_LIST = (By.XPATH, "//span[contains(text(), city)]")
     WEEKDAY_IN_8_DAYS_FORECAST = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
+    PRICING_PAGE_TITLE = (By.XPATH, "//h1[text()='Pricing']")
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
