@@ -21,4 +21,6 @@ class PricePageLocators():
     SUBSCRIBE_BUTTON = (By.XPATH, '//center/a[@class="ow-btn round btn-orange"]')
     COOKIE_BUTTON = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 
+class MainPageLocators():
 
+    XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
