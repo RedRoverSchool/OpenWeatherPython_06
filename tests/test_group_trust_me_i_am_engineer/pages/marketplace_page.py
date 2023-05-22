@@ -82,3 +82,10 @@ class MarketplacePage(BasePage):
         assert actual_location.text.strip() == expected_location \
                and actual_latitude.text.strip() == expected_latitude \
                and actual_longitude.text.strip() == expected_longitude
+
+    def verify_visibility_clickability_satellite_btn(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        satellite_button = self.element_is_clickable(self.locators.SATELLITE_BUTTON_LOC)
+        assert satellite_button.is_displayed() and satellite_button.is_enabled(), \
+            "The 'Satellite' button is not displayed on the map or is not clickable"
