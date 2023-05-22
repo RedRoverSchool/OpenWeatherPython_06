@@ -1,7 +1,8 @@
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-
+import time
+# from conftest import driver
 # Main page locators
 HEAD_SEARCH_FIELD = (By.NAME, "q")
 HEAD_SEARCH_PLACEHOLDER = (By.CSS_SELECTOR, 'input[name="q"]::placeholder')
@@ -54,3 +55,6 @@ def test_hidden_text_is_displayed_by_clicking_on_accordion_buttons(driver, wait)
             assert not previous_content.is_displayed(), "The previous answer content is not hidden"
 
         previous_content = question_content
+
+
+
