@@ -18,3 +18,7 @@ class TestFooterLinksFunctionality:
         page = MainPage(driver)
         page.check_current_and_forecast_apis_functionality()
 
+class TestFooterLinksclickability:
+    def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_clickability_current_and_forecast_apis()
