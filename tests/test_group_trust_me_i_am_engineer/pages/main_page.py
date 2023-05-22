@@ -1,7 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
-from OpenWeatherPython_06.pages import base_page
-from OpenWeatherPython_06.pages.base_page import BasePage
-from OpenWeatherPython_06.tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
+from pages import base_page
+from pages.base_page import BasePage
+from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
@@ -86,3 +86,10 @@ class MainPage(BasePage):
         pricing_link.click()
         assert '/price' in self.driver.current_url, \
             "The link 'Pricing' leads to incorrect page"
+
+    def check_a_visibility_of_pricing_page_title(self):
+        expected_pricing_page_title = "Pricing"
+        self.click_header_link("pricing")
+        pricing_page_title = self.element_is_visible(self.locators.PRICING_PAGE_TITLE)
+        assert pricing_page_title.text == expected_pricing_page_title, \
+            "The title of the Pricing page does not match the expected title"
