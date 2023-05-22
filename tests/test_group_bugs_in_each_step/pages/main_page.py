@@ -33,3 +33,8 @@ class MainPage(BasePage):
         current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
         assert current_and_forecast_apis.is_displayed() and current_and_forecast_apis.is_enabled(), \
             "The 'current_and_forecast_apis' link is not displayed on the page or is not clickable"
+
+    def check_weather_dashboard_link_is_visible(self):
+        weather_dashboard_link = self.element_is_visible(self.locators.WEATHER_DASHBOARD_LINK)
+        assert weather_dashboard_link.is_displayed(), "The Weather Dashboard link is not visible"
+
