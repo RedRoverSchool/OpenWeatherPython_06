@@ -32,3 +32,11 @@ class MainPage(BasePage):
     def faq_submenu_should_be_visible(self, wait):
         element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_FAQ_SUBMENU))
         assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
+
+    def assert_current_url(self, expected_url):
+        current_url = self.driver.current_url
+        assert current_url == expected_url, f"URL does not match. Actual: {current_url}"
+
+    def correct_header_is_displayed(self, text):
+        element_text = self.driver.find_element(*self.locators.HEADER).text
+        assert element_text == text, f'"{text}" is not present.'
