@@ -92,3 +92,4 @@ class MainPage(BasePage):
         pricing_page_title_text = self.driver.find_element(*self.locators.PRICING_PAGE_TITLE).text
         assert pricing_page_title_text == expected_pricing_page_title, \
             "The title of the Pricing page does not match the expected title"
+
