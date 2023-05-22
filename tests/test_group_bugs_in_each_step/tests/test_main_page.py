@@ -12,3 +12,9 @@ class TestHistoricalWeatherDataLink:
         element = historical_weather_data_link.check_historical_weather_data_link_is_visible()
         assert element is True, 'The element is not visible'
 
+
+class TestFooterLinksFunctionality:
+    def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_current_and_forecast_apis_functionality()
+
