@@ -89,3 +89,11 @@ class MarketplacePage(BasePage):
         satellite_button = self.element_is_clickable(self.locators.SATELLITE_BUTTON_LOC)
         assert satellite_button.is_displayed() and satellite_button.is_enabled(), \
             "The 'Satellite' button is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_terrain_checkbox(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.element_is_clickable(self.locators.MAP_BUTTON_LOC).click()
+        terrain_checkbox = self.element_is_clickable(self.locators.CHECKBOX_TERRAIN)
+        assert terrain_checkbox.is_displayed() and terrain_checkbox.is_enabled(), \
+            "The 'Terrain' checkbox is not displayed on the map or is not clickable"
