@@ -10,8 +10,15 @@ class MainPage(BasePage):
         return self
 
     def check_historical_weather_data_link_is_visible(self):
-        historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA)
+        historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         return historical_weather_data_link.is_displayed()
+
+    def check_historical_weather_data_link_functionality(self):
+        historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
+        self.go_to_element(historical_weather_data_link)
+        historical_weather_data_link.click()
+        assert '/api#history' in self.driver.current_url, \
+            "The Historical Weather Data link leads to an incorrect page"
 
     def check_current_and_forecast_apis_functionality(self):
         current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
@@ -19,3 +26,5 @@ class MainPage(BasePage):
         current_and_forecast_apis.click()
         assert '/api#current' in self.driver.current_url, \
             "The link 'current_and_forecast_apis' leads to incorrect page"
+
+
