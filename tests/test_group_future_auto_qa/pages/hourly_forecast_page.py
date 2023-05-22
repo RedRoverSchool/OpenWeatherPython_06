@@ -29,3 +29,11 @@ class HourlyForecastPage(BasePage):
         self.driver.get("https://openweathermap.org/api/hourly-forecast")
         assert self.driver.title == page_title, "The title of the page is incorrect!"
 
+    def check_clickability_and_visibility_of_call_hourly_forecast_data_link(self, wait):
+        self.driver.get("https://openweathermap.org/api/hourly-forecast")
+        wait.until(EC.element_to_be_clickable(self.locators.ALLOW_ALL_COOKIES)).click()
+        hourly_forecast_data_link = self.driver.find_element(*HourlyForecastPageLocators.CALL_HOURLY_FORECAST_DATA)
+        wait.until(EC.element_to_be_clickable(hourly_forecast_data_link))
+        assert hourly_forecast_data_link.is_displayed() and hourly_forecast_data_link.is_enabled()
+
+
