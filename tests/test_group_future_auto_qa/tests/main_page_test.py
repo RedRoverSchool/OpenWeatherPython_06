@@ -19,3 +19,9 @@ class TestMainPageHeader:
         main_page.fill_city_search_field('a')
         assert search_placeholder_text not in main_page.get_header_search_field_attribute("value"), \
             "The placeholder text is still visible in the search field after typing a symbol"
+
+
+    def test_tc_002_03_23_faq_link_is_visible_and_clickable(self, driver, open_and_load_main_page, wait):
+        main_page = MainPage(driver)
+        main_page.click_support_nav_menu()
+        main_page.faq_submenu_should_be_visible(wait=wait)
