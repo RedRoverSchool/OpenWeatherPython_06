@@ -3,6 +3,7 @@ from tests.test_group_bugs_in_each_step.locators.main_page_locators import *
 import requests
 import os
 
+
 class MainPage(BasePage):
     locators = MainPageLocators()
 
@@ -27,4 +28,8 @@ class MainPage(BasePage):
         assert '/api#current' in self.driver.current_url, \
             "The link 'current_and_forecast_apis' leads to incorrect page"
 
-
+    def verify_clickability_current_and_forecast_apis(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
+        assert current_and_forecast_apis.is_displayed() and current_and_forecast_apis.is_enabled(), \
+            "The 'current_and_forecast_apis' link is not displayed on the page or is not clickable"
