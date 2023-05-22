@@ -49,3 +49,14 @@ def test_RF_TC_007_01_04_Verify_Units_of_measurement(driver, locator):
 
     expected = 'Standard (Kelvin, hPa, meter/sec, mm/h)'
     assert expected == actual_units, '\n======== WRONG UNITS! ========\n'
+
+
+@pytest.mark.parametrize('locator', [M.FILE_FORMAT_INFO])
+def test_RF_TC_007_01_05_Verify_info_about_file_format(driver, locator):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    units = page.element_is_present(locator)
+    actual_units = units.text
+
+    expected = 'CSV'
+    assert expected == actual_units, '\n======== WRONG FILE FORMAT! ========\n'
