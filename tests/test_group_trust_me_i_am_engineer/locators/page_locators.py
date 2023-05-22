@@ -8,6 +8,11 @@ class MainPageLocators:
     CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
     LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
     LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+    FOOTER_PRICING_LINK = (By.XPATH, "//div[@class='inner-footer-container']//a[text()='Pricing']")
+    SEARCH_CITY_FIELD = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
+    SEARCH_BUTTON = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
+    SEARCH_OPTION_FROM_DROPDOWN_LIST = (By.XPATH, "//span[contains(text(), city)]")
+    WEEKDAY_IN_8_DAYS_FORECAST = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
@@ -25,6 +30,13 @@ class MarketplacePageLocators:
     INPUT_LONGITUDE = (By.XPATH, "//input[@placeholder='Longitude']")
     LATITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[1]")
     LONGITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[2]")
+    BUTTON_IMPORT_CSV = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
+    INPUT_FIELD_UPLOAD_FILE = (By.ID, "importCSV")
+    DIV_FIELD_UPLOAD_FILE = (By.XPATH, "//*[@id='app']/div[2]/div")
+    LOCATION_NAME_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[2]")
+    LATITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[3]")
+    LONGITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
 
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
+
