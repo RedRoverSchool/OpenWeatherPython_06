@@ -93,3 +93,9 @@ class MainPage(BasePage):
         pricing_page_title = self.element_is_visible(self.locators.PRICING_PAGE_TITLE)
         assert pricing_page_title.text == expected_pricing_page_title, \
             "The title of the Pricing page does not match the expected title"
+
+    def verify_the_link_openweather_for_business_is_visible(self):
+        for_business_link = self.driver.find_element(*self.locators.FOR_BUSINESS_LINK)
+        self.go_to_element(for_business_link)
+        assert self.element_is_visible(self.locators.FOR_BUSINESS_LINK), \
+            "OpenWeather for Business is not visible on the page"
