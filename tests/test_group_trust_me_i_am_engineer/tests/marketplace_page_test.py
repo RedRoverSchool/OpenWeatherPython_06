@@ -16,3 +16,7 @@ def test_TC_007_02_03_verify_search_by_coordinates(driver):
 def test_TC_007_02_05_verify_visibility_clickability_map_btn(driver):
     page = MarketplacePage(driver)
     page.verify_visibility_clickability_map_btn()
+
+def test_TC_007_02_04_verify_search_by_import_csv(driver):
+    page = MarketplacePage(driver)
+    page.verify_search_by_import_csv()

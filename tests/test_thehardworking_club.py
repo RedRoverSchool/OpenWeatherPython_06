@@ -59,7 +59,7 @@ dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
 navigation_arrow_button = (By.CSS_SELECTOR,'div#topcontrol i')
 allow_all_cookies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
 
-
+AGRICULTURE_ANALYTICS_LINK = (By.XPATH,"//a[normalize-space()='Agriculture analytics']")
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
@@ -199,5 +199,12 @@ def test_006_05_04_button_Contact_Us_works(driver, wait):
     assert driver.current_url == 'https://home.openweathermap.org/questions'
 
 
+def test_TC_021_01_2_Main_page_Agriculture_analytics(driver, wait, open_and_load_main_page):
 
+    agriculture_analytics = driver.find_element(*AGRICULTURE_ANALYTICS_LINK)
+    your_FOOTER_PANEL = driver.find_element(*FOOTER_PANEL)
+    your_FOOTER_PANEL.click()
+    agriculture_analytics.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == 'https://openagro.uk/'
 

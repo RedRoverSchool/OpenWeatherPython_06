@@ -6,11 +6,10 @@ class MainPage(BasePage):
 
     locators = MainPageLocators
 
-    def allow_all_cookies(self):
-        self.element_is_clickable(self.locators.ALLOW_ALL_COOKIES).click()
-
     def check_visibility_of_linkedIn_icon(self):
-        return self.element_is_visible(self.locators.LINKEDIN_ICON)
+        element = self.element_is_visible(self.locators.LINKEDIN_ICON)
+        assert element.is_displayed(), "LinkedIn interactive icon is not visible on a page"
 
     def check_clickability_of_linkedIn_icon(self):
-        return self.element_is_clickable(self.locators.LINKEDIN_ICON)
+        element = self.element_is_clickable(self.locators.LINKEDIN_ICON)
+        assert element.is_enabled(), "LinkedIn interactive icon is not clickable on a page"
