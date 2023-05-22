@@ -4,6 +4,7 @@ import pytest
 
 
 class TestHourlyForecastPage:
+
     link_locators = HourlyForecastPageLocators.link_locators
 
     @pytest.mark.parametrize("link_locator", link_locators)
