@@ -25,3 +25,11 @@ class TestMainPageHeader:
         main_page = MainPage(driver)
         main_page.click_support_nav_menu()
         main_page.faq_submenu_should_be_visible(wait=wait)
+
+
+    def test_tc_002_03_09_01_faq_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
+        main_page = MainPage(driver)
+        main_page.click_support_nav_menu()
+        main_page.click_faq_submenu(wait=wait)
+        main_page.assert_current_url("https://openweathermap.org/faq")
+        main_page.correct_header_is_displayed("Frequently Asked Questions")
