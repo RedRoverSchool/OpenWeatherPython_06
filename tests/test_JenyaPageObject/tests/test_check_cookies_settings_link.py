@@ -1,8 +1,10 @@
 import pytest
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+
 from tests.test_JenyaPageObject.pages.cookies_settings_page import CookiesSettingsPage
 from tests.test_JenyaPageObject.locators.cookies_settings_page_locators import CookiesSettingsPageLocators
-
+from conftest import wait
 
 
 class TestCookiesSettingsLink():
@@ -12,6 +14,11 @@ class TestCookiesSettingsLink():
         driver.get(url)
         yield driver
         driver.quit()
+
+    @pytest.fixture()
+    def wait(driver):
+        wait = WebDriverWait(driver, 25)
+        yield wait
 
 
 
