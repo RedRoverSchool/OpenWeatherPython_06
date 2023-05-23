@@ -74,6 +74,27 @@ class MemberPage(Base):
         self.input_value(locator.phone, "111111111")
 
     """
+    Method: fill in all the required fields of the subscription form
+    """
+
+    def fill_in_all_fields(self):
+        self.click_element(locator.legal_form_individual)
+        try:
+            self.select_option_from_list(locator.country, 2)
+        except Exception:
+            pass
+        self.input_value(locator.email, "test@test.com")
+        self.select_option_from_list(locator.title, 2)
+        self.input_value(locator.first_name, "Test")
+        self.input_value(locator.last_name, "Test")
+        self.input_value(locator.address_1, "ul. Test, 1-11")
+        self.input_value(locator.address_2, "ul. Test, 2-22")
+        self.input_value(locator.state, "Test")
+        self.input_value(locator.city, "Test")
+        self.input_value(locator.postal_code, "11-111")
+        self.input_value(locator.phone, "111111111")
+
+    """
     Method: check error message if every block (field), where it is necessary;
     As error message should appear only under required fields, we take this field block and check, 
     if there is am error message there
