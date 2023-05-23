@@ -10,6 +10,8 @@ class BasePage:
     guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
+    allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -122,6 +124,7 @@ class BasePage:
     def press_enter_button(self):
         actions = ActionChains(self.driver)
         actions.send_keys(Keys.ENTER).perform()
+
 
 
 
