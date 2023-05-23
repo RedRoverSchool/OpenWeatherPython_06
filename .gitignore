@@ -22,7 +22,7 @@ tests/test_pandoras_box.py
 tests/test_teachers.py
 tests/test_thehardworking_club.py
 PageObject/__init__.py
-pages/base_page.py
+
 tests/tests_group_trust_me_i_am_engineer/pages/__init__.py
 tests/tests_group_trust_me_i_am_engineer/tests/main_page_test.py
 tests/test_JenyaPageObject/pages/cookies_settings_page.py
