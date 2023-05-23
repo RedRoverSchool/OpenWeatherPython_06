@@ -43,3 +43,8 @@ class MainPage(BasePage):
         weather_dashboard_link = self.driver.find_element(*self.locators.WEATHER_DASHBOARD_LINK)
         assert weather_dashboard_link.is_enabled(), "The Weather dashboard link is not clickable"
 
+    def verify_how_to_start_visibility(self):
+        how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
+        assert how_to_start.is_displayed(), "The How to start link is not visible"
+
+

@@ -29,6 +29,12 @@ class TestFooterLinksclickability:
         page.verify_clickability_current_and_forecast_apis()
 
 
+class TestFooterLinksVisibility:
+    def test_TC_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_how_to_start_visibility()
+
+
 class TestWeatherDashboardLink:
 
     def test_tc_003_03_04_verify_weather_dashboard_link_visibility(self, driver, open_and_load_main_page):
