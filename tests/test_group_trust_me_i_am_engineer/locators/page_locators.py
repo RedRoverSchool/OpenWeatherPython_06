@@ -40,6 +40,14 @@ class MarketplacePageLocators:
     LONGITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
     SATELLITE_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Satellite')]")
     CHECKBOX_TERRAIN = (By.XPATH, "//li[@aria-label='Terrain']/span/span[2]")
+    BUTTON_ZOOM_IN = (By.XPATH, "//button[@title='Zoom in']")
 
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
+
+class OurInitiativesPageLocators:
+    OUR_INITIATIVES_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
+    LEARN_MORE_LINK = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
+    LEARN_MORE_PAGE_TITLE = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
+    HEADERS_SELECTOR = (By.XPATH, "//h2[@style='margin-top: 0;']")
+

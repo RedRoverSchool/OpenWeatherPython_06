@@ -97,3 +97,10 @@ class MarketplacePage(BasePage):
         terrain_checkbox = self.element_is_clickable(self.locators.CHECKBOX_TERRAIN)
         assert terrain_checkbox.is_displayed() and terrain_checkbox.is_enabled(), \
             "The 'Terrain' checkbox is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_zoom_in(self, wait):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.element_is_displayed(self.locators.BUTTON_ZOOM_IN, wait)
+        self.element_is_visible(self.locators.BUTTON_ZOOM_IN).click()
+        assert self.element_is_visible(self.locators.BUTTON_ZOOM_IN) and self.element_is_clickable(self.locators.BUTTON_ZOOM_IN)
