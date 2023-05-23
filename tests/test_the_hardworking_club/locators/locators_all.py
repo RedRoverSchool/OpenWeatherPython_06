@@ -19,9 +19,19 @@ class WidgetsPageLocators():
 
 
 
+
 class PricePageLocators():
 
     SUBSCRIBE_BUTTON = (By.XPATH, '//center/a[@class="ow-btn round btn-orange"]')
     COOKIE_BUTTON = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
+
+class GuidePageLocators:
+
+    SOLAR = (By.CSS_SELECTOR, "li a[href*='solar-energy-prediction']")
+    GLOBAL_WEATHER = (By.CSS_SELECTOR, "li a[href*='push-weather-alerts']")
+    ROAD_RISK = (By.CSS_SELECTOR, "li a[href*='road-risk']")
+    GLOBAL_PRECIP = (By.CSS_SELECTOR, "li a[href*='global-precipitation-map-forecast']")
+    WEATHER_MAPS = (By.CSS_SELECTOR, "li a[href*='weather-map-1h']")
 
 
