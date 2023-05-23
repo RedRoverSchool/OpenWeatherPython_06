@@ -36,7 +36,7 @@ URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 HISTORICAL_COLLECTION_LINKS = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2) a")
 EXPECTED_LINK_COLOR_HEX = "#e96e50"
 TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
-
+AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
 
 
 @pytest.mark.parametrize('city', CITIES)
@@ -100,6 +100,10 @@ def test_TC_005_10_03_correct_redirection_for_how_to_get_access_link(driver):
     how_to_get_access_link.click()
     how_to_get_access_title = driver.find_element(*HOW_TO_GET_ACCESS_TITLE_LOCATOR)
     assert how_to_get_access_title.is_displayed()
+
+
+def test_TC_021_01_01_visibility_of_agriculture_analytics_link(driver, open_and_load_main_page, wait):
+    assert driver.find_element(*AGRICULTURE_ANALYTICS_TITLE_LOCATOR).is_displayed()
 
 
 
