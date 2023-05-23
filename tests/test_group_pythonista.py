@@ -136,6 +136,7 @@ def test_TC_005_08_03_road_risk_api_visibility_of_road_risk_api_concept_section(
     assert section_road_risk.is_displayed(), 'Section - NOT FOUND'
 
 
+
 def test_TC_002_01_08_header_logo_verify_logo_redirects_from_weather_model_page_to_main_page(driver):
     driver.get(URL_WEATHER_MODEL)
     driver.find_element(*LOGO).click()

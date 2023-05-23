@@ -1,3 +1,4 @@
 .idea/
 __pycache__/
 allure-results
+conftest.py

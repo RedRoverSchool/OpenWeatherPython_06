@@ -125,7 +125,6 @@ class BasePage:
         actions = ActionChains(self.driver)
         actions.send_keys(Keys.ENTER).perform()
 
-    def allow_all_cookies(self, timeout=10):
-        wait(self.driver, timeout).until(EC.element_to_be_clickable(self.allow_all_cookies_button)).click()
+
 
 
