@@ -1,6 +1,7 @@
 HOME_PAGE_URL = 'https://openweathermap.org/'
 GUIDE_PAGE_URL = 'https://openweathermap.org/guide'
 DASHBOARD_PAGE_URL = 'https://openweathermap.org/weather-dashboard'
+FAQ_URL = 'https://openweathermap.org/faq'
 
 # URLs of all pages placed at header
 ALL_PAGES_URLs = ['https://openweathermap.org/',
