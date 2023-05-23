@@ -36,7 +36,6 @@ class TestFooterLinksVisibility:
 
 
 class TestWeatherDashboardLink:
-
     def test_tc_003_03_04_verify_weather_dashboard_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_weather_dashboard_link_is_visible()
@@ -48,4 +47,11 @@ class TestWeatherDashboardLink:
     def test_tc_003_12_02_verify_weather_data_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_weather_dashboard_link_functionality()
+
+
+class TestWeatherMapsLink:
+    def test_tc_003_12_03_verify_weather_maps_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_maps_link_functionality()
+
 
