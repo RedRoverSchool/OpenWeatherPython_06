@@ -35,3 +35,7 @@ class TestWeatherDashboardLink:
         page = MainPage(driver)
         page.check_weather_dashboard_link_is_visible()
 
+    def test_tc_003_03_05_verify_weather_dashboard_link_clickability(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_is_clickable()
+
