@@ -122,3 +122,6 @@ class BasePage:
     def press_enter_button(self):
         actions = ActionChains(self.driver)
         actions.send_keys(Keys.ENTER).perform()
+
+
+

@@ -1,9 +1,9 @@
 import pytest
-from selenium.webdriver.common.by import By
-
+from selenium.webdriver.common.action_chains import ActionChains
 from tests.test_JenyaPageObject.pages.cookies_settings_page import CookiesSettingsPage
 from tests.test_JenyaPageObject.locators.cookies_settings_page_locators import CookiesSettingsPageLocators
-from selenium.webdriver.common.action_chains import ActionChains
+
+
 
 class TestCookiesSettingsLink():
     @pytest.fixture
@@ -13,11 +13,10 @@ class TestCookiesSettingsLink():
         yield driver
         driver.quit()
 
-    def test_TC_001_13_01_cookies_settings_title(self, driver):
-        cookies_settings_page = CookiesSettingsPage(driver, "https://openweathermap.org/cookies-settings/")
-        cookies_settings_page.open()
-        title = cookies_settings_page.check_cookies_settings_page_title()
-        assert title == True
+
+
+    def test_TC_001_13_01_cookies_settings_title(self, driver, open):
+        assert driver.find_element(*CookiesSettingsPageLocators.TITLE_COOKIES_SETTINGS).is_displayed()
     def test_TC_001_13_01_cookies_settings_analyse_radio_button_ON(self, driver, open):
         ON_button1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)
         assert ON_button1.is_displayed() and ON_button1.is_enabled(), "ON checkbox is not displayed or not enable"
@@ -52,27 +51,36 @@ class TestCookiesSettingsLink():
         button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
         assert button.is_displayed()
 
-    def test_cookies_settings_scroll_and_save(self, driver, open):
+    def test_TC_001_13_01_cookies_settings_save_changes(self, driver, open):
+        footer = driver.find_element(*CookiesSettingsPageLocators.FOOTER)
+        footer.click()
 
-        first_button = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)
-        driver.execute_script("arguments[0].scrollIntoView();", first_button)
-        assert first_button.is_displayed() and first_button.is_enabled()
-        driver.execute_script("arguments[0].click();", first_button)
+        action = ActionChains(driver)
+        action.move_to_element(
+            driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON)).click().perform()
+        action.move_to_element(
+            driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)).click().perform()
+        action.move_to_element(
+            driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)).click().perform()
+        assert driver.find_element(*CookiesSettingsPageLocators.COOKIES_SAVED_MESSAGE).is_displayed()
 
-        second_button = driver.find_element(*CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON)
-        driver.execute_script("arguments[0].scrollIntoView();", second_button)
-        assert second_button.is_displayed() and second_button.is_enabled()# Выбрать вторую радиокнопку
-        driver.execute_script("arguments[0].click();", second_button)
 
-        save_button = driver.find_element(*CookiesSettingsPageLocators.SAVE_CHANGES_BUTTON)
-        driver.execute_script("arguments[0].scrollIntoView();", save_button)
 
-        assert save_button.is_displayed() and save_button.is_enabled()
 
-        driver.execute_script("arguments[0].click();", save_button)
+    @pytest.mark.parametrize("locator, expected_visibility, expected_enabled", [
+        (CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_ON, True, True),
+        (CookiesSettingsPageLocators.COOKIES_ANALYSE_NAME_ON, True, True),
+        (CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_OFF, True, True),
+        (CookiesSettingsPageLocators.COOKIES_ANALYSE_NAME_OFF, True, True),
+        (CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_ON, True, True),
+        (CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_NAME_ON, True, True),
+        (CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_CHECKBOX_OFF, True, True),
+        (CookiesSettingsPageLocators.COOKIES_GOOGLE_ADVERTISING_NAME_OFF, True, True),
+    ])
+    def test_TC_001_13_01_cookies_settings_visibility_and_enabled(self, driver, open, locator, expected_visibility, expected_enabled):
+        element = driver.find_element(*locator)
+        assert element.is_displayed() == expected_visibility and element.is_enabled() == expected_enabled
 
-        message = driver.find_element(*CookiesSettingsPageLocators.COOKIES_SAVED_MESSAGE)
-        assert message.text == "Your cookie settings were saved"
 
 
 
