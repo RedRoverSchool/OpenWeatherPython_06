@@ -25,3 +25,9 @@ class MainPage(BasePage):
             wait.until(EC.text_to_be_present_in_element(MainPageLocators.displayed_city_locator, city))
             actual_city = self.driver.find_element(*MainPageLocators.displayed_city_locator).text
             assert expected_city in actual_city
+
+    def about_us_link_leads_to_correct_page(self):
+        about_us_link = self.driver.find_element(*MainPageLocators.ABOUT_US_LOCATOR)
+        self.go_to_element(about_us_link)
+        about_us_link.click()
+        assert self.driver.current_url == 'https://openweathermap.org/about-us'
