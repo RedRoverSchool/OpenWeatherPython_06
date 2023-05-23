@@ -13,4 +13,3 @@ class ApiPage(BasePage):
         assert self.driver.title == page_title, "The title of the page is incorrect!"
 
 
-
