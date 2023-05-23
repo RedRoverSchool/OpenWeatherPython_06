@@ -122,7 +122,6 @@ class MemberPage(Base):
     """
 
     def check_payment_url(self):
-        #self.find_element((By.XPATH, '//div[text()="Pay with card"]'))
         current_url = self.driver.current_url
         assert 'checkout.stripe.com' in current_url, \
             'The payment url is incorrect, no "checkout.stripe.com" inside'
