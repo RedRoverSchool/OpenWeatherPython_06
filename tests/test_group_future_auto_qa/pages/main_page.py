@@ -1,3 +1,5 @@
+from selenium.webdriver import ActionChains
+
 from pages.base_page import BasePage
 from tests.test_group_future_auto_qa.locators.main_page_locators import MainPageLocators
 from selenium.webdriver.support import expected_conditions as EC
