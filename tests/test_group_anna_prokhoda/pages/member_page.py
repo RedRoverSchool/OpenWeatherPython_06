@@ -66,7 +66,7 @@ class MemberPage(Base):
     """
 
     def fill_in_required_fields(self):
-        self.input_value(locator.email, "test@test.com")
+        self.input_value(locator.email, "test@testt.com")
         self.input_value(locator.first_name, "Test")
         self.input_value(locator.last_name, "Test")
         self.input_value(locator.address_1, "ul. Test, 1-11")
@@ -84,7 +84,7 @@ class MemberPage(Base):
             self.select_option_from_list(locator.country, 2)
         except Exception:
             pass
-        self.input_value(locator.email, "test@test.com")
+        self.input_value(locator.email, "test@test.test")
         self.select_option_from_list(locator.title, 2)
         self.input_value(locator.first_name, "Test")
         self.input_value(locator.last_name, "Test")
