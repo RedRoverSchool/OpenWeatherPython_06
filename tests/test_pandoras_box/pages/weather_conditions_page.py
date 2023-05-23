@@ -17,3 +17,4 @@ class WeatherConditions(BasePage):
             case 'clouds':
                 clouds_codes = self.driver.find_element(*self.clouds_locator)
                 assert clouds_codes.is_displayed()
+
