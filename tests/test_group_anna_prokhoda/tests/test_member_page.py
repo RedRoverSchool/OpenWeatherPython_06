@@ -24,3 +24,5 @@ def test_tc_018_03_02_verify_error_messages_appeared_when_submitting_blank_form(
     member_page.get_link('dev')
     member_page.click_continue_button()
     member_page.check_error_messages()
+
+    
