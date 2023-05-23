@@ -1,10 +1,11 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from tests.test_group_anna_prokhoda.base.base_class import Base
+
+from pages.base_page import BasePage
 from tests.test_group_anna_prokhoda.locators.member_page_loc import MemberPageLocators as locator
 
 
-class MemberPage(Base):
+class MemberPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -65,32 +66,17 @@ class MemberPage(Base):
     Method: fill in only the required fields of the subscription form
     """
 
-    def fill_in_required_fields(self):
-        self.input_value(locator.email, "test@testtt.com")
+    def fill_in_fields(self, title=None, address_2=None, state=None):
+        if title:
+            self.select_option_from_list(locator.title, title)
+        if address_2:
+            self.input_value(locator.address_2, "ul. Test, 2-22")
+        if state:
+            self.input_value(locator.state, "Test")
+        self.input_value(locator.email, "test@test.com")
         self.input_value(locator.first_name, "Test")
         self.input_value(locator.last_name, "Test")
         self.input_value(locator.address_1, "ul. Test, 1-11")
-        self.input_value(locator.city, "Test")
-        self.input_value(locator.postal_code, "11-111")
-        self.input_value(locator.phone, "111111111")
-
-    """
-    Method: fill in all the required fields of the subscription form
-    """
-
-    def fill_in_all_fields(self):
-        self.click_element(locator.legal_form_individual)
-        try:
-            self.select_option_from_list(locator.country, 2)
-        except Exception:
-            pass
-        self.input_value(locator.email, "test@test.test")
-        self.select_option_from_list(locator.title, 2)
-        self.input_value(locator.first_name, "Test")
-        self.input_value(locator.last_name, "Test")
-        self.input_value(locator.address_1, "ul. Test, 1-11")
-        self.input_value(locator.address_2, "ul. Test, 2-22")
-        self.input_value(locator.state, "Test")
         self.input_value(locator.city, "Test")
         self.input_value(locator.postal_code, "11-111")
         self.input_value(locator.phone, "111111111")
