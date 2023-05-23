@@ -12,3 +12,9 @@ class OurInitiativesPage(BasePage):
     def click_initiatives_link(self):
         our_initiatives_link = self.element_is_present(self.locators.INITIATIVES)
         our_initiatives_link.click()
+
+    def click_education_learn_more(self):
+        education_learn_more = self.element_is_present(self.locators.EDUCATION_LEARN_MORE)
+        self.driver.execute_script("window.scrollBy(0, 500);")
+        self.action_move_to_element(education_learn_more)
+        education_learn_more.click()
