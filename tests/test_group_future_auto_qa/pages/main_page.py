@@ -16,3 +16,9 @@ class MainPage(BasePage):
 
     def click_header_search_field(self):
         self.driver.find_element(*self.locators.HEADER_SEARCH_FIELD).click()
+
+    def click_footer_product_collections_widgets(self, expected_link):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.FOOTER_WIDGETS)
+        link_href = widgets_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"

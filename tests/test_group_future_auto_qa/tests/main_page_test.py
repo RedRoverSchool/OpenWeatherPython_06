@@ -19,3 +19,10 @@ class TestMainPageHeader:
         main_page.fill_city_search_field('a')
         assert search_placeholder_text not in main_page.get_header_search_field_attribute("value"), \
             "The placeholder text is still visible in the search field after typing a symbol"
+
+
+class TestMainPageFooter:
+    def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        expected_link = "https://openweathermap.org/widgets-constructor"
+        page.click_footer_product_collections_widgets(expected_link)
