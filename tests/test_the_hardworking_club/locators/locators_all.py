@@ -35,3 +35,5 @@ class GuidePageLocators:
     WEATHER_MAPS = (By.CSS_SELECTOR, "li a[href*='weather-map-1h']")
 
 
+
+

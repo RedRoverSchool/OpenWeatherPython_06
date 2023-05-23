@@ -31,5 +31,3 @@ class TestWidgets:
         widget_page = WidgetsPage(driver)
         widget_page.verify_the_subtitle_of_the_page()
 
-
-

@@ -53,5 +53,3 @@ class WidgetsPage(BasePage):
 
 
 
-
-
