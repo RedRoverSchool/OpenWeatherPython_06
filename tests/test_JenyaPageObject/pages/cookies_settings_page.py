@@ -20,4 +20,3 @@ class CookiesSettingsPage(BasePage):
         return cookies_settings_title.is_displayed()
 
 
-
