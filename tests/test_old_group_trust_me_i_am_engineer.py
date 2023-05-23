@@ -226,10 +226,3 @@ def test_TC_003_08_04_Verify_the_link_OpenWeather_for_Business_is_visible(driver
     element = wait.until(EC.visibility_of_element_located(openweather_for_business_link))
     assert element.is_displayed(), \
         "OpenWeather for Business is not visible on the page"
-
-    # def check_a_visibility_of_pricing_page_title(self):
-    #     expected_pricing_page_title = "Pricing"
-    #     self.click_header_link("pricing")
-    #     pricing_page_title = self.element_is_visible(self.locators.PRICING_PAGE_TITLE)
-    #     assert pricing_page_title.text == expected_pricing_page_title, \
-    #         "The title of the Pricing page does not match the expected title"

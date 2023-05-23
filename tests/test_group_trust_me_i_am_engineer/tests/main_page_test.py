@@ -37,3 +37,6 @@ def test_TC_008_01_03_01_check_a_visibility_of_pricing_page_title(driver, open_a
     page = MainPage(driver)
     page.check_a_visibility_of_pricing_page_title()
 
+def test_TC_003_08_04_verify_the_link_openweather_for_business_is_visible(driver,open_and_load_main_page):
+    page = MainPage(driver)
+    page.verify_the_link_openweather_for_business_is_visible()

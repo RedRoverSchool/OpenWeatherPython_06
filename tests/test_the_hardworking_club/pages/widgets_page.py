@@ -41,6 +41,13 @@ class WidgetsPage(BasePage):
             assert widget.is_displayed(), "Some widget is not displayed"
 
 
+    def verify_the_subtitle_of_the_page(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        headline = self.driver.find_element(*self.locators.SUBTITLE_HEADLINE).text
+        expected_title = "Get a code for posting a weather forecast widget on your site."
+        assert headline == expected_title
+
+
 
 
 
