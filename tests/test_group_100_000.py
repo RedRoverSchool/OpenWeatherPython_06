@@ -16,6 +16,10 @@ URL_ROAD_RISK = 'https://openweathermap.org/api/road-risk'
 LINK_HOW_TO_REQUEST_RR_API = (By.CSS_SELECTOR, 'a[href="#how"]')
 TITLE_HOW_TO_RR_API = (By.XPATH, "//*[@id='how']/h2")
 
+DRIZZLE_LOCATOR = (By.XPATH, '//a[contains(@href, "#Drizzle")]/ancestor-or-self::table')
+CONDITION_URL = 'https://openweathermap.org/weather-conditions'
+
+
 
 def test_TC_001_04_02_Verify_state_of_sky_in_words_for_each_day_is_displayed(driver, open_and_load_main_page, wait):
     elements = driver.find_elements(*search_sky_in_words)
@@ -59,3 +63,9 @@ def test_TC_005_08_04_redirection_to_the_how_to_request_road_risk_API_section_of
     driver.find_element(*LINK_HOW_TO_REQUEST_RR_API).click()
     section_title = driver.find_element(*TITLE_HOW_TO_RR_API)
     assert section_title.is_displayed(), 'Title Not Found'
+
+def test_TC_001_12_04_Drizzle_group_of_codes_visible(driver):
+    driver.get(CONDITION_URL)
+    drizzle_codes = driver.find_element(*DRIZZLE_LOCATOR)
+    assert drizzle_codes.is_displayed()
+

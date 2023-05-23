@@ -1,22 +1,43 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+import pytest
+
 
 URL = 'https://openweathermap.org/widgets-constructor'
 URL_1 = 'https://openweathermap.org/weather-dashboard'
+URL_2 = 'https://openweathermap.org/guide'
+
 CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
-FITTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
+
+SOLAR = (By.CSS_SELECTOR, "li a[href*='solar-energy-prediction']")
+GLOBAL_WEATHER = (By.CSS_SELECTOR, "li a[href*='push-weather-alerts']")
+ROAD_RISK = (By.CSS_SELECTOR, "li a[href*='road-risk']")
+GLOBAL_PRECIP = (By.CSS_SELECTOR, "li a[href*='global-precipitation-map-forecast']")
+WEATHER_MAPS = (By.CSS_SELECTOR, "li a[href*='weather-map-1h']")
+
+FOOTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
 api_key = (By.XPATH, "//input[@id='api-key']")
 city_name = (By.CSS_SELECTOR, "#city-name")
 type_widget_1 = (
 By.XPATH, '//img[contains(@src, "themes/openweathermap/assets/vendor/owm/img/widgets/type-brown.png")]')
 left_bottom_widget = (By.XPATH, '//div/*[@class="widget-left-menu widget-left-menu--brown"]')
 widget_choose = (By.XPATH, "//li[@class = 'widget-choose__item']")
+
+XPATH_CITY_NAME = (By.XPATH, "//input[@id='city-name']")
+XPATH_SEARCH_FIELD_BUTTON = (By.XPATH, '//*[@id="search-city"]/i')
+XPATH_FIRST_BOTTOM_WIDGET_WINDOW = (By.XPATH, '//*[@id="container-openweathermap-widget-11"]/div/div[1]/div/h2')
+
 celsius_button = (By.CSS_SELECTOR, 'span#metric')
 fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
 
 CURRENT_URL = "https://openweather.co.uk/privacy-policy"
 XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
+subscribe_button = (By.XPATH, '//a[contains(text(), "Subscribe to One Call by Call")]')
+cookie_button = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 
 # locators and URL for subscription page
 
@@ -31,9 +52,14 @@ PHONE = (By.CSS_SELECTOR, '#invoice_form_phone')
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, "[name='commit']")
 
 fahrenheit_button = (By.CSS_SELECTOR, 'span#imperial')
+
 URL_weather_dashboard = 'https://openweathermap.org/weather-dashboard'
 dashboard_full_description = (By.CSS_SELECTOR, 'div.row.weather p big')
 
+navigation_arrow_button = (By.CSS_SELECTOR,'div#topcontrol i')
+allow_all_cookies = (By.CSS_SELECTOR,'div.stick-footer-panel__btn-container button')
+
+AGRICULTURE_ANALYTICS_LINK = (By.XPATH,"//a[normalize-space()='Agriculture analytics']")
 
 def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     driver.get(URL)
@@ -42,6 +68,7 @@ def test_TC_001_09_04_YourAPIKey_YourCityName_fields_visible(driver):
     assert your_api_key.is_displayed() and your_city_name.is_displayed()
 
 
+@pytest.mark.skip
 def test_TC_001_09_07_verify_display_of_bottom_widget_1_for_selected_type(driver):
     driver.get(URL)
     driver.find_element(*type_widget_1).click()
@@ -56,17 +83,39 @@ def test_TC_001_09_02_Verify_that_3_widgets_are_displayed(driver, wait):
         assert widget.is_displayed(), "Some widget is not displayed"
 
 
+def test_TC_001_09_08_select_the_specific_city(driver, wait):
+    driver.get(URL)
+    search_field = driver.find_element(*XPATH_CITY_NAME)
+    search_field.clear()
+    search_field.click()
+    search_field.send_keys("Foster city")
+    search_field_button = driver.find_element(*XPATH_SEARCH_FIELD_BUTTON)
+    search_field_button.click()
+    wait = WebDriverWait(driver, 10)
+    is_present = wait.until(EC.text_to_be_present_in_element(XPATH_FIRST_BOTTOM_WIDGET_WINDOW, 'Foster City'))
+    assert is_present
 
 def test_TC_001_09_03_visibility_of_celsius(driver):
     driver.get(URL)
     celsius = driver.find_element(*celsius_button)
     assert celsius.is_displayed() and celsius.is_enabled()
 
+    
 def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(driver, open_and_load_main_page, wait):
     privacy_policy_button = wait.until(EC.element_to_be_clickable(XPATH_PRIVACY_POLICY_BUTTON))
     driver.execute_script("arguments[0].click();", privacy_policy_button)
     driver.switch_to.window(driver.window_handles[1])
     assert driver.current_url == CURRENT_URL
+
+
+@pytest.mark.skip
+def test_TC_008_01_01_subscribe_button_redirects(driver):
+    driver.get('https://openweathermap.org/price')
+    cookie_button_click = driver.find_element(*cookie_button)
+    cookie_button_click.click()
+    subscribe_button_click = driver.find_element(*subscribe_button)
+    subscribe_button_click.click()
+    assert 'home.openweathermap.org/subscriptions' in driver.current_url and 'onecall_30/base' in driver.current_url
 
 def test_TC_001_09_04_verify_visibility_of_fahrenheit(driver):
     driver.get(URL)
@@ -84,7 +133,7 @@ def test_TC_006_01_12_verify_weather_dashboard_full_description(driver):
     displayed_text = dashboard_full_description_text.text
     assert expected_text == displayed_text
 
-
+    
 def test_TC_018_01_03_redirection_to_payment_service_page_for_logged_in_user(driver, open_and_load_main_page, wait, sign_in):
     driver.get(URL_subscription_base)
     first_name = driver.find_element(*FIRST_NAME)
@@ -115,4 +164,47 @@ def test_TC_006_05_03_button_Contact_Us_works(driver):
     driver.get(URL_1)
     my_CONTACT_US = driver.find_element(*CONTACT_US)
     assert my_CONTACT_US.is_enabled()
+    
+def test_TC_004_03_01_all_links_are_visibility(driver):
+    driver.get(URL_2)
+    link_text_list = [
+        driver.find_element(*SOLAR),
+        driver.find_element(*GLOBAL_WEATHER),
+        driver.find_element(*ROAD_RISK),
+        driver.find_element(*GLOBAL_PRECIP),
+        driver.find_element(*WEATHER_MAPS)
+    ]
+    for link_text in link_text_list:
+        assert link_text.is_displayed()
+
+
+def test_TC_001_14_01_Verify_functionality_of_navigation_arrow_button(driver, open_and_load_main_page, wait):
+    element = driver.find_element(*allow_all_cookies)
+    ActionChains(driver).move_to_element(element)
+    driver.execute_script("arguments[0].click();", element) #accepting cookies
+    driver.execute_script("window.scrollTo(0,document.body.scrollHeight)") #scrolling down
+    driver.find_element(*navigation_arrow_button).click()
+    wait.until(EC.invisibility_of_element(element))
+    assert not element.is_displayed()
+
+   
+def test_006_05_04_button_Contact_Us_works(driver, wait):
+
+    driver.get(URL_1)
+    my_CONTACT_US = driver.find_element(*CONTACT_US)
+    my_FOOTER_PANEL = driver.find_element(*FOOTER_PANEL)
+    my_FOOTER_PANEL.click()
+    my_CONTACT_US.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == 'https://home.openweathermap.org/questions'
+
+
+def test_TC_021_01_2_Main_page_Agriculture_analytics(driver, wait, open_and_load_main_page):
+
+    agriculture_analytics = driver.find_element(*AGRICULTURE_ANALYTICS_LINK)
+    your_FOOTER_PANEL = driver.find_element(*FOOTER_PANEL)
+    your_FOOTER_PANEL.click()
+    agriculture_analytics.click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == 'https://openagro.uk/'
 
