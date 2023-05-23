@@ -26,3 +26,9 @@ PageObject/__init__.py
 pages/base_page.py
 tests/tests_group_trust_me_i_am_engineer/pages/__init__.py
 tests/tests_group_trust_me_i_am_engineer/tests/main_page_test.py
+tests/test_JenyaPageObject/pages/cookies_settings_page.py
+tests/test_JenyaPageObject/tests/test_check_cookies_settings_link.py
+
+tests/tests_group_trust_me_i_am_engineer/pages/main_page.py
+
+ERROR tests/tests_group_trust_me_i_am_engineer/tests/main_page_test.py
