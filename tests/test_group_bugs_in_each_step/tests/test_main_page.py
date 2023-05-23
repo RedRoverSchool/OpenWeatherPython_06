@@ -29,9 +29,29 @@ class TestFooterLinksclickability:
         page.verify_clickability_current_and_forecast_apis()
 
 
-class TestWeatherDashboardLink:
+class TestFooterLinksVisibility:
+    def test_TC_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_how_to_start_visibility()
 
+
+class TestWeatherDashboardLink:
     def test_tc_003_03_04_verify_weather_dashboard_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_weather_dashboard_link_is_visible()
+
+    def test_tc_003_03_05_verify_weather_dashboard_link_clickability(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_is_clickable()
+
+    def test_tc_003_12_02_verify_weather_data_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_functionality()
+
+
+class TestWeatherMapsLink:
+    def test_tc_003_12_03_verify_weather_maps_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_maps_link_functionality()
+
 

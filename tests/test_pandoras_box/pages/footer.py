@@ -12,3 +12,11 @@ class Footer(BasePage):
         expected_title = 'OpenWeather'
         assert '/play.google' in self.driver.current_url and expected_title in self.driver.title
 
+
+class Footer(BasePage):
+
+    title_locator = (By.XPATH, '//p[text()="Product Collections"]')
+
+    def check_product_collections_module_title_is_visible(self):
+        title = self.driver.find_element(*self.title_locator)
+        assert title.is_displayed(), "Title is not visible"
