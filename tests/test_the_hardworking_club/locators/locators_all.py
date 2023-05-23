@@ -26,6 +26,10 @@ class PricePageLocators():
     COOKIE_BUTTON = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 
 
+class WeatherDashboardLocators:
+
+    CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
+
 class GuidePageLocators:
 
     SOLAR = (By.CSS_SELECTOR, "li a[href*='solar-energy-prediction']")
