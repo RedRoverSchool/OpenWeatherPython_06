@@ -43,3 +43,10 @@ class MarketplacePageLocators:
 
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
+
+class OurInitiativesPageLocators:
+    OUR_INITIATIVES_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
+    LEARN_MORE_LINK = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
+    LEARN_MORE_PAGE_TITLE = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
+    HEADERS_SELECTOR = (By.XPATH, "//h2[@style='margin-top: 0;']")
+
