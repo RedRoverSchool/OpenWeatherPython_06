@@ -23,3 +23,5 @@ class MemberPageLocators:
     legal_form_organization = (By.XPATH, '//span[@class="radio-inline"]//input[@value="organisation"]')
 
     error_message = (By.XPATH, '//span[@class="help-block"]')
+
+    payment = (By.XPATH, '//div[text()="Pay with card"]')
