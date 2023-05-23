@@ -1,3 +1,4 @@
+import os
 import time
 
 from selenium.webdriver import Keys
@@ -57,3 +58,49 @@ class MarketplacePage(BasePage):
         map_button = self.element_is_clickable(self.locators.MAP_BUTTON_LOC)
         assert map_button.is_displayed() and map_button.is_enabled(), \
             "The 'Map' button is not displayed on the map or is not clickable"
+
+    def verify_search_by_import_csv(self):
+        csv_file_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', 'test_data/search_by_import.csv'))
+        with open(csv_file_path, 'r') as f:
+            csv_str = f.readline()
+        expected_location, expected_latitude, expected_longitude = csv_str.split(";")
+
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+
+        input_file = self.driver.find_element(*self.locators.INPUT_FIELD_UPLOAD_FILE)
+        div_input_file = self.driver.find_element(*self.locators.DIV_FIELD_UPLOAD_FILE)
+
+        self.driver.execute_script("arguments[0].setAttribute('class','visible')", input_file)
+        self.driver.execute_script("arguments[0].setAttribute('class','visible')", div_input_file)
+
+        input_file.send_keys(csv_file_path)
+        actual_location = self.driver.find_element(*self.locators.LOCATION_NAME_TABLE)
+        actual_latitude = self.driver.find_element(*self.locators.LATITUDE_TABLE)
+        actual_longitude = self.driver.find_element(*self.locators.LONGITUDE_TABLE)
+        assert actual_location.text.strip() == expected_location \
+               and actual_latitude.text.strip() == expected_latitude \
+               and actual_longitude.text.strip() == expected_longitude
+
+    def verify_visibility_clickability_satellite_btn(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        satellite_button = self.element_is_clickable(self.locators.SATELLITE_BUTTON_LOC)
+        assert satellite_button.is_displayed() and satellite_button.is_enabled(), \
+            "The 'Satellite' button is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_terrain_checkbox(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.element_is_clickable(self.locators.MAP_BUTTON_LOC).click()
+        terrain_checkbox = self.element_is_clickable(self.locators.CHECKBOX_TERRAIN)
+        assert terrain_checkbox.is_displayed() and terrain_checkbox.is_enabled(), \
+            "The 'Terrain' checkbox is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_zoom_in(self, wait):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.element_is_displayed(self.locators.BUTTON_ZOOM_IN, wait)
+        self.element_is_visible(self.locators.BUTTON_ZOOM_IN).click()
+        assert self.element_is_visible(self.locators.BUTTON_ZOOM_IN) and self.element_is_clickable(self.locators.BUTTON_ZOOM_IN)

@@ -1,8 +1,5 @@
-import time
-from datetime import datetime, date
-
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from pages import base_page
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
@@ -12,12 +9,7 @@ class MainPage(BasePage):
     URL = 'https://openweathermap.org/'
     locators = MainPageLocators()
 
-    search_city_field = (By.CSS_SELECTOR, 'input[placeholder="Search city"]')
-    search_button = (By.CSS_SELECTOR, 'button[class ="button-round dark"]')
-    search_option = (By.XPATH, "//span[contains(text(), city)]")
-    weekday_8_days_forecast = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
-
-    def verify_weekdays_8days_forecast(self):
+    def verify_weekdays_in_8_days_forecast(self):
         list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
         today = datetime.now()
         num_today_weekday = date.weekday(today)
@@ -31,7 +23,7 @@ class MainPage(BasePage):
                 weekdays_expected.append(list_weekdays[num_next_day_weekday])
             num_next_day_weekday += 1
 
-        week_day_8_days_forecast = self.driver.find_elements(*self.weekday_8_days_forecast)
+        week_day_8_days_forecast = self.driver.find_elements(*self.locators.WEEKDAY_IN_8_DAYS_FORECAST)
         weekdays_on_app = []
         for day in week_day_8_days_forecast:
             weekdays_on_app.append(day.text[:3])
@@ -87,3 +79,23 @@ class MainPage(BasePage):
         current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
         assert expected_city_name == current_city_name.text, \
             "The current name of the city does not match the expected name of the city"
+
+    def verify_pricing_link_leads_to_a_correct_page(self):
+        pricing_link = self.driver.find_element(*self.locators.FOOTER_PRICING_LINK)
+        self.go_to_element(pricing_link)
+        pricing_link.click()
+        assert '/price' in self.driver.current_url, \
+            "The link 'Pricing' leads to incorrect page"
+
+    def check_a_visibility_of_pricing_page_title(self):
+        expected_pricing_page_title = "Pricing"
+        self.click_header_link("pricing")
+        pricing_page_title = self.element_is_visible(self.locators.PRICING_PAGE_TITLE)
+        assert pricing_page_title.text == expected_pricing_page_title, \
+            "The title of the Pricing page does not match the expected title"
+
+    def verify_the_link_openweather_for_business_is_visible(self):
+        for_business_link = self.driver.find_element(*self.locators.FOR_BUSINESS_LINK)
+        self.go_to_element(for_business_link)
+        assert self.element_is_visible(self.locators.FOR_BUSINESS_LINK), \
+            "OpenWeather for Business is not visible on the page"
