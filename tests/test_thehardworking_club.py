@@ -187,7 +187,6 @@ def test_TC_001_14_01_Verify_functionality_of_navigation_arrow_button(driver, op
     wait.until(EC.invisibility_of_element(element))
     assert not element.is_displayed()
 
-   
 def test_006_05_04_button_Contact_Us_works(driver, wait):
 
     driver.get(URL_1)
