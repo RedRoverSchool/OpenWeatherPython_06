@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from tests.test_group_anna_prokhoda.base.base_class import Base
 from tests.test_group_anna_prokhoda.locators.member_page_loc import MemberPageLocators as locator
@@ -114,6 +115,9 @@ class MemberPage(Base):
     """
 
     def click_continue_button(self):
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.find_element(locator.continue_payment_button)).perform()
+        print('Moved to button')
         self.click_element(locator.continue_payment_button)
 
     """
