@@ -33,3 +33,10 @@ class TestMainPageHeader:
         main_page.click_faq_submenu(wait=wait)
         main_page.assert_current_url("https://openweathermap.org/faq")
         main_page.correct_header_is_displayed("Frequently Asked Questions")
+
+
+class TestMainPageFooter:
+    def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        expected_link = "https://openweathermap.org/widgets-constructor"
+        page.click_footer_product_collections_widgets(expected_link)

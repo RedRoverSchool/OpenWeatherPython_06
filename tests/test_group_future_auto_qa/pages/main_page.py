@@ -40,3 +40,9 @@ class MainPage(BasePage):
     def correct_header_is_displayed(self, text):
         element_text = self.driver.find_element(*self.locators.HEADER).text
         assert element_text == text, f'"{text}" is not present.'
+
+    def click_footer_product_collections_widgets(self, expected_link):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.FOOTER_WIDGETS)
+        link_href = widgets_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
