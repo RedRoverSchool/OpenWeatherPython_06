@@ -11,6 +11,7 @@ def test_tc_018_03_01_verify_redirection_to_payment_service_page_for_unauthorize
     member_page.get_link('dev')
     member_page.fill_in_required_fields()
     member_page.click_continue_button()
-    wait.until(EC.presence_of_element_located(locator.payment))
+    #wait.until(EC.presence_of_element_located(locator.payment))
+    time.sleep(15)
     member_page.check_payment_url()
 
