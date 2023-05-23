@@ -66,7 +66,7 @@ class MemberPage(Base):
     """
 
     def fill_in_required_fields(self):
-        self.input_value(locator.email, "test@testt.com")
+        self.input_value(locator.email, "test@testtt.com")
         self.input_value(locator.first_name, "Test")
         self.input_value(locator.last_name, "Test")
         self.input_value(locator.address_1, "ul. Test, 1-11")
