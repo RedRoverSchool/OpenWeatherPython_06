@@ -48,6 +48,10 @@ class WidgetsPage(BasePage):
         assert headline == expected_title
 
 
+    def verify_visibility_of_fahrenheit(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        fahrenheit = self.driver.find_element(*self.locators.FAHRENHEIT_BUTTON)
+        assert fahrenheit.is_displayed()
 
 
 
