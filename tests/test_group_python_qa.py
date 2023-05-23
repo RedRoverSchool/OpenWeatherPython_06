@@ -4,6 +4,7 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+from selenium.webdriver.support.color import Color
 
 
 URL_SOLAR_API = "https://openweathermap.org/api/solar-energy-prediction"
@@ -32,7 +33,10 @@ HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2
 LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
 CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
 URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
+HISTORICAL_COLLECTION_LINKS = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2) a")
+EXPECTED_LINK_COLOR_HEX = "#e96e50"
 TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
+
 
 
 @pytest.mark.parametrize('city', CITIES)
@@ -122,8 +126,19 @@ def test_TC_004_08_03_historical_collection_link_redirects_correctly(driver):
     assert driver.current_url == URL_HISTORY_BULK
 
 
+
+def test_TC_004_08_03_verify_all_links_same_color(driver):
+    driver.get(GUIDE_PAGE)
+    all_links = driver.find_elements(*HISTORICAL_COLLECTION_LINKS)
+    for link in all_links:
+        link_color_rgba = link.value_of_css_property("color")
+        link_color_hex = Color.from_string(link_color_rgba).hex
+        assert link_color_hex == EXPECTED_LINK_COLOR_HEX, "The links' colors do not match the standard"
+
+        
 def test_TC_004_02_01_visibility_of_title_of_article(driver):
     driver.get(GUIDE_PAGE)
     title_nwp_model = driver.find_element(*TITLE_NWP_MODEL_LOCATOR)
     assert title_nwp_model.is_displayed()
+
 
