@@ -35,6 +35,12 @@ class TestFooterLinksVisibility:
         page.verify_how_to_start_visibility()
 
 
+class TestWeatherMapsLink:
+    def test_tc_003_12_03_verify_weather_maps_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_maps_link_functionality()
+
+
 class TestWeatherDashboardLink:
     def test_tc_003_03_04_verify_weather_dashboard_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
@@ -49,9 +55,9 @@ class TestWeatherDashboardLink:
         page.check_weather_dashboard_link_functionality()
 
 
-class TestWeatherMapsLink:
-    def test_tc_003_12_03_verify_weather_maps_link_functionality(self, driver, open_and_load_main_page):
+class TestOurTechnologyLink:
+    def test_tc_003_12_08_verify_our_technology_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
-        page.check_weather_maps_link_functionality()
+        page.check_our_technology_link_functionality()
 
 

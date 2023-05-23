@@ -57,6 +57,13 @@ class MainPage(BasePage):
         assert '/api#maps' in self.driver.current_url, \
             "The Weather Maps link leads to an incorrect page"
 
+    def check_our_technology_link_functionality(self):
+        our_technology_link = self.driver.find_element(*self.locators.OUR_TECHNOLOGY_LINK)
+        self.go_to_element(our_technology_link)
+        our_technology_link.click()
+        assert '/technology' in self.driver.current_url, \
+            "The Our technology link leads to an incorrect page"
+
     def verify_how_to_start_visibility(self):
         how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
         assert how_to_start.is_displayed(), "The How to start link is not visible"

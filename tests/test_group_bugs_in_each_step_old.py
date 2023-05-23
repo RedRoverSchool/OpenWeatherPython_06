@@ -16,3 +16,9 @@ def test_TC_003_03_02_verify_current_and_forecast_apis_is_clickable(driver, open
     element = driver.find_element(*CURRENT_AND_FORECAST_APIS)
     wait.until(EC.element_to_be_clickable(CURRENT_AND_FORECAST_APIS))
     assert element.is_displayed() and element.is_enabled()
+
+
+
+
+
+
