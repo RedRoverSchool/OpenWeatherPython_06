@@ -7,3 +7,9 @@ class TestFooter:
         page = Footer(driver)
         page.element_visibility(FL.ASK_A_QUESTION_LINK)
 
+    def test_TC_003_08_03_ask_a_question_link_is_clickable(self, driver, open_and_load_main_page, wait):
+        page = Footer(driver)
+        page.element_clickability(FL.ASK_A_QUESTION_LINK)
+
+
+
