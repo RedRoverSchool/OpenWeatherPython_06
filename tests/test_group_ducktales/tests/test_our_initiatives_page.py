@@ -24,4 +24,6 @@ class TestOurInitiativesPage:
         page.open_page()
         page.click_initiatives_link()
         page.click_education_learn_more()
-        page.get_question_headings()
+        question_headings = page.get_question_headings()
+        page.verify_question_headings_displayed(question_headings)
+

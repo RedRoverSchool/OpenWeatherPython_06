@@ -32,5 +32,8 @@ class OurInitiativesPage(BasePage):
             for i in range(1, 10)
         ]
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        assert all(heading.is_displayed() for heading in question_headings), "Error: FAQ section is not displayed"
         return question_headings
+
+    def verify_question_headings_displayed(self, question_headings):
+        assert all(heading.is_displayed() for heading in question_headings), "Error: FAQ section is not displayed"
+
