@@ -15,7 +15,3 @@ class SignInPage(BasePage):
         registration_question = self.element_is_visible(self.locators.REGISTRATION_QUESTION)
         return registration_question.is_displayed()
 
-    def check_registration_form_is_visible(self):
-        registration_form = self.element_is_visible(self.locators.REGISTRATION_FORM_DISPLAY)
-        assert registration_form.is_displayed(), "Sign In To Your Account is not displayed"
-
