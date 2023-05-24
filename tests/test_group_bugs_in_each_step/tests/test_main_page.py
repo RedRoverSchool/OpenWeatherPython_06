@@ -66,3 +66,10 @@ class TestAccuracyAndQualityOfWeatherDataLink:
                     (self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_accuracy_and_quality_of_weather_data_link_functionality()
+
+
+class TestConnectYourWeatherStationLink:
+    def test_tc_003_12_17_verify_connect_your_weather_station_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_connect_your_weather_station_link_functionality()
