@@ -17,3 +17,10 @@ class OurInitiativesPage(BasePage):
         self.driver.execute_script("window.scrollTo(0, 500)")
         element = wait.until(EC.element_to_be_clickable(self.locators.LEARN_MORE_LINK))
         assert element.is_displayed() and element.is_enabled()
+
+    def verify_that_headers_are_visible_on_the_Our_initiatives_page(self):
+        datas = ['Education', 'Healthcare', 'Open Source', 'Weather stations']
+        self.driver.get(self.URL_OUR_INITIATIVES)
+        find_all_headers = self.driver.find_elements(*self.locators.HEADERS_SELECTOR)
+        headers_on_page = [i.text for i in find_all_headers]
+        assert datas == headers_on_page
