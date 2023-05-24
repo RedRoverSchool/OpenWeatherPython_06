@@ -11,6 +11,5 @@ class PricePage(BasePage):
         self.driver.get(PricePage.URL_price_page)
         self.driver.find_element(*self.locators.COOKIE_BUTTON).click()
         self.driver.find_element(*self.locators.SUBSCRIBE_BUTTON).click()
-        assert 'home.openweathermap.org/subscriptions' in self.driver.current_url \
-               and 'onecall_30/base' in self.driver.current_url
+        assert 'unauth_subscribe/onecall_30/base' in self.driver.current_url, "The billing-info page isn't open"
 
