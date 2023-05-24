@@ -41,6 +41,14 @@ class TestMainPageHeader:
         main_page.how_to_start_submenu_should_be_visible(wait=wait)
 
 
+    def test_tc_002_03_10_01_how_to_start_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
+        main_page = MainPage(driver)
+        main_page.click_support_nav_menu()
+        main_page.click_how_to_start_submenu(wait=wait)
+        main_page.assert_current_url("https://openweathermap.org/appid")
+        main_page.correct_header_is_displayed("How to start using professional collections")
+
+
 class TestMainPageFooter:
     def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
         page = MainPage(driver)
