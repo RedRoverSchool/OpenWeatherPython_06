@@ -19,7 +19,6 @@ class MainPage(BasePage):
     def click_header_search_field(self):
         self.driver.find_element(*self.locators.HEADER_SEARCH_FIELD).click()
 
-
     def click_support_nav_menu(self):
         return self.driver.find_element(*self.locators.SUPPORT_MENU).click()
 
@@ -46,3 +45,7 @@ class MainPage(BasePage):
         widgets_link = self.element_is_clickable(self.locators.FOOTER_WIDGETS)
         link_href = widgets_link.get_attribute('href')
         assert link_href == expected_link, "Incorrect link"
+
+    def how_to_start_submenu_should_be_visible(self, wait):
+        element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_HOW_TO_START_SUBMENU))
+        assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
