@@ -12,3 +12,9 @@ class TestRegistrationQuestion:
         assert element is True, 'The element is not visible'
 
 
+class TestRegistrationForm:
+
+    def test_tc_014_01_01_verify_the_registration_form_visibility(self, driver, open_and_load_sign_in_page):
+        page = SignInPage(driver)
+        page.registration_form_is_visible()
+
