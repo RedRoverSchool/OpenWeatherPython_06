@@ -18,12 +18,15 @@ class WidgetsPageLocators():
     SUBTITLE_HEADLINE = (By.XPATH, "//h2[@class='headline first-child text-color']")
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
 
-
-
 class PricePageLocators():
 
     SUBSCRIBE_BUTTON = (By.XPATH, '//center/a[@class="ow-btn round btn-orange"]')
     COOKIE_BUTTON = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+
+    
+class MainPageLocators():
+  
+    XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
 
 
 class WeatherDashboardLocators:
@@ -38,7 +41,4 @@ class GuidePageLocators:
     ROAD_RISK = (By.CSS_SELECTOR, "li a[href*='road-risk']")
     GLOBAL_PRECIP = (By.CSS_SELECTOR, "li a[href*='global-precipitation-map-forecast']")
     WEATHER_MAPS = (By.CSS_SELECTOR, "li a[href*='weather-map-1h']")
-
-
-
 
