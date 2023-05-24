@@ -72,6 +72,13 @@ class MainPage(BasePage):
         assert '/accuracy-and-quality' in self.driver.current_url, \
             "The Accuracy and quality of weather data link leads to an incorrect page"
 
+    def check_connect_your_weather_station_link_functionality(self):
+        connect_your_weather_station_link = self.driver.find_element(*self.locators.CONNECT_YOUR_WEATHER_STATION_LINK)
+        self.go_to_element(connect_your_weather_station_link)
+        connect_your_weather_station_link.click()
+        assert '/stations' in self.driver.current_url, \
+            "The Connect your weather station link leads to an incorrect page"
+
     def verify_how_to_start_visibility(self):
         how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
         assert how_to_start.is_displayed(), "The How to start link is not visible"
