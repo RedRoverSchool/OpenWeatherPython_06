@@ -16,6 +16,7 @@ graphic_hourly_forecast_locator = (By.CSS_SELECTOR, "canvas[id=chart-component]"
 weather_items_locator = (By.CSS_SELECTOR, "ul.weather-items")
 weather_item_locator = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
 website_link_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
+ask_us_popup_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
 
 def test_tc_001_08_01_graphic_hourly_forecast_is_displayed(driver, open_and_load_main_page, wait):
     driver.get(URL)
@@ -34,3 +35,11 @@ def test_TC_010_02_06_verify_website_link_redirects_to_main_page(driver, open_an
     website_link = driver.find_element(*website_link_locator)
     driver.execute_script("arguments[0].click();", website_link)
     assert driver.current_url == URL
+
+def test_tc_010_02_07_verify_correct_redirection_to_popup_window(driver, open_and_load_main_page, wait):
+    driver.get(STUDENT_INITIATIVE_URL)
+    ask_us_popup = driver.find_element(*ask_us_popup_locator)
+    assert ask_us_popup.is_enabled() and ask_us_popup.is_displayed()
+
+
+
