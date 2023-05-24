@@ -14,7 +14,6 @@ class OurInitiativesPage(BasePage):
 
     def verify_learn_more_button_is_clickable(self, wait):
         self.driver.get(self.URL_OUR_INITIATIVES)
-        self.driver.execute_script("window.scrollTo(0, 500)")
         element = wait.until(EC.element_to_be_clickable(self.locators.LEARN_MORE_LINK))
         assert element.is_displayed() and element.is_enabled()
 
