@@ -49,3 +49,9 @@ class MainPage(BasePage):
     def how_to_start_submenu_should_be_visible(self, wait):
         element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_HOW_TO_START_SUBMENU))
         assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
+
+    def click_how_to_start_submenu(self, wait):
+        submenu = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_HOW_TO_START_SUBMENU)).click()
+        actions = ActionChains(self.driver)
+        actions.click(submenu).perform()
+        return submenu
