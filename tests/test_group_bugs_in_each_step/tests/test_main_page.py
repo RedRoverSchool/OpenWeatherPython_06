@@ -22,7 +22,58 @@ class TestFooterLinksFunctionality:
         page = MainPage(driver)
         page.check_current_and_forecast_apis_functionality()
 
+
 class TestFooterLinksclickability:
     def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.verify_clickability_current_and_forecast_apis()
+
+
+class TestHowToStartLink:
+    def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_how_to_start_visibility()
+
+    def test_tc_003_12_18_verify_how_to_start_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_how_to_start_link_functionality()
+
+
+class TestWeatherMapsLink:
+    def test_tc_003_12_03_verify_weather_maps_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_maps_link_functionality()
+
+
+class TestWeatherDashboardLink:
+    def test_tc_003_03_04_verify_weather_dashboard_link_visibility(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_is_visible()
+
+    def test_tc_003_03_05_verify_weather_dashboard_link_clickability(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_is_clickable()
+
+    def test_tc_003_12_02_verify_weather_data_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_weather_dashboard_link_functionality()
+
+
+class TestOurTechnologyLink:
+    def test_tc_003_12_08_verify_our_technology_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_our_technology_link_functionality()
+
+
+class TestAccuracyAndQualityOfWeatherDataLink:
+    def test_tc_003_12_16_verify_accuracy_and_quality_of_weather_data_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_accuracy_and_quality_of_weather_data_link_functionality()
+
+
+class TestConnectYourWeatherStationLink:
+    def test_tc_003_12_17_verify_connect_your_weather_station_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_connect_your_weather_station_link_functionality()

@@ -23,6 +23,12 @@ class SearchResultPage(BasePage):
         self.driver.find_element(*self.NOTIFICATION_BUTTON).click()
         assert len(self.driver.find_element(*self.NOTIFICATION_PANE).get_attribute("innerHTML")) == 0
 
+    def check_correspondence_of_entered_text(self, city):
+        wait(self.driver, timeout=5).until(EC.presence_of_element_located(self.STRING_ENTERED_CITY))
+        search_result_city_name = self.driver.find_element(*self.STRING_ENTERED_CITY)
+        assert search_result_city_name.get_property("value") == city
+
+
     def check_search_result_contains_city(self, city):
         cities = self.driver.find_elements(*self.result_locator)
         for city_name in cities:
