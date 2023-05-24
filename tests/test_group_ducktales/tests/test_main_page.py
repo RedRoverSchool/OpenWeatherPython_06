@@ -40,6 +40,10 @@ class TestMainPage:
         page.open_page()
         page.check_google_play_brand_link_display()
 
+    def test_tc_001_04_04_verify_in_day_list_first_element_month(self, driver, open_and_load_main_page):
+        page = MainPage(driver, LINK_MAIN_PAGE)
+        page.open_page()
+        page.check_months()
 
 
 
