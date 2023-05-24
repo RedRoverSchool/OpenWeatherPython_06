@@ -61,3 +61,8 @@ class TestOurTechnologyLink:
         page.check_our_technology_link_functionality()
 
 
+class TestAccuracyAndQualityOfWeatherDataLink:
+    def test_tc_003_12_16_verify_accuracy_and_quality_of_weather_data_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_accuracy_and_quality_of_weather_data_link_functionality()
