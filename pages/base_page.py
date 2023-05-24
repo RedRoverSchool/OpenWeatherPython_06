@@ -11,7 +11,8 @@ class BasePage:
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-
+    support_link = (By.XPATH, "//*[@id='support-dropdown']")
+    faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -30,6 +31,10 @@ class BasePage:
                 self.driver.find_element(*self.dashboard_link).click()
             case 'pricing':
                 self.driver.find_element(*self.pricing_link).click()
+            case 'faq':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.faq_option).click()
+
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
