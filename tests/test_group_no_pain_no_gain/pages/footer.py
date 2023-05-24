@@ -4,6 +4,3 @@ from tests.test_group_no_pain_no_gain.locators.footer_locators import FooterLoca
 
 class Footer(MainPage):
     pass
-
-
-
