@@ -1,5 +1,3 @@
-import time
-
 from pages.base_page import BasePage
 from ..locators.API_keys_locators import ApiKeysLocator
 
@@ -36,4 +34,6 @@ class ApiKeysPage(BasePage):
     def check_limit_of_api_key_name(self):
         api_name_limit = 20
         actual_length_of_api_key_name = len(self.api_key_name_of_first_row())
-        assert actual_length_of_api_key_name == api_name_limit
+        assert actual_length_of_api_key_name == api_name_limit, "The limit of API key name does not correspond to " \
+                                                                "expected limit"
+
