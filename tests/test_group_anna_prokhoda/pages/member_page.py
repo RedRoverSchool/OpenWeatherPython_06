@@ -1,4 +1,3 @@
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -38,31 +37,6 @@ class MemberPage(BasePage):
         self.select_option_from_list(locator.title, option)
 
     """
-    Method: verify the preselected country in the 'Country' field
-    """
-
-    def verify_country_text(self, value):
-        select_option = self.check_preselected_option(locator.country)
-        self.assert_text(select_option, value)
-
-    """
-    Method: verify is the error message in concrete field corresponds with the message from the requirements;
-    Error message is the message, which appears when the form field is left bank
-    Error message = "can't be blank"
-    """
-
-    def verify_error_message_text(self, field, value):
-        required_fields = {"email": "email",
-                           "first_name": "first_name",
-                           "last_name": "last_name",
-                           "address_line_1": "address_line_1",
-                           "city": "city",
-                           "postal_code": "postal_code",
-                           "phone": "phone"}
-        error_message_in_field = (By.XPATH, f'//div[contains(@class, {required_fields.get(field)})]//span[@class="help-block"]')
-        self.assert_text(self.find_element(error_message_in_field), value)
-
-    """
     Method: fill in only the required fields of the subscription form
     """
 
@@ -92,7 +66,7 @@ class MemberPage(BasePage):
 
         for i in range(len(required_fields)):
             error_message_in_field = (By.XPATH, f'//div[contains(@class, {required_fields[i]})]//span[@class="help-block"]')
-            error_message = self.find_element(error_message_in_field)
+            error_message = self.element_is_present(error_message_in_field)
             self.assert_text(error_message, "can't be blank")
             print(f'Error message {i} - OK')
 
@@ -101,32 +75,9 @@ class MemberPage(BasePage):
     """
 
     def click_continue_button(self):
-        actions = ActionChains(self.driver)
-        actions.move_to_element(self.find_element(locator.continue_payment_button)).perform()
+        self.action_move_to_element(self.element_is_clickable(locator.continue_payment_button))
         print('Moved to button')
         self.click_element(locator.continue_payment_button)
-
-    """
-    Method: if 'Legal from' radio button is chosen by default
-    """
-
-    def check_radio_button_legal_form_selected(self):
-        individual = self.check_element_selected(locator.legal_form_individual)
-        organization = self.check_element_selected(locator.legal_form_organization)
-
-        assert individual is True, \
-            'Radio button "Individual" is not selected by default'
-        assert organization is False, \
-            'Radio button "Organization" is not selected by default'
-
-    """
-    Method: if 'Country' field is disabled
-    """
-
-    def check_country_field_disabled(self):
-        result = self.check_property(locator.country, 'disabled')
-        assert result is True, \
-            'Country field is enabled'
 
     """
     Method: if the URL contain 'checkout.stripe.com' after transitioning to payment page
