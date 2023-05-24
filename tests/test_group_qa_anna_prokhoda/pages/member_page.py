@@ -1,7 +1,8 @@
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
-from tests.test_group_anna_prokhoda.locators.member_page_loc import MemberPageLocators as locator
+from tests.test_group_qa_anna_prokhoda.locators.member_page_loc import MemberPageLocators as locator
+from tests.test_group_qa_anna_prokhoda.links.links import member_page_url
 
 
 class MemberPage(BasePage):
@@ -9,11 +10,6 @@ class MemberPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-
-    #
-
-    URL = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/'
-    pages = {"startup": "startup", "dev": "dev", "pro": "pro", "ent": "ent"}
 
     # Methods
 
@@ -24,7 +20,8 @@ class MemberPage(BasePage):
     """
 
     def get_link(self, link):
-        self.driver.get(f'{self.URL}{self.pages.get(link)}')
+        pages = {"startup": "startup", "dev": "dev", "pro": "pro", "ent": "ent"}
+        self.driver.get(f'{member_page_url}{pages.get(link)}')
 
     """
     Method: choose the option in the 'Title' drop-down list

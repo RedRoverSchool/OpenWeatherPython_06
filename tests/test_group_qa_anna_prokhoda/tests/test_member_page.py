@@ -1,6 +1,4 @@
-import time
-
-from tests.test_group_anna_prokhoda.pages.member_page import MemberPage
+from tests.test_group_qa_anna_prokhoda.pages.member_page import MemberPage
 
 
 '''
