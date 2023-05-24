@@ -25,5 +25,3 @@ class MainPage(BasePage):
         new_window = self.driver.window_handles[1]
         self.driver.switch_to.window(new_window)
         assert link in self.driver.current_url
-
-

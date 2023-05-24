@@ -15,9 +15,3 @@ class TestFooter:
         page = Footer(driver)
         page.scroll_down_the_page()
         page.check_link_in_new_window(FL.ASK_A_QUESTION_LINK, links.ASK_A_QUESTION_PAGE)
-
-
-
-
-
-
