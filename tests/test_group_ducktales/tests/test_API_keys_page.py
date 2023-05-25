@@ -20,10 +20,11 @@ class TestApiKey:
         sign_in_page.log_in()
         api_keys_page = ApiKeysPage(driver)
         api_keys_page.open_api_keys_page()
-        api_keys_page.open_popup_rename_api_key()
-        api_keys_page.enter_new_api_name("New API name for test")
-        api_keys_page.click_save_new_api_key_name_button()
-        api_keys_page.check_limit_of_api_key_name()
+        api_keys_page.check_limit_of_created_api_key_name()
+
+
+
+
 
 
 

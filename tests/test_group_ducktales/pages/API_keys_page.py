@@ -37,3 +37,13 @@ class ApiKeysPage(BasePage):
         assert actual_length_of_api_key_name == api_name_limit, "The limit of API key name does not correspond to " \
                                                                 "expected limit"
 
+    def enter_created_api_key_name(self, new_api_name):
+        new_api_key_name_field = self.driver.find_element(*ApiKeysLocator.NEW_API_KEY_NAME)
+        new_api_key_name_field.send_keys(new_api_name)
+
+    def check_limit_of_created_api_key_name(self):
+        expected_api_name_limit = 20
+        created_api_key_name = self.driver.find_element(*ApiKeysLocator.NEW_API_KEY_NAME)
+        actual_api_name_limit = int(created_api_key_name.get_attribute('maxlength'))
+        assert actual_api_name_limit == expected_api_name_limit, "The limit of created API key name does not correspond to " \
+                                                                "requirements"
