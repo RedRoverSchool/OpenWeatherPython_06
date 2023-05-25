@@ -1,4 +1,5 @@
 import pytest
+
 from pages.main_page import MainPage
 from test_data.main_page_data import data
 
