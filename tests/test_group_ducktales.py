@@ -1,4 +1,4 @@
-from selenium.common import ElementClickInterceptedException
+from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
