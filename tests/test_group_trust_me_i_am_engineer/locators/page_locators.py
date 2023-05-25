@@ -42,6 +42,7 @@ class MarketplacePageLocators:
     CHECKBOX_TERRAIN = (By.XPATH, "//li[@aria-label='Terrain']/span/span[2]")
     BUTTON_ZOOM_IN = (By.XPATH, "//button[@title='Zoom in']")
     BUTTON_ZOOM_OUT = (By.XPATH, "//button[@title='Zoom out']")
+    BUTTON_STREET_VIEW = (By.XPATH, "//button[@title='Drag Pegman onto the map to open Street View']")
 
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")

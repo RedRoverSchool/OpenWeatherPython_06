@@ -36,3 +36,7 @@ def test_TC_007_02_09_verify_visibility_clickability_zoom_in_button(driver, wait
 def test_TC_007_02_10_verify_visibility_clickability_zoom_out_button(driver):
     page = MarketplacePage(driver)
     page.verify_visibility_clickability_zoom_out()
+
+def test_TC_007_02_12_verify_visibility_clickability_street_view_button(driver):
+    page = MarketplacePage(driver)
+    page.verify_visibility_clickability_street_view_btn()
