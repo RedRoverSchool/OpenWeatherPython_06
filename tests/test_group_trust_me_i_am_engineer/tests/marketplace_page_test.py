@@ -40,3 +40,7 @@ def test_TC_007_02_10_verify_visibility_clickability_zoom_out_button(driver):
 def test_TC_007_02_12_verify_visibility_clickability_street_view_button(driver):
     page = MarketplacePage(driver)
     page.verify_visibility_clickability_street_view_btn()
+
+def test_TC_007_02_11_verify_visibility_clickability_full_screen_button(driver):
+    page = MarketplacePage(driver)
+    page.verify_visibility_clickability_full_screen_btn()
