@@ -82,3 +82,9 @@ class MainPageFooter(BasePage):
         self.allow_all_cookies()
         pdf_filename,  path_to_file, check_file = self.pdf_downloader(self.locators.FOOTER_WEBSITE_TERMS_AND_CONDITIONS)
         assert check_file is True, f"PDF file '{pdf_filename}' was not downloaded to {path_to_file}"
+
+    def verify_terms_and_conditions_module_title_visibility(self):
+        terms_and_conditions_module_title = \
+            self.driver.find_element(*self.locators.FOOTER_TERMS_AND_CONDITIONS_TITLE)
+        assert terms_and_conditions_module_title.is_displayed(), \
+            "The Terms & Conditions module title is not visible"
