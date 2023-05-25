@@ -25,3 +25,9 @@ class MainPage(BasePage):
         new_window = self.driver.window_handles[1]
         self.driver.switch_to.window(new_window)
         assert link in self.driver.current_url
+
+    def check_page_title(self, link, data):
+        self.driver.get(link)
+        title = self.driver.title
+        assert data in title
+
