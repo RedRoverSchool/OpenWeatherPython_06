@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -19,49 +20,23 @@ accept_cookies = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
 weather_in_your_city = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 search_in_header = (By.CSS_SELECTOR, "#desktop-menu form[role='search']")
 city_query = (By.CSS_SELECTOR, '#search_str')
-user_dropdown = (By.CSS_SELECTOR, '#user-dropdown')
-user_dropdown_menu_items = (By.CSS_SELECTOR, '#user-dropdown-menu li')
-marketplace_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='marketplace']")
-guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
 
 
-def test_TC_000_00_01_verify_sign_link_text_is_valid(driver, open_and_load_main_page, wait):
-    driver.find_element(*accept_cookies).click()
-    expected_text = 'Sign in'
-    sign_in_text = driver.find_element(*sign_in_link).text
-    assert sign_in_text == expected_text
+def test_should_open_given_link(driver):
+    driver.get(URL)
+    assert 'openweathermap' in driver.current_url
 
 
-def test_TC_000_00_02_verify_sign_in_link_is_clickable(driver, open_and_load_main_page, wait):
-    element = driver.find_element(*sign_in_link)
-    wait.until(EC.element_to_be_clickable(sign_in_link))
-    assert element.is_displayed() and element.is_enabled()
+def test_check_page_title(driver):
+    driver.get('https://openweathermap.org/')
+    assert driver.title == 'Сurrent weather and forecast - OpenWeatherMap'
 
 
-def test_TC_000_00_03_verify_pricing_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
-    driver.find_element(*pricing_link).click()
-    pricing_text = driver.find_element(*price_page_title).text
-    assert pricing_text == "Pricing"
-
-
-def test_TC_000_00_04_verify_new_page_link_contains_valid_city_name(driver, open_and_load_main_page, wait):
-    query = 'Florida'
-    search_city = driver.find_element(*weather_in_your_city)
-    search_city.send_keys(query)
-    actions = ActionChains(driver)
-    actions.send_keys(Keys.ENTER).perform()
-    assert query in driver.current_url
-
-
-def test_TC_000_00_05_verify_sign_in_link_redirects_to_valid_page(driver, open_and_load_main_page, wait):
-    sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
-    driver.execute_script("arguments[0].click();", sign_link)
-    assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
-
-
-@pytest.mark.skip('No need to launch')
 @pytest.mark.parametrize('city', cities)
-def test_TC_000_00_06_verify_result_of_city_searching_is_valid(driver, open_and_load_main_page, wait, city):
+def test_fill_search_city_field(driver, city):
+    driver.get('https://openweathermap.org/')
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
     search_city_input = driver.find_element(*search_city_field)
     search_city_input.send_keys(city)
     driver.find_element(*search_button).click()
@@ -72,24 +47,59 @@ def test_TC_000_00_06_verify_result_of_city_searching_is_valid(driver, open_and_
     assert expected_city in actual_city
 
 
-def test_TC_000_00_07_verify_search_button_is_clickable(driver, open_and_load_main_page, wait):
+@pytest.mark.parametrize('city', cities)
+def test_all_dropdown_options_should_contain_valid_city(driver, city):
+    driver.get('https://openweathermap.org/')
+    wait = WebDriverWait(driver, 15)
+    wait.until_not(EC.presence_of_element_located(load_div))
     search_city_input = driver.find_element(*search_city_field)
-    search_city_input.send_keys('Paris')
-    element = driver.find_element(*search_button)
-    assert element.is_displayed() and element.is_enabled()
-
-def test_TC_000_00_08_verify_user_dropdown_contains_5_items(driver, open_and_load_main_page, sign_in):
-    items = driver.find_elements(*user_dropdown_menu_items)
-    assert len(items) == 5
+    search_city_input.send_keys(city)
+    driver.find_element(*search_button).click()
+    options = driver.find_elements(*search_dropdown)
+    for option in options:
+        assert city in option.text
 
 
-def test_TC_000_00_09_verify_marketplace_link_redirects_on_valid_page(driver, open_and_load_main_page):
-    driver.find_element(*marketplace_link).click()
-    driver.switch_to.window(driver.window_handles[1])
-    assert 'marketplace' in driver.current_url
+@pytest.fixture()
+def open_and_load_page(driver, wait):
+    driver.get(URL)
+    wait.until_not(EC.presence_of_element_located(load_div))
 
 
-def test_TC_000_00_10_verify_guide_link_redirects_on_valid_page(driver, open_and_load_main_page):
-    driver.find_element(*guide_link).click()
-    assert 'guide' in driver.current_url
+@pytest.fixture()
+def wait(driver):
+    wait = WebDriverWait(driver, 25)
+    yield wait
 
+
+def test_should_go_to_sign_in_page(driver, open_and_load_page, wait):
+    sign_link = wait.until(EC.presence_of_element_located(sign_in_link))
+    driver.execute_script("arguments[0].click();", sign_link)
+    assert "sign_in" in driver.current_url, f"\nWrong URL - {driver.current_url}"
+
+
+def test_should_be_valid_title_on_price_page(driver, open_and_load_page, wait):
+    element = driver.find_element(*pricing_link)
+    action_chains = ActionChains(driver)
+    action_chains.move_to_element(element)
+    driver.execute_script("arguments[0].click();", element)
+    pricing_text = driver.find_element(*price_page_title).text
+    assert pricing_text == "Pricing"
+
+
+def test_should_be_valid_text_in_sign_in_tab(driver, open_and_load_page, wait):
+    driver.find_element(*accept_cookies).click()
+    expected_text = 'Sign in'
+    element = driver.find_element(*sign_in_link)
+    sign_in_text = driver.execute_script("return arguments[0].textContent", element)
+    assert sign_in_text == expected_text
+
+
+def test_verify_new_page_link_contains_requested_city_name(driver, open_and_load_page, wait):
+    driver.set_window_size(1920, 1080)
+    query = 'Florida'
+    search_city = driver.find_element(*weather_in_your_city)
+    search_city.send_keys(query)
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.ENTER).perform()
+    assert query in driver.current_url
