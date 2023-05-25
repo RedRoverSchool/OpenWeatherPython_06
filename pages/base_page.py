@@ -14,6 +14,7 @@ class BasePage:
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
+    maps_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -35,6 +36,8 @@ class BasePage:
             case 'faq':
                 self.driver.find_element(*self.support_link).click()
                 self.driver.find_element(*self.faq_option).click()
+            case 'maps':
+                self.driver.find_element(*self.maps_link).click()
 
 
     def check_header_link(self, link_name):
