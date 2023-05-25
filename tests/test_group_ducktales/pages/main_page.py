@@ -57,3 +57,18 @@ class MainPage(BasePage):
         self.go_to_module_download_openweather_app()
         google_play_brand_link = self.driver.find_element(*MainLocator.GOOGLE_PLAY_BRAND_LINK)
         assert google_play_brand_link.is_displayed(), "Google Play brand-link is not displaying"
+
+    def get_months(self):
+        month = self.element_is_visible(MainLocator.FIRST_DAY_IN_8_DAY_FORECAST).text[5:-3]
+        return month
+
+    def get_months_by_computer(self):
+        month_by_computer = datetime.now().month
+        current_month = MONTHS[month_by_computer - 1]
+        return current_month
+
+    def check_months(self):
+        page_month = self.get_months()
+        page_month_by_computer = self.get_months_by_computer()
+        assert page_month == f'{page_month_by_computer}'
+
