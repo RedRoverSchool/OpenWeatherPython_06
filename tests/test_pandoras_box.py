@@ -13,6 +13,7 @@ FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder=
 ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
 STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
 SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
+SEARCH_DROPDOWN_MENU = By.CLASS_NAME, 'search-dropdown-menu'
 SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
 SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
 DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
@@ -27,6 +28,7 @@ BUTTON_LEARN_MORE = "//div[2]/div/div/div[2]/div/div[1]/center/a"
 chart_weather = (By.XPATH, "//*[@id='chart-component']")
 FOOTER_WEBSITE = (By.XPATH, '//*[@id="footer-website"]')
 GOOGLE_PLAY_LINK = (By.XPATH, '//*[@id="footer-website"]/div/div[3]/div/a[2]/img')
+METRIC_SWITCH = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 
 NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
 NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
@@ -340,4 +342,19 @@ def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(driver, open_
     expected_title = 'OpenWeather'
     # displayed_title = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]//div//h1/span').text
     assert '/play.google' in driver.current_url and expected_title in driver.title
+
+def test_TC_001_01_08_dropdown_list_contain_city_temperature_celsius(driver, open_and_load_main_page, wait):
+    metric_button = wait.until(EC.element_to_be_clickable(METRIC_SWITCH))
+    assert metric_button.is_displayed() and metric_button.is_enabled()
+    search_city_input = driver.find_element(*SEARCH_CITY_FIELD)
+    search_city_input.click()
+    search_city_input.send_keys('Saint Petersburg')
+    driver.find_element(*SEARCH_BUTTON).click()
+    wait.until(EC.element_to_be_clickable(SEARCH_DROPDOWN_MENU))
+    dropdown_list = driver.find_element(*SEARCH_DROPDOWN_MENU)
+    for city in dropdown_list.find_elements(By.CSS_SELECTOR, 'li'):
+        assert '°C' in city.text
+
+
+
 

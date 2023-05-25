@@ -1,8 +1,10 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
+from selenium.webdriver.support.color import Color
 
 
 URL_SOLAR_API = "https://openweathermap.org/api/solar-energy-prediction"
@@ -15,8 +17,8 @@ LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/di
 product_concept_title_locator = (By.CSS_SELECTOR, "#concept h2")
 subscription_module_button = (By.CSS_SELECTOR, ".inner-footer-container div:first-of-type "
                                                ".footer-section:nth-child(2) p.section-heading")
-quality_info_page = "https://openweathermap.org/accuracy-and-quality"
-nwp_model = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+QUALITY_INFO_PAGE = "https://openweathermap.org/accuracy-and-quality"
+NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
 CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
 CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
 EXPECTED_NUMBER_OF_FIELDS = 7
@@ -26,8 +28,19 @@ OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
 MAIN_PAGE = 'https://openweathermap.org/'
 HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
 HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
-
-
+GUIDE_PAGE = "https://openweathermap.org/guide"
+HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
+LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
+CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
+URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
+HISTORICAL_COLLECTION_LINKS = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2) a")
+EXPECTED_LINK_COLOR_HEX = "#e96e50"
+TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
+AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
+URL_WEATHER_CONDITIONS = "https://openweathermap.org/weather-conditions"
+WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
+ICONS_FOR_NIGHTTIME = (By.XPATH, '//td[contains(text(), "n.png")]')
+EXPECTED_MINIMUM_ICONS_FOR_NIGHTTIME = 8
 
 
 @pytest.mark.parametrize('city', CITIES)
@@ -61,8 +74,8 @@ def test_TC_003_05_01_subscription_module_title_displayed(driver, open_and_load_
 
 
 def test_001_017_01_visibility_of_nwp_block(driver):
-    driver.get(quality_info_page)
-    nwp = driver.find_element(*nwp_model)
+    driver.get(QUALITY_INFO_PAGE)
+    nwp = driver.find_element(*NWP_MODEL)
     assert nwp.is_displayed()
 
 
@@ -91,3 +104,57 @@ def test_TC_005_10_03_correct_redirection_for_how_to_get_access_link(driver):
     how_to_get_access_link.click()
     how_to_get_access_title = driver.find_element(*HOW_TO_GET_ACCESS_TITLE_LOCATOR)
     assert how_to_get_access_title.is_displayed()
+
+
+def test_TC_021_01_01_visibility_of_agriculture_analytics_link(driver, open_and_load_main_page, wait):
+    assert driver.find_element(*AGRICULTURE_ANALYTICS_TITLE_LOCATOR).is_displayed()
+
+
+
+def test_TC_004_08_01_historical_collection_block_visibility(driver):
+    driver.get(GUIDE_PAGE)
+    historical_collection = driver.find_element(*HISTORICAL_COLLECTION_MODULE)
+    driver.execute_script("arguments[0].scrollIntoView(true);", historical_collection)
+    assert historical_collection.is_displayed(), "The Historical Weather collection is not displaying"
+
+
+def test_TC_004_08_02_link_to_history_archive_is_clickable(driver):
+    driver.get(GUIDE_PAGE)
+    archive_link = driver.find_element(*LINK_HISTORICAL_ARCHIVE)
+    actions = ActionChains(driver)
+    actions.move_to_element(archive_link).perform()
+    assert archive_link.is_enabled(), "The link is not clickable"
+
+
+
+def test_TC_004_08_03_historical_collection_link_redirects_correctly(driver):
+    driver.get(GUIDE_PAGE)
+    driver.find_element(*CLICK_ALLOW_IN_STICK_FOOTER).click()
+    driver.find_element(*LINK_HISTORICAL_ARCHIVE).click()
+    assert driver.current_url == URL_HISTORY_BULK
+
+
+
+def test_TC_004_08_03_verify_all_links_same_color(driver):
+    driver.get(GUIDE_PAGE)
+    all_links = driver.find_elements(*HISTORICAL_COLLECTION_LINKS)
+    for link in all_links:
+        link_color_rgba = link.value_of_css_property("color")
+        link_color_hex = Color.from_string(link_color_rgba).hex
+        assert link_color_hex == EXPECTED_LINK_COLOR_HEX, "The links' colors do not match the standard"
+
+        
+def test_TC_004_02_01_visibility_of_title_of_article(driver):
+    driver.get(GUIDE_PAGE)
+    title_nwp_model = driver.find_element(*TITLE_NWP_MODEL_LOCATOR)
+    assert title_nwp_model.is_displayed()
+
+
+def test_TC_001_10_03_verify_count_of_icons_for_nighttime(driver):
+    driver.get(URL_WEATHER_CONDITIONS)
+    weather_icons = driver.find_element(*WEATHER_ICONS)
+    weather_icons.click()
+    actual_icons_for_nighttime = driver.find_elements(*ICONS_FOR_NIGHTTIME)
+    assert len(actual_icons_for_nighttime) >= EXPECTED_MINIMUM_ICONS_FOR_NIGHTTIME
+
+

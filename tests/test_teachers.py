@@ -92,3 +92,4 @@ def test_TC_000_00_09_verify_marketplace_link_redirects_on_valid_page(driver, op
 def test_TC_000_00_10_verify_guide_link_redirects_on_valid_page(driver, open_and_load_main_page):
     driver.find_element(*guide_link).click()
     assert 'guide' in driver.current_url
+
