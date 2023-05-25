@@ -117,4 +117,11 @@ class MarketplacePage(BasePage):
         self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
         street_view_btn = self.element_is_clickable(self.locators.BUTTON_STREET_VIEW)
         assert street_view_btn.is_displayed() and street_view_btn.is_enabled(), \
-            "The 'Zoom out' button is not displayed on the map or is not clickable"
+            "The 'Street view' button is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_full_screen_btn(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        full_screen_btn = self.element_is_clickable(self.locators.BUTTON_FULL_SCREEN)
+        assert full_screen_btn.is_displayed() and full_screen_btn.is_enabled(), \
+            "The 'Full screen' button is not displayed on the map or is not clickable"
