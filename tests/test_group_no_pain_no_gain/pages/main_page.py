@@ -26,8 +26,7 @@ class MainPage(BasePage):
         self.driver.switch_to.window(new_window)
         assert link in self.driver.current_url
 
-    def check_page_title(self, link, data):
-        self.driver.get(link)
+    def check_page_title(self, data):
         title = self.driver.title
-        assert data in title
+        assert data in title, f'{data} is not in the page title'
 
