@@ -15,3 +15,13 @@ class SignInPage(BasePage):
         registration_question = self.element_is_visible(self.locators.REGISTRATION_QUESTION)
         return registration_question.is_displayed()
 
+    def check_authorization(self, email=None, password=None):
+        if email:
+            self.driver.find_element(*self.locators.EMAIL_INPUT).send_keys(email)
+        if password:
+            self.driver.find_element(*self.locators.PASSWORD_INPUT).send_keys(password)
+        self.driver.find_element(*self.locators.SUBMIT_BUTTON).click()
+
+    def check_error_alert_text(self):
+        error_alert_text = self.driver.find_element(*self.locators.ERROR_ALERT).text
+        assert error_alert_text == 'Invalid Email or password.'
