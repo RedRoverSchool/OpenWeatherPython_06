@@ -11,6 +11,7 @@ class BasePage:
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
 
 
     def __init__(self, driver, link=None):

@@ -1,16 +1,10 @@
-from tests.test_group_qa_anna_prokhoda.pages.main_page import MainPage
-from tests.test_group_qa_anna_prokhoda.locators.footer_locators import FooterLocators as FL
-from tests.test_group_qa_anna_prokhoda.links.links import main_page_url
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait as wait
+from pages.base_page import BasePage
 
 
-class Footer(MainPage):
 
-    def element_visibility(self, locator):
-        element = wait(self.driver, timeout=3).until(EC.visibility_of_element_located(locator))
-        assert element.is_displayed(), 'element is not visible'
+class Footer(BasePage):
 
-    def element_clickability(self, locator):
-        element = wait(self.driver, timeout=3).until(EC.element_to_be_clickable(locator))
-        assert element.is_enabled(), 'element is not clickable'
+    def check_privacy_policy_link_is_clickable(self):
+        privacy_policy_link = self.element_is_clickable(self.privacy_policy_link)
+        assert privacy_policy_link.is_displayed() and privacy_policy_link.is_enabled(), "The privacy policy link is " \
+                                                                                        "not clickable "
