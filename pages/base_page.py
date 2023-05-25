@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -121,4 +122,3 @@ class BasePage:
 
     def press_enter_button(self):
         actions = ActionChains(self.driver)
-        actions.send_keys(Keys.ENTER).perform()
