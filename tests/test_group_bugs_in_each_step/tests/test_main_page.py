@@ -29,10 +29,14 @@ class TestFooterLinksclickability:
         page.verify_clickability_current_and_forecast_apis()
 
 
-class TestFooterLinksVisibility:
-    def test_TC_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
+class TestHowToStartLink:
+    def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
         page = MainPage(driver)
         page.verify_how_to_start_visibility()
+
+    def test_tc_003_12_18_verify_how_to_start_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_how_to_start_link_functionality()
 
 
 class TestWeatherMapsLink:
@@ -61,3 +65,15 @@ class TestOurTechnologyLink:
         page.check_our_technology_link_functionality()
 
 
+class TestAccuracyAndQualityOfWeatherDataLink:
+    def test_tc_003_12_16_verify_accuracy_and_quality_of_weather_data_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_accuracy_and_quality_of_weather_data_link_functionality()
+
+
+class TestConnectYourWeatherStationLink:
+    def test_tc_003_12_17_verify_connect_your_weather_station_link_functionality\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_connect_your_weather_station_link_functionality()

@@ -9,6 +9,7 @@ class SearchResultPage(BasePage):
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+    result_locator = (By.XPATH, '//a[contains(@href, "city")]')
 
     def check_notification_display(self):
         expected_notification = "×\nNot found"
@@ -26,3 +27,9 @@ class SearchResultPage(BasePage):
         wait(self.driver, timeout=5).until(EC.presence_of_element_located(self.STRING_ENTERED_CITY))
         search_result_city_name = self.driver.find_element(*self.STRING_ENTERED_CITY)
         assert search_result_city_name.get_property("value") == city
+
+
+    def check_search_result_contains_city(self, city):
+        cities = self.driver.find_elements(*self.result_locator)
+        for city_name in cities:
+            assert city in city_name.text

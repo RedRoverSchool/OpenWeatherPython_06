@@ -13,6 +13,8 @@ class BasePage:
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
 
+    support_link = (By.XPATH, "//*[@id='support-dropdown']")
+    faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
     def __init__(self, driver, link=None):
         self.driver = driver

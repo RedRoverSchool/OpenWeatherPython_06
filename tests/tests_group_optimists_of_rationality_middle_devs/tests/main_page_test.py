@@ -19,3 +19,10 @@ class TestTitle:
         for module in MainPageLocators.PRICING_AND_LIMITS_MODULE:
             price_section = driver.find_element(*module)
             assert price_section.is_displayed(), 'No "pricing and limits" module'
+
+    def test_006_04_02_Verify_that_the_Sign_up_button_is_clickable_in_the_Pricing_and_limits_section(self, driver,
+                                                                                                     open_and_load_main_page):
+
+        driver.find_element(*MainPageLocators.HEADER_DASHBOARD_LINK).click()
+        sign_up_button = driver.find_element(*MainPageLocators.PRICING_PLANS_SIGN_UP)
+        assert sign_up_button.is_enabled(), "Sign up link is not clickable"
