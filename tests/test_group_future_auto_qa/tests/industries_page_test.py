@@ -21,6 +21,9 @@ class TestIndustriesPage:
         page = IndustriesPage(driver)
         page.check_visibility_and_clickability_of_learn_more_and_talk_to_us_buttons(button_locator)
 
-
+    def test_tc_012_03_06_verify_redirection_of_learn_more_button_in_agriculture_section(self, driver):
+        page = IndustriesPage(driver)
+        expected_link = "https://agromonitoring.com/"
+        page.check_redirection_of_learn_more_button_in_agriculture_section(expected_link)
 
 
