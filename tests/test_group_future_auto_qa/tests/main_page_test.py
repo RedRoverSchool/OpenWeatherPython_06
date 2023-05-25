@@ -59,3 +59,7 @@ class TestMainPageFooter:
     def test_tc_003_12_22_pdf_downloading_after_click_on_terms_and_conditions_of_sale_link(self, driver, open_and_load_main_page):
         page = MainPageFooter(driver)
         page.verify_pdf_downloading_after_click_on_terms_and_conditions_of_sale_link()
+
+    def test_tc_003_12_23_pdf_downloading_after_click_on_website_terms_and_conditions_link(self, driver, open_and_load_main_page):
+        page = MainPageFooter(driver)
+        page.verify_pdf_downloading_after_click_on_website_terms_and_conditions_link()
