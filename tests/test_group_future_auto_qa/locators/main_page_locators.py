@@ -11,3 +11,5 @@ class MainPageLocators:
     SUPPORT_ASK_A_QUESTION_SUBMENU = (By.CSS_SELECTOR, '#support-dropdown-menu > li:nth-child(2) > a[href*="questions"]')
     HEADER = (By.CSS_SELECTOR, 'h1')
     FOOTER_WIDGETS = (By.XPATH, "//a[contains(text(), 'Widgets')]")
+    FOOTER_TERMS_AND_CONDITIONS_OF_SALE = (By.XPATH, "//a[normalize-space()='Terms and conditions of sale']")
+    FOOTER_WEBSITE_TERMS_AND_CONDITIONS = (By.XPATH, "//a[normalize-space()='Website terms and conditions']")
