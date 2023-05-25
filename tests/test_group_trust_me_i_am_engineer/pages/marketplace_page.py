@@ -104,3 +104,10 @@ class MarketplacePage(BasePage):
         self.element_is_displayed(self.locators.BUTTON_ZOOM_IN, wait)
         self.element_is_visible(self.locators.BUTTON_ZOOM_IN).click()
         assert self.element_is_visible(self.locators.BUTTON_ZOOM_IN) and self.element_is_clickable(self.locators.BUTTON_ZOOM_IN)
+
+    def verify_visibility_clickability_zoom_out(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        zoom_out_btn = self.element_is_clickable(self.locators.BUTTON_ZOOM_OUT)
+        assert zoom_out_btn.is_displayed() and zoom_out_btn.is_enabled(), \
+            "The 'Zoom out' button is not displayed on the map or is not clickable"

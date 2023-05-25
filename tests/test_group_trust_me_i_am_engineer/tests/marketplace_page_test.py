@@ -32,3 +32,7 @@ def test_TC_007_02_07_verify_visibility_clickability_terrain_checkbox(driver):
 def test_TC_007_02_09_verify_visibility_clickability_zoom_in_button(driver, wait):
     page = MarketplacePage(driver)
     page.verify_visibility_clickability_zoom_in(wait)
+
+def test_TC_007_02_10_verify_visibility_clickability_zoom_out_button(driver):
+    page = MarketplacePage(driver)
+    page.verify_visibility_clickability_zoom_out()
