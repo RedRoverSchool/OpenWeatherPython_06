@@ -14,5 +14,5 @@ class AccuracyAndQualityOfWeatherDataPage(BasePage):
         example_of_graphics_with_some_metrics = self.driver.find_element(
             *AccuracyAndQualityOfWeatherDataPageLocators.example_of_graphics_with_some_metrics_locator)
         self.go_to_element(example_of_graphics_with_some_metrics)
-        self.element_is_displayed(AccuracyAndQualityOfWeatherDataPageLocators.example_of_graphics_with_some_metrics_locator, wait)
+        assert self.element_is_displayed(AccuracyAndQualityOfWeatherDataPageLocators.example_of_graphics_with_some_metrics_locator, wait)
 
