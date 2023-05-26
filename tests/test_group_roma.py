@@ -1,5 +1,7 @@
+import time
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver import Keys
+from selenium.webdriver import Keys, ActionChains
 import pytest
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -15,7 +17,7 @@ map_info_block = ("css selector", 'a.map-info-block .minutely-section')
 URL = 'https://openweathermap.org/'
 #The page 'Maps' (/weathermap) doesn't include because it hasn't website footer
 PAGES = ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'home/sign_in', 'faq', 'appid']
-
+map_info_block = ("css selector", 'a.map-info-block .minutely-section')
 
 def test_TC_003_07_01_visibility_of_the_company_module(driver, open_and_load_main_page, wait):
     footer_website = driver.find_element(*footer_website_locator)
@@ -60,6 +62,10 @@ def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_da
         if i not in copyright_actual_result:
             copyright_flag = 0
     assert copyright_website.is_displayed() and copyright_flag == 1, f'\nCopyright is not present (actual) on the page - {driver.current_url}'
+
+
+def test_TC_001_06_01_redirect_to_interactive_world_weather_map_2(driver, open_and_load_main_page, wait):
+    assert driver.title == "Сurrent weather and forecast - OpenWeatherMap"
 
 def test_TC_003_10_05_verify_visibility_of_github_icon(driver, open_and_load_main_page):
     github_icon = driver.find_element(*gitHub_icon_image)
