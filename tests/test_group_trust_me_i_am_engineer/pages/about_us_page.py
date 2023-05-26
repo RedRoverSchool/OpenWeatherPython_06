@@ -11,7 +11,7 @@ class AboutUsPage(MainPage):
         self.driver.get(self.URL)
         wait.until_not(EC.presence_of_element_located(load_div))
 
-        self.element_is_clickable(self.locators.ALLOW_ALL_COOKIES_BUTTON).click()
+        self.allow_all_cookies()
         self.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
 
         self.element_is_visible(self.page_locators.HEADER)
