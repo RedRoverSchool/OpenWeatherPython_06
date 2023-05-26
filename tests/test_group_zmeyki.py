@@ -17,6 +17,16 @@ weather_items_locator = (By.CSS_SELECTOR, "ul.weather-items")
 weather_item_locator = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
 website_link_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
 ask_us_popup_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
+footer_openweathermap = (By.CSS_SELECTOR, '[id="footer-website"]')
+URLs = ['https://openweathermap.org/',
+        'https://openweathermap.org/guide',
+        'https://openweathermap.org/api',
+        'https://openweathermap.org/weather-dashboard',
+        'https://openweathermap.org/price',
+        'https://openweathermap.org/our-initiatives',
+        'https://openweathermap.org/examples',
+        'https://openweathermap.org/faq',
+        'https://openweathermap.org/appid']
 
 def test_tc_001_08_01_graphic_hourly_forecast_is_displayed(driver, open_and_load_main_page, wait):
     driver.get(URL)
@@ -40,6 +50,12 @@ def test_tc_010_02_07_verify_correct_redirection_to_popup_window(driver, open_an
     driver.get(STUDENT_INITIATIVE_URL)
     ask_us_popup = driver.find_element(*ask_us_popup_locator)
     assert ask_us_popup.is_enabled() and ask_us_popup.is_displayed()
+
+@pytest.mark.parametrize('URL', URLs)
+def test_TC_003_02_01_Website_footer_visibility(driver, URL):
+     driver.get(URL)
+     module_footer = driver.find_element(*footer_openweathermap)
+     assert module_footer.is_displayed()
 
 
 
