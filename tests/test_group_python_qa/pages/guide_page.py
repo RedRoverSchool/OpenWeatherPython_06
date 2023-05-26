@@ -15,8 +15,6 @@ class GuidePage(BasePage):
         assert historical_collection.is_displayed(), "The Historical Weather collection is not displaying"
 
     def link_to_history_archive_is_clickable(self):
-        self.driver.get(self.URL_GUIDE_PAGE)
         archive_link = self.driver.find_element(*self.locators.LINK_HISTORICAL_ARCHIVE)
-        actions = ActionChains(self.driver)
-        actions.move_to_element(archive_link).perform()
+        self.action_move_to_element(archive_link)
         assert archive_link.is_enabled(), "The link is not clickable"
