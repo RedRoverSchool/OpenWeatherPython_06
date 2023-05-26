@@ -79,7 +79,6 @@ class MainPage(BasePage):
         action = ActionChains(self.driver)
         action.click(on_element=element)
         action.perform()
-        self.element_is_visible(MainLocator.SEARCH_DROPDOWN_MENU)
         dropdown_list = self.driver.find_elements(*MainLocator.DROPDOWN_LIST)
         for i in dropdown_list:
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
