@@ -12,4 +12,5 @@ class MainPageLocators:
     HEADER = (By.CSS_SELECTOR, 'h1')
     FOOTER_WIDGETS = (By.XPATH, "//a[contains(text(), 'Widgets')]")
     FOOTER_TERMS_AND_CONDITIONS_OF_SALE = (By.XPATH, "//a[normalize-space()='Terms and conditions of sale']")
+    FOOTER_TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
     FOOTER_WEBSITE_TERMS_AND_CONDITIONS = (By.XPATH, "//a[normalize-space()='Website terms and conditions']")
