@@ -64,8 +64,30 @@ class MainPage(BasePage):
         assert '/technology' in self.driver.current_url, \
             "The Our technology link leads to an incorrect page"
 
+    def check_accuracy_and_quality_of_weather_data_link_functionality(self):
+        accuracy_and_quality_of_weather_data_link = \
+            self.driver.find_element(*self.locators.ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK)
+        self.go_to_element(accuracy_and_quality_of_weather_data_link)
+        accuracy_and_quality_of_weather_data_link.click()
+        assert '/accuracy-and-quality' in self.driver.current_url, \
+            "The Accuracy and quality of weather data link leads to an incorrect page"
+
+    def check_connect_your_weather_station_link_functionality(self):
+        connect_your_weather_station_link = self.driver.find_element(*self.locators.CONNECT_YOUR_WEATHER_STATION_LINK)
+        self.go_to_element(connect_your_weather_station_link)
+        connect_your_weather_station_link.click()
+        assert '/stations' in self.driver.current_url, \
+            "The Connect your weather station link leads to an incorrect page"
+
     def verify_how_to_start_visibility(self):
         how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
         assert how_to_start.is_displayed(), "The How to start link is not visible"
+
+    def check_how_to_start_link_functionality(self):
+        how_to_start_link = self.driver.find_element(*self.locators.HOW_TO_START_LINK)
+        self.go_to_element(how_to_start_link)
+        how_to_start_link.click()
+        assert '/appid' in self.driver.current_url, \
+            "The How to start link leads to an incorrect page"
 
 

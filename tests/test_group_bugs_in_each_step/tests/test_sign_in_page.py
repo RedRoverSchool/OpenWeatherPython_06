@@ -12,3 +12,5 @@ class TestRegistrationQuestion:
         assert element is True, 'The element is not visible'
 
 
+
+
