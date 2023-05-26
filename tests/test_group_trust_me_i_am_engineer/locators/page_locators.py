@@ -17,6 +17,8 @@ class MainPageLocators:
     FOR_BUSINESS_LINK = (By.XPATH, "//a[text()='OpenWeather for Business']")
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[@class ='stick-footer-panel__link']")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+    FOOTER_LINKEDIN_LINK = (By.XPATH, "//div[@class='social']/a[3]")
+
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
@@ -58,6 +60,5 @@ class OurInitiativesPageLocators:
 
 class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
-
 
 
