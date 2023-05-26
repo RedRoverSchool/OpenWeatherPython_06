@@ -72,16 +72,15 @@ class MainPage(BasePage):
         page_month_by_computer = self.get_months_by_computer()
         assert page_month == f'{page_month_by_computer}'
 
-    def get_dropdown_list(self):
-        self.element_is_visible(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
-        self.element_is_visible(*MainLocator.BTN_SEARCH).click()
-        self.element_is_visible(MainLocator.SEARCH_DROPDOWN_MENU)
-        dropdown_list = self.driver.element_is_visible(*MainLocator.SEARCH_DROPDOWN_MENU)
+    def get_dropdown_options(self):
+        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
+        self.driver.find_element(*MainLocator.BTN_SEARCH).click()
+        dropdown_list = self.element_is_clickable(MainLocator.SEARCH_DROPDOWN_MENU)
         return dropdown_list
 
     def check_dropdown_options(self):
-        self.get_dropdown_list()
-        for i in self.elements_are_visible(*MainLocator.DROPDOWN_LIST):
+        dropdown_list = self.get_dropdown_options()
+        for i in dropdown_list.find_elements(*MainLocator.DROPDOWN_LIST):
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
 
     def check_day(self):
