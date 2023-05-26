@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
+from selenium.webdriver.support.ui import Select
 
 
 class BasePage:
@@ -15,7 +16,6 @@ class BasePage:
     privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
-
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
