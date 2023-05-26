@@ -11,8 +11,11 @@ class ForBusinessPage(BasePage):
         products = self.element_is_visible(self.locators.PRODUCTS_IN_HEADER, 15)
         products.click()
         headings = self.elements_are_present(self.locators.PRODUCTS_HEADINGS, 15)
-        assert len(headings) == 7, "Not all headings are present on the page"
         return headings
+
+    def assert_headings_present(self):
+        headings = self.check_headings()
+        assert len(headings) == 7, "Not all headings are present on the page"
 
     def check_buttons(self):
         products = self.element_is_visible(self.locators.PRODUCTS_IN_HEADER, 15)
@@ -22,6 +25,10 @@ class ForBusinessPage(BasePage):
         if orange_buttons:
             orange_buttons.pop(0)
         buttons = black_buttons + orange_buttons
-        assert len(buttons) == 17, "The count of buttons is not as expected"
         return buttons
+
+    def assert_buttons_present(self):
+        buttons = self.check_buttons()
+        assert len(buttons) == 17, "The count of buttons is not as expected"
+
 
