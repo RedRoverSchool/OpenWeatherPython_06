@@ -6,6 +6,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
 
+
 class BasePage:
     sign_in_link = (By.CSS_SELECTOR, '.user-li a')
     guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
