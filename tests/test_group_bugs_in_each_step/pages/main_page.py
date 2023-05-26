@@ -96,3 +96,10 @@ class MainPage(BasePage):
         subscribe_for_free_link.click()
         assert '/users/sign_up' in self.driver.current_url, \
             "The Subscribe for free link leads to an incorrect page"
+
+    def check_openweather_for_business_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.OPENWEATHER_FOR_BUSINESS_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
+
