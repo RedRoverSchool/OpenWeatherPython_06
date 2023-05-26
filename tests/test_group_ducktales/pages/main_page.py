@@ -74,7 +74,7 @@ class MainPage(BasePage):
 
     def get_dropdown_options(self):
         self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
-        self.driver.find_element(*MainLocator.BTN_SEARCH).click()
+        self.element_is_clickable(MainLocator.BTN_SEARCH).click()
         dropdown_list = self.element_is_clickable(MainLocator.SEARCH_DROPDOWN_MENU)
         return dropdown_list
 
