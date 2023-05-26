@@ -1,3 +1,5 @@
+from selenium.common import ElementClickInterceptedException
+
 from tests.test_group_ducktales.test_data.our_initiatives_page_data import *
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
@@ -34,6 +36,19 @@ class OurInitiativesPage(BasePage):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         return question_headings
 
-    def verify_question_headings_displayed(self, question_headings):
+    @staticmethod
+    def verify_question_headings_displayed(question_headings):
         assert all(heading.is_displayed() for heading in question_headings), "Error: FAQ section is not displayed"
+
+    def click_question_headings(self, question_headings):
+        for heading in question_headings:
+            try:
+                self.driver.execute_script("arguments[0].click();", heading)
+            except ElementClickInterceptedException:
+                self.driver.execute_script("window.scrollTo(0, arguments[0].scrollHeight);", heading)
+                self.driver.execute_script("arguments[0].click();", heading)
+
+    @staticmethod
+    def verify_question_headings_clickable(question_headings):
+        assert all(heading.is_enabled() for heading in question_headings), "Error: FAQ section is not clickable"
 
