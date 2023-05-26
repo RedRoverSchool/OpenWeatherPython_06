@@ -72,13 +72,6 @@ class MainPage(BasePage):
         page_month_by_computer = self.get_months_by_computer()
         assert page_month == f'{page_month_by_computer}'
 
-    def get_dropdown_options(self):
-        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
-        self.element_is_visible(MainLocator.BTN_SEARCH)
-        self.element_is_clickable(MainLocator.BTN_SEARCH).click()
-        dropdown_list = self.element_is_clickable(MainLocator.SEARCH_DROPDOWN_MENU)
-        return dropdown_list
-
     def check_dropdown_options(self):
         self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
         self.element_is_clickable(MainLocator.BTN_SEARCH).click()
