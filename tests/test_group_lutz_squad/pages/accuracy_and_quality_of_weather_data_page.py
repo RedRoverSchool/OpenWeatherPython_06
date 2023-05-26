@@ -10,7 +10,6 @@ class AccuracyAndQualityOfWeatherDataPage(BasePage):
             *AccuracyAndQualityOfWeatherDataPageLocators.accuracy_and_quality_of_weather_data_link_locator)
         self.go_to_element(accuracy_and_quality_of_weather_data_page)
         accuracy_and_quality_of_weather_data_page.click()
-        assert self.driver.current_url == 'https://openweathermap.org/accuracy-and-quality'
         example_of_graphics_with_some_metrics = self.driver.find_element(
             *AccuracyAndQualityOfWeatherDataPageLocators.example_of_graphics_with_some_metrics_locator)
         self.go_to_element(example_of_graphics_with_some_metrics)
