@@ -10,7 +10,7 @@ class MainPage(BasePage):
         element = self.element_is_visible(MainLocator.FIRST_DAY_IN_8_DAY_FORECAST).text[:3]
         return element
 
-    def day_by_computer(self):
+    def get_day_by_computer(self):
         day_by_computer = datetime.now().weekday()
         today = WEEKDAYS[day_by_computer]
         return today
@@ -71,4 +71,24 @@ class MainPage(BasePage):
         page_month = self.get_months()
         page_month_by_computer = self.get_months_by_computer()
         assert page_month == f'{page_month_by_computer}'
+
+    def get_dropdown_list(self):
+        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys('California')
+        self.driver.find_element(*MainLocator.BTN_SEARCH).click()
+        self.element_is_visible(MainLocator.SEARCH_DROPDOWN_MENU)
+        # self.wait.until(EC.element_to_be_clickable(MainLocator.SEARCH_DROPDOWN_MENU))
+        dropdown_list = self.driver.find_element(*MainLocator.SEARCH_DROPDOWN_MENU)
+        return dropdown_list
+
+    def check_dropdown_options(self):
+        dropdown_list = self.get_dropdown_list()
+        for i in dropdown_list.find_elements(*MainLocator.DROPDOWN_LIST):
+            assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
+
+    def check_day(self):
+        day_by_weak = self.get_day_by_weak()
+        day_by_computer = self.get_day_by_computer()
+        assert day_by_weak == f'{day_by_computer}'
+
+
 
