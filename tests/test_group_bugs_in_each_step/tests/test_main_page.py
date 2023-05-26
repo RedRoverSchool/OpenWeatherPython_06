@@ -77,3 +77,9 @@ class TestConnectYourWeatherStationLink:
                     (self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_connect_your_weather_station_link_functionality()
+
+class TestSubscribeForFreeLink:
+    def test_tc_003_12_19_verify_subscribe_for_free_link_functionality_for_unauthorized_user\
+                    (self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_subscribe_for_free_link_functionality()
