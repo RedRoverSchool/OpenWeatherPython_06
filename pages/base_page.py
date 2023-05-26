@@ -15,6 +15,7 @@ class BasePage:
 
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
+    how_to_start_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -33,6 +34,13 @@ class BasePage:
                 self.driver.find_element(*self.dashboard_link).click()
             case 'pricing':
                 self.driver.find_element(*self.pricing_link).click()
+            case 'faq':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.faq_option).click()
+            case 'how to start':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.how_to_start_option).click()
+
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
