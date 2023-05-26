@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -11,6 +12,8 @@ class BasePage:
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    support_link = (By.XPATH, "//*[@id='support-dropdown']")
+    faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
 
 
     def __init__(self, driver, link=None):
@@ -30,6 +33,9 @@ class BasePage:
                 self.driver.find_element(*self.dashboard_link).click()
             case 'pricing':
                 self.driver.find_element(*self.pricing_link).click()
+            case 'faq':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.faq_option).click()
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
@@ -128,4 +134,47 @@ class BasePage:
     def allow_all_cookies(self, timeout=10):
         wait(self.driver, timeout).until(EC.element_to_be_clickable(self.allow_all_cookies_button)).click()
 
+    def input_value(self, element, value):
+        """
+        Method: input values, send_keys
+        """
+        self.element_is_present(element).send_keys(value)
+        print(f'Input: {value}')
 
+    def click_element(self, element):
+        """
+        Method: click element (e.g. button)
+        """
+        self.element_is_present(element).click()
+        print('Button clicked')
+
+    def assert_url(self, result):
+        """
+        Method: assert current URL
+        """
+        get_url = self.driver.current_url
+        assert get_url == result, \
+            f'Wrong result:' \
+            f'\nCurrent URL: "{get_url}"' \
+            f'\nURL expected: "{result}"'
+        print(f"Current URL result: '{result}' --- PASSED")
+
+    def assert_text(self, text, result):
+        """
+        Method: assert page text
+        """
+        value_text = text.text
+        assert value_text == result, \
+            f'Wrong result:' \
+            f'\nThe message displayed: "{value_text}"' \
+            f'\nThe message expected: "{result}"'
+        print(f"Text result: '{result}' --- PASSED")
+
+    def select_option_from_list(self, locator, option):
+        """
+        Method: allows to select value from the drop-down list
+        and put the value straight into the field
+        """
+        select = Select(self.element_is_present(locator))
+        select.select_by_index(option)
+        print(f'Item from drop-down selected')
