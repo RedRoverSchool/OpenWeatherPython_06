@@ -120,6 +120,7 @@ def test_TC_004_08_01_historical_collection_block_visibility(driver):
 
 def test_TC_004_08_02_link_to_history_archive_is_clickable(driver):
     driver.get(GUIDE_PAGE)
+    # self.driver.get(self.URL_GUIDE_PAGE)
     archive_link = driver.find_element(*LINK_HISTORICAL_ARCHIVE)
     actions = ActionChains(driver)
     actions.move_to_element(archive_link).perform()

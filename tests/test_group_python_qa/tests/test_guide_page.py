@@ -8,7 +8,6 @@ def test_TC_004_08_01_historical_collection_block_visibility(driver):
     page.historical_collection_block_visibility()
 
 
-
 def test_TC_004_08_02_link_to_history_archive_is_clickable(driver):
     page = GuidePage(driver, GuidePage.URL_GUIDE_PAGE)
     page.open_page()
