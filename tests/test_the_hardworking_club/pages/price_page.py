@@ -1,5 +1,4 @@
 from pages.base_page import BasePage
-from selenium.webdriver.common.by import By
 from tests.test_the_hardworking_club.locators.locators_all import PricePageLocators
 
 class PricePage(BasePage):
