@@ -30,9 +30,9 @@ def test_tc_001_08_02_weather_items_are_displayed(driver, open_and_load_main_pag
     weather_items = driver.find_elements(*weather_item_locator)
     for weather_item in weather_items:
         assert weather_item.is_displayed()
-
-
-def test_tc_010_02_06_verify_website_link_redirects_to_main_page(driver, open_and_load_main_page, wait):
+        
+        
+def test_TC_010_02_06_verify_website_link_redirects_to_main_page(driver, open_and_load_main_page, wait):
     driver.get(STUDENT_INITIATIVE_URL)
     website_link = driver.find_element(*website_link_locator)
     driver.execute_script("arguments[0].click();", website_link)
@@ -82,3 +82,4 @@ def test_tc_010_02_07_verify_correct_redirection_to_popup_window(driver, open_an
     driver.get(STUDENT_INITIATIVE_URL)
     ask_us_popup = driver.find_element(*ask_us_popup_locator)
     assert ask_us_popup.is_enabled() and ask_us_popup.is_displayed()
+
