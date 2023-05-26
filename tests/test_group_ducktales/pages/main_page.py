@@ -74,7 +74,7 @@ class MainPage(BasePage):
 
     def check_dropdown_options(self):
         self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
-        self.element_is_clickable(MainLocator.BTN_SEARCH).click()
+        self.element_is_clickable(MainLocator.BTN_SEARCH, 15).click()
         self.element_is_visible(MainLocator.SEARCH_DROPDOWN_MENU)
         dropdown_list = self.driver.find_elements(*MainLocator.DROPDOWN_LIST)
         for i in dropdown_list:
