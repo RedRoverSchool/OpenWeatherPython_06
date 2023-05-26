@@ -58,6 +58,7 @@ class OurInitiativesPageLocators:
 
 class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
+    IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
 
 
 
