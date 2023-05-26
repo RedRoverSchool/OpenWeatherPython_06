@@ -19,8 +19,8 @@ class TestFooter:
         footer.open_page()
         footer.find_links_under_technologies_module(icon)
 
-    def test_tc_001_15_03_verify_redirection_to_about_us_page(self, driver):
+    def test_tc_001_15_03_verify_redirection_to_about_us_page(self, driver, wait):
         footer = Footer(driver, HOME_PAGE_URL)
         footer.open_page()
-        footer.check_redirection_to_about_us_page()
+        footer.check_redirection_to_about_us_page(wait)
 
