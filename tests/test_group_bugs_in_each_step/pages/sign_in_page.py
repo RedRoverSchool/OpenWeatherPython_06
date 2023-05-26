@@ -25,3 +25,7 @@ class SignInPage(BasePage):
     def check_error_alert_text(self):
         error_alert_text = self.driver.find_element(*self.locators.ERROR_ALERT).text
         assert error_alert_text == 'Invalid Email or password.'
+
+    def check_registration_form_is_visible(self):
+        registration_form = self.element_is_visible(self.locators.REGISTRATION_FORM_DISPLAY)
+        assert registration_form.is_displayed(), "Sign In To Your Account is not visible"

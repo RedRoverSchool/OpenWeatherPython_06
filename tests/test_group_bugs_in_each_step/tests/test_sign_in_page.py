@@ -17,6 +17,11 @@ class TestRegistrationQuestion:
         sign_in_page.check_authorization()
         sign_in_page.check_error_alert_text()
 
+    def test_tc_014_01_01_verify_registration_form_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_form_is_visible()
+
 
 
 
