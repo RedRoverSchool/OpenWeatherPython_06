@@ -43,7 +43,7 @@ class TestMainPage:
         page.open_page()
         page.check_months()
 
-    def test_tc_001_01_02_main_page_search_city_dropdown_options_contain_valid_value(self, driver, open_and_load_main_page):
+    def test_tc_001_01_02_main_page_search_city_dropdown_options_valid_value(self, driver, open_and_load_main_page):
         page = MainPage(driver, LINK_MAIN_PAGE)
         page.open_page()
         page.check_dropdown_options()
