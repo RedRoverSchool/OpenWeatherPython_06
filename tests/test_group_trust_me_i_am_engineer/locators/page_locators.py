@@ -62,4 +62,14 @@ class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
 
+class SubscriptionsPageLocators():
+    RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
+    INPUT_EMAIL = (By.XPATH, "//input[@type='email']")
+    INPUT_ORGANISATION = (By.XPATH, "//input[@id='unauth_subscription_form_organisation']")
+    INPUT_ADDRESS_1 = (By.XPATH, "//input[@id='unauth_subscription_form_address_line_1']")
+    INPUT_CITY = (By.XPATH, "//input[@id='unauth_subscription_form_city']")
+    INPUT_POSTCODE = (By.XPATH, "//input[@id='unauth_subscription_form_postal_code']")
+    INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
+    BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
+
 
