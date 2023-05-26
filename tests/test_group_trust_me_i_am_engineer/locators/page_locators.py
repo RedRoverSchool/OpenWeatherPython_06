@@ -15,6 +15,8 @@ class MainPageLocators:
     WEEKDAY_IN_8_DAYS_FORECAST = (By.XPATH, "//div//li[@data-v-5ed3171e]/span")
     PRICING_PAGE_TITLE = (By.XPATH, "//h1[text()='Pricing']")
     FOR_BUSINESS_LINK = (By.XPATH, "//a[text()='OpenWeather for Business']")
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[@class ='stick-footer-panel__link']")
+    ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
 
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
@@ -53,4 +55,9 @@ class OurInitiativesPageLocators:
     LEARN_MORE_LINK = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
     LEARN_MORE_PAGE_TITLE = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
     HEADERS_SELECTOR = (By.XPATH, "//h2[@style='margin-top: 0;']")
+
+class AboutUsPageLocators():
+    HEADER = (By.XPATH, "//h1")
+
+
 
