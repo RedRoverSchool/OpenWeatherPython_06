@@ -120,5 +120,3 @@ class BasePage:
         action.move_to_element(element)
         action.perform()
 
-    def press_enter_button(self):
-        actions = ActionChains(self.driver)
