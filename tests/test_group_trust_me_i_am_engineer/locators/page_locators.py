@@ -71,4 +71,4 @@ class SubscriptionsPageLocators():
     INPUT_POSTCODE = (By.XPATH, "//input[@id='unauth_subscription_form_postal_code']")
     INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
     BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
-
+    TEXT_PAYMENT_PAGE = (By.XPATH, "//div[@id='root']")
