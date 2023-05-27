@@ -2,7 +2,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from pages import base_page
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
-import time
+from selenium.webdriver import Keys
+
 
 class SubscriptionsPage(BasePage):
     URL_SUBSCRIPTION = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
@@ -28,5 +29,8 @@ class SubscriptionsPage(BasePage):
         button.click()
         self.element_is_displayed(self.locators.TEXT_PAYMENT_PAGE, wait)
         self.driver.refresh()
-        assert 'checkout.stripe' in self.driver.current_url, \
+        partial_url = "https://checkout.stripe.com"
+        wait.until(EC.url_contains(partial_url))
+        payment_url = self.driver.current_url
+        assert partial_url in payment_url, \
             "'Continue to payment' button leads to incorrect page"
