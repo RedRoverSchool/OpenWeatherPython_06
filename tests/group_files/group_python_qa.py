@@ -1,6 +1,7 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 import pytest
+import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
@@ -134,7 +135,6 @@ def test_TC_004_08_03_historical_collection_link_redirects_correctly(driver):
     assert driver.current_url == URL_HISTORY_BULK
 
 
-
 def test_TC_004_08_03_verify_all_links_same_color(driver):
     driver.get(GUIDE_PAGE)
     all_links = driver.find_elements(*HISTORICAL_COLLECTION_LINKS)
@@ -149,6 +149,36 @@ def test_TC_004_02_01_visibility_of_title_of_article(driver):
     title_nwp_model = driver.find_element(*TITLE_NWP_MODEL_LOCATOR)
     assert title_nwp_model.is_displayed()
 
+    # PARTNERS_AND_SOLUTION_PAGE = "https://openweathermap.org/examples"
+    # LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
+def test_TC_011_09_01_link_See_library_visibility(driver):
+    driver.get(PARTNERS_AND_SOLUTION_PAGE_URL)
+    see_library_link = driver.find_element(*LINK_SEE_LIBRARY)
+    driver.execute_script("arguments[0].scrollIntoView(true);", see_library_link)
+    assert see_library_link.is_displayed(), "The link is not displaying"
+
+def test_TC_011_09_02_link_See_library_is_clickable(driver):
+    driver.get(PARTNERS_AND_SOLUTION_PAGE_URL)
+    see_library_link = driver.find_element(*LINK_SEE_LIBRARY)
+    actions = ActionChains(driver)
+    actions.move_to_element(see_library_link).perform()
+    assert see_library_link.is_enabled(), "The link is not clickable"
+
+
+PARTNERS_AND_SOLUTION_PAGE_URL = "https://openweathermap.org/examples"
+LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
+ALLOW_ALL_COOKIES = (By.XPATH, '//button[text() = "Allow all"]')
+BRIANDOWNS_GITHUB_URL = "http://briandowns.github.io/openweathermap/"
+
+
+def test_TC_011_09_03_link_See_library_redirects_correctly(driver):
+    driver.get(PARTNERS_AND_SOLUTION_PAGE_URL)
+    driver.find_element(*ALLOW_ALL_COOKIES).click()
+    driver.find_element(*LINK_SEE_LIBRARY).click()
+    driver.switch_to.window(driver.window_handles[1])
+    assert driver.current_url == BRIANDOWNS_GITHUB_URL
+    # assert 'http://briandowns' in driver.current_url, \
+    #         "The See link leads to an incorrect page"
 
 def test_TC_001_10_03_verify_count_of_icons_for_nighttime(driver):
     driver.get(URL_WEATHER_CONDITIONS)
