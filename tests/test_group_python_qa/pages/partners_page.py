@@ -4,6 +4,7 @@ from tests.test_group_python_qa.locators.locators import PartnersPageLocators
 
 class PartnersPage(BasePage):
     locators = PartnersPageLocators()
+
     PARTNERS_AND_SOLUTION_PAGE_URL = "https://openweathermap.org/examples"
     BRIANDOWNS_GITHUB_URL = "http://briandowns.github.io/openweathermap/"
 
