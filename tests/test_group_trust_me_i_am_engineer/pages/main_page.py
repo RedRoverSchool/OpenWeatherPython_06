@@ -1,7 +1,6 @@
 from selenium.webdriver.support import expected_conditions as EC
-from OpenWeatherPython_06.pages import base_page
-from OpenWeatherPython_06.pages.base_page import BasePage
-from OpenWeatherPython_06.tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
+from pages.base_page import BasePage
+from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
