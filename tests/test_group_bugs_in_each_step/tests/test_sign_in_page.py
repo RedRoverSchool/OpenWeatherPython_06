@@ -22,6 +22,10 @@ class TestRegistrationQuestion:
         page.open_page()
         page.check_registration_form_is_visible()
 
+    def test_tc_014_01_02_verify_email_field_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_email_field_is_visible()
 
 
 
