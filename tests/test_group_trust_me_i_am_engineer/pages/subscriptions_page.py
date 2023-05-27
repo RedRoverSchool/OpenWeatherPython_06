@@ -26,6 +26,6 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        wait.until_not(EC.url_contains('checkout.stripe.com'))
+        wait.until(EC.url_contains('checkout.stripe.com'))
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
