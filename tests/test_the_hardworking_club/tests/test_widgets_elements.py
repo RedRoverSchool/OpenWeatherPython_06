@@ -15,10 +15,10 @@ class TestWidgets:
         widgets_page.verify_display_of_bottom_widget_1_for_selected_type()
 
 
-    def test_TC_001_09_08_select_the_specific_city(self, driver):
+    def test_TC_001_09_08_select_the_specific_city(self, driver, wait):
 
         widgets_page = WidgetsPage(driver)
-        widgets_page.check_the_specific_city_is_present()
+        widgets_page.check_the_specific_city_is_present(wait)
 
 
     def test_TC_001_09_02_verify_that_3_widgets_are_displayed(self, driver):
@@ -26,5 +26,13 @@ class TestWidgets:
         widgets_page = WidgetsPage(driver)
         widgets_page.verify_that_3_widgets_are_displayed()
 
+    def test_TC_001_09_14_verify_the_subtitle_of_the_page(self, driver):
 
+        widget_page = WidgetsPage(driver)
+        widget_page.verify_the_subtitle_of_the_page()
+
+
+    def test_TC_001_09_04_verify_visibility_of_fahrenheit(self, driver):
+        widget_page = WidgetsPage(driver)
+        widget_page.verify_visibility_of_fahrenheit()
 
