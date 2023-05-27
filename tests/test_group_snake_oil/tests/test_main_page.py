@@ -1,3 +1,4 @@
+import pytest
 from tests.test_group_snake_oil.links.all_links import HOME_PAGE_URL
 from tests.test_group_snake_oil.pages.main_page import MainPage
 
@@ -25,3 +26,9 @@ class TestMainPage:
         main_page.open_page()
         main_page.open_Support_dropdown()
         main_page.check_click_FAQ_element()
+
+    @pytest.mark.xfail(reason="First letter is a capital Cyrillic 'C'")
+    def test_tc_001_15_01_verify_title_content(self, driver):
+        page = MainPage(driver, HOME_PAGE_URL)
+        page.open_page()
+        page.title_check(text="Current weather and forecast - OpenWeatherMap")
