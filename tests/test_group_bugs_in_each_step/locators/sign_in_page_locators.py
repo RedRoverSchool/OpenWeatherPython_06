@@ -8,3 +8,5 @@ class SignInPageLocators:
     SUBMIT_BUTTON = (By.XPATH, "//*[@class='simple_form new_user']/input[3]")
     ERROR_ALERT = (By.XPATH, "//div[@class='panel-body']")
     REGISTRATION_FORM_DISPLAY = (By.CSS_SELECTOR, ".sign-form")
+    EMAIL_FIELD_DISPLAY = (By.CSS_SELECTOR, ".new_user > :nth-child(3)")
+    PASSWORD_FIELD_DISPLAY = (By.CSS_SELECTOR, "#user_password")

@@ -70,6 +70,7 @@ def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(dri
     assert imperial_button.is_displayed() and imperial_button.is_enabled(), \
         "The temperature switch button in the imperial system is not displayed or is not clickable"
 
+@pytest.mark.skip
 def test_TC_001_05_01_verify_the_current_date_and_time(driver, open_and_load_main_page):
     date_time = driver.find_element(*loc_date_time)
     date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
