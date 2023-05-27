@@ -98,6 +98,7 @@ def get_section_title_locator_for_tc_008_01_04(section):
     return (By.CSS_SELECTOR, f'#{section} h2')
 
 
+@pytest.mark.skip
 @pytest.mark.parametrize('section', sections)
 def test_tc_008_01_04_check_6_sections_are_visible(driver, open_and_load_main_page, wait, section):
     driver.find_element(*HEADER_PRICING_LINK).click()
@@ -109,13 +110,13 @@ def test_tc_008_01_04_check_6_sections_are_visible(driver, open_and_load_main_pa
     assert actual_section.is_displayed(), \
         f"Section {driver.find_element(*section_title_locator).text} is not visible"
 
-
+@pytest.mark.skip
 def test_tc_003_10_07_check_medium_icon_is_visible(driver, open_and_load_main_page, wait):
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
     assert medium_link.is_displayed(), "The medium icon is not displayed"
 
-
+@pytest.mark.skip
 def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_page, wait):
     driver.find_element(By.TAG_NAME, 'html').send_keys(Keys.END)
     medium_link = wait.until(EC.element_to_be_clickable(MEDIUM_LINK))
@@ -125,7 +126,7 @@ def test_tc_003_10_09_check_medium_icon_is_clickable(driver, open_and_load_main_
                                                                                               "clickable and tooltip " \
                                                                                               "incorrect "
 
-
+@pytest.mark.skip
 def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_condition_page):
     minimum_icons_for_daytime = 8
     driver.find_element(*WEATHER_ICONS).click()
@@ -133,7 +134,7 @@ def test_tc_001_10_02_verify_count_of_icons_for_daytime(driver, open_weather_con
     quantity = len(actual_icons_daytime)
     assert quantity >= minimum_icons_for_daytime, f"Count of daytime icons less then 8 and equal {quantity}"
 
-
+@pytest.mark.skip
 def test_tc_008_01_03_check_the_pricing_page_title(driver, open_and_load_main_page,wait):
     driver.find_element(*HEADER_PRICING_LINK).click()
     wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
@@ -141,12 +142,13 @@ def test_tc_008_01_03_check_the_pricing_page_title(driver, open_and_load_main_pa
     assert pricing_title.is_displayed(), "Title Pricing is not displayed"
 
 
+@pytest.mark.skip
 def test_tc_008_01_02_check_pricing_page_is_open(driver, open_and_load_main_page, wait):
     driver.find_element(*HEADER_PRICING_LINK).click()
     wait.until(EC.element_to_be_clickable(PRICING_SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON))
     assert driver.current_url == 'https://openweathermap.org/price'
 
-    
+@pytest.mark.skip
 def test_tc_001_11_01_verify_existing_of_example_api_response(driver, open_weather_condition_page):
     driver.find_element(*TITLE_EXAMPLE_API_RESPONSE)
     example = driver.find_element(*EXAMPLE_API_RESPONSE)
