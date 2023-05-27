@@ -34,7 +34,7 @@ class TestRegistrationQuestion:
         page.open_page()
         page.check_password_field_is_visible()
 
-    def test_tc_014_04_03_verify_authorization_with_valid_credentials(self, driver):
+    def test_tc_014_04_01_verify_authorization_with_valid_data(self, driver):
         sign_in_page = SignInPage(driver, SignInUrls.url_sign_in_page)
         sign_in_page.open_page()
         sign_in_page.check_authorization(credentials['email'], credentials['password'])
