@@ -27,6 +27,7 @@ class TestRegistrationQuestion:
         page.open_page()
         page.check_email_field_is_visible()
 
-
-
-
+    def test_tc_014_01_03_verify_password_field_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_password_field_is_visible()
