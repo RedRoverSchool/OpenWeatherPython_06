@@ -21,13 +21,13 @@ class SubscriptionsPage(BasePage):
         city = self.driver.find_element(*self.locators.INPUT_CITY)
         city.send_keys("Istanbul")
         postal_code = self.driver.find_element(*self.locators.INPUT_POSTCODE)
-        postal_code.send_keys("Istanbul")
+        postal_code.send_keys("54321")
         phone = self.driver.find_element(*self.locators.INPUT_PHONE_NUMBER)
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        self.driver.switch_to.window(self.driver.window_handles[0])
         wait.until(EC.title_is("Openweather Ltd."))
+        self.driver.refresh()
         payment_url = 'checkout.stripe'
         assert payment_url in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
