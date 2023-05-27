@@ -1,5 +1,3 @@
-from selenium.common import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
 from tests.test_group_future_auto_qa.locators.for_business_page_locators import ForBusinessPageLocators
 from pages.base_page import BasePage
 
@@ -41,7 +39,15 @@ class ForBusinessPage(BasePage):
         return [talk_to_us_button, current_and_forecasts, historical_data, weather_alerts, weather_maps,
                 energy_prediction]
 
-    def assert_elements_present(self):
+    def assert_elements_are_present(self):
         elements = self.check_elements()
         assert all(elements), "Not all elements are present on the page"
+
+    def check_elements_are_clickable(self):
+        elements = self.check_elements()
+        return [element.is_enabled() for element in elements]
+
+    def assert_elements_are_clickable(self):
+        clickable_elements = self.check_elements_are_clickable()
+        assert all(clickable_elements), "Not all elements are clickable"
 
