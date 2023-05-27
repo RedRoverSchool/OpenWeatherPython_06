@@ -1,4 +1,5 @@
 from tests.test_group_future_auto_qa.pages.main_page import MainPage
+from tests.test_group_future_auto_qa.pages.main_page import MainPageFooter
 import pytest
 
 
@@ -54,3 +55,20 @@ class TestMainPageFooter:
         page = MainPage(driver)
         expected_link = "https://openweathermap.org/widgets-constructor"
         page.click_footer_product_collections_widgets(expected_link)
+
+    def test_tc_003_12_22_pdf_downloading_after_click_on_terms_and_conditions_of_sale_link(self, driver, open_and_load_main_page):
+        page = MainPageFooter(driver)
+        page.verify_pdf_downloading_after_click_on_terms_and_conditions_of_sale_link()
+
+    def test_tc_003_12_23_pdf_downloading_after_click_on_website_terms_and_conditions_link(self, driver, open_and_load_main_page):
+        page = MainPageFooter(driver)
+        page.verify_pdf_downloading_after_click_on_website_terms_and_conditions_link()
+
+    def test_tc_003_06_02_verify_terms_and_conditions_module_title_visibility(self, driver, open_and_load_main_page):
+        page = MainPageFooter(driver)
+        page.verify_terms_and_conditions_module_title_visibility()
+
+    def test_tc_003_12_20_verify_blog_link_functionality(self, driver, open_and_load_main_page, wait):
+        page = MainPageFooter(driver)
+        expected_link = "https://openweather.co.uk/blog/category/weather"
+        page.check_blog_link_functionality(expected_link)

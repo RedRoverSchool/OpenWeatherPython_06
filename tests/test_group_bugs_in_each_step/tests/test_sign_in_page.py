@@ -11,6 +11,18 @@ class TestRegistrationQuestion:
         element = sign_in_question.check_registration_question_is_visible()
         assert element is True, 'The element is not visible'
 
+    def test_tc_014_04_02_verify_authorization_with_empty_fields(self, driver):
+        sign_in_page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        sign_in_page.open_page()
+        sign_in_page.check_authorization()
+        sign_in_page.check_error_alert_text()
+
+    def test_tc_014_01_01_verify_registration_form_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_form_is_visible()
+
+
 
 
 
