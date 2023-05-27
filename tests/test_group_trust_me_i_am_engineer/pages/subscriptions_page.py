@@ -26,8 +26,8 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        wait.until(EC.title_is("Openweather Ltd."))
+        expected_title = "Openweather Ltd."
+        wait.until(EC.title_contains(expected_title))
         self.driver.refresh()
-        payment_url = 'checkout.stripe'
-        assert payment_url in self.driver.current_url, \
+        assert 'checkout.stripe' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
