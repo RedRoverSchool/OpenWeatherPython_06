@@ -29,3 +29,7 @@ class SignInPage(BasePage):
     def check_registration_form_is_visible(self):
         registration_form = self.element_is_visible(self.locators.REGISTRATION_FORM_DISPLAY)
         assert registration_form.is_displayed(), "Sign In To Your Account is not visible"
+
+    def check_email_field_is_visible(self):
+        email_field = self.element_is_visible(self.locators.EMAIL_FIELD_DISPLAY)
+        assert email_field.is_displayed(), "Email field is not visible"
