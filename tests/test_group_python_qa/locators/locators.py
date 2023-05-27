@@ -16,7 +16,6 @@ class MainPageLocators:
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
 
-
 class PartnersPageLocators:
     LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
     ALLOW_ALL_COOKIES = (By.XPATH, '//button[text() = "Allow all"]')
