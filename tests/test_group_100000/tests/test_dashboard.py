@@ -1,5 +1,5 @@
 from tests.test_group_100000.pages.dashboard_page import DashboardPage
-from tests.test_group_100_000 import weather_symbol
+from tests.group_files.group_100_000 import weather_symbol
 
 def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(driver, open_and_load_main_page):
     humidity_symbol = driver.find_element(*weather_symbol)
