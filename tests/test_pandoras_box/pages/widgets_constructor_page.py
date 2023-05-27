@@ -6,6 +6,7 @@ class WidgetsConstructor(BasePage):
     widget_constructor_URL = 'https://openweathermap.org/widgets-constructor'
     metric_toggle = (By.XPATH, '//span[@id="metric"]')
     metric_units = (By.XPATH, '//span[text()="°C"]')
+    imperial_units = (By.XPATH, '//span[text()="°F"]')
     widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
                         (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
                         (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
@@ -34,3 +35,18 @@ class WidgetsConstructor(BasePage):
                         self.element_is_visible(widget_locator)
                     metric_units_number = self.driver.find_elements(*self.metric_units)
                     assert len(metric_units_number) == 14, "Units did not switch correctly"
+            case 'fahrenheit':
+                toggle_position = self.driver.find_element(*self.metric_toggle)
+                if toggle_position.get_attribute("style") == expected_position:
+                    self.driver.find_element(*self.metric_toggle).click()
+                    for widget_locator in self.widgets_locators:
+                        self.element_is_visible(widget_locator)
+                    imperial_units_number = self.driver.find_elements(*self.imperial_units)
+                    assert len(imperial_units_number) == 14, "Units did not switch correctly"
+                else:
+                    action = ActionChains(self.driver)
+                    action.double_click(toggle_position).perform()
+                    for widget_locator in self.widgets_locators:
+                        self.element_is_visible(widget_locator)
+                    imperial_units_number = self.driver.find_elements(*self.imperial_units)
+                    assert len(imperial_units_number) == 14, "Units did not switch correctly"

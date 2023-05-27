@@ -1,5 +1,6 @@
 from selenium.webdriver import ActionChains
-
+import requests
+import os
 from pages.base_page import BasePage
 from tests.test_group_future_auto_qa.locators.main_page_locators import MainPageLocators
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,3 +56,42 @@ class MainPage(BasePage):
         actions = ActionChains(self.driver)
         actions.click(submenu).perform()
         return submenu
+
+
+class MainPageFooter(BasePage):
+    locators = MainPageLocators()
+
+    def pdf_downloader(self, locator):
+        pdf_url = self.element_is_clickable(locator).get_attribute("href")
+        response = requests.get(pdf_url)
+        pdf_filename = pdf_url[pdf_url.rfind("/") + 1:]
+        path_to_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', f'test_data/{pdf_filename}'))
+        with open(path_to_file, 'wb') as f:
+            f.write(response.content)
+            check_file = os.path.exists(path_to_file)
+            f.close()
+            os.remove(path_to_file)
+        return pdf_filename,  path_to_file, check_file
+
+    def verify_pdf_downloading_after_click_on_terms_and_conditions_of_sale_link(self):
+        self.allow_all_cookies()
+        pdf_filename,  path_to_file, check_file = self.pdf_downloader(self.locators.FOOTER_TERMS_AND_CONDITIONS_OF_SALE)
+        assert check_file is True, f"PDF file '{pdf_filename}' was not downloaded to {path_to_file}"
+
+    def verify_pdf_downloading_after_click_on_website_terms_and_conditions_link(self):
+        self.allow_all_cookies()
+        pdf_filename,  path_to_file, check_file = self.pdf_downloader(self.locators.FOOTER_WEBSITE_TERMS_AND_CONDITIONS)
+        assert check_file is True, f"PDF file '{pdf_filename}' was not downloaded to {path_to_file}"
+
+    def verify_terms_and_conditions_module_title_visibility(self):
+        terms_and_conditions_module_title = \
+            self.driver.find_element(*self.locators.FOOTER_TERMS_AND_CONDITIONS_TITLE)
+        assert terms_and_conditions_module_title.is_displayed(), \
+            "The Terms & Conditions module title is not visible"
+
+    def check_blog_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.FOOTER_BLOG_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
+

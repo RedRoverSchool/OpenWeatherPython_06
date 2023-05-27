@@ -15,3 +15,11 @@ class TestFooter:
         page = Footer(driver)
         page.scroll_down_the_page()
         page.check_link_in_new_window(FL.ASK_A_QUESTION_LINK, links.ASK_A_QUESTION_PAGE)
+
+    def test_TC_003_08_07_blog_link_is_visible(self, driver, open_and_load_main_page):
+        page = Footer(driver)
+        page.element_visibility(FL.BLOG_LINK)
+
+    def test_TC_003_08_08_blog_link_is_clickable(self, driver, open_and_load_main_page):
+        page = Footer(driver)
+        page.element_clickability(FL.BLOG_LINK)
