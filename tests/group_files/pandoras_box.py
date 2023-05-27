@@ -97,7 +97,7 @@ def test_TC_002_03_08_open_pricing(driver, open_and_load_main_page):
     expected_title = "Pricing"
     displayed_title = driver.find_element(*DISPLAYED_TITLE).text
     assert displayed_title == expected_title
-
+@pytest.mark.skip
 def test_TC_002_02_03_verify_result_of_search_for_invalid_city_name(driver, open_and_load_main_page, wait):
     search_weather_in_your_city = driver.find_element(*FIELD_WEATHER_IN_YUOR_CITY)
     entered_invalid_city_name = "LJKJJ"

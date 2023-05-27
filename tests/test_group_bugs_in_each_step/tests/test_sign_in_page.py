@@ -1,5 +1,7 @@
 from tests.test_group_bugs_in_each_step.pages.sign_in_page import SignInPage
 from tests.test_group_bugs_in_each_step.test_data.urls import SignInUrls
+from tests.test_group_bugs_in_each_step.pages.profile_page import ProfilePage
+from test_data.credentials import credentials
 import pytest
 
 
@@ -31,3 +33,10 @@ class TestRegistrationQuestion:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_password_field_is_visible()
+
+    def test_tc_014_04_01_verify_authorization_with_valid_data(self, driver):
+        sign_in_page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        sign_in_page.open_page()
+        sign_in_page.check_authorization(credentials['email'], credentials['password'])
+        profile_page = ProfilePage(driver)
+        profile_page.check_auth_notification()
