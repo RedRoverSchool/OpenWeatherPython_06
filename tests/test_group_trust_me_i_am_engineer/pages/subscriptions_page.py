@@ -8,7 +8,7 @@ class SubscriptionsPage(BasePage):
     URL_SUBSCRIPTION = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
     locators = SubscriptionsPageLocators()
 
-    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
+    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self, wait):
         self.driver.get(self.URL_SUBSCRIPTION)
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
         radiobutton.click()
@@ -26,7 +26,8 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        time.sleep(10)
-        assert 'checkout.stripe.com' in self.driver.current_url, \
+        self.driver.switch_to.window(self.driver.window_handles[0])
+        wait.until(EC.title_is("Openweather Ltd."))
+        payment_url = 'checkout.stripe'
+        assert payment_url in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
-
