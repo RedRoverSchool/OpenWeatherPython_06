@@ -33,3 +33,7 @@ class SignInPage(BasePage):
     def check_email_field_is_visible(self):
         email_field = self.element_is_visible(self.locators.EMAIL_FIELD_DISPLAY)
         assert email_field.is_displayed(), "Email field is not visible"
+
+    def check_password_field_is_visible(self):
+        password_field = self.element_is_visible(self.locators.PASSWORD_FIELD_DISPLAY)
+        assert password_field.is_displayed(), "Password field is not visible"
