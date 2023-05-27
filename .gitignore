@@ -1,5 +1,5 @@
 .idea/
-__pycache__/
+
 allure-results
 test_data
 tests/test_group_100_000.py
