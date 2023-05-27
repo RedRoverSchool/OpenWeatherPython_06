@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import pytest
 from selenium.webdriver.common.keys import Keys
-__file__ = "C:/Users/HP/PycharmProjects/MainProject/tests/test_group_ducktales.py"
+
 
 
 TO_IMPERIAL_BTN = By.XPATH, "//div[contains(text(),'Imperial: °F, mph')]"
