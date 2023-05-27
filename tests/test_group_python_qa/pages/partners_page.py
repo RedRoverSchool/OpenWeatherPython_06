@@ -13,3 +13,4 @@ class PartnersPage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView(true);", see_library_link)
         assert see_library_link.is_displayed(), "The link is not displaying"
 
+
