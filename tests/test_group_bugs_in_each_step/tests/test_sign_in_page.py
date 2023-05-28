@@ -42,7 +42,7 @@ class TestRegistrationQuestion:
         profile_page.check_auth_notification()
 
     def test_tc_014_04_05_verify_authorization_with_valid_email_and_empty_password_field(self, driver):
-        check_emai_without_password = SignInPage(driver, SignInUrls.url_sign_in_page)
-        check_emai_without_password.open_page()
-        check_emai_without_password.check_authorization(credentials['email'])
-        check_emai_without_password.check_error_alert_text()
+        check_email_without_password = SignInPage(driver, SignInUrls.url_sign_in_page)
+        check_email_without_password.open_page()
+        check_email_without_password.check_authorization(credentials['email'])
+        check_email_without_password.check_error_alert_text()
