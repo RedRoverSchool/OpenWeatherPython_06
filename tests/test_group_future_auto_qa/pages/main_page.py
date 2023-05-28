@@ -88,3 +88,10 @@ class MainPageFooter(BasePage):
             self.driver.find_element(*self.locators.FOOTER_TERMS_AND_CONDITIONS_TITLE)
         assert terms_and_conditions_module_title.is_displayed(), \
             "The Terms & Conditions module title is not visible"
+
+    def check_blog_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.FOOTER_BLOG_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
+

@@ -14,6 +14,7 @@ class ApiKeysLocator:
     SAVE_NEW_API_NAME_BUTTON = By.CSS_SELECTOR, '.pop-up-footer .button-round.dark'
     API_KEY_NAME_FIRST_ROW = By.XPATH, "//div[@class='col-md-8']//tr[1]//td[2]"
     NEW_API_KEY_NAME = By.CSS_SELECTOR, ".new_api_key_form .owm_input"
+    GENERATE_BUTTON = By.CSS_SELECTOR, '.new_api_key_form .button-round.dark'
 
 
 

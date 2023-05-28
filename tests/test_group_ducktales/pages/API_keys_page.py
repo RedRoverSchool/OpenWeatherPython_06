@@ -46,4 +46,13 @@ class ApiKeysPage(BasePage):
         created_api_key_name = self.driver.find_element(*ApiKeysLocator.NEW_API_KEY_NAME)
         actual_api_name_limit = int(created_api_key_name.get_attribute('maxlength'))
         assert actual_api_name_limit == expected_api_name_limit, "The limit of created API key name does not correspond to " \
-                                                                "requirements"
+                                                                 "requirements"
+
+    def check_create_api_key_field_is_required(self):
+        new_api_key_name_field = self.driver.find_element(*ApiKeysLocator.NEW_API_KEY_NAME)
+        is_required = new_api_key_name_field.get_attribute('required')
+        assert is_required, "The field hasn't required attribute"
+
+    def check_is_generate_button_clickable(self):
+        is_generate_button_clickable = self.element_is_clickable(ApiKeysLocator.GENERATE_BUTTON)
+        assert is_generate_button_clickable, "The button does not clickable"

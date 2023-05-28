@@ -68,3 +68,7 @@ class TestMainPageFooter:
         page = MainPageFooter(driver)
         page.verify_terms_and_conditions_module_title_visibility()
 
+    def test_tc_003_12_20_verify_blog_link_functionality(self, driver, open_and_load_main_page, wait):
+        page = MainPageFooter(driver)
+        expected_link = "https://openweather.co.uk/blog/category/weather"
+        page.check_blog_link_functionality(expected_link)
