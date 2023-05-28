@@ -1,0 +1,8 @@
+
+start browser...
+
+checking link: https://openweathermap.org/api/hourly-forecast#cityid5
+link text: Built-in API request by city ID
+198.5   85.453125
+
+quit browser...
