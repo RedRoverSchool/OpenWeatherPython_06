@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from tests.test_group_ducktales.locators.main_locators import MainLocator
 from tests.test_group_ducktales.test_data.main_page_data import *
 from datetime import datetime
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 class MainPage(BasePage):
@@ -10,7 +11,7 @@ class MainPage(BasePage):
         element = self.element_is_visible(MainLocator.FIRST_DAY_IN_8_DAY_FORECAST).text[:3]
         return element
 
-    def day_by_computer(self):
+    def get_day_by_computer(self):
         day_by_computer = datetime.now().weekday()
         today = WEEKDAYS[day_by_computer]
         return today
@@ -71,4 +72,21 @@ class MainPage(BasePage):
         page_month = self.get_months()
         page_month_by_computer = self.get_months_by_computer()
         assert page_month == f'{page_month_by_computer}'
+
+    def check_dropdown_options(self):
+        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
+        element = self.driver.find_element(*MainLocator.BTN_SEARCH)
+        action = ActionChains(self.driver)
+        action.click(on_element=element)
+        action.perform()
+        dropdown_list = self.driver.find_elements(*MainLocator.DROPDOWN_LIST)
+        for i in dropdown_list:
+            assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
+
+    def check_day(self):
+        day_by_weak = self.get_day_by_weak()
+        day_by_computer = self.get_day_by_computer()
+        assert day_by_weak == f'{day_by_computer}'
+
+
 
