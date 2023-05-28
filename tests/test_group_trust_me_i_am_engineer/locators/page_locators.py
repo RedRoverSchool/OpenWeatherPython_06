@@ -61,5 +61,6 @@ class OurInitiativesPageLocators:
 class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
+    HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
 
 
