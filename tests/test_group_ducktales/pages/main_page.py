@@ -95,9 +95,8 @@ class MainPage(BasePage):
         for i in dropdown_list:
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
 
-    def click_first_element_dropdown_menu(self, wait):
-        wait.until(EC.element_to_be_clickable(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD))
-        # self.element_is_clickable(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD, 10)
+    def click_first_element_dropdown_menu(self):
+        self.element_is_visible(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD, 10)
         self.driver.find_element(*MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD).click()
         self.element_is_present(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 10)
 
@@ -109,7 +108,7 @@ class MainPage(BasePage):
     def check_city_name_displayed_by_zip(self, wait):
         self.find_search_city_input(KEYS_FOR_SEARCH_CITY_INPUT_ZIP)
         self.click_btn_search()
-        self.click_first_element_dropdown_menu(wait)
+        self.click_first_element_dropdown_menu()
         displayed_city = self.get_city_text(wait)
         assert displayed_city == EXPECTED_CITY
 
