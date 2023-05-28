@@ -5,13 +5,18 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
 
+
 class BasePage:
     sign_in_link = (By.CSS_SELECTOR, '.user-li a')
     guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
     dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
 
+    support_link = (By.XPATH, "//*[@id='support-dropdown']")
+    faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
+    how_to_start_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -30,6 +35,12 @@ class BasePage:
                 self.driver.find_element(*self.dashboard_link).click()
             case 'pricing':
                 self.driver.find_element(*self.pricing_link).click()
+            case 'faq':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.faq_option).click()
+            case 'how to start':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.how_to_start_option).click()
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
@@ -128,4 +139,5 @@ class BasePage:
     def allow_all_cookies(self, timeout=10):
         wait(self.driver, timeout).until(EC.element_to_be_clickable(self.allow_all_cookies_button)).click()
 
-
+    def title_check(self, text=None):
+        assert self.driver.title == text, "Title is NOT correct"

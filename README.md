@@ -2,6 +2,7 @@
 
 [![OpenWeather_06](https://github.com/RedRoverSchool/OpenWeatherPython_06/actions/workflows/openweather.yml/badge.svg?branch=main)](https://github.com/RedRoverSchool/OpenWeatherPython_06/actions/workflows/openweather.yml)
 
+[![Allure-report](https://img.shields.io/badge/Allure%20Report-deployed-green)](https://redroverschool.github.io/OpenWeatherPython_06)
 
 ## How to work with this repository:
 
@@ -13,4 +14,3 @@
 
 - After, execute **pytest -s -v** to run tests.
 
-[**Allure report**](https://redroverschool.github.io/OpenWeatherPython_06/)
