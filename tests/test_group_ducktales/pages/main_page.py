@@ -3,6 +3,7 @@ from tests.test_group_ducktales.locators.main_locators import MainLocator
 from tests.test_group_ducktales.test_data.main_page_data import *
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class MainPage(BasePage):
@@ -15,6 +16,11 @@ class MainPage(BasePage):
         day_by_computer = datetime.now().weekday()
         today = WEEKDAYS[day_by_computer]
         return today
+
+    def check_day(self):
+        day_by_weak = self.get_day_by_weak()
+        day_by_computer = self.get_day_by_computer()
+        assert day_by_weak == f'{day_by_computer}', 'Module Search city widget contains the wrong day of the week '
 
     def go_to_module_download_openweather_app(self):
         module_download_openweather_app = self.driver.find_element(*MainLocator.MODULE_DOWNLOAD_OPENWEATHER_APP)
@@ -73,20 +79,38 @@ class MainPage(BasePage):
         page_month_by_computer = self.get_months_by_computer()
         assert page_month == f'{page_month_by_computer}'
 
-    def check_dropdown_options(self):
-        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(KEYS_FOR_SEARCH_CITY_INPUT)
+    def find_search_city_input(self, key):
+        self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(key)
+
+    def click_btn_search(self):
         element = self.driver.find_element(*MainLocator.BTN_SEARCH)
         action = ActionChains(self.driver)
         action.click(on_element=element)
         action.perform()
+
+    def check_dropdown_options(self):
+        self.find_search_city_input(KEYS_FOR_SEARCH_CITY_INPUT)
+        self.click_btn_search()
         dropdown_list = self.driver.find_elements(*MainLocator.DROPDOWN_LIST)
         for i in dropdown_list:
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
 
-    def check_day(self):
-        day_by_weak = self.get_day_by_weak()
-        day_by_computer = self.get_day_by_computer()
-        assert day_by_weak == f'{day_by_computer}'
+    def click_first_element_dropdown_menu(self):
+        self.element_is_clickable(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD, 10)
+        self.driver.find_element(*MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD).click()
+        self.element_is_present(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 10)
+
+    def get_city_text(self, wait):
+        wait.until(EC.text_to_be_present_in_element(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 'Atchison'))
+        displayed_city = self.driver.find_element(*MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT).text
+        return displayed_city
+
+    def check_city_name_displayed_by_zip(self, wait):
+        self.find_search_city_input(KEYS_FOR_SEARCH_CITY_INPUT_ZIP)
+        self.click_btn_search()
+        self.click_first_element_dropdown_menu()
+        displayed_city = self.get_city_text(wait)
+        assert displayed_city == EXPECTED_CITY
 
 
 
