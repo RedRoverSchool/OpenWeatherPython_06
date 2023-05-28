@@ -14,3 +14,6 @@ class TestMainPageHeader:
     def test_tc_001_01_01_02_searching_requested_city_name_displayed_in_widget(self, driver, wait, open_and_load_main_page):
         main_page = MainPage(driver)
         main_page.check_search_city_result(wait, 'Kyiv, UA')
+        main_page.displayed_text_is_the_same_as_the_entered_text(wait=wait)
+
+
