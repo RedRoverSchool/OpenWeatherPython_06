@@ -120,7 +120,6 @@ class BasePage:
         Проскроливет страницу к выбранному элементы, так, чтобы элемент стал видимым пользователю.
         """
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
-
     def action_move_to_element(self, element):
         """
         Двигает курсор мышки на середину выбранного элемента
