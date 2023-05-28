@@ -96,8 +96,8 @@ class MainPage(BasePage):
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
 
     def click_first_element_dropdown_menu(self):
-        self.element_is_present(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD, 10)
-        self.driver.find_element(*MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD).click()
+        self.element_is_clickable(MainLocator.DROPDOWN_LIST, 10)
+        self.driver.find_element(*MainLocator.DROPDOWN_LIST).click()
         self.element_is_present(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 10)
 
     def get_city_text(self, wait):
