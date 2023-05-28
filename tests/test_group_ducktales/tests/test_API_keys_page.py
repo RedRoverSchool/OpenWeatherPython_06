@@ -28,3 +28,11 @@ class TestApiKey:
         api_keys_page = ApiKeysPage(driver)
         api_keys_page.open_api_keys_page()
         api_keys_page.check_create_api_key_field_is_required()
+
+    def test_tc_017_04_04_api_key_generate_button_is_clickable(self, driver):
+        sign_in_page = SignInPage(driver, LINK_SIGN_IN_PAGE)
+        sign_in_page.open_page()
+        sign_in_page.log_in()
+        api_keys_page = ApiKeysPage(driver)
+        api_keys_page.open_api_keys_page()
+        api_keys_page.check_is_generate_button_clickable()

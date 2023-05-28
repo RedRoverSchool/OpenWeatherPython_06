@@ -52,3 +52,7 @@ class ApiKeysPage(BasePage):
         new_api_key_name_field = self.driver.find_element(*ApiKeysLocator.NEW_API_KEY_NAME)
         is_required = new_api_key_name_field.get_attribute('required')
         assert is_required, "The field hasn't required attribute"
+
+    def check_is_generate_button_clickable(self):
+        is_generate_button_clickable = self.element_is_clickable(ApiKeysLocator.GENERATE_BUTTON)
+        assert is_generate_button_clickable, "The button does not clickable"
