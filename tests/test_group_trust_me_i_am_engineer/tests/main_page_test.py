@@ -40,3 +40,7 @@ def test_TC_008_01_03_01_check_a_visibility_of_pricing_page_title(driver, open_a
 def test_TC_003_08_04_verify_the_link_openweather_for_business_is_visible(driver,open_and_load_main_page):
     page = MainPage(driver)
     page.verify_the_link_openweather_for_business_is_visible()
+
+def test_TC_003_12_13_verify_link_LinkedIn_leads_to_the_correct_page_with_unauthorized_linkedin_user(driver,open_and_load_main_page, wait):
+    page = MainPage(driver)
+    page.verify_link_LinkedIn_leads_to_the_correct_page()
