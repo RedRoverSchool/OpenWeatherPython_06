@@ -1,0 +1,8 @@
+
+start browser...
+
+checking link: https://openweathermap.org/api/hourly-forecast#parameter
+link text: Weather fields in API response
+198.5   86.265625
+
+quit browser...
