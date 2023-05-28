@@ -23,6 +23,16 @@ class HourlyForecastPage(BasePage):
         return {left: rect.left, top: rect.top};
         """, title)
         print(position_of_title['left'], " ", position_of_title['top'])
-        assert position_of_title['left'] <= 280 and position_of_title['top'] <= 100
+        assert position_of_title['left'] <= 280 and position_of_title['top'] <= 100, "Anchor link doesn't work"
 
+    def check_page_title(self, page_title):
+        self.driver.get("https://openweathermap.org/api/hourly-forecast")
+        assert self.driver.title == page_title, "The title of the page is incorrect"
 
+    def check_clickability_and_visibility_of_call_hourly_forecast_data_link(self, wait):
+        self.driver.get("https://openweathermap.org/api/hourly-forecast")
+        wait.until(EC.element_to_be_clickable(self.locators.ALLOW_ALL_COOKIES)).click()
+        hourly_forecast_data_link = self.driver.find_element(*HourlyForecastPageLocators.CALL_HOURLY_FORECAST_DATA)
+        wait.until(EC.element_to_be_clickable(hourly_forecast_data_link))
+        assert hourly_forecast_data_link.is_displayed() and hourly_forecast_data_link.is_enabled(), \
+            "Link is not displayed or not clickable"
