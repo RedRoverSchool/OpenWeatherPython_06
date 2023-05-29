@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class GuidePageLocators:
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
     TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
@@ -8,8 +9,8 @@ class GuidePageLocators:
     LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
     CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
 
+
 class MainPageLocators:
-    CITIES = ['New York', 'Los Angeles', 'Paris']
     SEARCH_CITY_FIELD_LOCATOR = (By.CSS_SELECTOR, "input[placeholder='Search city']")
     SEARCH_BUTTON_LOCATOR = (By.CSS_SELECTOR, "button[class ='button-round dark']")
     SEARCH_1ST_OPTION_LOCATOR = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')
