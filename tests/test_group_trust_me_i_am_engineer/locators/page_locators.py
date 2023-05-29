@@ -69,3 +69,6 @@ class SubscriptionsPageLocators():
     RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
     ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
 
+class PartnersPageLocators():
+    BUTTON_VIEW_ON_GITHUB = (By.XPATH, "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
+    BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
