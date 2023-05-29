@@ -64,4 +64,8 @@ class AboutUsPageLocators():
     HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
 
+class SubscriptionsPageLocators():
+    BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
+    RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
+    ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
 
