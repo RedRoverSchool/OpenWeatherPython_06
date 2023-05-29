@@ -56,3 +56,15 @@ class ApiKeysPage(BasePage):
     def check_is_generate_button_clickable(self):
         is_generate_button_clickable = self.element_is_clickable(ApiKeysLocator.GENERATE_BUTTON)
         assert is_generate_button_clickable, "The button does not clickable"
+
+    def click_generate_api_key_name_button(self):
+        generate_api_key_button = self.driver.find_element(*ApiKeysLocator.GENERATE_BUTTON)
+        generate_api_key_button.click()
+
+    def get_length_of_table_api_keys(self):
+        initial_table_api_keys = self.elements_are_visible(ApiKeysLocator.TABLE_API_KEYS)
+        return len(initial_table_api_keys)
+
+    def check_is_api_key_generated(self, initial_table_length):
+        actual_api_keys_table_length = self.get_length_of_table_api_keys()
+        assert actual_api_keys_table_length == initial_table_length + 1, "The new API key does not generated"
