@@ -15,3 +15,7 @@ def test_TC_002_02_01_search_result_contains_city(driver, open_and_load_main_pag
     page.press_enter_button()
     result_page = SearchResultPage(driver)
     result_page.check_search_result_contains_city('Bangkok')
+
+def test_TC_002_03_12_open_maps(driver, open_and_load_main_page):
+    maps_page = Header(driver)
+    maps_page.check_open_maps('maps')

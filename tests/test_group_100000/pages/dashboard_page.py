@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
 from tests.test_group_100000.locators.dashboard_page_locators import DashboardLocators as D
-from tests.test_group_100_000 import weather_symbol
+from tests.group_files.group_100_000 import weather_symbol
 
 BTN_COOKIES = (By.CLASS_NAME, "stick-footer-panel__link")
 
@@ -24,7 +24,7 @@ class DashboardPage(BasePage):
         assert alert_mms.is_displayed(), 'WELCOME EVENTS'
 
         
-    def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(self):
-        humidity_symbol = self.driver.find_element(*weather_symbol)
+    def verify_humidity_percentage_in_detailed_weather_data_for_current_location(self):
+        humidity_symbol = self.driver.find_element(*D.WEATHER_SYMBOL)
         assert humidity_symbol.is_displayed()
 
