@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from tests.test_group_100000.locators.api_page_locators import RoadRiskApi as R
 from tests.test_group_100000.locators.api_page_locators import WeatherConditions as W
@@ -38,6 +39,18 @@ class RoadRiskApi(BasePage):
         self.driver.find_element(*R.LINK_API_KEY_TAB).click()
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert self.element_is_visible(self.page_loc.LIST_API_KEYS)
+
+    def verification_sources_list(self):
+        self.open_road_risk_api_page()
+        self.driver.find_element(*R.LINK_LIST_OF_NATIONAL).click()
+        self.allow_all_cookies()
+        list_sours = self.driver.find_element(*R.BLOCK_LIST_SOURCE)
+        rows = list_sours.find_elements(By.TAG_NAME, 'tr')
+        for row in rows[1:]:
+            cells = row.find_elements(By.TAG_NAME, 'td')
+            for cell in cells:
+                if cell.text.strip():
+                    assert cell.text.strip(), 'Value not found'
 
 
 class WeatherConditionsPage(BasePage):
