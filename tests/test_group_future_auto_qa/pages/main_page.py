@@ -95,3 +95,11 @@ class MainPageFooter(BasePage):
         link_href = blog_link.get_attribute('href')
         assert link_href == expected_link, "Incorrect link"
 
+    def click_footer_product_collections_all_widgets(self, expected_link, link_number):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.product_collection[link_number])
+        print(f'widgets_link = {widgets_link}')
+        link_href = widgets_link.get_attribute('href')
+        print(f'link_href = {link_href}')
+        print(f'expected_link = {expected_link}')
+        assert link_href in expected_link, "Incorrect link"
