@@ -21,3 +21,10 @@ class PartnersPage(BasePage):
         self.driver.execute_script("arguments[0].click();", button)
         self.driver.switch_to.window(self.driver.window_handles[-1])
         assert self.drupal_button, self.driver.current_url
+
+    def verify_the_link_view_on_github_is_clickable(self):
+        self.driver.get(self.URL_PARTNERS)
+        button = self.driver.find_element(*self.locators.BUTTON_VIEW_ON_GITHUB)
+        self.go_to_element(button)
+        assert button.is_enabled(), \
+            "The 'View on Github' button is not clickable"
