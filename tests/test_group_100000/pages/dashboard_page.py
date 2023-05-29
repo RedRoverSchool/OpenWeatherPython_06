@@ -24,7 +24,7 @@ class DashboardPage(BasePage):
         assert alert_mms.is_displayed(), 'WELCOME EVENTS'
 
         
-    def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(self):
-        humidity_symbol = self.driver.find_element(*weather_symbol)
+    def verify_humidity_percentage_in_detailed_weather_data_for_current_location(self):
+        humidity_symbol = self.driver.find_element(*D.WEATHER_SYMBOL)
         assert humidity_symbol.is_displayed()
 
