@@ -50,7 +50,7 @@ class RoadRiskApi(BasePage):
             cells = row.find_elements(By.TAG_NAME, 'td')
             for cell in cells:
                 if cell.text.strip():
-                    assert cell.text.strip(), 'Значение не найдено'
+                    assert cell.text.strip(), 'Value not found'
 
 
 class WeatherConditionsPage(BasePage):
