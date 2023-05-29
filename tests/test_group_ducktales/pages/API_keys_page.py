@@ -5,7 +5,6 @@ from ..test_data.sign_in_page_data import LINK_SIGN_IN_PAGE
 
 
 class ApiKeysPage(BasePage):
-    pass
 
     def open_api_keys_page(self):
         sign_in_page = SignInPage(self.driver, LINK_SIGN_IN_PAGE)
