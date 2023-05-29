@@ -19,3 +19,9 @@ def test_TC_005_08_01_road_risk_api_verify_page_title_for_road_risk_api(driver):
 def test_TC_005_08_05_redirection_to_the_list_of_sectional_sources_of_weather_warnings_section_of_the_page(driver):
     page = RoadRiskApi(driver)
     page.check_redirection_to_the_section_of_the_page()
+
+
+def test_TC_005_08_06_verify_redirection_to_the_page_with_API_keys_by_clicking_on_the_API_Key_tab(driver,
+                                                                                open_and_load_main_page, sign_in):
+    page = RoadRiskApi(driver)
+    page.verify_redirection_to_the_page_with_api_keys()

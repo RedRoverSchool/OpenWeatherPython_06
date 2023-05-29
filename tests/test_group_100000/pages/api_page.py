@@ -32,6 +32,13 @@ class RoadRiskApi(BasePage):
         assert self.element_is_visible(self.page_loc.TITLE_LIST_OF_NATIONAL).text == "List of national " \
                                                                                      "weather warning sources"
 
+    def verify_redirection_to_the_page_with_api_keys(self):
+        self.open_road_risk_api_page()
+        self.allow_all_cookies()
+        self.driver.find_element(*R.LINK_API_KEY_TAB).click()
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        assert self.element_is_visible(self.page_loc.LIST_API_KEYS)
+
 
 class WeatherConditionsPage(BasePage):
     def check_visibility_drizzle_group(self):
