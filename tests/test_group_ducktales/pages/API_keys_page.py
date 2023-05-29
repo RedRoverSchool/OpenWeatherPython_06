@@ -1,11 +1,15 @@
 from pages.base_page import BasePage
 from ..locators.API_keys_locators import ApiKeysLocator
+from tests.test_group_ducktales.pages.sign_in_page import SignInPage
+from ..test_data.sign_in_page_data import LINK_SIGN_IN_PAGE
 
 
 class ApiKeysPage(BasePage):
-    pass
 
     def open_api_keys_page(self):
+        sign_in_page = SignInPage(self.driver, LINK_SIGN_IN_PAGE)
+        sign_in_page.open_page()
+        sign_in_page.log_in()
         api_key_tab = self.driver.find_element(*ApiKeysLocator.TAB_API_KEYS)
         api_key_tab.click()
 
