@@ -6,9 +6,9 @@ from pages.base_page import BasePage
 from tests.test_group_optimists_of_rationality_middle_devs.locators.sign_in_locators import *
 
 class SignInPage(BasePage):
-    URL = SignInURL.SIGNINURL
+    URL = SignInURL.SIGN_IN_URL
     print('===========')
-    print(SignInURL.SIGNINURL, '#SignInURL()')
+    print(SignInURL.SIGN_IN_URL, '#SignInURL()')
     print('===========')
     locators = SignInLocators()
 
