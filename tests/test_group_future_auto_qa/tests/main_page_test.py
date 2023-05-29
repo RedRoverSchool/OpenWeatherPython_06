@@ -41,7 +41,6 @@ class TestMainPageHeader:
         main_page.click_support_nav_menu()
         main_page.how_to_start_submenu_should_be_visible(wait=wait)
 
-
     def test_tc_002_03_10_01_how_to_start_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
         main_page = MainPage(driver)
         main_page.click_support_nav_menu()
