@@ -12,8 +12,7 @@ class RoadRiskApi:
     TITLE_LIST_OF_NATIONAL = (By.XPATH, "//*[@id='listsource']/h3")
     LINK_API_KEY_TAB = (By.CSS_SELECTOR, "td a[target='_blank']")
     LIST_API_KEYS = (By.CSS_SELECTOR, '.active')
-
-
+    BLOCK_LIST_SOURCE = (By.XPATH, '//*[@id="listsource"]/table')
 
 
 class WeatherConditions:

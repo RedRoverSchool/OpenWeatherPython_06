@@ -22,6 +22,12 @@ def test_TC_005_08_05_redirection_to_the_list_of_sectional_sources_of_weather_wa
 
 
 def test_TC_005_08_06_verify_redirection_to_the_page_with_API_keys_by_clicking_on_the_API_Key_tab(driver,
-                                                                                open_and_load_main_page, sign_in):
+                                                                                                  open_and_load_main_page,
+                                                                                                  sign_in):
     page = RoadRiskApi(driver)
     page.verify_redirection_to_the_page_with_api_keys()
+
+
+def test_TC_005_08_07_road_risk_api_verification_of_national_weather_warning_sources_list(driver):
+    page = RoadRiskApi(driver)
+    page.verification_sources_list()
