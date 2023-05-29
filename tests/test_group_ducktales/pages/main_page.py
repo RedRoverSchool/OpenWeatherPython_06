@@ -4,6 +4,8 @@ from tests.test_group_ducktales.test_data.main_page_data import *
 from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import (NoSuchElementException, TimeoutException)
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class MainPage(BasePage):
@@ -95,8 +97,11 @@ class MainPage(BasePage):
         for i in dropdown_list:
             assert 'California' in i.text, 'Not all search suggestions in the drop-down list contain "California"'
 
-    def click_first_element_dropdown_menu(self):
-        self.driver.find_element(*MainLocator.DROPDOWN_LIST).click()
+    def click_first_element_dropdown_menu(self, driver):
+        ignore_list = [NoSuchElementException, TimeoutException]
+        wait = WebDriverWait(driver, timeout=10, poll_frequency=1, ignored_exceptions=ignore_list)
+        element_dropdown_menu = wait.until(EC.element_to_be_clickable(MainLocator.DROPDOWN_LIST))
+        element_dropdown_menu.click()
         self.element_is_present(MainLocator.SEARCH_DROPDOWN_MENU_FIRST_CHILD_TEXT, 10)
 
     def get_city_text(self, wait):
@@ -107,7 +112,7 @@ class MainPage(BasePage):
     def check_city_name_displayed_by_zip(self, wait):
         self.find_search_city_input(KEYS_FOR_SEARCH_CITY_INPUT_ZIP)
         self.click_btn_search()
-        self.click_first_element_dropdown_menu()
+        self.click_first_element_dropdown_menu(self.driver)
         displayed_city = self.get_city_text(wait)
         assert displayed_city == EXPECTED_CITY
 
