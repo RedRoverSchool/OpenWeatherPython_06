@@ -36,11 +36,10 @@ class MainPage(BasePage):
         self.click_search_button(city)
         expected_city = city
         expected_error_message = f'No results for {city}'
-        if self.element_is_displayed(self.locators.NO_RESULTS_NOTIFICATION, wait):
-            actual_error_message = wait.until(
-                EC.visibility_of_element_located(self.locators.NO_RESULTS_NOTIFICATION))
+        actual_error_message = self.element_is_displayed(self.locators.NO_RESULTS_NOTIFICATION, wait)
+        if actual_error_message:
             actual_error_message_text = actual_error_message.text
-            assert actual_error_message_text == expected_error_message, 'message = acspected'
+            assert actual_error_message_text == expected_error_message, 'message = ogudaem'
         else:
             wait.until(EC.element_to_be_clickable(self.locators.SEARCH_OPTION_Locator)).click()
             wait.until(EC.text_to_be_present_in_element(self.locators.DISPLAYED_CITY_1_Locator, city))
