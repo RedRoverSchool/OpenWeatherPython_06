@@ -16,3 +16,4 @@ def test_TC_011_03_02_verify_the_link_view_on_github_is_clickable(driver):
 def test_TC_011_03_01_verify_the_link_open_manual_is_visible(driver):
     page = PartnersPage(driver)
     page.verify_the_link_open_manual_is_visible()
+
