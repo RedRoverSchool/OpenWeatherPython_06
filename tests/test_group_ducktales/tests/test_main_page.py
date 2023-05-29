@@ -48,8 +48,7 @@ class TestMainPage:
         page.open_page()
         page.check_dropdown_options()
 
-    def test_tc_001_01_01_verify_city_name_displayed_by_zip(self, driver, wait):
-        page = MainPage(driver, LINK_MAIN_PAGE)
-        page.open_page()
+    def test_tc_001_01_01_verify_city_name_displayed_by_zip(self, driver, wait, open_and_load_main_page):
+        page = MainPage(driver)
         page.check_city_name_displayed_by_zip(wait)
 
