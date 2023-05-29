@@ -63,4 +63,5 @@ class AboutUsPageLocators():
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
     HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
 
-
+class TechnologyPageLocators:
+    DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")

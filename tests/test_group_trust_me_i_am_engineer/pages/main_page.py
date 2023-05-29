@@ -108,3 +108,4 @@ class MainPage(BasePage):
         self.driver.execute_script("arguments[0].click();", linkedin_element)
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert self.linkedin_link, self.driver.current_url
+
