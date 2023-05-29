@@ -18,6 +18,7 @@ class BasePage:
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
     maps_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
     how_to_start_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
+    ask_a_question_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -48,6 +49,11 @@ class BasePage:
             case 'how to start':
                 self.driver.find_element(*self.support_link).click()
                 self.driver.find_element(*self.how_to_start_option).click()
+            case 'ask a question':
+                self.driver.find_element(*self.support_link).click()
+                self.driver.find_element(*self.ask_a_question_option).click()
+                window_after = self.driver.window_handles[1]
+                self.driver.switch_to.window(window_after)
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
