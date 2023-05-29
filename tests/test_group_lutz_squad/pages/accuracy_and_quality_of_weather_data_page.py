@@ -15,3 +15,7 @@ class AccuracyAndQualityOfWeatherDataPage(BasePage):
         self.go_to_element(example_of_graphics_with_some_metrics)
         assert self.element_is_displayed(AccuracyAndQualityOfWeatherDataPageLocators.example_of_graphics_with_some_metrics_locator, wait)
 
+
+    def check_visibility_of_number_of_cities(self):
+        number_of_cities = self.driver.find_element(*AccuracyAndQualityOfWeatherDataPageLocators.number_of_cities_for_evaluation)
+        assert number_of_cities.is_displayed(), 'Number of cities link not found'
