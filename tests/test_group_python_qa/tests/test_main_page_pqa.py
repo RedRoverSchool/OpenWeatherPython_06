@@ -13,5 +13,11 @@ def test_tc_001_04_01_visibility_of_8_lines_in_8_day_forecast_block(driver, open
     main_page.check_8_lines_are_displayed()
 
 
+def test_tc_021_01_01_visibility_of_agriculture_analytics_link(driver, open_and_load_main_page):
+    main_page = MainPage(driver)
+    main_page.visibility_of_agriculture_analytics_link()
+
+
+
 
 

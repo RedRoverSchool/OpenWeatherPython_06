@@ -25,3 +25,5 @@ class MainPage(BasePage):
         for line in lines:
             assert line.is_displayed()
 
+    def visibility_of_agriculture_analytics_link(self):
+        self.driver.find_element(*self.locator.AGRICULTURE_ANALYTICS_TITLE_LOCATOR).is_displayed()
