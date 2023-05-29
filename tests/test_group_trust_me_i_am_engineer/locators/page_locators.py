@@ -72,3 +72,4 @@ class SubscriptionsPageLocators():
 class PartnersPageLocators():
     BUTTON_VIEW_ON_GITHUB = (By.XPATH, "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
     BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
+    BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
