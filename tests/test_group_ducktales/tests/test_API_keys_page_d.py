@@ -33,4 +33,10 @@ class TestApiKey:
         api_keys_page.click_generate_api_key_name_button()
         api_keys_page.check_is_api_key_generated(initial_api_keys_table_length)
 
+    def test_tc_017_04_06_generate_successfully_notice_is_displayed(self, driver):
+        api_keys_page = ApiKeysPage(driver)
+        api_keys_page.open_api_keys_page()
+        api_keys_page.enter_created_api_key_name("Generate name 1")
+        api_keys_page.click_generate_api_key_name_button()
+        api_keys_page.check_is_success_generate_notice_displayed()
 
