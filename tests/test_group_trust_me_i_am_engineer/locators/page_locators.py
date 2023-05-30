@@ -63,6 +63,8 @@ class AboutUsPageLocators():
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
     HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
+    APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
+    APP_TITLE = (By.XPATH, "//h1")
 
 class SubscriptionsPageLocators():
     BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
@@ -76,4 +78,6 @@ class PartnersPageLocators():
 
 class TechnologyPageLocators:
     DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")
+
+
 
