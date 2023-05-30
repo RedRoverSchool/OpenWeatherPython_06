@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 from pages import base_page
 from pages.base_page import BasePage
@@ -46,6 +48,6 @@ class SubscriptionsPage(BasePage):
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
         payment_url = self.driver.current_url
-        print(payment_url)
+        time.sleep(10)
         assert partial_url in payment_url, \
             "'Continue to payment' button leads to incorrect page"
