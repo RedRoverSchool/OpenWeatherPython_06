@@ -37,3 +37,5 @@ EXPECTED_URLS_SIGNED_OUT_LIST = \
      'https://openweathermap.org/weather-dashboard/dashboard-documentation#setup',
      'https://openweathermap.org/weather-dashboard/dashboard-documentation',
      'https://home.openweathermap.org/users/sign_in']
+
+STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
