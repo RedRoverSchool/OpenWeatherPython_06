@@ -148,3 +148,6 @@ class BasePage:
 
     def title_check(self, text=None):
         assert self.driver.title == text, "Title is NOT correct"
+
+    def find_element_and_click(self, locator):
+        self.driver.find_element(*locator).click()
