@@ -47,7 +47,6 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        payment_url = self.driver.current_url
         time.sleep(10)
-        assert partial_url in payment_url, \
+        assert partial_url in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
