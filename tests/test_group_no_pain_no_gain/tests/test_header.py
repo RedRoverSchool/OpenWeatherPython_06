@@ -12,4 +12,4 @@ class TestHeader:
 
     def test_partners_link_leads_to_page_with_correct_header(self, driver, open_and_load_main_page):
         page = Header(driver)
-        page.link_leads_to_page_with_correct_header(HL.PARTNERS_LINK, PPL.PARTNERS_PAGE_HEADER)
+        page.link_leads_to_page_with_correct_header(HL.PARTNERS_LINK, PPL.PARTNERS_PAGE_HEADING)
