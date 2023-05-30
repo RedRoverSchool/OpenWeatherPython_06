@@ -30,3 +30,11 @@ class MainPage(BasePage):
         title = self.driver.title
         assert data in title, f'{data} is not in the page title'
 
+    def get_text_content_of_the_element(self, locator, data):
+        element = self.driver.find_element(*locator).text
+        assert element == data, f'{data} is not in the text content of the element'
+
+    def get_background_color_of_the_element(self, locator, data):
+        element = self.driver.find_element(*locator)
+        background_color_of_the_element =  element.value_of_css_property("background-color")
+        assert background_color_of_the_element == data, 'Wrong background color'

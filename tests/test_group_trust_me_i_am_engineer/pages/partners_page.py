@@ -35,3 +35,10 @@ class PartnersPage(BasePage):
         self.go_to_element(button)
         assert button.is_displayed(), \
             "The 'Open manual' button is not displayed"
+
+    def verify_the_link_open_manual_is_clickable(self):
+        self.driver.get(self.URL_PARTNERS)
+        button = self.driver.find_element(*self.locators.BUTTON_OPEN_MANUAL)
+        self.go_to_element(button)
+        assert button.is_enabled(), \
+            "The 'Open manual' button is not clickable"
