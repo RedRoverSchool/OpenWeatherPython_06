@@ -13,3 +13,8 @@ class SolarApi(BasePage):
         self.find_element_and_click(self.locator.HOW_TO_GET_ACCESS_TITLE_LOCATOR)
         assert self.element_is_displayed(self.locator.HOW_TO_GET_ACCESS_TITLE_LOCATOR, wait)
 
+    def visibility_of_product_concept_article_title(self, wait):
+        self.open_page()
+        self.element_is_displayed(self.locator.PRODUCT_CONCEPT_TITLE_LOCATOR, wait)
+
+
