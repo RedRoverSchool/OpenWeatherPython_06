@@ -28,3 +28,8 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.link_visibility_and_clickability(PPL.RASPBERRY, links.RASPBERRY_GITHUB)
+
+    def test_TC_011_06_01_verify_the_first_link_in_android_section_is_visible_and_clickable(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visibility_and_clickability(PPL.ANDROID_FIRST_LINK, links.ANDROID_WEATHER)
