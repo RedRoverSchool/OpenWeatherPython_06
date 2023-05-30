@@ -22,10 +22,11 @@ class SubscriptionsPage(BasePage):
         for i in error_message:
             assert i.is_displayed()
             checks += 1
-        assert checks == expected_number_of_error_message, \
-            "An error message 'can't be blank' does not appeared for fields marked as required."
+        assert checks == expected_number_of_error_message
 
-   def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
+
+
+    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
         partial_url = "https://checkout.stripe.com"
         self.driver.get(self.URL_SUBSCRIPTION)
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
