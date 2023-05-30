@@ -8,3 +8,5 @@ class FootersLocators:
         (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[1]/a"),
         (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[2]/a"),
         (By.XPATH, "//p[@class='section-heading' and text()='Technologies']/following-sibling::div/ul/li[3]/a")]
+
+    ABOUT_US = (By.XPATH, "//a[contains(text(), 'About us')]")
