@@ -88,3 +88,20 @@ class MainPageFooter(BasePage):
             self.driver.find_element(*self.locators.FOOTER_TERMS_AND_CONDITIONS_TITLE)
         assert terms_and_conditions_module_title.is_displayed(), \
             "The Terms & Conditions module title is not visible"
+
+    def check_blog_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.FOOTER_BLOG_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
+
+    def click_footer_product_collections_all_widgets(self, expected_link, link_number):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.product_collection[link_number])
+        link_href = widgets_link.get_attribute('href')
+        assert link_href in expected_link, "Incorrect link"
+
+    def check_about_us_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
+        assert about_us_link.is_enabled(), "The About us is not clickable"
