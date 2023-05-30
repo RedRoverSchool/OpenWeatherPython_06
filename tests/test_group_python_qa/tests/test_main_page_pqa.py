@@ -19,7 +19,7 @@ def test_tc_021_01_01_visibility_of_agriculture_analytics_link(driver, open_and_
     main_page.visibility_of_agriculture_analytics_link()
 
 
-def test_001_017_01_visibility_of_nwp_block(driver):
+def test_TC_001_017_01_visibility_of_nwp_block(driver):
     quality_info_page = MainPage(driver, QUALITY_INFO_PAGE)
     quality_info_page.open_page()
     quality_info_page.visibility_of_nwp_block()
