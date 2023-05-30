@@ -8,6 +8,7 @@ class PartnersPage(BasePage):
     locators = PartnersPageLocators()
     drupal_button = 'https://www.drupal.org/project/olowm'
 
+
     def verify_the_link_view_on_github_is_visible(self):
         self.driver.get(self.URL_PARTNERS)
         button = self.driver.find_element(*self.locators.BUTTON_VIEW_ON_GITHUB)
@@ -42,3 +43,15 @@ class PartnersPage(BasePage):
         self.go_to_element(button)
         assert button.is_enabled(), \
             "The 'Open manual' button is not clickable"
+
+    def verify_17_sections_are_visible(self):
+        data = ["Google Weather-Based Campaign Management with OpenWeatherMap API",
+                "Google Maps JavaScript API based on OpenWeatherMap API",
+                "OpenWeather current weather data in Mozilla's IoT project",
+                "Ubuntu", "Android", "Leaflet", "Java", "Go (golang)",
+                "JavaScript", "CMS", "Raspberry Pi", "Python", "PHP", "Apache Camel",
+                "Desktop", "Mobile applications", "6,000+ repositories on GitHub"]
+        self.driver.get(self.URL_PARTNERS)
+        find_all_headers = self.driver.find_elements(*self.locators.HEADERS_ON_THE_PAGE)
+        headers_on_the_page = [i.text for i in find_all_headers]
+        assert data == headers_on_the_page
