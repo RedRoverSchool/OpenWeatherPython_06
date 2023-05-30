@@ -24,3 +24,27 @@ class SubscriptionsPage(BasePage):
             checks += 1
         assert checks == expected_number_of_error_message, \
             "An error message 'can't be blank' does not appeared for fields marked as required."
+
+   def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
+        partial_url = "https://checkout.stripe.com"
+        self.driver.get(self.URL_SUBSCRIPTION)
+        radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
+        radiobutton.click()
+        email = self.driver.find_element(*self.locators.INPUT_EMAIL)
+        email.send_keys('testemail@mail.com')
+        organisation = self.driver.find_element(*self.locators.INPUT_ORGANISATION)
+        organisation.send_keys("TestName")
+        address_line = self.driver.find_element(*self.locators.INPUT_ADDRESS_1)
+        address_line.send_keys("Test street 123")
+        city = self.driver.find_element(*self.locators.INPUT_CITY)
+        city.send_keys("Istanbul")
+        postal_code = self.driver.find_element(*self.locators.INPUT_POSTCODE)
+        postal_code.send_keys("54321")
+        phone = self.driver.find_element(*self.locators.INPUT_PHONE_NUMBER)
+        phone.send_keys("+905556667778")
+        button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
+        button.click()
+        payment_url = self.driver.current_url
+        print(payment_url)
+        assert partial_url in payment_url, \
+            "'Continue to payment' button leads to incorrect page"
