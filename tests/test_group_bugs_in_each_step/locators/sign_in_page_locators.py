@@ -11,3 +11,4 @@ class SignInPageLocators:
     EMAIL_FIELD_DISPLAY = (By.CSS_SELECTOR, ".new_user > :nth-child(3)")
     PASSWORD_FIELD_DISPLAY = (By.CSS_SELECTOR, "#user_password")
     REMEMBER_ME_RECORD_DISPLAY = (By.CSS_SELECTOR, "label.boolean")
+    CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
