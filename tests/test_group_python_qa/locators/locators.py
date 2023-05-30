@@ -17,3 +17,8 @@ class MainPageLocators:
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
     AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
+
+
+class OurInitiativesPageLocators:
+    MAIN_LOGO = (By.CSS_SELECTOR, 'img[src="/themes/openweathermap/assets/img/logo_white_cropped.png"]')
+
