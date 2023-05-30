@@ -18,3 +18,8 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.get_background_color_of_the_element(PPL.PARTENERS_PAGE_INFO_BOARD, PPD.INFO_BOARD_BACKGROUND_COLOR)
+
+    def test_TC_011_01_02_verify_that_the_heading_of_the_page_equals_to_Partners_and_solutions(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.get_text_content_of_the_element(PPL.PARTNERS_PAGE_HEADING, PPD.PARTNERS_PAGE_HEADING)
