@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class MainPageLocators:
+    ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     HEADER_SEARCH_PLACEHOLDER = (By.CSS_SELECTOR, 'input[name="q"]::placeholder')
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
