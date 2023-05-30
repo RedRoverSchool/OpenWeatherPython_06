@@ -39,3 +39,4 @@ EXPECTED_URLS_SIGNED_OUT_LIST = \
      'https://home.openweathermap.org/users/sign_in']
 
 STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
+PRICING_PAGE_URL_FOR_DEVELOPER_PLAN = "https://openweathermap.org/price"
