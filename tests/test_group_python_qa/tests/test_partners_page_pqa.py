@@ -1,4 +1,4 @@
-from tests.test_group_python_qa.pages.partners_page import PartnersPage
+from tests.test_group_python_qa.pages.partners_page_pqa import PartnersPage
 
 class TestPartnersPage:
 
