@@ -1,10 +1,6 @@
 import time
-
-from selenium.webdriver.support import expected_conditions as EC
-from pages import base_page
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
-from selenium.webdriver import Keys
 
 
 class SubscriptionsPage(BasePage):
@@ -24,8 +20,8 @@ class SubscriptionsPage(BasePage):
         for i in error_message:
             assert i.is_displayed()
             checks += 1
-        assert checks == expected_number_of_error_message
-
+        assert checks == expected_number_of_error_message, \
+            "An error message 'can't be blank' does not appeared for fields marked as required."
 
 
     def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
@@ -46,6 +42,5 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        time.sleep(30)
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
