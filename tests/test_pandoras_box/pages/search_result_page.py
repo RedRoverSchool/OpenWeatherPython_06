@@ -38,8 +38,7 @@ class SearchResultPage(BasePage):
             assert city in city_name.text
 
     def dropdown_contain_city_temperature(self):
-        metric_button = wait(self.driver, timeout=5).until(EC.element_to_be_clickable(self.METRIC_SWITCH))
-        assert metric_button.is_displayed() and metric_button.is_enabled()
+        wait(self.driver, timeout=5).until(EC.element_to_be_clickable(self.METRIC_SWITCH))
         search_city_input = self.driver.find_element(*MainPage.search_city_field)
         search_city_input.click()
         search_city_input.send_keys(*self.KEY_SEARCH_CITY)
