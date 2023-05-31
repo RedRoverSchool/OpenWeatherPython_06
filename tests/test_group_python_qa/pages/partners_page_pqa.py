@@ -7,8 +7,6 @@ class PartnersPage(BasePage):
     locators = PartnersPageLocators()
 
 
-    def link_See_library_visibility(self):
-        self.driver.get(self.PARTNERS_AND_SOLUTION_PAGE_URL)
-        see_library_link = self.driver.find_element(*PartnersPageLocators.LINK_SEE_LIBRARY)
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", see_library_link)
-        assert see_library_link.is_displayed(), "The link is not displaying"
+    def link_See_library_visibility(self, wait):
+        self.open_page()
+        self.element_is_displayed(self.locators.LINK_SEE_LIBRARY, wait)
