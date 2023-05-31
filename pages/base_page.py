@@ -13,7 +13,7 @@ class BasePage:
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
-
+    partners_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/examples"]')
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
     maps_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
@@ -41,7 +41,8 @@ class BasePage:
                 self.driver.find_element(*self.faq_option).click()
             case 'maps':
                 self.driver.find_element(*self.maps_link).click()
-
+            case 'partners':
+                self.driver.find_element(*self.partners_link).click()
             case 'faq':
                 self.driver.find_element(*self.support_link).click()
                 self.driver.find_element(*self.faq_option).click()
@@ -148,3 +149,6 @@ class BasePage:
 
     def title_check(self, text=None):
         assert self.driver.title == text, "Title is NOT correct"
+
+    def find_element_and_click(self, locator):
+        self.driver.find_element(*locator).click()

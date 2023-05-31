@@ -57,3 +57,8 @@ class TestRegistrationQuestion:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_remember_me_record_is_visible()
+
+    def test_tc_014_01_06_verify_checkbox_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_checkbox_is_visible()
