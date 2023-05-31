@@ -5,7 +5,7 @@ from tests.test_group_lutz_squad.locators.cookies_settings_page_locators import 
 
 class CookiesSettingsPage(BasePage):
 
-    def scroll_page_down_to_checkboxes_and_button(self):
+    def scroll_page_down_to_chekboxes_and_button(self):
         save_changes_button = self.driver.find_element(*CS.SAVE_CHANGES_BUTTON)
         self.driver.execute_script("arguments[0].focus();", save_changes_button)
 
