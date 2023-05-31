@@ -50,5 +50,7 @@ class SubscriptionsPage(BasePage):
         # loading = self.driver.find_element(*self.locators.LOADING)
         # wait.until_not(EC.presence_of_element_located(load_div))
         # time.sleep(10)
-        assert partial_url in self.driver.current_url, \
+        assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
+
+
