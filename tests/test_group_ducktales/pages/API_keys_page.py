@@ -74,7 +74,6 @@ class ApiKeysPage(BasePage):
         assert actual_api_keys_table_length == initial_table_length + 1, "The new API key does not generated"
 
     def check_is_success_generate_notice_displayed(self):
-        expected_new_api_key_notice_text = 'API key was created successfully'
         actual_new_api_key_notice_text = self.driver.find_element(*ApiKeysLocator.NOTICE_MESSAGE).text
-        assert actual_new_api_key_notice_text == expected_new_api_key_notice_text,\
+        assert actual_new_api_key_notice_text == 'API key was created successfully',\
             "The success generate API key notice text does not displayed"
