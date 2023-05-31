@@ -9,3 +9,12 @@ class PageWithMap(BasePage):
             *PageWithMapLocators.PAGE_WITH_MAP_PRESSURE_BUTTON_LOCATOR)
         self.go_to_element(pressure_button)
         assert self.element_is_clickable(PageWithMapLocators.PAGE_WITH_MAP_PRESSURE_BUTTON_LOCATOR)
+
+    def cities_checkbox_is_checked(self):
+        cities_checkbox = self.driver.find_element(*PageWithMapLocators.CITIES_CHECKBOX_INPUT)
+        assert cities_checkbox.is_selected()
+
+    def cities_checkbox_is_unchecked(self):
+        self.driver.find_element(*PageWithMapLocators.CITIES_CHECKBOX_LABEL).click()
+        cities_checkbox_input = self.driver.find_element(*PageWithMapLocators.CITIES_CHECKBOX_INPUT)
+        assert not cities_checkbox_input.is_selected()
