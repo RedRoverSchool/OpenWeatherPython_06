@@ -6,3 +6,4 @@ OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
 GUIDE_PAGE = "https://openweathermap.org/guide"
 URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 URL_WEATHER_CONDITIONS = "https://openweathermap.org/weather-conditions"
+OPENAGRO_PAGE = "https://openagro.uk/"

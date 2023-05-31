@@ -20,8 +20,11 @@ class MainPageLocators:
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
 
 
-
 class SolarApiLocators:
     HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
     PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
+
+
+class OpenAgroLocators:
+    REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
