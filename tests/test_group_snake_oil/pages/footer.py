@@ -1,4 +1,6 @@
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
+from tests.test_group_snake_oil.links.all_links import ABOUT_US_URL
 from tests.test_group_snake_oil.locators.footer_locators import FootersLocators
 
 
@@ -16,3 +18,10 @@ class Footer(BasePage):
         element_link = element.get_attribute('href')
         assert element.is_displayed() and element.is_enabled(), \
             f"Link {element_link} link is not visible/clickable on a page"
+
+    def check_redirection_to_about_us_page(self, wait):
+        element = wait.until(EC.presence_of_element_located(self.locators.ABOUT_US))
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        element.click()
+        wait.until(EC.url_to_be(ABOUT_US_URL))
+        assert self.driver.current_url == ABOUT_US_URL

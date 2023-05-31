@@ -37,3 +37,11 @@ class SignInPage(BasePage):
     def check_password_field_is_visible(self):
         password_field = self.element_is_visible(self.locators.PASSWORD_FIELD_DISPLAY)
         assert password_field.is_displayed(), "Password field is not visible"
+
+    def check_remember_me_record_is_visible(self):
+        remember_me_record = self.element_is_visible(self.locators.REMEMBER_ME_RECORD_DISPLAY)
+        assert remember_me_record.is_displayed(), "Remember me record is not visible"
+
+    def check_checkbox_is_visible(self):
+        checkbox = self.element_is_visible(self.locators.CHECKBOX_DISPLAY)
+        assert checkbox.is_displayed(), "Checkbox is not visible"

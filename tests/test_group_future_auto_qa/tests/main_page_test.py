@@ -41,7 +41,6 @@ class TestMainPageHeader:
         main_page.click_support_nav_menu()
         main_page.how_to_start_submenu_should_be_visible(wait=wait)
 
-
     def test_tc_002_03_10_01_how_to_start_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
         main_page = MainPage(driver)
         main_page.click_support_nav_menu()
@@ -51,6 +50,10 @@ class TestMainPageHeader:
 
 
 class TestMainPageFooter:
+    link_product_collections = ["https://openweathermap.org/api#current", "https://openweathermap.org/api#history",
+                                "https://openweathermap.org/api#maps", "https://openweathermap.org/weather-dashboard",
+                                "https://openweathermap.org/widgets-constructor"]
+
     def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
         page = MainPage(driver)
         expected_link = "https://openweathermap.org/widgets-constructor"
@@ -72,3 +75,12 @@ class TestMainPageFooter:
         page = MainPageFooter(driver)
         expected_link = "https://openweather.co.uk/blog/category/weather"
         page.check_blog_link_functionality(expected_link)
+
+    @pytest.mark.parametrize("link_product_collection", link_product_collections)
+    def test_tc_003_12_24_verify_product_collections_module_all_link_functionality(self, driver,
+                                                                                   open_and_load_main_page, wait,
+                                                                                   link_product_collection):
+        page = MainPageFooter(driver)
+        expected_link = link_product_collection
+        link_number = self.link_product_collections.index(expected_link)
+        page.click_footer_product_collections_all_widgets(expected_link, link_number)
