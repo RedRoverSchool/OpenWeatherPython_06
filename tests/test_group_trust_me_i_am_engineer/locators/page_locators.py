@@ -61,5 +61,21 @@ class OurInitiativesPageLocators:
 class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
+    HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
+    NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
+    APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
+    APP_TITLE = (By.XPATH, "//h1")
 
+class SubscriptionsPageLocators():
+    BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
+    RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
+    ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
 
+class PartnersPageLocators():
+    BUTTON_VIEW_ON_GITHUB = (By.XPATH, "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
+    BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
+    BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
+    HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
+
+class TechnologyPageLocators:
+    DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")

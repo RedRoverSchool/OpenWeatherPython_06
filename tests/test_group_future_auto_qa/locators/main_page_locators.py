@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class MainPageLocators:
+    ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     HEADER_SEARCH_PLACEHOLDER = (By.CSS_SELECTOR, 'input[name="q"]::placeholder')
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
@@ -15,3 +16,9 @@ class MainPageLocators:
     FOOTER_TERMS_AND_CONDITIONS_OF_SALE = (By.XPATH, "//a[normalize-space()='Terms and conditions of sale']")
     FOOTER_TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
     FOOTER_WEBSITE_TERMS_AND_CONDITIONS = (By.XPATH, "//a[normalize-space()='Website terms and conditions']")
+    FOOTER_CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[contains(text(), 'Current and Forecast')]")
+    FOOTER_HISTORICAL_WEATHER_DATA = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
+    FOOTER_WEATHER_MAPS = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
+    FOOTER_WEATHER_DASHBOARD = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
+    product_collection = [FOOTER_CURRENT_AND_FORECAST_APIS, FOOTER_HISTORICAL_WEATHER_DATA, FOOTER_WEATHER_MAPS,
+                          FOOTER_WEATHER_DASHBOARD, FOOTER_WIDGETS]
