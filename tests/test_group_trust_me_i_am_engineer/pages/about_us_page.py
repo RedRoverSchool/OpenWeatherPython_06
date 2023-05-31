@@ -1,12 +1,18 @@
+from selenium.webdriver import ActionChains
+
 from pages.base_page import BasePage
-from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators, AboutUsPageLocators
+from tests.test_group_trust_me_i_am_engineer.locators.page_locators import AboutUsPageLocators
 
 class AboutUsPage(BasePage):
     URL = "https://openweathermap.org/about-us"
     page_locators = AboutUsPageLocators
 
+    def open(self):
+        self.driver.get(self.URL)
+
     def verify_correct_header_about_us_page(self, wait):
         self.element_is_visible(self.page_locators.HEADER)
+
         assert self.element_is_visible(self.page_locators.HEADER).text == "OpenWeather\nglobal services"
 
     def verify_image_beside_header_is_displayed(self, wait):
@@ -24,6 +30,14 @@ class AboutUsPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[1])
         button_url = self.driver.current_url
         assert button_url == expected_link, button + " button link is not correct"
+
+    def check_cursor_style_transformation(self, element):
+        element = element
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).perform()
+        cursor_style = element.value_of_css_property("cursor")
+
+        assert cursor_style == "pointer", "Cursor is not transformed into a hand pointer."
 
     def click_on_app_store_button(self):
         self.element_is_clickable(self.page_locators.APP_STORE_BUTTON).click()
