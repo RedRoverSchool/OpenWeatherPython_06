@@ -17,8 +17,15 @@ class MainPageLocators:
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
     AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
+    NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+
+
+
+class SolarApiLocators:
+    HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
+    HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
+    PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
 
 
 class OurInitiativesPageLocators:
     MAIN_LOGO = (By.CSS_SELECTOR, 'img[src="/themes/openweathermap/assets/img/logo_white_cropped.png"]')
-
