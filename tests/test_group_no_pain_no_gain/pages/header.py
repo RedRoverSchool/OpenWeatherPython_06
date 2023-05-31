@@ -6,6 +6,10 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 
 
 class Header(MainPage):
+    def element_visibility_and_clickability(self, locator, link):
+        element = wait(self.driver, timeout=3).until(EC.visibility_of_element_located(locator))
+        assert element.is_displayed() and element.is_enabled(), f'"{link}" link is not visible or clickable'
+
     def link_leads_to_page_with_correct_header(self, locator, result_header_locator):
         element = self.driver.find_element(*locator)
         element_text = element.text

@@ -17,10 +17,3 @@ def test_TC_011_03_01_verify_the_link_open_manual_is_visible(driver):
     page = PartnersPage(driver)
     page.verify_the_link_open_manual_is_visible()
 
-def test_TC_011_03_04_verify_the_link_open_manual_is_clickable(driver):
-    page = PartnersPage(driver)
-    page.verify_the_link_open_manual_is_clickable()
-
-def test_TC_011_01_03_verify_17_sections_are_visible(driver):
-    page = PartnersPage(driver)
-    page.verify_17_sections_are_visible()

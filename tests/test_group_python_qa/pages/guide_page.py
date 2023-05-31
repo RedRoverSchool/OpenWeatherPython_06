@@ -13,8 +13,3 @@ class GuidePage(BasePage):
         self.driver.execute_script("arguments[0].scrollIntoView(true);", historical_collection)
         assert historical_collection.is_displayed(), "The Historical Weather collection is not displaying"
 
-
-    def link_to_history_archive_is_clickable(self):
-        archive_link = self.driver.find_element(*self.locators.LINK_HISTORICAL_ARCHIVE)
-        self.action_move_to_element(archive_link)
-        assert archive_link.is_enabled(), "The link is not clickable"
