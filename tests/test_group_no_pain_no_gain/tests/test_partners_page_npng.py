@@ -12,12 +12,12 @@ class TestPartnersPage:
     def test_TC_011_20_01_verify_that_the_info_board_message_at_the_top_of_the_page_is_displayed(self, driver):
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.get_text_content_of_the_element(PPL.PARTENERS_PAGE_INFO_BOARD, PPD.PARTENERS_PAGE_INFO_BOARD_TEXT)
+        page.get_text_content_of_the_element(PPL.PARTNERS_PAGE_INFO_BOARD, PPD.PARTNERS_PAGE_INFO_BOARD_TEXT)
 
     def test_TC_011_20_02_verify_the_color_of_the_info_board_message_at_the_top_of_the_page(self, driver):
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.get_background_color_of_the_element(PPL.PARTENERS_PAGE_INFO_BOARD, PPD.INFO_BOARD_BACKGROUND_COLOR)
+        page.get_background_color_of_the_element(PPL.PARTNERS_PAGE_INFO_BOARD, PPD.INFO_BOARD_BACKGROUND_COLOR)
 
     def test_TC_011_01_02_verify_that_the_heading_of_the_page_equals_to_Partners_and_solutions(self, driver):
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
@@ -33,3 +33,8 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.link_visibility_and_clickability(PPL.ANDROID_FIRST_LINK, links.ANDROID_WEATHER)
+
+    def test_TC_011_20_03_verify_that_the_Github_link_in_the_info_board_message_is_visible_and_clickable(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visibility_and_clickability(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB_LINK)
