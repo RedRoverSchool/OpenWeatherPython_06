@@ -28,8 +28,7 @@ class SubscriptionsPage(BasePage):
 
 
 
-    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self, wait):
-        partial_url = "checkout.stripe.com"
+    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
         self.driver.get(self.URL_SUBSCRIPTION)
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
         radiobutton.click()
@@ -47,10 +46,5 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        # loading = self.driver.find_element(*self.locators.LOADING)
-        # wait.until_not(EC.presence_of_element_located(load_div))
-        # time.sleep(10)
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
-
-
