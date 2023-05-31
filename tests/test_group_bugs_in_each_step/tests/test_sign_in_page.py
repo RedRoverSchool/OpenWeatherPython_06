@@ -40,3 +40,20 @@ class TestRegistrationQuestion:
         sign_in_page.check_authorization(credentials['email'], credentials['password'])
         profile_page = ProfilePage(driver)
         profile_page.check_auth_notification()
+
+    def test_tc_014_04_05_verify_authorization_with_valid_email_and_empty_password_field(self, driver):
+        check_email_without_password = SignInPage(driver, SignInUrls.url_sign_in_page)
+        check_email_without_password.open_page()
+        check_email_without_password.check_authorization(credentials['email'])
+        check_email_without_password.check_error_alert_text()
+
+    def test_tc_014_04_06_verify_authorization_with_valid_password_and_empty_email_field(self, driver):
+        check_password_without_email = SignInPage(driver, SignInUrls.url_sign_in_page)
+        check_password_without_email.open_page()
+        check_password_without_email.check_authorization(credentials['password'])
+        check_password_without_email.check_error_alert_text()
+
+    def test_tc_014_01_05_verify_remember_me_record_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_remember_me_record_is_visible()
