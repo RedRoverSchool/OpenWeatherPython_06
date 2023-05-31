@@ -18,3 +18,18 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.get_background_color_of_the_element(PPL.PARTENERS_PAGE_INFO_BOARD, PPD.INFO_BOARD_BACKGROUND_COLOR)
+
+    def test_TC_011_01_02_verify_that_the_heading_of_the_page_equals_to_Partners_and_solutions(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.get_text_content_of_the_element(PPL.PARTNERS_PAGE_HEADING, PPD.PARTNERS_PAGE_HEADING)
+
+    def test_TC_011_12_01_verify_the_link_in_raspberry_is_visible_and_clickable(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visibility_and_clickability(PPL.RASPBERRY, links.RASPBERRY_GITHUB)
+
+    def test_TC_011_06_01_verify_the_first_link_in_android_section_is_visible_and_clickable(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visibility_and_clickability(PPL.ANDROID_FIRST_LINK, links.ANDROID_WEATHER)
