@@ -65,6 +65,8 @@ class AboutUsPageLocators():
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     APP_TITLE = (By.XPATH, "//h1")
+    BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
+
 
 class SubscriptionsPageLocators():
     BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
