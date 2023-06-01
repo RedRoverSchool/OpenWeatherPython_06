@@ -88,3 +88,13 @@ class TestMarketplacePage:
         REQUESTED_CITY = M.REQUESTED_CITY
         assert displayed_text == REQUESTED_CITY, '\n======== WRONG CITY! ========\n'
 
+
+def test_RF_TC_007_01_07_Verify_amount_of_order(driver):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    page.select_state_field()
+    page.select_element_from_dropdown_list(M.STATE_TEXAS)
+    page.select_year_field()
+    page.select_element_from_dropdown_list(M.YEAR_2019)
+    page.element_is_clickable(M.PLACE_ORDER_BTN)
+
