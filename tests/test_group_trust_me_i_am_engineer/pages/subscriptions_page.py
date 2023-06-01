@@ -1,6 +1,5 @@
 import time
-from telnetlib import EC
-
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
 
@@ -44,6 +43,6 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
-        self.element_is_displayed(self.locators.TEXT_PAYMENT_PAGE, wait)
+        wait.until(EC.visibility_of_element_located(self.locators.TEXT_PAYMENT_PAGE))
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
