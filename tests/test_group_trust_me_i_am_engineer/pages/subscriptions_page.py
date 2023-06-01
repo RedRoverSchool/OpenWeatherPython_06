@@ -1,4 +1,4 @@
-import time
+import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
@@ -27,7 +27,7 @@ class SubscriptionsPage(BasePage):
 
     def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self, wait):
         self.driver.get(self.URL_SUBSCRIPTION)
-        wait.until(EC.element_to_be_clickable(self.locators.RADIOBUTTON_ORGANISATIONS))
+        wait.until(EC.presence_of_element_located(self.locators.LOAD_PAGE))
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
         radiobutton.click()
         email = self.driver.find_element(*self.locators.INPUT_EMAIL)

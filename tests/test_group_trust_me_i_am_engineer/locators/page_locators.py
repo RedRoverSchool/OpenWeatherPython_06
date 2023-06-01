@@ -77,6 +77,7 @@ class SubscriptionsPageLocators():
     INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
     BUTTON_PAYMENT_PAGE = (By.XPATH, "//div[@class='SubmitButton-IconContainer']")
     LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
+    LOAD_PAGE = (By.XPATH, "//div[@class='wrapper']")
 
 class PartnersPageLocators():
     BUTTON_VIEW_ON_GITHUB = (By.XPATH, "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
