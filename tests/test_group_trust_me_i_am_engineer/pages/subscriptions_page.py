@@ -27,6 +27,7 @@ class SubscriptionsPage(BasePage):
 
     def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self, wait):
         self.driver.get(self.URL_SUBSCRIPTION)
+        wait.until(EC.element_to_be_clickable(self.locators.RADIOBUTTON_ORGANISATIONS))
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
         radiobutton.click()
         email = self.driver.find_element(*self.locators.INPUT_EMAIL)
