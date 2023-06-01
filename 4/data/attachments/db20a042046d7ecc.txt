@@ -1,0 +1,8 @@
+
+start browser...
+
+checking link: https://openweathermap.org/api/hourly-forecast#5days
+link text: Call Hourly forecast data
+198.5   85.578125
+
+quit browser...
