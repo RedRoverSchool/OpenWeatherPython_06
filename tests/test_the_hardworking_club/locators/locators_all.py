@@ -33,6 +33,7 @@ class WeatherDashboardLocators:
 
     CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
     FOOTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+    DASHBOARD_FULL_DESCRIPTION = (By.CSS_SELECTOR, 'div.row.weather p big b')
 
 class GuidePageLocators:
 

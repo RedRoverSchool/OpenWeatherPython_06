@@ -25,5 +25,15 @@ class DashboardPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert self.driver.current_url == 'https://home.openweathermap.org/questions'
 
+    def verify_weather_dashboard_full_description(self):
+
+        self.driver.get(DashboardPage.url_weather_dashboard)
+        dashboard_full_description_text = self.driver.find_element(*self.locators.DASHBOARD_FULL_DESCRIPTION)
+        expected_text = "The OpenWeather Dashboard is a lightweight and flexible visual " \
+                        "tool for our customers who would like to be notified weather " \
+                        "events to make informed decisions and plan actions based on the weather input."
+        displayed_text = dashboard_full_description_text.text
+        assert expected_text == displayed_text
+
 
 
