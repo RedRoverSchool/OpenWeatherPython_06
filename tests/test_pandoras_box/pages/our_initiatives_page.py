@@ -8,7 +8,7 @@ class OurInitiativesPage(BasePage):
     BUTTON_LEARN_MORE = (By.CSS_SELECTOR, 'a[class="ow-btn round btn-black"]')
        
     
-   def verify_learn_more_link_redirects_to_valid_page(self):
+    def verify_learn_more_link_redirects_to_valid_page(self):
         self.driver.execute_script("window.scrollTo(0, 500)")
         self.driver.find_element(*self.BUTTON_LEARN_MORE).click()
         actual_title = self.driver.find_element(*self.DISPLAYED_TITLE).text
