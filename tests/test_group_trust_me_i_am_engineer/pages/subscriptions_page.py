@@ -1,4 +1,3 @@
-import time
 
 from selenium.webdriver.common.by import By
 
@@ -49,6 +48,14 @@ class SubscriptionsPage(BasePage):
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         print('checkout.stripe.com')
         print(self.driver.current_url, ' = self.driver.current_url ДО')
+
+        """ Дебагинг для CI GitAction """
+        import http.client
+        conn = http.client.HTTPConnection("ifconfig.me")
+        conn.request("GET", "/ip")
+        git_action_ip = conn.getresponse().read()
+        print(git_action_ip)
+
         button.click()
         stripe_element = (By.CSS_SELECTOR, "#stripe-title")
         WebDriverWait(self.driver, timeout=20).until(EC.presence_of_element_located(stripe_element))
