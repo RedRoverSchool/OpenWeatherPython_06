@@ -20,3 +20,9 @@ class AboutUsPage(BasePage):
     def contact_us_button_is_clickable(self):
         contact_us_button = self.driver.find_element(*AboutUsLocators.CONTACT_US_BUTTON)
         return contact_us_button.is_enabled()
+
+    def verify_redirection_contact_us_button_to_the_new_webpage(self):
+        self.open()
+        self.click_contact_us_button()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert self.driver.current_url == "https://home.openweathermap.org/questions"
