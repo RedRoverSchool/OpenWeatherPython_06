@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
+from conftest import load_div
 
 
 class MainPage(BasePage):
@@ -108,3 +109,11 @@ class MainPage(BasePage):
         self.driver.execute_script("arguments[0].click();", linkedin_element)
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert self.linkedin_link, self.driver.current_url
+
+    def go_to_about_us_page(self, wait):
+        self.driver.get(self.URL)
+        wait.until_not(EC.presence_of_element_located(load_div))
+
+        self.allow_all_cookies()
+        self.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
+
