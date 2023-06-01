@@ -64,13 +64,9 @@ class OneCallApiPage(BasePage):
     def verify_redirection_one_call_api_3_link(self):
         self.driver.get(O.API_PAGE)
         self.driver.find_element(*O.ONE_CALL_API_3).click()
-        # self.allow_all_cookies()
         expected_link = O.ONE_CALL_API_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
 
-        # self.driver.switch_to.window(self.driver.window_handles[1])
-        # button_url = self.driver.current_url
-        # assert button_url == expected_link, " button link is not correct"
 
 
 
