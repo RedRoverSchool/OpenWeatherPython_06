@@ -1,6 +1,12 @@
 import time
+
+from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
 
 
 class SubscriptionsPage(BasePage):
@@ -41,6 +47,12 @@ class SubscriptionsPage(BasePage):
         phone = self.driver.find_element(*self.locators.INPUT_PHONE_NUMBER)
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
+        print('checkout.stripe.com')
+        print(self.driver.current_url, ' = self.driver.current_url ДО')
         button.click()
+        stripe_element = (By.CSS_SELECTOR, "#stripe-title")
+        WebDriverWait(self.driver, timeout=20).until(EC.presence_of_element_located(stripe_element))
+        print(self.driver.current_url, ' = self.driver.current_url ПОСЛЕ')
+
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
