@@ -27,3 +27,7 @@ def test_TC_002_02_04_verify_displaying_entered_city_name_in_Search_field(driver
 def test_TC_001_01_08_dropdown_list_contain_city_temperature(driver, open_and_load_main_page, wait):
     search_result = SearchResultPage(driver)
     search_result.dropdown_contain_city_temperature()
+
+def test_TC_001_05_04_verify_description_weather_for_current_location(driver, open_and_load_main_page, wait):
+    actual_weather = SearchResultPage(driver)
+    actual_weather.check_description_weather_block('Feels like')
