@@ -75,7 +75,7 @@ class SubscriptionsPageLocators():
     INPUT_CITY = (By.XPATH, "//input[@id='unauth_subscription_form_city']")
     INPUT_POSTCODE = (By.XPATH, "//input[@id='unauth_subscription_form_postal_code']")
     INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
-    TEXT_PAYMENT_PAGE = (By.XPATH, "//div[@id='root']")
+    TEXT_PAYMENT_PAGE = (By.XPATH, "//div[@data-testid = 'product-summary']")
     LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
 
 class PartnersPageLocators():

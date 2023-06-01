@@ -1,4 +1,6 @@
 import time
+from telnetlib import EC
+
 from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import SubscriptionsPageLocators
 
@@ -24,7 +26,7 @@ class SubscriptionsPage(BasePage):
             "An error message 'can't be blank' does not appeared for fields marked as required."
 
 
-    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self):
+    def verify_redirect_to_payment_service_page_for_not_logged_in_user_in_organisation(self, wait):
         self.driver.get(self.URL_SUBSCRIPTION)
         radiobutton = self.driver.find_element(*self.locators.RADIOBUTTON_ORGANISATIONS)
         radiobutton.click()
@@ -42,5 +44,6 @@ class SubscriptionsPage(BasePage):
         phone.send_keys("+905556667778")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
         button.click()
+        self.element_is_displayed(self.locators.TEXT_PAYMENT_PAGE, wait)
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
