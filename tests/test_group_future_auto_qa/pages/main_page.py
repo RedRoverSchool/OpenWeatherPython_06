@@ -100,3 +100,8 @@ class MainPageFooter(BasePage):
         widgets_link = self.element_is_clickable(self.locators.product_collection[link_number])
         link_href = widgets_link.get_attribute('href')
         assert link_href in expected_link, "Incorrect link"
+
+    def check_about_us_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
+        assert about_us_link.is_enabled(), "The About us is not clickable"

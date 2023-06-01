@@ -12,12 +12,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from test_data.credentials import credentials
 
 URL = 'https://openweathermap.org/'
+URL_SIGN_IN = 'https://home.openweathermap.org/users/sign_in'
 
 load_div = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
 email_input = (By.CSS_SELECTOR, '#user_email')
 password_input = (By.CSS_SELECTOR, '#user_password')
 submit_button = (By.CSS_SELECTOR, "input[value='Submit']")
 sign_in_link = (By.CSS_SELECTOR, '.user-li a')
+sign_in_to_your_account_form = (By.CSS_SELECTOR, 'div.sign-form')  # https://prnt.sc/4G8jF6RDTDL5
+
 @pytest.fixture(scope='function')
 def driver():
     print('\nstart browser...')
@@ -40,6 +43,11 @@ def open_and_load_main_page(driver, wait):
     driver.get(URL)
     wait.until_not(EC.presence_of_element_located(load_div))
 
+@pytest.fixture()
+def open_and_load_sign_in_page(driver, wait):
+    driver.get(URL_SIGN_IN)
+    # Appears only if the user is not logged in
+    wait.until(EC.presence_of_element_located(sign_in_to_your_account_form))
 
 @pytest.fixture()
 def wait(driver):
