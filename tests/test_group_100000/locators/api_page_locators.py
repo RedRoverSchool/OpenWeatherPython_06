@@ -18,3 +18,9 @@ class RoadRiskApi:
 class WeatherConditions:
     DRIZZLE_LOCATOR = (By.XPATH, '//a[contains(@href, "#Drizzle")]/ancestor-or-self::table')
     CONDITION_URL = 'https://openweathermap.org/weather-conditions'
+
+
+class OneCallApi:
+    API_PAGE = 'https://openweathermap.org/api'
+    ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
+    ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
