@@ -14,3 +14,9 @@ class OurInitiativesPage(BasePage):
         actual_title = self.driver.find_element(*self.DISPLAYED_TITLE).text
         expected_title = "Free Data for Students"
         assert expected_title == actual_title
+
+
+    def check_text_on_button_learn_more(self):
+        button_learn_more = self.driver.find_element(*self.BUTTON_LEARN_MORE)
+        expected_text = "Learn more"
+        assert expected_text == button_learn_more.text
