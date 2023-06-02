@@ -5,11 +5,6 @@ class MainPageUrls:
 class SignInUrls:
     url_sign_in_page = "https://home.openweathermap.org/users/sign_in"
 
-
-# class SuitOfUrls:
-#     suit_of_urls = ['https://openweathermap.org/', 'https://openweathermap.org/guide']
-
-
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
         'https://openweathermap.org/api',

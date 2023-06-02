@@ -45,3 +45,7 @@ class SignInPage(BasePage):
     def check_checkbox_is_visible(self):
         checkbox = self.element_is_visible(self.locators.CHECKBOX_DISPLAY)
         assert checkbox.is_displayed(), "Checkbox is not visible"
+
+    def check_registration_link_is_visible(self):
+        registration_link = self.element_is_visible(self.locators.CREATE_AN_ACCOUNT_LINK)
+        return registration_link.is_displayed(), "Create an Account link is not visible"
