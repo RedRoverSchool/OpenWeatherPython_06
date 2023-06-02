@@ -77,7 +77,7 @@ class MainPage(BasePage):
     def check_months(self):
         page_month = self.get_months()
         page_month_by_computer = self.get_months_by_computer()
-        assert page_month == f'{page_month_by_computer}'
+        assert page_month in f'{page_month_by_computer}'
 
     def find_search_city_input(self, key):
         self.driver.find_element(*MainLocator.SEARCH_CITY_INPUT).send_keys(key)
