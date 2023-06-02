@@ -19,3 +19,11 @@ class TestFooter:
     def test_TC_003_08_07_blog_link_is_visible(self, driver, open_and_load_main_page):
         page = Footer(driver)
         page.element_visibility(FL.BLOG_LINK)
+
+    def test_TC_003_08_08_blog_link_is_clickable(self, driver, open_and_load_main_page):
+        page = Footer(driver)
+        page.element_clickability(FL.BLOG_LINK)
+
+    def test_TC_003_13_02_clickability_of_Manage_cookies_button(self, driver, open_and_load_main_page):
+        page = Footer(driver)
+        page.element_clickability(FL.MANAGE_COOKIES)
