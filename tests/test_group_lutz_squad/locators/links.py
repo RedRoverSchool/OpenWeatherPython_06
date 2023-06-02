@@ -1,0 +1,1 @@
+API_PAGE_LINK = "https://openweathermap.org/api"
