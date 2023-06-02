@@ -6,3 +6,5 @@ OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
 GUIDE_PAGE = "https://openweathermap.org/guide"
 URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 URL_WEATHER_CONDITIONS = "https://openweathermap.org/weather-conditions"
+PARTNERS_AND_SOLUTION_PAGE = "https://openweathermap.org/examples"
+WEATHER_INDICATOR_PAGE = "https://launchpad.net/my-weather-indicator"
