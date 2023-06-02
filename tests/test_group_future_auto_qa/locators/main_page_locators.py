@@ -20,5 +20,7 @@ class MainPageLocators:
     FOOTER_HISTORICAL_WEATHER_DATA = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
     FOOTER_WEATHER_MAPS = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
     FOOTER_WEATHER_DASHBOARD = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
+    CHART_WEATHER = (By.CSS_SELECTOR, "canvas[id='chart-component']")
+
     product_collection = [FOOTER_CURRENT_AND_FORECAST_APIS, FOOTER_HISTORICAL_WEATHER_DATA, FOOTER_WEATHER_MAPS,
                           FOOTER_WEATHER_DASHBOARD, FOOTER_WIDGETS]
