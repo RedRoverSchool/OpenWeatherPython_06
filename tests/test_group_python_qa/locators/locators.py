@@ -31,3 +31,4 @@ class OpenAgroLocators:
 
 class PartnersAndSolutionsLocators:
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
+    LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
