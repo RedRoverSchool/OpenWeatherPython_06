@@ -76,3 +76,7 @@ class TestRegistrationLink:
         page.open_page()
         page.check_registration_link_is_clickable()
 
+    def test_tc_014_03_04_checking_the_link_in_the_Sing_In_form_leads_to_the_registration_page(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_functionality()
