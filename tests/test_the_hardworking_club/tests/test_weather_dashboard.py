@@ -13,6 +13,11 @@ class TestWeatherDashboard:
         button_click = DashboardPage(driver)
         button_click.button_leads_to_the_correct_page()
 
+    def test_TC_006_01_12_verify_weather_dashboard_full_description(self, driver):
+
+        dashboard_page = DashboardPage(driver)
+        dashboard_page.verify_weather_dashboard_full_description()
+
 
 
 

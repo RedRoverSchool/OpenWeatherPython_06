@@ -23,3 +23,7 @@ def test_TC_002_02_04_verify_displaying_entered_city_name_in_Search_field(driver
     main_page.press_enter_button()
     search_result_page = SearchResultPage(driver)
     search_result_page.check_correspondence_of_entered_text(' ljKJJ')
+
+def test_TC_001_01_08_dropdown_list_contain_city_temperature(driver, open_and_load_main_page, wait):
+    search_result = SearchResultPage(driver)
+    search_result.dropdown_contain_city_temperature()

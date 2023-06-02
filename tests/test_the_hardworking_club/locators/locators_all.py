@@ -17,6 +17,7 @@ class WidgetsPageLocators():
     WIDGET_CHOOSE = (By.XPATH, "//li[@class = 'widget-choose__item']")
     SUBTITLE_HEADLINE = (By.XPATH, "//h2[@class='headline first-child text-color']")
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
+    CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
 
 class PricePageLocators():
 
@@ -33,6 +34,7 @@ class WeatherDashboardLocators:
 
     CONTACT_US = (By.CSS_SELECTOR, 'div.row p.below a.btn_like')
     FOOTER_PANEL = (By.CSS_SELECTOR, 'button.stick-footer-panel__link')
+    DASHBOARD_FULL_DESCRIPTION = (By.CSS_SELECTOR, 'div.row.weather p big b')
 
 class GuidePageLocators:
 

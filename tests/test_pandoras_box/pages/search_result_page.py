@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
+from pages.main_page import MainPage
 
 
 class SearchResultPage(BasePage):
@@ -10,6 +11,8 @@ class SearchResultPage(BasePage):
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
     result_locator = (By.XPATH, '//a[contains(@href, "city")]')
+    KEY_SEARCH_CITY = 'Saint Petersburg'
+    METRIC_SWITCH = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 
     def check_notification_display(self):
         expected_notification = "×\nNot found"
@@ -33,3 +36,13 @@ class SearchResultPage(BasePage):
         cities = self.driver.find_elements(*self.result_locator)
         for city_name in cities:
             assert city in city_name.text
+
+    def dropdown_contain_city_temperature(self):
+        wait(self.driver, timeout=5).until(EC.element_to_be_clickable(self.METRIC_SWITCH))
+        search_city_input = self.driver.find_element(*MainPage.search_city_field)
+        search_city_input.click()
+        search_city_input.send_keys(*self.KEY_SEARCH_CITY)
+        self.driver.find_element(*MainPage.search_button).click()
+        dropdown_list = self.driver.find_elements(*MainPage.search_dropdown)
+        for city in dropdown_list:
+            assert '°C' in city.text
