@@ -101,16 +101,13 @@ class MainPage(BasePage):
         about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
         assert about_us_link.is_displayed(), "The About us link is not visible"
 
-    def check_openweather_for_business_link_functionality(self, expected_link):
-        self.allow_all_cookies()
-        blog_link = self.element_is_clickable(self.locators.OPENWEATHER_FOR_BUSINESS_LINK)
-        link_href = blog_link.get_attribute('href')
-        assert link_href == expected_link, "Incorrect link"
-
     def check_product_collections_module_is_visible(self):
         product_collections_module = self.driver.find_element(*self.locators.PRODUCT_COLLECTIONS)
         assert product_collections_module.is_displayed(), \
             "The footer is not displayed or does not contain the expected text"
 
-
-
+    def check_openweather_for_business_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.OPENWEATHER_FOR_BUSINESS_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"

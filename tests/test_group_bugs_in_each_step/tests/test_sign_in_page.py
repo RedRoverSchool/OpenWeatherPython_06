@@ -62,3 +62,17 @@ class TestRegistrationQuestion:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_checkbox_is_visible()
+
+
+class TestRegistrationLink:
+
+    def test_tc_014_03_02_checking_the_link_to_the_registration_page_display(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_is_visible()
+
+    def test_tc_014_03_03_checking_clickability_of_registration_link(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_is_clickable()
+
