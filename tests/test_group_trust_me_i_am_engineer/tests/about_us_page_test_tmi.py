@@ -28,6 +28,7 @@ def test_tc_001_15_07_verify_redirection_to_weather_category_blog_page(driver, w
     about_us_page.driver.switch_to.window(about_us_page.driver.window_handles[1])
 
     blog_category_weather_page = BlogCategoryWeatherPage(driver)
+
     blog_category_weather_page.verify_page_url("News and Updates", blog_category_weather_page.URL)
 
 def test_tc_001_15_10_verify_redirection_to_app_store(driver, wait):

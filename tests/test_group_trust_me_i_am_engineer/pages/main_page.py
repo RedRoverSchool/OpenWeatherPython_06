@@ -110,10 +110,6 @@ class MainPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[1])
         assert self.linkedin_link, self.driver.current_url
 
-    def go_to_about_us_page(self, wait):
-        self.driver.get(self.URL)
-        wait.until_not(EC.presence_of_element_located(load_div))
-
-        self.allow_all_cookies()
+    def go_to_about_us_page(self):
         self.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
 
