@@ -3,6 +3,7 @@ from tests.test_group_lutz_squad.locators.guide_page_locators import GuidePageLo
 from selenium.webdriver.support.color import Color
 
 from tests.test_group_lutz_squad.test_data.data import industry_apis_link_color_hex
+from tests.test_group_lutz_squad.locators.links import ONE_CALL_3_LINK
 
 
 class GuidePage(BasePage):
@@ -16,3 +17,10 @@ class GuidePage(BasePage):
             self.driver.find_element(*GuidePageLocators.INDUSTRY_APIS_LOCATOR).value_of_css_property(
                 'color'))
         assert industry_apis_link_color.hex == industry_apis_link_color_hex
+
+    def one_call_api_by_call_link_redirection(self):
+        element = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL_LOCATOR)
+        self.driver.execute_script("arguments[0].click();", element)
+        expected_link = ONE_CALL_3_LINK
+        assert self.driver.current_url == expected_link, "This link is not correct"
+
