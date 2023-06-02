@@ -10,16 +10,11 @@ class PartnersPage(BasePage):
      def open(self):
          self.driver.get("https://openweathermap.org/examples#python")
 
-     def scroll_to_git_button_python(self):
-         self.driver.execute_script("window.scrollTo(0, 500)")
 
-     def click_git_button_python(self):
-         git_button_python = self.driver.find_element(*PartnersLocators.GIT_BUTTON_PYTHON)
-         git_button_python.click()
-
-     def git_button_python_is_clickable(self):
-         git_button_python = self.driver.find_element(*PartnersLocators.GIT_BUTTON_PYTHON)
-         return git_button_python.is_enabled()
+     def verify_visibility_and_clickability_git_button_python(self):
+         self.open()
+         link = self.element_is_clickable(self.locators.GIT_BUTTON_PYTHON)
+         assert link.is_enabled(), "The 'View on Github' button is not clickable"
 
      def verify_redirection_git_button_python_to_the_new_webpage(self):
          self.open()
