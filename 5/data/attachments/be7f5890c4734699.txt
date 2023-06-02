@@ -1,0 +1,8 @@
+
+start browser...
+
+checking link: https://openweathermap.org/api/hourly-forecast#XML
+link text: XML
+198.5   85.84375
+
+quit browser...
