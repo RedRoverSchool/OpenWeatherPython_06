@@ -17,6 +17,7 @@ class WidgetsPageLocators():
     WIDGET_CHOOSE = (By.XPATH, "//li[@class = 'widget-choose__item']")
     SUBTITLE_HEADLINE = (By.XPATH, "//h2[@class='headline first-child text-color']")
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
+    CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
 
 class PricePageLocators():
 
