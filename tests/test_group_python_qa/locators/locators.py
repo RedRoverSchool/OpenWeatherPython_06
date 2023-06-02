@@ -23,6 +23,13 @@ class MainPageLocators:
 class SolarApiLocators:
     HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
+
+
+class CookiesSettingsLocators:
+    RADIOBUTTON_1_LOCATOR = (By.ID, 'inlineCheckbox1')
+    RADIOBUTTON_2_LOCATOR = (By.ID, 'inlineCheckbox2')
+    SAVE_CHANGES_BUTTON = (By.ID, 'remove-stick-footer')
+    ALLOW_BUTTON = (By.XPATH, '//button[text()="Allow all"]')
     PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
 
 
