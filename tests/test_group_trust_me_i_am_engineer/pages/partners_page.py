@@ -7,6 +7,8 @@ class PartnersPage(BasePage):
     URL_PARTNERS = 'https://openweathermap.org/examples'
     locators = PartnersPageLocators()
     drupal_button = 'https://www.drupal.org/project/olowm'
+    awesome_widget_button = 'http://wordpress.org/extend/plugins/awesome-weather/'
+
 
 
     def verify_the_link_view_on_github_is_visible(self):
@@ -55,3 +57,10 @@ class PartnersPage(BasePage):
         find_all_headers = self.driver.find_elements(*self.locators.HEADERS_ON_THE_PAGE)
         headers_on_the_page = [i.text for i in find_all_headers]
         assert data == headers_on_the_page
+
+    def verify_wordpress_awesome_weather_widget_leads_to_the_new_website(self):
+        self.driver.get(self.URL_PARTNERS)
+        awesome_button = self.driver.find_element(*self.locators.BUTTON_VIEW_WIDGET)
+        self.driver.execute_script("arguments[0].click();", awesome_button)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert self.awesome_widget_button, self.driver.current_url
