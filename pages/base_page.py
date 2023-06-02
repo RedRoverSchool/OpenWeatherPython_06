@@ -152,3 +152,6 @@ class BasePage:
 
     def find_element_and_click(self, locator):
         self.driver.find_element(*locator).click()
+
+    def switch_to_new_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
