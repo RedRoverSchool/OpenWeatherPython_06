@@ -25,7 +25,6 @@ def test_TC_001_05_01_verify_the_current_date_and_time(driver, open_and_load_mai
     page = MainPage(driver)
     page.verify_the_current_date_and_time()
 
-@pytest.mark.skip
 def test_TC_001_05_02_verify_current_location(driver, open_and_load_main_page, wait):
     page = MainPage(driver)
     page.verify_current_location(wait)
