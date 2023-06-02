@@ -29,3 +29,9 @@ class PartnersPage(BasePage):
         self.switch_to_new_window()
         apache_camel_link = self.driver.current_url
         assert apache_camel_link == apache_camel, "Incorrect link"
+
+    def verify_visibility_and_clickability_the_link_apache_camel_to_a_new_window(self, apache_camel):
+        self.driver.get(PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        assert self.element_is_visible(self.locators.APACHE_CAMEL_BUTTON), "Apache Camel is not visible"
+        assert self.element_is_clickable(self.locators.APACHE_CAMEL_BUTTON), "Apache Camel is not clickable"
