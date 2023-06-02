@@ -53,3 +53,10 @@ class SignInPage(BasePage):
     def check_registration_link_is_clickable(self):
         registration_link = self.driver.find_element(*self.locators.CREATE_AN_ACCOUNT_LINK)
         assert registration_link.is_enabled(), "The Create an Account link is not clickable"
+
+    def check_registration_link_functionality(self):
+        registration_link = self.driver.find_element(*self.locators.CREATE_AN_ACCOUNT_LINK)
+        # self.go_to_element(registration_link)
+        registration_link.click()
+        assert '/sign_up' in self.driver.current_url, \
+            "The Create an Account link leads to an incorrect page"
