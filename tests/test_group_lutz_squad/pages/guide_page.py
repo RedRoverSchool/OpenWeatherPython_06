@@ -16,3 +16,12 @@ class GuidePage(BasePage):
             self.driver.find_element(*GuidePageLocators.INDUSTRY_APIS_LOCATOR).value_of_css_property(
                 'color'))
         assert industry_apis_link_color.hex == industry_apis_link_color_hex
+
+
+    def one_call_api_link_is_visible(self):
+        one_call_api = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL)
+        assert one_call_api.is_displayed(), "One call api link is not visible"
+
+    def one_call_api_link_is_clickable(self):
+        one_call_api = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL)
+        assert one_call_api.is_enabled(), "One call api link is not clackable"
