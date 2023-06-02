@@ -13,3 +13,7 @@ class TestPartnersPage:
         partners_page.switch_to_new_window()
         partners_page.check_correct_redirection()
 
+    def test_tc_011_09_01_link_see_library_visibility(self, driver, wait):
+        partners_page = PartnersAndSolutions(driver, PARTNERS_AND_SOLUTION_PAGE)
+        partners_page.open_page()
+        partners_page.link_see_library_visibility(wait)

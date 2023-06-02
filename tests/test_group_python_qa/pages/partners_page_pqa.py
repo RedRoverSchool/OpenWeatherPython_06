@@ -8,3 +8,6 @@ class PartnersAndSolutions(BasePage):
 
     def check_correct_redirection(self):
         assert WEATHER_INDICATOR_PAGE == self.driver.current_url, "Incorrect page"
+
+    def link_see_library_visibility(self, wait):
+        self.element_is_displayed(self.locator.LINK_SEE_LIBRARY, wait)
