@@ -15,3 +15,5 @@ URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/stations',
         'https://openweathermap.org/about-us'
         ]
+PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
+APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'

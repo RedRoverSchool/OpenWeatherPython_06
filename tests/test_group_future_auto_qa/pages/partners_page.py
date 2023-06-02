@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from tests.test_group_future_auto_qa.locators.partners_page_locators import PartnersLocators
+from tests.test_group_future_auto_qa.test_data.urls import PARTNERS_AND_SOLUTIONS
 
 
 class PartnersPage(BasePage):
@@ -22,7 +23,7 @@ class PartnersPage(BasePage):
         assert self.git_button_python, self.driver.current_url
 
     def verify_redirected_the_link_apache_camel_to_a_new_window(self, apache_camel):
-        self.driver.get("https://openweathermap.org/examples")
+        self.driver.get(PARTNERS_AND_SOLUTIONS)
         self.allow_all_cookies()
         self.find_element_and_click(self.locators.APACHE_CAMEL_BUTTON)
         self.switch_to_new_window()
