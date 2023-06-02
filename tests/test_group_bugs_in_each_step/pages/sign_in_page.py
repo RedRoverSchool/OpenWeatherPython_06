@@ -48,4 +48,8 @@ class SignInPage(BasePage):
 
     def check_registration_link_is_visible(self):
         registration_link = self.element_is_visible(self.locators.CREATE_AN_ACCOUNT_LINK)
-        return registration_link.is_displayed(), "Create an Account link is not visible"
+        assert registration_link.is_displayed(), "The Create an Account link is not visible"
+
+    def check_registration_link_is_clickable(self):
+        registration_link = self.driver.find_element(*self.locators.CREATE_AN_ACCOUNT_LINK)
+        assert registration_link.is_enabled(), "The Create an Account link is not clickable"

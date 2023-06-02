@@ -1,9 +1,14 @@
 class MainPageUrls:
-    url_main_page = "https://home.openweathermap.org"
+        url_main_page = "https://home.openweathermap.org"
 
 
 class SignInUrls:
-    url_sign_in_page = "https://home.openweathermap.org/users/sign_in"
+        url_sign_in_page = "https://home.openweathermap.org/users/sign_in"
+
+
+class SignUpUrls:
+        url_sign_up_page = "https://home.openweathermap.org/users/sign_up"
+
 
 URLs = ['https://openweathermap.org/',
         'https://openweathermap.org/guide',
