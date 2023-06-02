@@ -79,6 +79,8 @@ class PartnersPageLocators():
     BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
     BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
     HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
+    BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
+
 
 class TechnologyPageLocators:
     DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")
