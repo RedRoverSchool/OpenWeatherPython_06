@@ -164,3 +164,6 @@ class BasePage:
 
     def switch_to_new_window(self):
         self.driver.switch_to.window(self.driver.window_handles[1])
+
+    def check_for_redirection(self, expected_url):
+        assert self.driver.current_url == expected_url

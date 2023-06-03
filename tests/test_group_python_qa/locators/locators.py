@@ -28,6 +28,8 @@ class SolarApiLocators:
 
 class OpenAgroLocators:
     REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
+    REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
 
 class PartnersAndSolutionsLocators:
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
