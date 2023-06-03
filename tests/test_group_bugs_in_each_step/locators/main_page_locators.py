@@ -5,6 +5,7 @@ class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[@class='stick-footer-panel__link']")
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")

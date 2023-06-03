@@ -92,7 +92,7 @@ class TestWebsiteTermsAndConditionsLink:
 
 
 class TestOpenWeatherForBusinessLink:
-    def test_tc_003_12_21_verify_openweather_for_business_link_functionality(self, driver, open_and_load_main_page, wait):
+    def test_tc_003_12_21_verify_openweather_for_business_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
