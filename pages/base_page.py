@@ -13,6 +13,7 @@ class BasePage:
     pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
     allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     privacy_policy_link = (By.CSS_SELECTOR, 'div.section-content ul li:nth-child(2) a[href*="privacy-policy"]')
+    our_initiatives_link = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7) a')
     partners_link = (By.CSS_SELECTOR, '#desktop-menu a[href="/examples"]')
     support_link = (By.XPATH, "//*[@id='support-dropdown']")
     faq_option = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
@@ -42,6 +43,8 @@ class BasePage:
                 self.driver.find_element(*self.faq_option).click()
             case 'maps':
                 self.driver.find_element(*self.maps_link).click()
+            case 'our initiatives':
+                self.driver.find_element(*self.our_initiatives_link).click()
             case 'partners':
                 self.driver.find_element(*self.partners_link).click()
             case 'faq':
@@ -158,3 +161,6 @@ class BasePage:
 
     def find_element_and_click(self, locator):
         self.driver.find_element(*locator).click()
+
+    def switch_to_new_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])

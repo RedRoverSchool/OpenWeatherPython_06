@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class MainPageLocators:
     METRIC_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
     IMPERIAL_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
@@ -23,6 +24,7 @@ class MainPageLocators:
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 
+
 class MarketplacePageLocators:
     HISTORY_BULK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
     HISTORY_BULK_SEARCH_LOCATION = (By.ID, "firstSearch")
@@ -44,13 +46,16 @@ class MarketplacePageLocators:
     LONGITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
     SATELLITE_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Satellite')]")
     CHECKBOX_TERRAIN = (By.XPATH, "//li[@aria-label='Terrain']/span/span[2]")
+    CHECKBOX_LABELS = (By.XPATH, "//li[@aria-label='Labels']/span")
     BUTTON_ZOOM_IN = (By.XPATH, "//button[@title='Zoom in']")
     BUTTON_ZOOM_OUT = (By.XPATH, "//button[@title='Zoom out']")
     BUTTON_STREET_VIEW = (By.XPATH, "//button[@title='Drag Pegman onto the map to open Street View']")
     BUTTON_FULL_SCREEN = (By.XPATH, "//button[@title='Toggle fullscreen view']")
 
+
 class WeatherConditionsLocators:
     ICON_LIST_DESCRIPTION = (By.XPATH, "//table[@class='table table-bordered'][1]/tbody/tr/td[3]")
+
 
 class OurInitiativesPageLocators:
     OUR_INITIATIVES_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(7)')
@@ -58,10 +63,12 @@ class OurInitiativesPageLocators:
     LEARN_MORE_PAGE_TITLE = (By.CSS_SELECTOR, "h1[class='breadcrumb-title']")
     HEADERS_SELECTOR = (By.XPATH, "//h2[@style='margin-top: 0;']")
 
+
 class AboutUsPageLocators():
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
-    HEADERS_ON_PAGE_FOOTER = (By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
+    HEADERS_ON_PAGE_FOOTER = (
+    By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     APP_TITLE = (By.XPATH, "//h1")
@@ -73,11 +80,23 @@ class SubscriptionsPageLocators():
     RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
     ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
 
+
 class PartnersPageLocators():
-    BUTTON_VIEW_ON_GITHUB = (By.XPATH, "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
+    BUTTON_VIEW_ON_GITHUB = (By.XPATH,
+                             "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
     BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
     BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
     HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
+    BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
+
 
 class TechnologyPageLocators:
     DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")
+
+class SignInPageLocators:
+    CREATE_AN_ACCOUNT_LINK = (By.XPATH, "//a[contains(@ href, '/users/sign_up')]")
+
+class MigratePageLocators:
+    SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
+
+
