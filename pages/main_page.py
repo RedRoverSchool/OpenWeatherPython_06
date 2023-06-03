@@ -9,6 +9,7 @@ class MainPage(BasePage):
     search_button = (By.CSS_SELECTOR, "button[class ='button-round dark']")
     displayed_city = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
     no_results_notification = (By.CSS_SELECTOR, '.widget-notification > span')
+    actual_weather = (By.CSS_SELECTOR, '#weather-widget div.current-container.mobile-padding div.bold')
 
     def fill_city_search_field(self, city):
         input_city = self.driver.find_element(*self.search_city_field)
