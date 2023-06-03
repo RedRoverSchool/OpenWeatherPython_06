@@ -46,3 +46,8 @@ class SearchResultPage(BasePage):
         dropdown_list = self.driver.find_elements(*MainPage.search_dropdown)
         for city in dropdown_list:
             assert '°C' in city.text
+
+    def check_description_weather_block(self, text):
+        description_weather = self.driver.find_element(*MainPage.actual_weather)
+        description_weather_text = description_weather.text
+        assert description_weather.is_displayed() and text in description_weather_text
