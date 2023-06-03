@@ -84,8 +84,15 @@ class TestSubscribeForFreeLink:
         page = MainPage(driver)
         page.check_subscribe_for_free_link_functionality()
 
+class TestWebsiteTermsAndConditionsLink:
+        def test_tc_003_06_03_verify_website_terms_and_conditions_link_visibility\
+                        (self, driver,open_and_load_main_page):
+            page = MainPage(driver)
+            page.check_website_terms_and_conditions_link_visibility()
+
+
 class TestOpenWeatherForBusinessLink:
-    def test_tc_003_12_21_verify_openweather_for_business_link_functionality(self, driver, open_and_load_main_page, wait):
+    def test_tc_003_12_21_verify_openweather_for_business_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
