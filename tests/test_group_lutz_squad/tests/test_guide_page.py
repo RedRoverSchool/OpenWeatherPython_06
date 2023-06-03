@@ -25,3 +25,8 @@ def test_TC_004_06_04_verify_redirection_one_call_api_by_call_link(driver, wait)
     page = GuidePage(driver, link=GuidePageLocators.GUIDE_PAGE_LINK)
     page.open_page()
     page.one_call_api_by_call_link_redirection()
+
+def test_TC_004_06_07_verify_button_subscribe_to_onecall_by_call_is_visible(driver, wait):
+    page = GuidePage(driver, link=GuidePageLocators.GUIDE_PAGE_LINK)
+    page.open_page()
+    page.subscribe_to_onecall_by_call_button_is_visible()

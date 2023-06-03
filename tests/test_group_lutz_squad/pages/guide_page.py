@@ -33,3 +33,7 @@ class GuidePage(BasePage):
         expected_link = ONE_CALL_3_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
 
+    def subscribe_to_onecall_by_call_button_is_visible(self):
+        subscribe_to_onecall_by_call_button = self.element_is_visible(GuidePageLocators.SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON)
+        assert subscribe_to_onecall_by_call_button.is_displayed(), "The button 'subscribe to onecall by call' is not visible "
+
