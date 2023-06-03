@@ -17,7 +17,7 @@ class MainPageLocators:
     PRICING_PAGE_TITLE = (By.XPATH, "//h1[text()='Pricing']")
     FOR_BUSINESS_LINK = (By.XPATH, "//a[text()='OpenWeather for Business']")
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[@class ='stick-footer-panel__link']")
-    ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+
     FOOTER_LINKEDIN_LINK = (By.XPATH, "//div[@class='social']/a[3]")
 
 
