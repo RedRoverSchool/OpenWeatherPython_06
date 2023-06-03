@@ -50,11 +50,3 @@ class SubscriptionsPage(BasePage):
         WebDriverWait(self.driver, timeout=20).until(EC.presence_of_element_located(self.locators.ELEMENT_STRIPE))
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
-
-        # """ Дебагинг для CI GitAction """
-        # import http.client
-        # conn = http.client.HTTPConnection("ifconfig.me")
-        # conn.request("GET", "/ip")
-        # git_action_ip = conn.getresponse().read()
-        # print(git_action_ip)
-
