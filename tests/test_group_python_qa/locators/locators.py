@@ -23,6 +23,7 @@ class MainPageLocators:
 class SolarApiLocators:
     HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
+    PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
 
 
 class CookiesSettingsLocators:
@@ -30,11 +31,12 @@ class CookiesSettingsLocators:
     RADIOBUTTON_2_LOCATOR = (By.ID, 'inlineCheckbox2')
     SAVE_CHANGES_BUTTON = (By.ID, 'remove-stick-footer')
     ALLOW_BUTTON = (By.XPATH, '//button[text()="Allow all"]')
-    PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
+    ALERT_BANNER = (By.XPATH, '//b[text() = "Your cookie settings were saved"]')
 
 
 class OpenAgroLocators:
     REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
+
 
 class PartnersAndSolutionsLocators:
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
