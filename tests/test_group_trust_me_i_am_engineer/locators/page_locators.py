@@ -20,7 +20,6 @@ class MainPageLocators:
 
     FOOTER_LINKEDIN_LINK = (By.XPATH, "//div[@class='social']/a[3]")
 
-
 class WeatherAPIPageLocators:
     WEATHER_API_PAGE_TITLE = (By.CSS_SELECTOR, "h1.breadcrumb-title")
 
@@ -79,6 +78,16 @@ class SubscriptionsPageLocators():
     BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
     RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
     ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
+    INPUT_EMAIL = (By.XPATH, "//input[@type='email']")
+    INPUT_ORGANISATION = (By.XPATH, "//input[@id='unauth_subscription_form_organisation']")
+    INPUT_ADDRESS_1 = (By.XPATH, "//input[@id='unauth_subscription_form_address_line_1']")
+    INPUT_CITY = (By.XPATH, "//input[@id='unauth_subscription_form_city']")
+    INPUT_POSTCODE = (By.XPATH, "//input[@id='unauth_subscription_form_postal_code']")
+    INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
+    BUTTON_PAYMENT_PAGE = (By.XPATH, "//div[@class='SubmitButton-IconContainer']")
+    LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
+    LOAD_PAGE = (By.XPATH, "//div[@class='wrapper']")
+    ELEMENT_STRIPE = (By.CSS_SELECTOR, "#stripe-title")
 
 
 class PartnersPageLocators():
