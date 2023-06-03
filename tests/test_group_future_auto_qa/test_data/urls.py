@@ -17,3 +17,4 @@ URLs = ['https://openweathermap.org/',
         ]
 PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
 APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
+YOUTUBE_PyOWM_URL = 'https://www.youtube.com/watch?v=123Vz_3E0Zs&feature=youtu.be'
