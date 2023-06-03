@@ -36,6 +36,8 @@ class CookiesSettingsLocators:
 
 class OpenAgroLocators:
     REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
+    REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
 
 
 class PartnersAndSolutionsLocators:
