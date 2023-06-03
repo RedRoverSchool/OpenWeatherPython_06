@@ -46,20 +46,15 @@ class SubscriptionsPage(BasePage):
         phone = self.driver.find_element(*self.locators.INPUT_PHONE_NUMBER)
         phone.send_keys("+19295678976")
         button = self.driver.find_element(*self.locators.BUTTON_CONTINUE_TO_PAYMENT)
-        print('checkout.stripe.com')
-        print(self.driver.current_url, ' = self.driver.current_url ДО')
-
-        """ Дебагинг для CI GitAction """
-        import http.client
-        conn = http.client.HTTPConnection("ifconfig.me")
-        conn.request("GET", "/ip")
-        git_action_ip = conn.getresponse().read()
-        print(git_action_ip)
-
         button.click()
-        stripe_element = (By.CSS_SELECTOR, "#stripe-title")
-        WebDriverWait(self.driver, timeout=20).until(EC.presence_of_element_located(stripe_element))
-        print(self.driver.current_url, ' = self.driver.current_url ПОСЛЕ')
-
+        WebDriverWait(self.driver, timeout=20).until(EC.presence_of_element_located(self.locators.ELEMENT_STRIPE))
         assert 'checkout.stripe.com' in self.driver.current_url, \
             "'Continue to payment' button leads to incorrect page"
+
+        # """ Дебагинг для CI GitAction """
+        # import http.client
+        # conn = http.client.HTTPConnection("ifconfig.me")
+        # conn.request("GET", "/ip")
+        # git_action_ip = conn.getresponse().read()
+        # print(git_action_ip)
+
