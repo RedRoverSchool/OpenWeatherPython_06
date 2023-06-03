@@ -20,3 +20,8 @@ def test_TC_004_06_03_verify_redirection_industry_standard_apis_link(driver, wai
     page.open_page()
     page.industry_standard_apis_link_redirection()
 
+
+def test_TC_004_06_04_verify_redirection_one_call_api_by_call_link(driver, wait):
+    page = GuidePage(driver, link=GuidePageLocators.GUIDE_PAGE_LINK)
+    page.open_page()
+    page.one_call_api_by_call_link_redirection()

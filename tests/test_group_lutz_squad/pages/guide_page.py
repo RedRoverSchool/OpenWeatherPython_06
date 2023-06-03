@@ -4,6 +4,7 @@ from selenium.webdriver.support.color import Color
 
 from tests.test_group_lutz_squad.test_data.data import industry_apis_link_color_hex
 from tests.test_group_lutz_squad.locators.links import API_PAGE_LINK
+from tests.test_group_lutz_squad.locators.links import ONE_CALL_3_LINK
 
 
 class GuidePage(BasePage):
@@ -24,4 +25,11 @@ class GuidePage(BasePage):
         expected_link = API_PAGE_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
 
+
+
+    def one_call_api_by_call_link_redirection(self):
+        element = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL_LOCATOR)
+        self.driver.execute_script("arguments[0].click();", element)
+        expected_link = ONE_CALL_3_LINK
+        assert self.driver.current_url == expected_link, "This link is not correct"
 
