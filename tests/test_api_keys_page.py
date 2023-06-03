@@ -1,4 +1,4 @@
-from pages.API_keys_page import ApiKeysPage
+from pages.api_keys_page import ApiKeysPage
 
 
 class TestApiKey:
