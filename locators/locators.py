@@ -22,6 +22,8 @@ class MainPageLocators:
     SEARCH_BUTTON = (By.CSS_SELECTOR, "button[class ='button-round dark']")
     DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
 
 class DashboardPageLocators:
     pass
@@ -31,3 +33,17 @@ class PricingPageLocators:
 
 class ApiPageLocators:
     pass
+
+class AboutUsPageLocators:
+
+    HEADER = (By.XPATH, "//h1")
+    IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
+    HEADERS_ON_PAGE_FOOTER = (
+        By.XPATH, "//div[@class='horizontal-section']/div[not(contains(@class,'not-foldable'))]/p")
+    NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
+    APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
+    BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
+
+class AppStorePageLocators:
+
+    APP_TITLE = (By.XPATH, "//h1")
