@@ -80,3 +80,8 @@ class TestRegistrationLink:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_registration_link_functionality()
+
+    def test_tc_014_01_07_verify_submit_button_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_submit_button_is_visible()
