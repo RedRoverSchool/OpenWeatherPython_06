@@ -85,3 +85,8 @@ class TestRegistrationLink:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_submit_button_is_visible()
+
+    def test_tc_014_01_08_verify_link_for_password_recovery_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_link_for_password_recovery_is_visible()
