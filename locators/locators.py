@@ -19,6 +19,23 @@ class BasePageLocators:
 
 
 class MainPageLocators:
+    ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
+    ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
+        (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
+    CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
+    COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    HISTORICAL_WEATHER_DATA_LINK = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
+    HOW_TO_START = (By.XPATH, "//div[@id='footer-website']//a[text()='How to start']")
+    HOW_TO_START_LINK = (By.CSS_SELECTOR, "div[class='section-content'] a[href*='appid']")
+    OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")
+    OUR_TECHNOLOGY_LINK = (By.XPATH, "//a[contains(text(), 'Our technology')]")
+    PRODUCT_COLLECTIONS = (By.XPATH, "//p[@class='section-heading' and text()='Product Collections']")
+    SUBSCRIBE_FOR_FREE_LINK = \
+        (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
+    WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
+    WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
+    WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[contains(text(), 'Website')]")
+
     SEARCH_DROPDOWN = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
     SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
     SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
@@ -27,6 +44,7 @@ class MainPageLocators:
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+
 
 
 class DashboardPageLocators:
@@ -70,6 +88,11 @@ class ApiKeysLocator:
     NEW_API_KEY_NAME = By.CSS_SELECTOR, ".new_api_key_form .owm_input"
     GENERATE_BUTTON = By.CSS_SELECTOR, '.new_api_key_form .button-round.dark'
     TABLE_API_KEYS = By.CSS_SELECTOR, "tbody tr"
+
+
+class SignInPageLocators:
+    CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")
+    REGISTRATION_QUESTION = By.XPATH, "//p[contains(text(), 'Not registered?')]"
 
 
 class SignInLocator:
