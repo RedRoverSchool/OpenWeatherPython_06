@@ -70,3 +70,9 @@ class ApiKeysLocator:
     NEW_API_KEY_NAME = By.CSS_SELECTOR, ".new_api_key_form .owm_input"
     GENERATE_BUTTON = By.CSS_SELECTOR, '.new_api_key_form .button-round.dark'
     TABLE_API_KEYS = By.CSS_SELECTOR, "tbody tr"
+
+
+class SignInLocator:
+    EMAIL_INPUT = By.CSS_SELECTOR, '#user_email'
+    PASSWORD_INPUT = By.CSS_SELECTOR, '#user_password'
+    SUBMIT_BUTTON = By.CSS_SELECTOR, "input[value='Submit']"
