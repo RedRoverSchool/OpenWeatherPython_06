@@ -35,3 +35,10 @@ def test_TC_001_01_08_dropdown_list_contain_city_temperature(driver, open_and_lo
     search_result = SearchResultPage(driver)
     search_result.dropdown_contain_city_temperature()
 
+
+def test_TC_001_01_02_verify_displaying_entered_city_name_in_cirillic(driver, open_and_load_main_page, wait):
+    main_page = MainPage(driver)
+    main_page.enter_city_in_weather_in_your_city_field('Кишинев')
+    main_page.press_enter_button()
+    search_result_page = SearchResultPage(driver)
+    search_result_page.check_search_result_contains_city('Chisinau, MD')
