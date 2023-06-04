@@ -27,3 +27,9 @@ class MainPage(BasePage):
             actual_city = self.driver.find_element(*self.locators.DISPLAYED_CITY).text
             assert expected_city in actual_city
 
+    def go_to_about_us_page_from_main_page(self, driver):
+        main_page = MainPage(driver)
+        main_page.allow_all_cookies()
+        main_page.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
+
+

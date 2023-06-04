@@ -9,8 +9,8 @@ def test_tc_001_15_01_verify_correct_header_about_us_page(driver, wait):
     about_us_page.verify_correct_header_about_us_page()
 
 def test_tc_001_15_02_verify_image_beside_header_is_displayed(driver, wait):
-    about_us_page = AboutUsPage(driver)
-    about_us_page.open()
+    about_us_page = AboutUsPage(driver, "https://openweathermap.org/about-us")
+    about_us_page.open_page()
 
     about_us_page.verify_image_beside_header_is_displayed()
 
