@@ -44,7 +44,7 @@ class MainPageLocators:
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
-
+    HEADER_SEARCH_FIELD = (By.NAME, "q")
 
 
 class DashboardPageLocators:

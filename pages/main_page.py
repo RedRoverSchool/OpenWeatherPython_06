@@ -121,3 +121,8 @@ class MainPage(BasePage):
         product_collections_module = self.driver.find_element(*self.locators.PRODUCT_COLLECTIONS)
         assert product_collections_module.is_displayed(), \
             "The footer is not displayed or does not contain the expected text"
+
+    def get_header_search_field_attribute(self, attribute):
+        '''To retrieve the value of a specific attribute from Header Search field'''
+        search_placeholder = self.driver.find_element(*self.locators.HEADER_SEARCH_FIELD)
+        return search_placeholder.get_attribute(attribute)

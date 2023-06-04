@@ -60,3 +60,10 @@ class TestMainPage:
         page = MainPage(driver)
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
+
+    class TestHeaderPage:
+        def test_tc_002_02_07_placeholder_is_displayed_in_search_field(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            search_placeholder_text = main_page.get_header_search_field_attribute("placeholder")
+            assert search_placeholder_text == "Weather in your city", \
+                "Password field placeholder text is incorrect or missing"
