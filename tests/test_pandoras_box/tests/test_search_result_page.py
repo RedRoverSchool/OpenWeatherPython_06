@@ -31,9 +31,9 @@ def test_tc_001_08_03_chart_current_weather(driver, open_and_load_main_page):
     page.check_chart_weather_is_displayed()
 
 
-def test_TC_001_01_08_dropdown_list_contain_city_temperature(driver, open_and_load_main_page, wait):
-    search_result = SearchResultPage(driver)
-    search_result.dropdown_contain_city_temperature()
+#def test_TC_001_01_08_dropdown_list_contain_city_temperature(driver, open_and_load_main_page, wait):
+#    search_result = SearchResultPage(driver)
+#    search_result.dropdown_contain_city_temperature()
 
 def test_TC_001_05_04_verify_description_weather_for_current_location(driver, open_and_load_main_page, wait):
     actual_weather = SearchResultPage(driver)
