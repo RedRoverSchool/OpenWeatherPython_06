@@ -13,3 +13,4 @@ class SignInPageLocators:
     REMEMBER_ME_RECORD_DISPLAY = (By.CSS_SELECTOR, "label.boolean")
     CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
     CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")
+    SUBMIT_BUTTON_DISPLAY = (By.CSS_SELECTOR, ".new_user > .btn")
