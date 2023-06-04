@@ -125,3 +125,11 @@ class MarketplacePage(BasePage):
         full_screen_btn = self.element_is_clickable(self.locators.BUTTON_FULL_SCREEN)
         assert full_screen_btn.is_displayed() and full_screen_btn.is_enabled(), \
             "The 'Full screen' button is not displayed on the map or is not clickable"
+
+    def verify_visibility_clickability_labels_checkbox(self):
+        self.driver.get(self.URL_MARKETPLACE)
+        self.driver.find_element(*self.locators.HISTORY_BULK_TITLE).click()
+        self.element_is_clickable(self.locators.SATELLITE_BUTTON_LOC).click()
+        labels_checkbox = self.element_is_clickable(self.locators.CHECKBOX_LABELS)
+        assert labels_checkbox.is_displayed() and labels_checkbox.is_enabled(), \
+            "The 'Terrain' checkbox is not displayed on the map or is not clickable"

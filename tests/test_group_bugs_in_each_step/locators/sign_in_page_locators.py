@@ -12,3 +12,4 @@ class SignInPageLocators:
     PASSWORD_FIELD_DISPLAY = (By.CSS_SELECTOR, "#user_password")
     REMEMBER_ME_RECORD_DISPLAY = (By.CSS_SELECTOR, "label.boolean")
     CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
+    CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")

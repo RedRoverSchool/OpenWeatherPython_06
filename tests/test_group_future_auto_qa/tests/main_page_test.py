@@ -1,5 +1,6 @@
 from tests.test_group_future_auto_qa.pages.main_page import MainPage
 from tests.test_group_future_auto_qa.pages.main_page import MainPageFooter
+from tests.test_group_future_auto_qa.pages.main_page import MainPageHourlyForecast
 import pytest
 
 
@@ -84,3 +85,9 @@ class TestMainPageFooter:
         expected_link = link_product_collection
         link_number = self.link_product_collections.index(expected_link)
         page.click_footer_product_collections_all_widgets(expected_link, link_number)
+
+
+class TestMainPageHourlyForecast:
+    def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
+        page = MainPageHourlyForecast(driver)
+        page.verify_chart_weather_is_present()
