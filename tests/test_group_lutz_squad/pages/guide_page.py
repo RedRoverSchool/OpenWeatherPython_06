@@ -9,6 +9,8 @@ from tests.test_group_lutz_squad.locators.links import ONE_CALL_3_LINK
 
 class GuidePage(BasePage):
 
+    link = 'https://openweathermap.org/guide'
+
     def industry_apis_link_is_visible_and_clickable(self):
         self.element_is_visible(GuidePageLocators.INDUSTRY_APIS_LOCATOR)
         assert self.element_is_clickable(GuidePageLocators.INDUSTRY_APIS_LOCATOR)
