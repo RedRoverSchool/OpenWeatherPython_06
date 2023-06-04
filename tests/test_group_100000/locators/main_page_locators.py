@@ -8,3 +8,9 @@ class EightDayForecast:
 class FooterBlockLocators:
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     HOW_TO_START_LINK = (By.CSS_SELECTOR, "div.section-content ul>li>a[href='/appid']")
+
+class MainPageLocators:
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[@class ='stick-footer-panel__link']")
+    ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+class AboutUsPageLocators():
+    HEADER = (By.XPATH, "//h1")
