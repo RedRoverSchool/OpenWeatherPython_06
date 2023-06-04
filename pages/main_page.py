@@ -32,4 +32,14 @@ class MainPage(BasePage):
         main_page.allow_all_cookies()
         main_page.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
 
+    def choose_1st_option(self, wait):
+        wait.until(EC.element_to_be_clickable(self.locators.SEARCH_1ST_OPTION_LOCATOR)).click()
+
+    def switch_to_c_temp(self):
+        self.driver.find_element(*self.locators.C_TEMP_LOCATOR).click()
+
+    def check_8_lines_are_displayed(self):
+        lines = self.driver.find_elements(*self.locators.LINE_IN_8_DAYS_FORECAST_LOCATOR)
+        for line in lines:
+            assert line.is_displayed()
 

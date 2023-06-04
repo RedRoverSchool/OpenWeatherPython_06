@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class BasePageLocators:
     SIGN_IN_LINK = (By.CSS_SELECTOR, '.user-li a')
     GUIDE_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
@@ -15,6 +16,7 @@ class BasePageLocators:
     HOW_TO_START_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
     ASK_A_QUESTION_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
 
+
 class MainPageLocators:
     SEARCH_DROPDOWN = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
     SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
@@ -24,6 +26,11 @@ class MainPageLocators:
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+    SEARCH_1ST_OPTION_LOCATOR = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:first-child span:first-child')
+    C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
+    LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
+    AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
+
 
 class DashboardPageLocators:
     pass
@@ -47,3 +54,17 @@ class AboutUsPageLocators:
 class AppStorePageLocators:
 
     APP_TITLE = (By.XPATH, "//h1")
+
+
+class OpenAgroLocators:
+
+    REQUEST_DATA_LOCATORS = (By.XPATH, '//a[text()="Request data"]')
+    REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
+
+class SolarApiLocators:
+
+    HOW_TO_GET_ACCESS_LINK = (By.XPATH, '//a[@href="#how"]')
+    HOW_TO_GET_ACCESS_TITLE = (By.CSS_SELECTOR, "#how h2")
+    PRODUCT_CONCEPT_TITLE = (By.CSS_SELECTOR, "#concept h2")
+
