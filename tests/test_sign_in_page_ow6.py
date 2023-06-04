@@ -1,9 +1,6 @@
 from pages.sign_in_page import SignInPage
 from test_data.urls import SignInUrls
 
-from pages.main_page import MainPage
-from test_data.urls import MainPageUrls
-
 
 class TestSignInPage:
 
