@@ -23,3 +23,7 @@ def test_TC_001_017_01_visibility_of_nwp_block(driver):
     quality_info_page = MainPage(driver, QUALITY_INFO_PAGE)
     quality_info_page.open_page()
     quality_info_page.visibility_of_nwp_block()
+
+def test_tc_003_05_01_subscription_module_title_displayed(driver, open_and_load_main_page):
+    main_page = MainPage(driver)
+    main_page.subscription_module_title_check()

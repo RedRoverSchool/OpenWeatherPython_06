@@ -32,4 +32,7 @@ class MainPage(BasePage):
     def visibility_of_nwp_block(self):
         nwp = self.driver.find_element(*self.locator.NWP_MODEL)
         assert nwp.is_displayed()
-        
+
+
+    def subscription_module_title_check(self):
+        self.driver.find_element(*self.locator.SUBSCRIPTION_MODULE_BUTTON).is_displayed()
