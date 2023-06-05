@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import pytest
 
-from conftest import wait
+
 from tests.test_jenya_cookies_settings.pages.base_page import BasePage
 from tests.test_jenya_cookies_settings.locators.cookies_settings_page_locators import CookiesSettingsPageLocators
 
