@@ -34,3 +34,7 @@ class OpenAgroLocators:
 class PartnersAndSolutionsLocators:
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
     LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
+
+class OurInitiativesPageLocators:
+    MAIN_LOGO = (By.CSS_SELECTOR, 'img[src="/themes/openweathermap/assets/img/logo_white_cropped.png"]')
+
