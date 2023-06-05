@@ -19,7 +19,6 @@ class BasePageLocators:
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
 
 
-
 class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
@@ -53,6 +52,7 @@ class MainPageLocators:
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
 
+
 class DashboardPageLocators:
     pass
 
@@ -64,8 +64,8 @@ class PricingPageLocators:
 class ApiPageLocators:
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
 
-class AboutUsPageLocators:
 
+class AboutUsPageLocators:
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
     HEADERS_ON_PAGE_FOOTER = (
@@ -74,19 +74,17 @@ class AboutUsPageLocators:
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
 
-class AppStorePageLocators:
 
+class AppStorePageLocators:
     APP_TITLE = (By.XPATH, "//h1")
 
 
 class OpenAgroLocators:
-
     REQUEST_DATA_LOCATORS = (By.XPATH, '//a[text()="Request data"]')
     REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
 
 
 class SolarApiLocators:
-
     HOW_TO_GET_ACCESS_LINK = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE = (By.CSS_SELECTOR, "#how h2")
     PRODUCT_CONCEPT_TITLE = (By.CSS_SELECTOR, "#concept h2")
@@ -140,3 +138,10 @@ class MarketplaceLocators:
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
 
+
+class GuideLocators:
+    GUIDE_URL = 'https://openweathermap.org/guide'
+    guide_fast_way_links_locators = [(By.XPATH, '//*[@class="lead"]//*[@href="https://openweather.co.uk/"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
