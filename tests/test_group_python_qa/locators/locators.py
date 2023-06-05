@@ -22,6 +22,7 @@ class MainPageLocators:
                                                    ".footer-section:nth-child(2) p.section-heading")
 
 
+
 class SolarApiLocators:
     HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
