@@ -5,8 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from tests.test_jenya_cookies_settings.pages.cookies_settings_page import CookiesSettingsPage
 from tests.test_jenya_cookies_settings.locators.cookies_settings_page_locators import CookiesSettingsPageLocators
-from conftest import wait
-
 
 class TestCookiesSettingsLink():
     @pytest.fixture
