@@ -17,3 +17,10 @@ class TestPartnersPage:
         partners_page = PartnersAndSolutions(driver, PARTNERS_AND_SOLUTION_PAGE)
         partners_page.open_page()
         partners_page.link_see_library_visibility(wait)
+
+    def test_tc_011_09_02_link_see_library_is_clickable(self, driver, wait):
+        partners_page = PartnersAndSolutions(driver, PARTNERS_AND_SOLUTION_PAGE)
+        partners_page.open_page()
+        partners_page.link_see_library_is_clickable(wait)
+
+

@@ -97,9 +97,18 @@ class MainPage(BasePage):
         assert '/users/sign_up' in self.driver.current_url, \
             "The Subscribe for free link leads to an incorrect page"
 
+    def check_website_terms_and_conditions_link_visibility(self):
+        website_terms_and_conditions_link = self.driver.find_element(*self.locators.WEBSITE_TERMS_AND_CONDITIONS_LINK)
+        assert website_terms_and_conditions_link.is_displayed(), "The Website terms and conditions link is not visible"
+
     def check_about_us_link_is_visible(self):
         about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
         assert about_us_link.is_displayed(), "The About us link is not visible"
+
+    def check_product_collections_module_is_visible(self):
+        product_collections_module = self.driver.find_element(*self.locators.PRODUCT_COLLECTIONS)
+        assert product_collections_module.is_displayed(), \
+            "The footer is not displayed or does not contain the expected text"
 
     def check_openweather_for_business_link_functionality(self, expected_link):
         self.allow_all_cookies()

@@ -60,3 +60,11 @@ class SignInPage(BasePage):
         registration_link.click()
         assert '/sign_up' in self.driver.current_url, \
             "The Create an Account link leads to an incorrect page"
+
+    def check_submit_button_is_visible(self):
+        submit_button = self.element_is_visible(self.locators.SUBMIT_BUTTON_DISPLAY)
+        assert submit_button.is_displayed(), "Submit button is not visible"
+
+    def check_link_for_password_recovery_is_visible(self):
+        link_for_password_recovery = self.element_is_visible(self.locators.LINK_FOR_PASSWORD_RECOVERY_DISPLAY)
+        assert link_for_password_recovery.is_displayed(), "Link for password recovery display is not visible"

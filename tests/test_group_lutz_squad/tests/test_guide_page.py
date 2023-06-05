@@ -15,6 +15,14 @@ def test_TC_004_06_05_verify_industry_standart_apis_link_color(driver, wait):
     page.open_page()
     page.industry_check_color()
 
+
+def test_TC_004_06_02_verify_visibility_and_clickability_One_Call_API_by_call_link(driver):
+    page = GuidePage(driver, link=GuidePageLocators.GUIDE_PAGE_LINK)
+    page.open_page()
+    page.one_call_api_link_is_visible()
+    page.one_call_api_link_is_clickable()
+
+
 def test_TC_004_06_03_verify_redirection_industry_standard_apis_link(driver, wait):
     page = GuidePage(driver, link=GuidePageLocators.GUIDE_PAGE_LINK)
     page.open_page()

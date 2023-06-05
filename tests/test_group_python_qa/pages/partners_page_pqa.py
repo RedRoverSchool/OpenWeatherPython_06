@@ -11,3 +11,9 @@ class PartnersAndSolutions(BasePage):
 
     def link_see_library_visibility(self, wait):
         self.element_is_displayed(self.locator.LINK_SEE_LIBRARY, wait)
+
+    def link_see_library_is_clickable(self, wait):
+        see_library_link = self.element_is_clickable(self.locator.LINK_SEE_LIBRARY)
+        assert see_library_link.is_enabled(), "The link is not clickable"
+
+
