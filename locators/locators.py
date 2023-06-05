@@ -52,6 +52,8 @@ class MainPageLocators:
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
+    SUPPORT_MENU = (By.CSS_SELECTOR, '#support-dropdown')
+    SUPPORT_FAQ_SUBMENU = (By.CSS_SELECTOR, '#support-dropdown-menu > li:nth-child(1) > a[href="/faq"]')
 
 class DashboardPageLocators:
     pass
