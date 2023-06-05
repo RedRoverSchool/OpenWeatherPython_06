@@ -52,6 +52,7 @@ class MainPageLocators:
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
+    XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
 
 class DashboardPageLocators:
     pass

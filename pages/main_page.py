@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators
-
+from test_data.all_links import Links
 
 class MainPage(BasePage):
     locators = MainPageLocators()
@@ -180,3 +180,10 @@ class MainPage(BasePage):
     def verify_how_to_start_visibility(self):
         how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
         assert how_to_start.is_displayed(), "The How to start link is not visible"
+
+    def verify_privacy_policy_is_opened_after_click(self, driver, wait):
+        privacy_policy_button = wait.until(EC.element_to_be_clickable(self.locators.XPATH_PRIVACY_POLICY_BUTTON))
+        self.driver.execute_script("arguments[0].click();", privacy_policy_button)
+        self.driver.switch_to.window(driver.window_handles[1])
+        assert self.driver.current_url == Links.PRIVACY_POLICY_URL
+
