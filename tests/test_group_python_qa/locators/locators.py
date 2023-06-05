@@ -20,8 +20,17 @@ class MainPageLocators:
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
 
 
-
 class SolarApiLocators:
     HOW_TO_GET_ACCESS_LINK_LOCATOR = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE_LOCATOR = (By.CSS_SELECTOR, "#how h2")
     PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
+
+
+class OpenAgroLocators:
+    REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
+    REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
+
+class PartnersAndSolutionsLocators:
+    UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
+    LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')

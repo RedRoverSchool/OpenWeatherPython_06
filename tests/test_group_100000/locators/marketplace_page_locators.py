@@ -19,3 +19,5 @@ class MarketplaceLocators:
     CITY_NAME_FROM_DROPDOWN_MENU = (By.CSS_SELECTOR, "div .pac-item:first-child")
     CITY_NAME_ON_MAP = (By.CSS_SELECTOR, "div .pop-up-marker .pop-up-header >h3")
     REQUESTED_CITY = "Paris"
+    PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
+    ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")

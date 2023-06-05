@@ -1,5 +1,5 @@
-from tests.test_group_ducktales.pages.main_page import MainPage
-from tests.test_group_ducktales.test_data.main_page_data import *
+from tests.test_group_ducktales.pages.main_page_d import MainPage
+from tests.test_group_ducktales.test_data.main_page_data_d import *
 
 
 class TestMainPage:
@@ -52,3 +52,6 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_city_name_displayed_by_zip(wait)
 
+    def test_tc_001_04_07_verify_day_list_elements_numbers_days(self, driver, wait, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_in_day_list_numbers_days(driver)

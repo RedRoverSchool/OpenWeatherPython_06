@@ -105,3 +105,10 @@ class MainPageFooter(BasePage):
         self.driver.find_element(*self.locators.COOKIES).click()
         about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
         assert about_us_link.is_enabled(), "The About us is not clickable"
+
+
+class MainPageHourlyForecast(BasePage):
+    locators = MainPageLocators()
+
+    def verify_chart_weather_is_present(self):
+        assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"

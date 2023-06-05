@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from tests.test_group_100000.locators.api_page_locators import RoadRiskApi as R
 from tests.test_group_100000.locators.api_page_locators import WeatherConditions as W
+from tests.test_group_100000.locators.api_page_locators import OneCallApi as O
 
 
 class RoadRiskApi(BasePage):
@@ -57,3 +58,15 @@ class WeatherConditionsPage(BasePage):
     def check_visibility_drizzle_group(self):
         drizzle_codes = self.driver.find_element(*W.DRIZZLE_LOCATOR)
         assert drizzle_codes.is_displayed()
+
+
+class OneCallApiPage(BasePage):
+    def verify_redirection_one_call_api_3_link(self):
+        self.driver.get(O.API_PAGE)
+        self.driver.find_element(*O.ONE_CALL_API_3).click()
+        expected_link = O.ONE_CALL_API_LINK
+        assert self.driver.current_url == expected_link, "This link is not correct"
+
+
+
+

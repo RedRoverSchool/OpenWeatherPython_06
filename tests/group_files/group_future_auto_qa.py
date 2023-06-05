@@ -42,7 +42,7 @@ def test_TC_005_10_01_visibility_of_weather_api_page_title(driver):
     assert driver.title == 'Weather API - OpenWeatherMap', "The title of the page is incorrect"
 
 
-def test_hidden_text_is_displayed_by_clicking_on_accordion_buttons(driver, wait):
+def test_015_01_04_hidden_text_is_displayed_by_clicking_on_accordion_buttons(driver, wait):
     driver.get("https://openweathermap.org/faq")
     parent_elements = driver.find_elements(By.CSS_SELECTOR, ".question-heading")
     previous_content = None

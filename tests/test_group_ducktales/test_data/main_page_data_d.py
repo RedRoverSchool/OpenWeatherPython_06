@@ -5,4 +5,6 @@ MONTHS = ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augus
 KEYS_FOR_SEARCH_CITY_INPUT = 'California'
 KEYS_FOR_SEARCH_CITY_INPUT_ZIP = '66002'
 EXPECTED_CITY = 'Atchison, US'
-expected_city = 'Atchison, US'
+MONTH_31 = ('January', 'March', 'May', 'July', 'August', 'October', 'December')
+MONTH_30 = ('April', 'June', 'September', 'November')
+MONTH_28 = ('February')
