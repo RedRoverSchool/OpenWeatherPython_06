@@ -115,3 +115,9 @@ class MainPage(BasePage):
         blog_link = self.element_is_clickable(self.locators.OPENWEATHER_FOR_BUSINESS_LINK)
         link_href = blog_link.get_attribute('href')
         assert link_href == expected_link, "Incorrect link"
+
+    def verify_widgets_clickability(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        widgets = self.driver.find_element(*self.locators.WIDGETS)
+        assert widgets.is_displayed() and widgets.is_enabled(), \
+            "The 'widgets' link is not displayed on the page or is not clickable"
