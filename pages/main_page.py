@@ -33,6 +33,17 @@ class MainPage(BasePage):
         main_page.allow_all_cookies()
         main_page.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
 
+    def choose_1st_option(self, wait):
+        wait.until(EC.element_to_be_clickable(self.locators.SEARCH_DROPDOWN_OPTION)).click()
+
+    def switch_to_c_temp(self):
+        self.driver.find_element(*self.locators.C_TEMP_LOCATOR).click()
+
+    def check_8_lines_are_displayed(self):
+        lines = self.driver.find_elements(*self.locators.LINE_IN_8_DAYS_FORECAST_LOCATOR)
+        for line in lines:
+            assert line.is_displayed()
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link.is_displayed(), "The Historical Weather Data link is not visible"

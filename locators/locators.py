@@ -18,6 +18,7 @@ class BasePageLocators:
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
 
 
+
 class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
@@ -44,6 +45,9 @@ class MainPageLocators:
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
+    C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
+    LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
+    AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
     HEADER_SEARCH_FIELD = (By.NAME, "q")
 
 
@@ -71,6 +75,19 @@ class AboutUsPageLocators:
 class AppStorePageLocators:
 
     APP_TITLE = (By.XPATH, "//h1")
+
+
+class OpenAgroLocators:
+
+    REQUEST_DATA_LOCATORS = (By.XPATH, '//a[text()="Request data"]')
+    REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
+
+class SolarApiLocators:
+
+    HOW_TO_GET_ACCESS_LINK = (By.XPATH, '//a[@href="#how"]')
+    HOW_TO_GET_ACCESS_TITLE = (By.CSS_SELECTOR, "#how h2")
+    PRODUCT_CONCEPT_TITLE = (By.CSS_SELECTOR, "#concept h2")
 
 
 class ApiKeysLocator:
