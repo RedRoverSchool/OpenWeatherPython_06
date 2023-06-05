@@ -106,3 +106,8 @@ class TestMainPage:
                 self, driver, open_and_load_main_page, wait):
             main_page = MainPage(driver)
             main_page.check_placeholder_disappears("a", "value")
+
+        def test_tc_002_03_23_faq_link_is_visible_and_clickable(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            main_page.click_support_nav_menu()
+            main_page.faq_submenu_should_be_visible(wait=wait)
