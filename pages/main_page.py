@@ -187,3 +187,12 @@ class MainPage(BasePage):
         self.driver.switch_to.window(driver.window_handles[1])
         assert self.driver.current_url == Links.PRIVACY_POLICY_URL
 
+
+    def click_support_nav_menu(self):
+        return self.driver.find_element(*self.locators.SUPPORT_MENU).click()
+
+
+    def faq_submenu_should_be_visible(self, wait):
+        element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_FAQ_SUBMENU))
+        assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
+
