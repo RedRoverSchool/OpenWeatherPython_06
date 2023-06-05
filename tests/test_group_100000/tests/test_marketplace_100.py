@@ -89,6 +89,16 @@ class TestMarketplacePage:
         assert displayed_text == REQUESTED_CITY, '\n======== WRONG CITY! ========\n'
 
 
+def test_RF_TC_007_01_07_Verify_Place_order_button_is_visible_and_clickable(driver):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    page.select_state_field()
+    page.select_element_from_dropdown_list(M.STATE_TEXAS)
+    page.select_year_field()
+    page.select_element_from_dropdown_list(M.YEAR_2019)
+    page.element_is_clickable(M.PLACE_ORDER_BTN)
+
+
     def test_TC_007_03_03_Verify_clickability_of_button_Add_location(self, driver, wait):
         marketplace_page = MarketplacePage(driver, link=M.URL_HISTORY_FORECAST_BULK)
         marketplace_page.open_page()
