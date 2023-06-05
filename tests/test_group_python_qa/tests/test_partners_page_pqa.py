@@ -23,3 +23,4 @@ class TestPartnersPage:
         partners_page.open_page()
         partners_page.link_see_library_is_clickable(wait)
 
+

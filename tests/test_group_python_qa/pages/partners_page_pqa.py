@@ -16,3 +16,4 @@ class PartnersAndSolutions(BasePage):
         see_library_link = self.element_is_clickable(self.locator.LINK_SEE_LIBRARY)
         assert see_library_link.is_enabled(), "The link is not clickable"
 
+
