@@ -72,3 +72,50 @@ def test_RF_TC_007_01_06_Verify_amount_of_order(driver):
     page.select_element_from_dropdown_list(M.STATE_TEXAS)
     actual_amount = page.find_total_amount(M.TOTAL_AMOUNT)
     assert expected_amount == actual_amount, '\n======== WRONG TOTAL AMOUNT! ========\n'
+
+
+class TestMarketplacePage:
+
+    def test_TC_007_03_02_Verify_visibility_of_location_name_on_the_map(self, driver, wait):
+        marketplace_page = MarketplacePage(driver, link=M.URL_HISTORY_FORECAST_BULK)
+        marketplace_page.open_page()
+        marketplace_page.click_marketplace_search_field()
+        marketplace_page.select_by_location_method()
+        marketplace_page.fill_marketplace_search_field()
+        marketplace_page.select_city_from_dropdown_list(wait=wait)
+        marketplace_page.find_displayed_text(wait=wait)
+        displayed_text = marketplace_page.find_displayed_text(wait=wait)
+        REQUESTED_CITY = M.REQUESTED_CITY
+        assert displayed_text == REQUESTED_CITY, '\n======== WRONG CITY! ========\n'
+
+
+def test_RF_TC_007_01_07_Verify_Place_order_button_is_visible_and_clickable(driver):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    page.select_state_field()
+    page.select_element_from_dropdown_list(M.STATE_TEXAS)
+    page.select_year_field()
+    page.select_element_from_dropdown_list(M.YEAR_2019)
+    page.element_is_clickable(M.PLACE_ORDER_BTN)
+
+
+    def test_TC_007_03_03_Verify_clickability_of_button_Add_location(self, driver, wait):
+        marketplace_page = MarketplacePage(driver, link=M.URL_HISTORY_FORECAST_BULK)
+        marketplace_page.open_page()
+        marketplace_page.click_marketplace_search_field()
+        marketplace_page.select_by_location_method()
+        marketplace_page.fill_marketplace_search_field()
+        marketplace_page.select_city_from_dropdown_list(wait=wait)
+        marketplace_page.element_is_clickable(M.ADD_LOCATION_BTN)
+
+
+
+def test_RF_TC_007_01_07_Verify_amount_of_order(driver):
+    page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+    page.open_page()
+    page.select_state_field()
+    page.select_element_from_dropdown_list(M.STATE_TEXAS)
+    page.select_year_field()
+    page.select_element_from_dropdown_list(M.YEAR_2019)
+    page.element_is_clickable(M.PLACE_ORDER_BTN)
+

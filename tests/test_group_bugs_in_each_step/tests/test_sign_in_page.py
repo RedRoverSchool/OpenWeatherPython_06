@@ -52,3 +52,41 @@ class TestRegistrationQuestion:
         check_password_without_email.open_page()
         check_password_without_email.check_authorization(credentials['password'])
         check_password_without_email.check_error_alert_text()
+
+    def test_tc_014_01_05_verify_remember_me_record_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_remember_me_record_is_visible()
+
+    def test_tc_014_01_06_verify_checkbox_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_checkbox_is_visible()
+
+
+class TestRegistrationLink:
+
+    def test_tc_014_03_02_checking_the_link_to_the_registration_page_display(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_is_visible()
+
+    def test_tc_014_03_03_checking_clickability_of_registration_link(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_is_clickable()
+
+    def test_tc_014_03_04_checking_the_link_in_the_Sing_In_form_leads_to_the_registration_page(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_link_functionality()
+
+    def test_tc_014_01_07_verify_submit_button_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_submit_button_is_visible()
+
+    def test_tc_014_01_08_verify_link_for_password_recovery_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_link_for_password_recovery_is_visible()

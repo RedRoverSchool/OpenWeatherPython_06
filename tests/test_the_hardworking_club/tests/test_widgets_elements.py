@@ -36,3 +36,6 @@ class TestWidgets:
         widget_page = WidgetsPage(driver)
         widget_page.verify_visibility_of_fahrenheit()
 
+    def test_TC_001_09_03_verify_visibility_of_celsius(self, driver):
+        widget_page = WidgetsPage(driver)
+        widget_page.verify_visibility_of_celsius()

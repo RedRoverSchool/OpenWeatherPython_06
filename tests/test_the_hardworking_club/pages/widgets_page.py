@@ -53,6 +53,10 @@ class WidgetsPage(BasePage):
         assert fahrenheit.is_displayed()
 
 
+    def verify_visibility_of_celsius(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        celsius = self.driver.find_element(*self.locators.CELSIUS_BUTTON)
+        assert celsius.is_displayed()
 
 
 

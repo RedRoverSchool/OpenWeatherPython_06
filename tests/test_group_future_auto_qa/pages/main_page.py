@@ -95,3 +95,20 @@ class MainPageFooter(BasePage):
         link_href = blog_link.get_attribute('href')
         assert link_href == expected_link, "Incorrect link"
 
+    def click_footer_product_collections_all_widgets(self, expected_link, link_number):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.product_collection[link_number])
+        link_href = widgets_link.get_attribute('href')
+        assert link_href in expected_link, "Incorrect link"
+
+    def check_about_us_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
+        assert about_us_link.is_enabled(), "The About us is not clickable"
+
+
+class MainPageHourlyForecast(BasePage):
+    locators = MainPageLocators()
+
+    def verify_chart_weather_is_present(self):
+        assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
