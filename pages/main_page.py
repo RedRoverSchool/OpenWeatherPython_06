@@ -33,7 +33,7 @@ class MainPage(BasePage):
         main_page.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
 
     def choose_1st_option(self, wait):
-        wait.until(EC.element_to_be_clickable(self.locators.SEARCH_1ST_OPTION_LOCATOR)).click()
+        wait.until(EC.element_to_be_clickable(self.locators.SEARCH_DROPDOWN_OPTION)).click()
 
     def switch_to_c_temp(self):
         self.driver.find_element(*self.locators.C_TEMP_LOCATOR).click()
