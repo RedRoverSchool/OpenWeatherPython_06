@@ -49,7 +49,8 @@ class MainPageLocators:
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
     AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
     HEADER_SEARCH_FIELD = (By.NAME, "q")
-
+    CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
+    WIDGETS = (By.XPATH, "//a[text()='Widgets']")
 
 class DashboardPageLocators:
     pass
