@@ -1,17 +1,13 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
+from locators.locators import BasePageLocators
+
 
 class BasePage:
-    sign_in_link = (By.CSS_SELECTOR, '.user-li a')
-    guide_link = (By.CSS_SELECTOR, "#desktop-menu a[href*='guide']")
-    dashboard_link = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
-    pricing_link = (By.XPATH, '//div[@id="desktop-menu"]//a[text()="Pricing"]')
-    allow_all_cookies_button = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-
+    locators = BasePageLocators()
 
     def __init__(self, driver, link=None):
         self.driver = driver
@@ -23,13 +19,30 @@ class BasePage:
     def click_header_link(self, link_name):
         match link_name:
             case 'sign':
-                self.driver.find_element(*self.sign_in_link).click()
+                self.driver.find_element(*self.locators.SIGN_IN_LINK).click()
             case 'guide':
-                self.driver.find_element(*self.guide_link).click()
+                self.driver.find_element(*self.locators.GUIDE_LINK).click()
             case 'dashboard':
-                self.driver.find_element(*self.dashboard_link).click()
+                self.driver.find_element(*self.locators.DASHBOARD_LINK).click()
             case 'pricing':
-                self.driver.find_element(*self.pricing_link).click()
+                self.driver.find_element(*self.locators.PRICING_LINK).click()
+            case 'faq':
+                self.driver.find_element(*self.locators.SUPPORT_LINK).click()
+                self.driver.find_element(*self.locators.FAQ_OPTION).click()
+            case 'maps':
+                self.driver.find_element(*self.locators.MAPS_LINK).click()
+            case 'our initiatives':
+                self.driver.find_element(*self.locators.OUR_INITIATIVES_LINK).click()
+            case 'partners':
+                self.driver.find_element(*self.locators.PARTNERS_LINK).click()
+            case 'how to start':
+                self.driver.find_element(*self.locators.SUPPORT_LINK).click()
+                self.driver.find_element(*self.locators.HOW_TO_START_OPTION).click()
+            case 'ask a question':
+                self.driver.find_element(*self.locators.SUPPORT_LINK).click()
+                self.driver.find_element(*self.locators.ASK_A_QUESTION_OPTION).click()
+                window_after = self.driver.window_handles[1]
+                self.driver.switch_to.window(window_after)
 
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
@@ -126,6 +139,16 @@ class BasePage:
         actions.send_keys(Keys.ENTER).perform()
 
     def allow_all_cookies(self, timeout=10):
-        wait(self.driver, timeout).until(EC.element_to_be_clickable(self.allow_all_cookies_button)).click()
+        wait(self.driver, timeout).until(EC.element_to_be_clickable(self.locators.ALLOW_ALL_COOKIES_BUTTON)).click()
 
+    def title_check(self, text=None):
+        assert self.driver.title == text, "Title is NOT correct"
 
+    def find_element_and_click(self, locator):
+        self.driver.find_element(*locator).click()
+
+    def switch_to_new_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[1])
+
+    def check_for_redirection(self, expected_url):
+        assert self.driver.current_url == expected_url

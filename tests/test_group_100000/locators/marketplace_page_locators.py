@@ -11,3 +11,13 @@ class MarketplaceLocators:
     WEATHER_PAR_LIST = (By.XPATH, "//*[@class='section']//ul[@class='owm-list']/li")
     UNITS_INFO = (By.XPATH, "//div[@class='filters']/p[1]/span[2]")
     FILE_FORMAT_INFO = (By.XPATH, "//div[@class='filters']/p[2]/span[2]")
+    STATE_TEXAS_SUB = (By.XPATH, "//span[text()='Texas']/following-sibling::*")
+    TOTAL_AMOUNT = (By.CSS_SELECTOR, ".footer-content>h4")
+    URL_HISTORY_FORECAST_BULK = 'https://home.openweathermap.org/history_forecast_bulks/new'
+    SEARCH_FLD = (By.CSS_SELECTOR, "#firstSearch")
+    BY_LOCATION_BTN = (By.CSS_SELECTOR, "div .search-pop-up > button:first-child")
+    CITY_NAME_FROM_DROPDOWN_MENU = (By.CSS_SELECTOR, "div .pac-item:first-child")
+    CITY_NAME_ON_MAP = (By.CSS_SELECTOR, "div .pop-up-marker .pop-up-header >h3")
+    REQUESTED_CITY = "Paris"
+    PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
+    ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")

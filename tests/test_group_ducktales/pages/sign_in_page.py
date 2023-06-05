@@ -3,7 +3,6 @@ from tests.test_group_ducktales.test_data import sign_in_page_data
 from tests.test_group_ducktales.locators.sign_in_locators import SignInLocator
 
 
-
 class SignInPage(BasePage):
 
     def log_in(self):

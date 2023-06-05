@@ -21,7 +21,7 @@ class WidgetsPage(BasePage):
         left_bottom_widget_appeared = self.element_is_visible(self.locators.LEFT_BOTTOM_WIDGET)
         assert left_bottom_widget_appeared.is_displayed()
 
-    def check_the_specific_city_is_present(self):
+    def check_the_specific_city_is_present(self, wait):
         self.driver.get(WidgetsPage.url_widgets_page)
         search_field = self.driver.find_element(*self.locators.XPATH_CITY_NAME)
         search_field.clear()
@@ -29,7 +29,6 @@ class WidgetsPage(BasePage):
         search_field.send_keys("Foster city")
         search_field_button = self.driver.find_element(*self.locators.XPATH_SEARCH_FIELD_BUTTON)
         search_field_button.click()
-        wait = WebDriverWait(self.driver, 10)
         is_present = wait.until(EC.text_to_be_present_in_element(self.locators.XPATH_FIRST_BOTTOM_WIDGET_WINDOW, 'Foster City'))
         assert is_present
 
@@ -41,8 +40,23 @@ class WidgetsPage(BasePage):
             assert widget.is_displayed(), "Some widget is not displayed"
 
 
+    def verify_the_subtitle_of_the_page(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        headline = self.driver.find_element(*self.locators.SUBTITLE_HEADLINE).text
+        expected_title = "Get a code for posting a weather forecast widget on your site."
+        assert headline == expected_title
 
 
+    def verify_visibility_of_fahrenheit(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        fahrenheit = self.driver.find_element(*self.locators.FAHRENHEIT_BUTTON)
+        assert fahrenheit.is_displayed()
+
+
+    def verify_visibility_of_celsius(self):
+        self.driver.get(WidgetsPage.url_widgets_page)
+        celsius = self.driver.find_element(*self.locators.CELSIUS_BUTTON)
+        assert celsius.is_displayed()
 
 
 
