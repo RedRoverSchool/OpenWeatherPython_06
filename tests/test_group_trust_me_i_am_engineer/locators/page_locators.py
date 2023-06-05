@@ -97,6 +97,7 @@ class PartnersPageLocators():
     BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
     HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
     BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
+    BUTTON_VIEW_SOLUTIONS = (By.XPATH, "//a[text()='View solutions']")
 
 
 class TechnologyPageLocators:

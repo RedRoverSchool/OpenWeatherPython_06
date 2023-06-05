@@ -33,5 +33,11 @@ class PartnersPage(BasePage):
     def verify_visibility_and_clickability_the_link_apache_camel_to_a_new_window(self, apache_camel):
         self.driver.get(PARTNERS_AND_SOLUTIONS)
         self.allow_all_cookies()
-        assert self.element_is_visible(self.locators.APACHE_CAMEL_BUTTON) and self.\
+        assert self.element_is_visible(self.locators.APACHE_CAMEL_BUTTON) and self. \
             element_is_clickable(self.locators.APACHE_CAMEL_BUTTON), "Apache Camel is not visible or not clickable"
+
+    def verify_visibility_and_clickability_of_the_github_button_php(self, wait):
+        self.driver.get(PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        assert self.element_is_displayed(self.locators.GIT_BUTTON_PHP, wait) and self. \
+            element_is_clickable(self.locators.GIT_BUTTON_PHP), "GitHub PHP button is not visible or not clickable"

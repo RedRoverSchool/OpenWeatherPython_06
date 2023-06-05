@@ -22,3 +22,9 @@ def test_tc_011_15_02_verify_visibility_and_clickability_of_the_link_apache_came
     page = PartnersPage(driver)
     apache_camel = APACHE_CAMEL_URL
     page.verify_visibility_and_clickability_the_link_apache_camel_to_a_new_window(apache_camel)
+
+
+def test_tc_011_14_01_verify_visibility_and_clickability_of_the_github_button_php(driver, wait):
+    page = PartnersPage(driver)
+    page.verify_visibility_and_clickability_of_the_github_button_php(wait)
+
