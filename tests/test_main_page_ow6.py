@@ -1,5 +1,5 @@
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators, AboutUsPageLocators
+from locators.locators import MainPageLocators
 
 
 class TestMainPage:
