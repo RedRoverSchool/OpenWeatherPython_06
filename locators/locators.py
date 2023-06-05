@@ -45,7 +45,8 @@ class MainPageLocators:
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
     HEADER_SEARCH_FIELD = (By.NAME, "q")
-
+    CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
+    WIDGETS = (By.XPATH, "//a[text()='Widgets']")
 
 class DashboardPageLocators:
     pass

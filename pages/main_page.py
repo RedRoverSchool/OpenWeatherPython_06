@@ -142,3 +142,30 @@ class MainPage(BasePage):
         self.fill_city_search_field(symbol)
         assert search_placeholder_text not in self.get_header_search_field_attribute(attribute), \
             "The placeholder text is still visible in the search field after typing a symbol"
+
+
+    def check_current_and_forecast_apis_functionality(self):
+        current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
+        self.go_to_element(current_and_forecast_apis)
+        current_and_forecast_apis.click()
+        assert '/api#current' in self.driver.current_url, \
+            "The link 'current_and_forecast_apis' leads to incorrect page"
+
+
+    def verify_clickability_current_and_forecast_apis(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
+        assert current_and_forecast_apis.is_displayed() and current_and_forecast_apis.is_enabled(), \
+            "The 'current_and_forecast_apis' link is not displayed on the page or is not clickable"
+
+
+    def verify_widgets_clickability(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        widgets = self.driver.find_element(*self.locators.WIDGETS)
+        assert widgets.is_displayed() and widgets.is_enabled(), \
+            "The 'widgets' link is not displayed on the page or is not clickable"
+
+
+    def verify_how_to_start_visibility(self):
+        how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
+        assert how_to_start.is_displayed(), "The How to start link is not visible"

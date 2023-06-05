@@ -61,6 +61,29 @@ class TestMainPage:
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
 
+    class TestFooterLinksFunctionality:
+        def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.check_current_and_forecast_apis_functionality()
+
+
+    class TestFooterLinksclickability:
+        def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.verify_clickability_current_and_forecast_apis()
+
+
+        def test_tc_003_03_06_verify_widgets_clickability(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_widgets_clickability()
+
+
+    class TestHowToStartLink:
+        def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_how_to_start_visibility()
+
+
     class TestHeaderPage:
         def test_tc_002_02_07_placeholder_is_displayed_in_search_field(self, driver, open_and_load_main_page):
             main_page = MainPage(driver)
