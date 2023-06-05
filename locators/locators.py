@@ -16,6 +16,7 @@ class BasePageLocators:
     HOW_TO_START_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
     ASK_A_QUESTION_OPTION = (
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
+    API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
 
 
 
@@ -61,7 +62,7 @@ class PricingPageLocators:
 
 
 class ApiPageLocators:
-    pass
+    button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
 
 class AboutUsPageLocators:
 
