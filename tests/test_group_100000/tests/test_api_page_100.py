@@ -16,3 +16,10 @@ class TestOneCallApi:
         page = OneCallApiPage(driver, link=O.API_PAGE)
         page.open_page()
         page.verify_redirection_one_call_api_3_link()
+
+
+class TestCopyrightBlock:
+    def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_page(self, driver):
+        page = FooterApiPage(driver, link=O.API_PAGE)
+        page.open_page()
+        page.verify_the_copyright_information_is_present_on_the_site_page()
