@@ -14,10 +14,29 @@ class BasePageLocators:
     FAQ_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/faq']")
     MAPS_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(6) a')
     HOW_TO_START_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='/appid']")
-    ASK_A_QUESTION_OPTION = (By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
+    ASK_A_QUESTION_OPTION = (
+        By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
+
 
 
 class MainPageLocators:
+    ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
+    ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
+        (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
+    CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
+    COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    HISTORICAL_WEATHER_DATA_LINK = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
+    HOW_TO_START = (By.XPATH, "//div[@id='footer-website']//a[text()='How to start']")
+    HOW_TO_START_LINK = (By.CSS_SELECTOR, "div[class='section-content'] a[href*='appid']")
+    OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")
+    OUR_TECHNOLOGY_LINK = (By.XPATH, "//a[contains(text(), 'Our technology')]")
+    PRODUCT_COLLECTIONS = (By.XPATH, "//p[@class='section-heading' and text()='Product Collections']")
+    SUBSCRIBE_FOR_FREE_LINK = \
+        (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
+    WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
+    WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
+    WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[contains(text(), 'Website')]")
+
     SEARCH_DROPDOWN = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
     SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
     SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
@@ -29,13 +48,16 @@ class MainPageLocators:
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
     AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
+    HEADER_SEARCH_FIELD = (By.NAME, "q")
 
 
 class DashboardPageLocators:
     pass
 
+
 class PricingPageLocators:
     pass
+
 
 class ApiPageLocators:
     pass
@@ -67,3 +89,31 @@ class SolarApiLocators:
     HOW_TO_GET_ACCESS_TITLE = (By.CSS_SELECTOR, "#how h2")
     PRODUCT_CONCEPT_TITLE = (By.CSS_SELECTOR, "#concept h2")
 
+
+class ApiKeysLocator:
+    API_KEY_NAME_URL = 'https://home.openweathermap.org/api_keys'
+    API_KEY_EDIT_SELECTOR = By.CSS_SELECTOR, "i[class='fa fa-edit']"
+    API_KEY_NAME_SELECTOR = By.XPATH, "//table/tbody/tr/td[2]"
+    API_KEY_ENTER_SELECTOR = By.CSS_SELECTOR, "input[name='edit_key_form[name]']"
+    SAVE_BUTTON_SELECTOR = By.CSS_SELECTOR, "button[class='button-round dark']"
+    TAB_API_KEYS = By.CSS_SELECTOR, '#myTab [href="/api_keys"]'
+    MODULE_API_KEY_CREATE = By.CSS_SELECTOR, '.col-md-4 h4'
+    EDIT_API_KEY_ICON = By.CSS_SELECTOR, '.edit_key_btn .fa-edit'
+    API_KEY_FIELD = (By.CSS_SELECTOR, '#new_edit_key_form .owm_input')
+    SAVE_NEW_API_NAME_BUTTON = By.CSS_SELECTOR, '.pop-up-footer .button-round.dark'
+    API_KEY_NAME_FIRST_ROW = By.XPATH, "//div[@class='col-md-8']//tr[1]//td[2]"
+    NEW_API_KEY_NAME = By.CSS_SELECTOR, ".new_api_key_form .owm_input"
+    GENERATE_BUTTON = By.CSS_SELECTOR, '.new_api_key_form .button-round.dark'
+    TABLE_API_KEYS = By.CSS_SELECTOR, "tbody tr"
+
+
+class SignInPageLocators:
+    CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")
+    REGISTRATION_QUESTION = By.XPATH, "//p[contains(text(), 'Not registered?')]"
+
+
+class SignInLocator:
+    EMAIL_INPUT = By.CSS_SELECTOR, '#user_email'
+    PASSWORD_INPUT = By.CSS_SELECTOR, '#user_password'
+    SUBMIT_BUTTON = By.CSS_SELECTOR, "input[value='Submit']"
+    
