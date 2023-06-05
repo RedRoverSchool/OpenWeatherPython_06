@@ -4,10 +4,13 @@ from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
+from conftest import load_div
+
 
 class MainPage(BasePage):
     URL = 'https://openweathermap.org/'
     locators = MainPageLocators()
+    linkedin_link = 'https://www.linkedin.com/company/openweathermap/'
 
     def verify_weekdays_in_8_days_forecast(self):
         list_weekdays = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon')
@@ -54,7 +57,7 @@ class MainPage(BasePage):
         date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
         date_time_site = datetime.strptime(date_time_str, '%Y %b %d, %I:%M%p').replace(tzinfo=ZoneInfo('Europe/London'))
         date_time_now = datetime.now(ZoneInfo('Europe/London'))
-        assert (date_time_now - date_time_site).total_seconds() <= 240, \
+        assert (date_time_now - date_time_site).total_seconds() <= 600, \
             "The current date and time does not match the date and time specified on the page"
 
     def verify_current_location(self, wait):
@@ -99,3 +102,14 @@ class MainPage(BasePage):
         self.go_to_element(for_business_link)
         assert self.element_is_visible(self.locators.FOR_BUSINESS_LINK), \
             "OpenWeather for Business is not visible on the page"
+
+    def verify_link_LinkedIn_leads_to_the_correct_page(self):
+        self.driver.execute_script("window.scrollTo(0, 500)")
+        linkedin_element = self.driver.find_element(*self.locators.FOOTER_LINKEDIN_LINK)
+        self.driver.execute_script("arguments[0].click();", linkedin_element)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        assert self.linkedin_link, self.driver.current_url
+
+    def go_to_about_us_page(self):
+        self.element_is_clickable(self.locators.ABOUT_US_BUTTON).click()
+

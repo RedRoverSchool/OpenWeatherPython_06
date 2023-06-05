@@ -10,6 +10,5 @@ class ApiPage(BasePage):
     def check_page_title(self, page_title):
         api_page = ApiPage(self.driver, "https://openweathermap.org/api")
         api_page.open_page()
-        assert self.driver.title == page_title, "The title of the page is incorrect!"
-
+        assert self.driver.title == page_title, "The title of the page is incorrect"
 

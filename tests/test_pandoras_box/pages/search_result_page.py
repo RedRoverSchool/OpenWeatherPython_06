@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
+from pages.main_page import MainPage
 
 
 class SearchResultPage(BasePage):
@@ -9,6 +10,9 @@ class SearchResultPage(BasePage):
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+    result_locator = (By.XPATH, '//a[contains(@href, "city")]')
+    KEY_SEARCH_CITY = 'Saint Petersburg'
+    METRIC_SWITCH = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
 
     def check_notification_display(self):
         expected_notification = "×\nNot found"
@@ -26,3 +30,24 @@ class SearchResultPage(BasePage):
         wait(self.driver, timeout=5).until(EC.presence_of_element_located(self.STRING_ENTERED_CITY))
         search_result_city_name = self.driver.find_element(*self.STRING_ENTERED_CITY)
         assert search_result_city_name.get_property("value") == city
+
+
+    def check_search_result_contains_city(self, city):
+        cities = self.driver.find_elements(*self.result_locator)
+        for city_name in cities:
+            assert city in city_name.text
+
+    def dropdown_contain_city_temperature(self):
+        wait(self.driver, timeout=5).until(EC.element_to_be_clickable(self.METRIC_SWITCH))
+        search_city_input = self.driver.find_element(*MainPage.search_city_field)
+        search_city_input.click()
+        search_city_input.send_keys(*self.KEY_SEARCH_CITY)
+        self.driver.find_element(*MainPage.search_button).click()
+        dropdown_list = self.driver.find_elements(*MainPage.search_dropdown)
+        for city in dropdown_list:
+            assert '°C' in city.text
+
+    def check_description_weather_block(self, text):
+        description_weather = self.driver.find_element(*MainPage.actual_weather)
+        description_weather_text = description_weather.text
+        assert description_weather.is_displayed() and text in description_weather_text
