@@ -137,3 +137,19 @@ class MainPage(BasePage):
         '''To retrieve the value of a specific attribute from Header Search field'''
         search_placeholder = self.driver.find_element(*self.locators.HEADER_SEARCH_FIELD)
         return search_placeholder.get_attribute(attribute)
+
+    def check_placeholder_text_is_visible(self, expected_value):
+        '''To retrieve the value of a specific attribute from Header Search field'''
+        search_placeholder_text = self.get_header_search_field_attribute("placeholder")
+        assert search_placeholder_text == expected_value, \
+            "Password field placeholder text is incorrect or missing"
+
+    def click_header_search_field(self):
+        self.driver.find_element(*self.locators.HEADER_SEARCH_FIELD).click()
+
+    def check_placeholder_disappears(self, symbol, attribute):
+        search_placeholder_text = self.get_header_search_field_attribute("placeholder")
+        self.click_header_search_field()
+        self.fill_city_search_field(symbol)
+        assert search_placeholder_text not in self.get_header_search_field_attribute(attribute), \
+            "The placeholder text is still visible in the search field after typing a symbol"
