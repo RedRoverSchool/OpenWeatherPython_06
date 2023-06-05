@@ -1,6 +1,6 @@
 from pages.base_page import BasePage
 from tests.test_group_python_qa.locators.locators import PartnersAndSolutionsLocators
-from tests.test_group_python_qa.links.links_all_pages import WEATHER_INDICATOR_PAGE
+from tests.test_group_python_qa.links.links_all_pages import WEATHER_INDICATOR_PAGE, GO_LIBRARY_PAGE
 
 
 class PartnersAndSolutions(BasePage):
@@ -16,4 +16,6 @@ class PartnersAndSolutions(BasePage):
         see_library_link = self.element_is_clickable(self.locator.LINK_SEE_LIBRARY)
         assert see_library_link.is_enabled(), "The link is not clickable"
 
+    def link_see_library_redirects_correctly(self):
+        assert GO_LIBRARY_PAGE == self.driver.current_url, "Incorrect page"
 
