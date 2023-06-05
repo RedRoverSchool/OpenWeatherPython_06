@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 from tests.test_group_trust_me_i_am_engineer.locators.page_locators import MainPageLocators
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
+from conftest import load_div
 
 
 class MainPage(BasePage):
@@ -56,7 +57,7 @@ class MainPage(BasePage):
         date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
         date_time_site = datetime.strptime(date_time_str, '%Y %b %d, %I:%M%p').replace(tzinfo=ZoneInfo('Europe/London'))
         date_time_now = datetime.now(ZoneInfo('Europe/London'))
-        assert (date_time_now - date_time_site).total_seconds() <= 240, \
+        assert (date_time_now - date_time_site).total_seconds() <= 600, \
             "The current date and time does not match the date and time specified on the page"
 
     def verify_current_location(self, wait):

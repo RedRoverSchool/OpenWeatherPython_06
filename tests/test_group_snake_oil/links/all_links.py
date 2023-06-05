@@ -2,6 +2,7 @@ HOME_PAGE_URL = 'https://openweathermap.org/'
 GUIDE_PAGE_URL = 'https://openweathermap.org/guide'
 DASHBOARD_PAGE_URL = 'https://openweathermap.org/weather-dashboard'
 FAQ_URL = 'https://openweathermap.org/faq'
+ABOUT_US_URL = "https://openweathermap.org/about-us"
 
 # URLs of all pages placed at header
 ALL_PAGES_URLs = ['https://openweathermap.org/',
@@ -37,3 +38,9 @@ EXPECTED_URLS_SIGNED_OUT_LIST = \
      'https://openweathermap.org/weather-dashboard/dashboard-documentation#setup',
      'https://openweathermap.org/weather-dashboard/dashboard-documentation',
      'https://home.openweathermap.org/users/sign_in']
+
+
+class StudentInitiativePageLinks:
+    STUDENT_INITIATIVE_PAGE_URL = "https://openweathermap.org/our-initiatives/student-initiative"
+    PRICING_PAGE_URL_FOR_DEVELOPER_PLAN = "https://openweathermap.org/price"
+    PRICING_PAGE_URL_FOR_MEDIUM_PLAN = "https://openweathermap.org/price#history"

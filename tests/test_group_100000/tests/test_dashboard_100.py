@@ -1,6 +1,8 @@
 from tests.test_group_100000.pages.dashboard_page import DashboardPage
 
-def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(driver, open_and_load_main_page):
+
+def test_TC_001_05_03_Verify_humidity_percentage_in_detailed_weather_data_for_current_location(driver,
+                                                                                               open_and_load_main_page):
     page = DashboardPage(driver)
     page.verify_humidity_percentage_in_detailed_weather_data_for_current_location()
 

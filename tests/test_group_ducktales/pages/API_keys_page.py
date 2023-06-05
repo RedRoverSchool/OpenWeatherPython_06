@@ -1,11 +1,16 @@
 from pages.base_page import BasePage
 from ..locators.API_keys_locators import ApiKeysLocator
+from tests.test_group_ducktales.pages.sign_in_page import SignInPage
+from ..test_data.sign_in_page_data import LINK_SIGN_IN_PAGE
+
 
 
 class ApiKeysPage(BasePage):
-    pass
 
     def open_api_keys_page(self):
+        sign_in_page = SignInPage(self.driver, LINK_SIGN_IN_PAGE)
+        sign_in_page.open_page()
+        sign_in_page.log_in()
         api_key_tab = self.driver.find_element(*ApiKeysLocator.TAB_API_KEYS)
         api_key_tab.click()
 
@@ -56,3 +61,26 @@ class ApiKeysPage(BasePage):
     def check_is_generate_button_clickable(self):
         is_generate_button_clickable = self.element_is_clickable(ApiKeysLocator.GENERATE_BUTTON)
         assert is_generate_button_clickable, "The button does not clickable"
+
+    def click_generate_api_key_name_button(self):
+        generate_api_key_button = self.driver.find_element(*ApiKeysLocator.GENERATE_BUTTON)
+        generate_api_key_button.click()
+
+    def get_length_of_table_api_keys(self):
+        initial_table_api_keys = self.elements_are_visible(ApiKeysLocator.TABLE_API_KEYS)
+        return len(initial_table_api_keys)
+
+    def check_is_api_key_generated(self, initial_table_length):
+        actual_api_keys_table_length = self.get_length_of_table_api_keys()
+        assert actual_api_keys_table_length == initial_table_length + 1, "The new API key does not generated"
+
+
+
+    def check_api_key_is_not_generated(self, new_api_name):
+        initial_api_keys_table_length = self.get_length_of_table_api_keys()
+        self.enter_created_api_key_name(new_api_name)
+        self.click_generate_api_key_name_button()
+        final_api_keys_table_length = self.get_length_of_table_api_keys()
+        assert initial_api_keys_table_length == final_api_keys_table_length
+
+
