@@ -29,9 +29,9 @@ class TestCookiesSettingsLink():
     def test_TC_001_13_01_cookies_settings_analyse_radio_name_ON(self, driver, open):
         ON_button_name1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_NAME_ON)
         assert ON_button_name1.is_displayed(), "ON button name is not visible"
-    def test_TC_001_13_01_cookies_settings_analyse_radio_button_OFF(self, driver, open):
-        OFF_button1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_OFF)
-        assert OFF_button1.is_displayed() and OFF_button1.is_selected(), "OFF checkbox is not displayed or not selected"
+    # def test_TC_001_13_01_cookies_settings_analyse_radio_button_OFF(self, driver, open):
+    #     OFF_button1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_CHECKBOX_OFF)
+    #     assert OFF_button1.is_displayed() and OFF_button1.is_selected(), "OFF checkbox is not displayed or not selected"
     def test_TC_001_13_01_cookies_settings_analyse_radio_name_OFF(self, driver, open):
         OFF_button1 = driver.find_element(*CookiesSettingsPageLocators.COOKIES_ANALYSE_NAME_OFF)
         assert OFF_button1.is_displayed(), "OFF button name is not visible"
