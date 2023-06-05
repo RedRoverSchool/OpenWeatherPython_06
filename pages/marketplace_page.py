@@ -25,3 +25,36 @@ class MarketplacePage(BasePage):
         total = t.text
         amount = total.split()[1]
         return f'${amount}'
+
+
+    def click_marketplace_search_field(self):
+        marketplace_search_field = self.driver.find_element(*M.SEARCH_FLD)
+        action_chains = ActionChains(self.driver)
+        action_chains.move_to_element(marketplace_search_field)
+        self.driver.execute_script("arguments[0].click();", marketplace_search_field)
+        return marketplace_search_field
+
+    def select_by_location_method(self):
+        by_location_button = self.driver.find_element(*M.BY_LOCATION_BTN)
+        action_chains = ActionChains(self.driver)
+        action_chains.move_to_element(by_location_button)
+        self.driver.execute_script("arguments[0].click();", by_location_button)
+        return by_location_button
+
+    def fill_marketplace_search_field(self):
+        input_city_name = self.driver.find_element(*M.SEARCH_FLD)
+        input_city_name.click()
+        input_city_name.send_keys("Paris")
+
+    def select_city_from_dropdown_list(self, wait):
+        wait.until(EC.visibility_of_element_located(M.CITY_NAME_FROM_DROPDOWN_MENU))
+        city_name_from_dropdown_list = self.element_is_clickable(M.CITY_NAME_FROM_DROPDOWN_MENU)
+        city_name_from_dropdown_list.click()
+        return city_name_from_dropdown_list
+
+    def find_displayed_text(self, wait):
+        displayed_text = wait.until(EC.visibility_of_element_located(M.CITY_NAME_ON_MAP)).text
+        return displayed_text
+        requested_city = "Paris"
+        assert displayed_text == requested_city, '\n======== WRONG CITY! ========\n'
+
