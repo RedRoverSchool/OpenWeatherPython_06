@@ -79,9 +79,9 @@ class TestMainPage:
             page = MainPage(driver)
             page.check_current_and_forecast_apis_functionality()
 
-    def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(self, driver, wait):
-        main_page = MainPage(driver)
-        main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
+        def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(self, driver, wait, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
 
 
     class TestFooterLinksclickability:
@@ -93,8 +93,6 @@ class TestMainPage:
         def test_tc_003_03_06_verify_widgets_clickability(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
             page.verify_widgets_clickability()
-
-
 
 
     class TestHowToStartLink:
