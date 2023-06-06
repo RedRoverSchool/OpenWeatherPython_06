@@ -1,8 +1,7 @@
-import pytest
-from pages.base_page import BasePage
-from pages.solar_irradiance_page import SolarIrradiancePage
-
-
+from tests.test_jenya_solar_irradiance.pages.solar_irradiance_page import SolarIrradiancePage
+from locators.locators import SolarIrradianceLocators
 def test_TC_005_09_01_verify_solar_irradiance_description(driver):
-    description = SolarIrradiancePage(driver)
-    description.verify_description_visibility()
+    page = SolarIrradiancePage(driver, SolarIrradianceLocators.URL_SolarIrradiancePage)
+    page.open_page()
+    page.verify_description_visibility()
+
