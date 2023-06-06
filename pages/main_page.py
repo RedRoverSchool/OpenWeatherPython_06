@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators
 from test_data.all_links import Links
 
+
 class MainPage(BasePage):
     locators = MainPageLocators()
 
@@ -154,7 +155,6 @@ class MainPage(BasePage):
         assert search_placeholder_text not in self.get_header_search_field_attribute(attribute), \
             "The placeholder text is still visible in the search field after typing a symbol"
 
-
     def check_current_and_forecast_apis_functionality(self):
         current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
         self.go_to_element(current_and_forecast_apis)
@@ -162,20 +162,17 @@ class MainPage(BasePage):
         assert '/api#current' in self.driver.current_url, \
             "The link 'current_and_forecast_apis' leads to incorrect page"
 
-
     def verify_clickability_current_and_forecast_apis(self):
         self.driver.find_element(*self.locators.COOKIES).click()
         current_and_forecast_apis = self.driver.find_element(*self.locators.CURRENT_AND_FORECAST_APIS)
         assert current_and_forecast_apis.is_displayed() and current_and_forecast_apis.is_enabled(), \
             "The 'current_and_forecast_apis' link is not displayed on the page or is not clickable"
 
-
     def verify_widgets_clickability(self):
         self.driver.find_element(*self.locators.COOKIES).click()
         widgets = self.driver.find_element(*self.locators.WIDGETS)
         assert widgets.is_displayed() and widgets.is_enabled(), \
             "The 'widgets' link is not displayed on the page or is not clickable"
-
 
     def verify_how_to_start_visibility(self):
         how_to_start = self.driver.find_element(*self.locators.HOW_TO_START)
@@ -187,12 +184,24 @@ class MainPage(BasePage):
         self.driver.switch_to.window(driver.window_handles[1])
         assert self.driver.current_url == Links.PRIVACY_POLICY_URL
 
-
     def click_support_nav_menu(self):
         return self.driver.find_element(*self.locators.SUPPORT_MENU).click()
-
 
     def faq_submenu_should_be_visible(self, wait):
         element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_FAQ_SUBMENU))
         assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
 
+    def click_footer_product_collections_widgets(self, expected_link):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.WIDGETS)
+        link_href = widgets_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
+
+    def click_footer_product_collections_all_widgets(self, expected_link, link_number):
+        self.allow_all_cookies()
+        widgets_link = self.element_is_clickable(self.locators.product_collection[link_number])
+        link_href = widgets_link.get_attribute('href')
+        assert link_href in expected_link, "Incorrect link"
+
+    def verify_chart_weather_is_present(self):
+        assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
