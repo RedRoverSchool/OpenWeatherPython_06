@@ -1,8 +1,8 @@
 from pages.base_page import BasePage
-from ..locators.API_keys_locators import ApiKeysLocator
+from locators.locators import ApiKeysLocator
 from tests.test_group_ducktales.pages.sign_in_page import SignInPage
-from ..test_data.sign_in_page_data import LINK_SIGN_IN_PAGE
 
+LINK_SIGN_IN_PAGE = "https://home.openweathermap.org/users/sign_in"
 
 
 class ApiKeysPage(BasePage):
@@ -73,14 +73,3 @@ class ApiKeysPage(BasePage):
     def check_is_api_key_generated(self, initial_table_length):
         actual_api_keys_table_length = self.get_length_of_table_api_keys()
         assert actual_api_keys_table_length == initial_table_length + 1, "The new API key does not generated"
-
-
-
-    def check_api_key_is_not_generated(self, new_api_name):
-        initial_api_keys_table_length = self.get_length_of_table_api_keys()
-        self.enter_created_api_key_name(new_api_name)
-        self.click_generate_api_key_name_button()
-        final_api_keys_table_length = self.get_length_of_table_api_keys()
-        assert initial_api_keys_table_length == final_api_keys_table_length
-
-

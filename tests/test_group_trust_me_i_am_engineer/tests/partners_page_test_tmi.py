@@ -28,3 +28,7 @@ def test_TC_011_01_03_verify_17_sections_are_visible(driver):
 def test_TC_011_11_02_verify_redirection_awesome_button_to_the_right_website(driver):
     page = PartnersPage(driver)
     page.verify_wordpress_awesome_weather_widget_leads_to_the_new_website()
+
+def test_TC_011_18_01_verify_redirection_view_solutions_button_to_the_right_website(driver):
+    page = PartnersPage(driver)
+    page.verify_the_link_view_solutions_leads_to_the_new_website()
