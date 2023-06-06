@@ -9,6 +9,8 @@ from tests.test_group_lutz_squad.locators.links import ONE_CALL_3_LINK
 
 class GuidePage(BasePage):
 
+    link = 'https://openweathermap.org/guide'
+
     def industry_apis_link_is_visible_and_clickable(self):
         self.element_is_visible(GuidePageLocators.INDUSTRY_APIS_LOCATOR)
         assert self.element_is_clickable(GuidePageLocators.INDUSTRY_APIS_LOCATOR)
@@ -24,12 +26,12 @@ class GuidePage(BasePage):
         one_call_api = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL_LOCATOR)
         assert one_call_api.is_displayed(), "One call api link is not visible"
 
-        
+
     def one_call_api_link_is_clickable(self):
         one_call_api = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL_LOCATOR)
         assert one_call_api.is_enabled(), "One call api link is not clackable"
 
-        
+
     def industry_standard_apis_link_redirection(self):
         element = self.driver.find_element(*GuidePageLocators.INDUSTRY_APIS_LOCATOR)
         self.driver.execute_script("arguments[0].click();", element)
@@ -37,8 +39,14 @@ class GuidePage(BasePage):
         assert self.driver.current_url == expected_link, "This link is not correct"
 
 
+
     def one_call_api_by_call_link_redirection(self):
         element = self.driver.find_element(*GuidePageLocators.ONE_CALL_API_BY_CALL_LOCATOR)
         self.driver.execute_script("arguments[0].click();", element)
         expected_link = ONE_CALL_3_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
+
+    def subscribe_to_onecall_by_call_button_is_visible(self):
+        subscribe_to_onecall_by_call_button = self.element_is_visible(GuidePageLocators.SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON)
+        assert subscribe_to_onecall_by_call_button.is_displayed(), "The button 'subscribe to onecall by call' is not visible "
+
