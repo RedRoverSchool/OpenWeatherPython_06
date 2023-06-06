@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#zip
-link text: Built-in API request by ZIP code
-198.5   85.953125
-
-quit browser...

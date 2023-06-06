@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#geocoding
-link text: Geocoding API
-198.5   85.53125
-
-quit browser...
