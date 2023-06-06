@@ -7,7 +7,6 @@ from zoneinfo import ZoneInfo
 
 class MainPage(BasePage):
     locators = MainPageLocators()
-    URL = 'https://openweathermap.org/'
 
     def fill_city_search_field(self, city):
         input_city = self.driver.find_element(*self.locators.SEARCH_CITY_FIELD)
@@ -240,7 +239,7 @@ class MainPage(BasePage):
         self.driver.execute_cdp_cmd(
             "Browser.grantPermissions",
             {
-                "origin": self.URL,
+                "origin": Links.URL_MAIN_PAGE,
                 "permissions": ["geolocation"]
             },
         )
