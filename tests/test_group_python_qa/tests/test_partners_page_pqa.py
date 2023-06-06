@@ -1,5 +1,5 @@
 from tests.test_group_python_qa.pages.partners_page_pqa import PartnersAndSolutions
-from tests.test_group_python_qa.links.links_all_pages import PARTNERS_AND_SOLUTION_PAGE
+from tests.test_group_python_qa.links.links_all_pages import PARTNERS_AND_SOLUTION_PAGE, GO_LIBRARY_PAGE
 from tests.test_group_python_qa.locators.locators import PartnersAndSolutionsLocators as loc
 
 
@@ -22,5 +22,14 @@ class TestPartnersPage:
         partners_page = PartnersAndSolutions(driver, PARTNERS_AND_SOLUTION_PAGE)
         partners_page.open_page()
         partners_page.link_see_library_is_clickable(wait)
+
+    def test_tc_011_09_03_link_see_library_redirects_correctly(self, driver):
+        partners_page = PartnersAndSolutions(driver, PARTNERS_AND_SOLUTION_PAGE)
+        partners_page.open_page()
+        partners_page.allow_all_cookies()
+        partners_page.find_element_and_click(loc.LINK_SEE_LIBRARY)
+        partners_page.switch_to_new_window()
+        partners_page.check_for_redirection(GO_LIBRARY_PAGE)
+
 
 
