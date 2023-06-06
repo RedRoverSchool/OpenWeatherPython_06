@@ -51,6 +51,14 @@ class MainPageLocators:
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
+    CHART_WEATHER = (By.CSS_SELECTOR, "canvas[id='chart-component']")
+    XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
+
+    SUPPORT_MENU = (By.CSS_SELECTOR, '#support-dropdown')
+    SUPPORT_FAQ_SUBMENU = (By.CSS_SELECTOR, '#support-dropdown-menu > li:nth-child(1) > a[href="/faq"]')
+
+    product_collection = [CURRENT_AND_FORECAST_APIS, HISTORICAL_WEATHER_DATA_LINK, WEATHER_MAPS_LINK,
+                          WEATHER_DASHBOARD_LINK, WIDGETS]
 
 
 class DashboardPageLocators:
@@ -145,3 +153,7 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
+
+class PartnersLocators:
+    APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")

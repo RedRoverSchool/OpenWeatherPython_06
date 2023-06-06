@@ -1,5 +1,8 @@
+import pytest
+
 from pages.main_page import MainPage
 from locators.locators import MainPageLocators
+from test_data.urls import MainPageUrls
 
 
 class TestMainPage:
@@ -79,6 +82,10 @@ class TestMainPage:
             page = MainPage(driver)
             page.check_current_and_forecast_apis_functionality()
 
+        def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(self, driver, wait, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
+
 
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
@@ -106,3 +113,30 @@ class TestMainPage:
                 self, driver, open_and_load_main_page, wait):
             main_page = MainPage(driver)
             main_page.check_placeholder_disappears("a", "value")
+
+        def test_tc_002_03_23_faq_link_is_visible_and_clickable(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            main_page.click_support_nav_menu()
+            main_page.faq_submenu_should_be_visible(wait=wait)
+
+    class TestMainPageFooter:
+        link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
+
+        def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            expected_link = "https://openweathermap.org/widgets-constructor"
+            page.click_footer_product_collections_widgets(expected_link)
+
+        @pytest.mark.parametrize("link_product_collection", link_product_collections)
+        def test_tc_003_12_24_verify_product_collections_module_all_link_functionality(self, driver,
+                                                                                       open_and_load_main_page, wait,
+                                                                                       link_product_collection):
+            page = MainPage(driver)
+            expected_link = link_product_collection
+            link_number = self.link_product_collections.index(expected_link)
+            page.click_footer_product_collections_all_widgets(expected_link, link_number)
+
+    class TestMainPageHourlyForecast:
+        def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_chart_weather_is_present()
