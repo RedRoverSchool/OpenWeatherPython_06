@@ -1,5 +1,8 @@
+import pytest
+
 from pages.main_page import MainPage
 from locators.locators import MainPageLocators
+from test_data.urls import MainPageUrls
 
 
 class TestMainPage:
@@ -115,3 +118,25 @@ class TestMainPage:
             main_page = MainPage(driver)
             main_page.click_support_nav_menu()
             main_page.faq_submenu_should_be_visible(wait=wait)
+
+    class TestMainPageFooter:
+        link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
+
+        def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            expected_link = "https://openweathermap.org/widgets-constructor"
+            page.click_footer_product_collections_widgets(expected_link)
+
+        @pytest.mark.parametrize("link_product_collection", link_product_collections)
+        def test_tc_003_12_24_verify_product_collections_module_all_link_functionality(self, driver,
+                                                                                       open_and_load_main_page, wait,
+                                                                                       link_product_collection):
+            page = MainPage(driver)
+            expected_link = link_product_collection
+            link_number = self.link_product_collections.index(expected_link)
+            page.click_footer_product_collections_all_widgets(expected_link, link_number)
+
+    class TestMainPageHourlyForecast:
+        def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_chart_weather_is_present()
