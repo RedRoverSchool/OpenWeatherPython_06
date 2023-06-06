@@ -23,3 +23,17 @@ class Dashboard(BasePage):
     def verify_display_of_client_logos(self):
         logo = self.driver.find_element(*DashboardLocators.DASHBOARD_LOGO_IMAGE)
         assert logo.is_displayed(), 'Dynamic image with customer logos not showing up in the "Our users" section'
+
+    def verify_display_of_Pricing_and_limits_section(self):
+        pricing_and_limits_section_elements = self.check_sections_are_display()
+        assert all(pricing_and_limits_section_elements), 'No "pricing and limits" module'
+
+    def check_pricing_and_limits_section(self):
+        pricing_and_limits_section = self.element_is_present(self.locators.PRICING_AND_LIMITS)
+        pricing_and_limits_section1 = self.element_is_present(self.locators.PRICING_AND_LIMITS1)
+        pricing_and_limits_section2 = self.element_is_present(self.locators.PRICING_AND_LIMITS2)
+        return [pricing_and_limits_section, pricing_and_limits_section1, pricing_and_limits_section2]
+
+    def check_sections_are_display(self):
+        links = self.check_pricing_and_limits_section()
+        return [element.is_displayed() for element in links]
