@@ -30,3 +30,9 @@ class TestClimaticForecast30:
         page = ClimaticForecast(driver, ClimateForecast.URL_FORCAST30)
         page.open_page()
         page.check_visibility_climatic_forecast_30_days_page_title()
+
+    def test_TC_005_06_02_redirect_to_the_how_to_make_an_api_call_section_of_the_page(self, driver):
+        page = ClimaticForecast(driver, ClimateForecast.URL_FORCAST30)
+        page.open_page()
+        page.check_redirect_to_the_how_to_make_of_the_page()
+
