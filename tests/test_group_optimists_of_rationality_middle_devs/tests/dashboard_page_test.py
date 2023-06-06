@@ -14,3 +14,8 @@ class TestDashboardPage:
         page = Dashboard(driver, DashboardLocators.HEADER_DASHBOARD_LINK)
         page.open_page()
         page.verify_display_of_client_logos()
+
+    def test_TC_006_04_01_Verify_display_of_Pricing_and_limits_section(self, driver):
+        dashboard_page = Dashboard(driver, DashboardLocators.HEADER_DASHBOARD_LINK)
+        dashboard_page.open_page()
+        dashboard_page.verify_display_of_Pricing_and_limits_section()
