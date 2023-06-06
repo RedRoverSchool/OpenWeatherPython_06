@@ -51,7 +51,6 @@ class MainPageLocators:
     HEADER_SEARCH_FIELD = (By.NAME, "q")
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
-
     CHART_WEATHER = (By.CSS_SELECTOR, "canvas[id='chart-component']")
     XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
 
@@ -73,8 +72,8 @@ class PricingPageLocators:
 class ApiPageLocators:
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
 
-class AboutUsPageLocators:
 
+class AboutUsPageLocators:
     HEADER = (By.XPATH, "//h1")
     IMAGE_BESIDE_HEADER = (By.CSS_SELECTOR, "img.tablet-plus")
     HEADERS_ON_PAGE_FOOTER = (
@@ -83,19 +82,17 @@ class AboutUsPageLocators:
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
 
-class AppStorePageLocators:
 
+class AppStorePageLocators:
     APP_TITLE = (By.XPATH, "//h1")
 
 
 class OpenAgroLocators:
-
     REQUEST_DATA_LOCATORS = (By.XPATH, '//a[text()="Request data"]')
     REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
 
 
 class SolarApiLocators:
-
     HOW_TO_GET_ACCESS_LINK = (By.XPATH, '//a[@href="#how"]')
     HOW_TO_GET_ACCESS_TITLE = (By.CSS_SELECTOR, "#how h2")
     PRODUCT_CONCEPT_TITLE = (By.CSS_SELECTOR, "#concept h2")
@@ -149,6 +146,13 @@ class MarketplaceLocators:
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
 
+
+class GuideLocators:
+    GUIDE_URL = 'https://openweathermap.org/guide'
+    guide_fast_way_links_locators = [(By.XPATH, '//*[@class="lead"]//*[@href="https://openweather.co.uk/"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
+                                     (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
 
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
