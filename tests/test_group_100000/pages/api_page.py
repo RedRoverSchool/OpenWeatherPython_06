@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-from tests.test_group_100000.locators.api_page_locators import RoadRiskApi as R
+from tests.test_group_100000.locators.api_page_locators import RoadRiskApi as R, ClimateForecast
 from tests.test_group_100000.locators.api_page_locators import WeatherConditions as W
 from tests.test_group_100000.locators.api_page_locators import OneCallApi as O
 from tests.test_group_100000.locators.main_page_locators import FooterBlockLocators as F
@@ -76,3 +76,9 @@ class FooterApiPage(BasePage):
         footer = self.driver.find_element(*F.FOOTER_COPYRIGHT)
         assert footer.is_displayed() and expected_footer_text in footer.text, \
             "The footer is not displayed or does not contain the expected text"
+
+
+class ClimaticForecast(BasePage):
+    def check_visibility_climatic_forecast_30_days_page_title(self):
+        title_page = self.driver.find_element(*ClimateForecast.TITLE_FORCAST30).text
+        assert title_page == 'Climate forecast for 30 days', 'The title of the page does not match the expected value'

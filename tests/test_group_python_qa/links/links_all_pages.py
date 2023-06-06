@@ -11,3 +11,4 @@ PARTNERS_AND_SOLUTION_PAGE = "https://openweathermap.org/examples"
 WEATHER_INDICATOR_PAGE = "https://launchpad.net/my-weather-indicator"
 AGRICULTURAL_ANALYTICS_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSd5kFWRG3LfLUkXi71divVuAslOje24MelPKt9kvcoVQCKIRw/viewform"
 URL_OUR_INITIATIVES_PAGE = 'https://openweathermap.org/our-initiatives'
+GO_LIBRARY_PAGE = "http://briandowns.github.io/openweathermap/"

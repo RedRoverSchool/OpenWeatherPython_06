@@ -53,6 +53,12 @@ class MainPageLocators:
     CURRENT_AND_FORECAST_APIS = (By.XPATH, "//a[text()='Current and Forecast APIs']")
     WIDGETS = (By.XPATH, "//a[text()='Widgets']")
 
+    XPATH_PRIVACY_POLICY_BUTTON = (By.XPATH, '//*[@id="footer-website"]/div/div[2]/div[2]/div/ul/li[2]/a')
+
+    SUPPORT_MENU = (By.CSS_SELECTOR, '#support-dropdown')
+    SUPPORT_FAQ_SUBMENU = (By.CSS_SELECTOR, '#support-dropdown-menu > li:nth-child(1) > a[href="/faq"]')
+
+
 class DashboardPageLocators:
     pass
 
