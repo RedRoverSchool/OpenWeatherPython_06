@@ -16,6 +16,10 @@ class MainPage(BasePage):
     def scroll_down_the_page(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
+    def scroll_to_the_element(self, locator):
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
     def check_link(self, locator, link):
         self.driver.find_element(*locator).click()
         assert link in self.driver.current_url
