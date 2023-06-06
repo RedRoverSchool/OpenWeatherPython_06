@@ -14,3 +14,8 @@ def test_TC_005_09_03_verify_reference_data_visibility(driver):
     page = SolarIrradiancePage(driver, SolarIrradianceLocators.URL_SolarIrradiancePage)
     page.open_page()
     page.verify_reference_data_visibility()
+
+def test_TC_005_09_04_verify_Clear_Sky_model_algorithms_visibility(driver):
+    page = SolarIrradiancePage(driver, SolarIrradianceLocators.URL_SolarIrradiancePage)
+    page.open_page()
+    page.verify_Clear_Sky_model_visibility()

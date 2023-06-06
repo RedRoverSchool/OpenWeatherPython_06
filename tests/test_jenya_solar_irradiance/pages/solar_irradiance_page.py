@@ -25,6 +25,11 @@ class SolarIrradiancePage(BasePage):
         locator = self.locators.REFERENCE_DATA
         element = self.driver.find_element(*locator)
         assert element.is_displayed()
+
+    def verify_Clear_Sky_model_visibility(self):
+        locator = self.locators.CLEAR_SKY_MODEL
+        element = self.driver.find_element(*locator)
+        assert element.is_displayed()
 # check link hover
 
 # check link clickability
