@@ -81,3 +81,7 @@ class PartnersPageLocators():
 
 class TechnologyPageLocators:
     DETAILED_REPORT_LINK = (By.XPATH, "//div[@class='container']//p[8]//a")
+
+class SignInPageLocators:
+    CREATE_AN_ACCOUNT_LINK = (By.XPATH, "//a[contains(@ href, '/users/sign_up')]")
+
