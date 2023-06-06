@@ -34,6 +34,3 @@ class MainPage(BasePage):
         assert nwp.is_displayed()
 
 
-    def subscription_module_title_check(self):
-        self.driver.find_element(*self.locator.SUBSCRIPTION_MODULE_BUTTON).is_displayed()
-

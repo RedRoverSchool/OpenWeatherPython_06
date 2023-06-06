@@ -18,8 +18,7 @@ class MainPageLocators:
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
     AGRICULTURE_ANALYTICS_TITLE_LOCATOR = (By.CSS_SELECTOR, ".section-content > .mobile-padding > div > h2")
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
-    SUBSCRIPTION_MODULE_BUTTON = (By.CSS_SELECTOR, ".inner-footer-container div:first-of-type "
-                                                   ".footer-section:nth-child(2) p.section-heading")
+    SUBSCRIPTION_MODULE_BUTTON = (By.CSS_SELECTOR, ".horizontal-section:first-of-type > div:nth-child(2) p")
 
 
 
