@@ -19,3 +19,7 @@ class Dashboard(BasePage):
     def check_links_are_clickable(self):
         links = self.check_elements()
         return [element.is_enabled() for element in links]
+
+    def verify_display_of_client_logos(self):
+        logo = self.driver.find_element(*DashboardLocators.DASHBOARD_LOGO_IMAGE)
+        assert logo.is_displayed(), 'Dynamic image with customer logos not showing up in the "Our users" section'
