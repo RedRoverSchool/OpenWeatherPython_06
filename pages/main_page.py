@@ -2,10 +2,12 @@ from .base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators
 from test_data.all_links import Links
-
+from datetime import datetime, date
+from zoneinfo import ZoneInfo
 
 class MainPage(BasePage):
     locators = MainPageLocators()
+    URL = 'https://openweathermap.org/'
 
     def fill_city_search_field(self, city):
         input_city = self.driver.find_element(*self.locators.SEARCH_CITY_FIELD)
@@ -205,3 +207,53 @@ class MainPage(BasePage):
 
     def verify_chart_weather_is_present(self):
         assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
+
+    def checking_the_temperature_system_switching(self, system):
+        match system:
+            case "°C":
+                self.driver.find_element(*self.locators.METRIC_BUTTON).click()
+            case "°F":
+                self.driver.find_element(*self.locators.IMPERIAL_BUTTON).click()
+        current_temp = self.driver.find_element(*self.locators.CURRENT_TEMP)
+        assert system in current_temp.text, f"The current temperature does not correspond to the {system} system"
+
+    def verify_temperature_button_displayed_clickable(self, system):
+        match system:
+            case "°C":
+                metric_button = self.locators.METRIC_BUTTON
+            case "°F":
+                metric_button = self.locators.IMPERIAL_BUTTON
+        assert self.element_is_clickable(metric_button) \
+               and self.element_is_visible(metric_button), \
+            "The temperature switch button in the metric system is not displayed or is not clickable"
+
+    def verify_the_current_date_and_time(self):
+        date_time = self.driver.find_element(*self.locators.LOC_DATE_TIME)
+        date_time_str = f'{str(datetime.now(ZoneInfo("Europe/London")).year)} {date_time.text}'
+        date_time_site = datetime.strptime(date_time_str, '%Y %b %d, %I:%M%p').replace(tzinfo=ZoneInfo('Europe/London'))
+        date_time_now = datetime.now(ZoneInfo('Europe/London'))
+        assert (date_time_now - date_time_site).total_seconds() <= 600, \
+            "The current date and time does not match the date and time specified on the page"
+
+    def verify_current_location(self, wait):
+        expected_city_name = "Chicago, US"
+        self.driver.execute_cdp_cmd(
+            "Browser.grantPermissions",
+            {
+                "origin": self.URL,
+                "permissions": ["geolocation"]
+            },
+        )
+        self.driver.execute_cdp_cmd(
+            "Emulation.setGeolocationOverride",
+            {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "accuracy": 100,
+            },
+        )
+        self.driver.find_element(*self.locators.LOC).click()
+        wait.until_not(EC.presence_of_element_located(self.locators.LOAD_DIV))
+        current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
+        assert expected_city_name == current_city_name.text, \
+            "The current name of the city does not match the expected name of the city"
