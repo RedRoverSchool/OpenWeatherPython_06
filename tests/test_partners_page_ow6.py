@@ -35,6 +35,9 @@ class TestPartnersPage:
         git_button_python = PartnersPageUrls.GIT_PYTHON_URL
         partners_page.verify_redirection_git_button_python_to_the_new_webpage(git_button_python)
 
+    def test_TC_011_13_03_visibility_and_clickability_of_the_link_View_on_Youtube(self, driver):
+        partners_page = PartnersPage(driver)
+        partners_page.verify_visibility_and_clickability_youtube_button_pyowm()
 
     def test_tc_011_14_01_verify_visibility_and_clickability_of_the_github_button_php(self, driver, wait):
         page = PartnersPage(driver)
@@ -55,7 +58,6 @@ class TestPartnersPage:
     def test_TC_011_03_04_verify_the_link_open_manual_is_clickable(self, driver):
         page = PartnersPage(driver)
         page.verify_the_link_open_manual_is_clickable()
-
 
     def test_TC_011_01_03_verify_17_sections_are_visible(self, driver):
         page = PartnersPage(driver)

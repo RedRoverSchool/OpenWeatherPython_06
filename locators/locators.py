@@ -111,6 +111,7 @@ class MainPageLocators:
     WEATHER_ITEMS_LOCATOR = (By.CSS_SELECTOR, "ul.weather-items")
     WEATHER_ITEM_LOCATOR = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
 
+
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
     HEADER_DASHBOARD = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[3]/a')
@@ -234,12 +235,14 @@ class SignInPageLocators:
     EMAIL_INPUT2 = (By.XPATH, "//input[@class='string email optional form-control']")
     DISPLAYED_AUTHORISATION_HEADER = (By.XPATH, '//h3[text()="Sign In To Your Account"]')
 
+
 class SignInLocator:
     EMAIL_INPUT = By.CSS_SELECTOR, '#user_email'
     PASSWORD_INPUT = By.CSS_SELECTOR, '#user_password'
     SUBMIT_BUTTON = By.CSS_SELECTOR, "input[value='Submit']"
     ERROR_LOGIN_MESSAGE_DIV = (By.CSS_SELECTOR, '.panel.panel-red')
     SUCCESS_LOGIN_MESSAGE_DIV = By.CSS_SELECTOR, '.panel.panel-green'
+
 
 class MarketplaceLocators:
     URL_HISTORICAL_WEATHER = 'https://home.openweathermap.org/zip_code_data/new'
@@ -303,6 +306,7 @@ class WeatherConditionsLocators:
     CLOUDS_LOCATOR = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
     thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
+
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'
     guide_fast_way_links_locators = [(By.XPATH, '//*[@class="lead"]//*[@href="https://openweather.co.uk/"]'),
@@ -320,11 +324,13 @@ class GuideLocators:
     SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.CSS_SELECTOR, "a[href='/price'].ow-btn.round.btn-orange")
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
+
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     GIT_BUTTON_PHP = (By.XPATH, '//*[@id="php"]/a')
     GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
+    YOUTUBE_BUTTON_PYOWM = (By.CSS_SELECTOR, '#python > a[href*="youtube"]')
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
     BUTTON_VIEW_ON_GITHUB = (By.XPATH,
                              "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
@@ -366,6 +372,7 @@ class PartnersLocators:
     BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
     BUTTON_VIEW_SOLUTIONS = (By.XPATH, "//a[text()='View solutions']")
 
+
 class WidgetsConstractorLocators:
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
     CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
@@ -380,6 +387,7 @@ class WidgetsConstractorLocators:
                         (By.XPATH, '//*[@id="container-openweathermap-widget-17"]'),
                         (By.XPATH, '//*[@id="container-openweathermap-widget-18"]'),
                         (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')]
+
 
 class ProfilePageLocators:
     AUTH_NOTIFICATION = (By.XPATH, "//div[@class='panel-body']")
@@ -473,6 +481,7 @@ class SearchResultPageLocators:
 class AccuracyAndQualityOfWeatherDataPageLocators:
     NUMBER_OF_CITIES_FOR_EVALUATION = (By.CSS_SELECTOR, ".col-sm-12 p>a")
 
+
 class MapsPageLocators:
     CITIES_CHECKBOX_INPUT = (By.CSS_SELECTOR, 'input#citiesConditions')
     CITIES_CHECKBOX_LABEL = (By.CSS_SELECTOR, 'label.weather-layer-container__label')
@@ -485,7 +494,6 @@ class MembersPageLocators:
     CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
     CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
     SUCCESSFUL_SAVING_SETTINGS_MESSAGE = (By.CSS_SELECTOR, 'div.alert-block')
-
 
 
 class CookiesSettingsPageLocators:
@@ -503,9 +511,9 @@ class StudentInitiativeLocators:
     BUTTON_GET_ACCESS = (By.XPATH, '//a[text()="Get access"]')
 
 
-
 class AskAQuestionPageLocators:
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h4.headline')
+
 
 class HowToStartLocators:
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')

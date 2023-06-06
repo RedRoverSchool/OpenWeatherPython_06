@@ -123,3 +123,8 @@ class PartnersPage(BasePage):
             href = anchor_link.get_attribute("href")
             assert address_bar in self.driver.current_url and href == self.driver.current_url, \
                 f"Redirection of the anchor link {href} is not successful"
+
+    def verify_visibility_and_clickability_youtube_button_pyowm(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        link = self.element_is_clickable(self.locators.YOUTUBE_BUTTON_PYOWM)
+        assert link, "The 'View on Youtube' button is not clickable"

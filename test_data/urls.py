@@ -32,7 +32,6 @@ class SuitsUrls:
             ]
 
 
-
 class WeatherConditionsUrls:
     url_weather_conditions = "https://openweathermap.org/weather-conditions"
 
@@ -42,6 +41,7 @@ class PartnersPageUrls:
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
     WEATHER_INDICATOR_URL = "https://launchpad.net/my-weather-indicator"
     GIT_PYTHON_URL = 'https://github.com/csparpa/pyowm'
+    YOUTUBE_PyOWM_URL = 'https://www.youtube.com/watch?v=123Vz_3E0Zs&feature=youtu.be'
     RASPBERRY_GITHUB = 'https://github.com/DzikuVx/raspberry_temperature_log'
     ANDROID_WEATHER = 'http://www.survivingwithandroid.com/2016/01/4-free-weather-providers-api-to-develop.html'
     INFO_BOARD_GITHUB = "https://github.com/search?q=openweathermap&ref=cmdform"
