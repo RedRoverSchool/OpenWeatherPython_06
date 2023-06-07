@@ -180,7 +180,6 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
 
-
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
