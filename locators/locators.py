@@ -60,6 +60,14 @@ class MainPageLocators:
     product_collection = [CURRENT_AND_FORECAST_APIS, HISTORICAL_WEATHER_DATA_LINK, WEATHER_MAPS_LINK,
                           WEATHER_DASHBOARD_LINK, WIDGETS]
 
+    METRIC_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
+    IMPERIAL_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
+    CURRENT_TEMP = (By.CSS_SELECTOR, "div.current-temp span.heading")
+    LOC_DATE_TIME = (By.XPATH, "//div[@class='current-container mobile-padding']/div/span[@class='orange-text']")
+    CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
+    LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
+    LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
 
 class DashboardPageLocators:
     BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
@@ -217,3 +225,19 @@ class FooterLocators:
 
 class MigratePageLocators:
     SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
+
+
+class SubscriptionLocators:
+    BUTTON_CONTINUE_TO_PAYMENT = (By.XPATH, "//input[@value='Continue to payment']")
+    RADIOBUTTON_ORGANISATIONS = (By.XPATH, "//span[2]//input[@type='radio']")
+    ERROR_MESSAGE = (By.XPATH, "//span[@class='help-block']")
+    INPUT_EMAIL = (By.XPATH, "//input[@type='email']")
+    INPUT_ORGANISATION = (By.XPATH, "//input[@id='unauth_subscription_form_organisation']")
+    INPUT_ADDRESS_1 = (By.XPATH, "//input[@id='unauth_subscription_form_address_line_1']")
+    INPUT_CITY = (By.XPATH, "//input[@id='unauth_subscription_form_city']")
+    INPUT_POSTCODE = (By.XPATH, "//input[@id='unauth_subscription_form_postal_code']")
+    INPUT_PHONE_NUMBER = (By.XPATH, "//input[@id='unauth_subscription_form_phone']")
+    BUTTON_PAYMENT_PAGE = (By.XPATH, "//div[@class='SubmitButton-IconContainer']")
+    LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
+    LOAD_PAGE = (By.XPATH, "//div[@class='wrapper']")
+    ELEMENT_STRIPE = (By.CSS_SELECTOR, "#stripe-title")
