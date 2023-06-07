@@ -34,6 +34,13 @@ class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
 
+
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'
     URL_SIGN_UP = 'https://home.openweathermap.org/users/sign_up'
+
+
+class OurInitiativesPageUrls:
+    OUR_INITIATIVES_PAGE = "https://openweathermap.org/our-initiatives"
+    EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
+

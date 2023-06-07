@@ -19,6 +19,7 @@ class BasePageLocators:
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
     HEADER = (By.XPATH, "//h1")
 
+
 class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
@@ -223,6 +224,7 @@ class ClimateForecastLocators:
 class FooterLocators:
     FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 
+
 class MigratePageLocators:
     SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
 
@@ -248,3 +250,11 @@ class FAQPageLocators:
     FAQ_QUESTIONS_AREA = (By.CSS_SELECTOR, ".question.visible")
     FAQ_ANSWER_SECTIONS = (By.XPATH, "./following-sibling::div[@class='question-content']")
     FAQ_ANSWER_TEXT = (By.CSS_SELECTOR, "p")
+
+
+class OurInitiativesPageLocators:
+    INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
+    SECTION = By.XPATH, "//span[contains(text(), '{}')]"
+    EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
+    QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
+
