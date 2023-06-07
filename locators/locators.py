@@ -214,3 +214,6 @@ class ClimateForecastLocators:
 
 class FooterLocators:
     FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
+
+class MigratePageLocators:
+    SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
