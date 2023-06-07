@@ -57,6 +57,10 @@ class MainPageLocators:
     SUPPORT_MENU = (By.CSS_SELECTOR, '#support-dropdown')
     SUPPORT_FAQ_SUBMENU = (By.CSS_SELECTOR, '#support-dropdown-menu > li:nth-child(1) > a[href="/faq"]')
 
+    FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
+    LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
+    DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
+
     product_collection = [CURRENT_AND_FORECAST_APIS, HISTORICAL_WEATHER_DATA_LINK, WEATHER_MAPS_LINK,
                           WEATHER_DASHBOARD_LINK, WIDGETS]
 

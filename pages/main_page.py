@@ -2,6 +2,7 @@ from .base_page import BasePage
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators
 from test_data.all_links import Links
+from datetime import datetime
 
 
 class MainPage(BasePage):
@@ -205,3 +206,20 @@ class MainPage(BasePage):
 
     def verify_chart_weather_is_present(self):
         assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
+
+    def verify_in_day_list_days_of_the_week(self):
+        weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        days_by_page = []
+        days = self.driver.find_elements(*MainPageLocators.DAYS_IN_8_DAY_FORECAST)
+        for day in days:
+            days_by_page.append(day.text[:3])
+        number_day = datetime.now().weekday()
+        days_by_computer = weekdays[number_day:] + weekdays[:number_day] + weekdays[(number_day):(number_day + 1):]
+        assert days_by_page == days_by_computer
+
+    def verify_in_day_list_first_element_number_day(self):
+        number_day = self.driver.find_element(*MainPageLocators.FIRST_DAY_IN_8_DAY_FORECAST).text[-2:]
+        if number_day.startswith('0'):
+            number_day = number_day[1:]
+        number_day_by_computer = datetime.now().day
+        assert number_day == f'{number_day_by_computer}'

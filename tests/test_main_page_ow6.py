@@ -77,6 +77,15 @@ class TestMainPage:
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
 
+    def test_tc_001_04_05_verify_in_day_list_first_element_number_day(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_first_element_number_day()
+
+    def test_tc_001_04_06_verify_in_day_list_days_of_the_week(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_days_of_the_week()
+
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)
