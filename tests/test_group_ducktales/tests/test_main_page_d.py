@@ -60,5 +60,9 @@ class TestMainPage:
         page = MainPage(driver)
         page.verify_in_day_list_first_element_number_day()
 
+    def test_TC_001_04_06_verify_in_day_list_days_of_the_week(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_days_of_the_week()
+
 
 

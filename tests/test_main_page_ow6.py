@@ -77,6 +77,30 @@ class TestMainPage:
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
 
+    def test_TC_001_02_01_verify_temperature_switched_on_metric_system(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.checking_the_temperature_system_switching("°C")
+
+    def test_TC_001_02_02_verify_temperature_switched_on_imperial_system(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.checking_the_temperature_system_switching("°F")
+
+    def test_TC_001_02_03_verify_temperature_metric_button_displayed_clickable(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_temperature_button_displayed_clickable("°C")
+
+    def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_temperature_button_displayed_clickable("°F")
+
+    def test_TC_001_05_01_verify_the_current_date_and_time(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_the_current_date_and_time()
+
+    def test_TC_001_05_02_verify_current_location(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_current_location(wait)
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)

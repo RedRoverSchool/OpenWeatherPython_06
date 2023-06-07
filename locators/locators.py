@@ -60,6 +60,14 @@ class MainPageLocators:
     product_collection = [CURRENT_AND_FORECAST_APIS, HISTORICAL_WEATHER_DATA_LINK, WEATHER_MAPS_LINK,
                           WEATHER_DASHBOARD_LINK, WIDGETS]
 
+    METRIC_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Metric')]")
+    IMPERIAL_BUTTON = (By.XPATH, "//div[@class='switch-container']/div[contains(text(), 'Imperial')]")
+    CURRENT_TEMP = (By.CSS_SELECTOR, "div.current-temp span.heading")
+    LOC_DATE_TIME = (By.XPATH, "//div[@class='current-container mobile-padding']/div/span[@class='orange-text']")
+    CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
+    LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
+    LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+
 
 class DashboardPageLocators:
     BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
@@ -217,3 +225,6 @@ class ClimateForecastLocators:
 
 class FooterLocators:
     FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
+
+class MigratePageLocators:
+    SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
