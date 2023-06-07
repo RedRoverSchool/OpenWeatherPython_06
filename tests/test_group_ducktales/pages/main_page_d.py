@@ -168,6 +168,15 @@ class MainPage(BasePage):
         number_day_by_computer = datetime.now().day
         assert number_day == f'{number_day_by_computer}'
 
+    def verify_in_day_list_days_of_the_week(self):
+        days_by_page = []
+        days = self.driver.find_elements(*MainLocator.DAYS_IN_8_DAY_FORECAST)
+        for day in days:
+            days_by_page.append(day.text[:3])
+        number_day = datetime.now().weekday()
+        days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
+        assert days_by_page == days_by_computer
+
 
 
 
