@@ -70,14 +70,20 @@ class MainPageLocators:
 
 
 class DashboardPageLocators:
-    pass
+    BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
+    TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
+    TRY_THE_DASHBOARD2_BTN = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
+    PANEL_SIGN_IN_FORM = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
+    WEATHER_SYMBOL = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
 
 
 class PricingPageLocators:
-    pass
+    URL_PRICING = 'https://openweathermap.org/price'
+    LINK_TEXT_ONE_CALL = (By.CSS_SELECTOR, "#onecall > div > div > h2")
 
 
 class ApiPageLocators:
+    API_PAGE = 'https://openweathermap.org/api'
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
 
 
@@ -162,6 +168,32 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
 
+
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+
+
+class RoadRiskApiLocators:
+    ROAD_RISK_API_LINK = 'https://openweathermap.org/api/road-risk'
+    LINK_API_KEYS = 'https://home.openweathermap.org/api_keys'
+    TITLE_HOW_TO_RR_API = (By.XPATH, "//*[@id='how']/h2")
+    LINK_HOW_TO_REQUEST_RR_API = (By.CSS_SELECTOR, 'a[href="#how"]')
+    SECTION_R_CONCEPTS = (By.XPATH, "//*[@id='concept']")
+    TITLE_ROAD_RISK = (By.CSS_SELECTOR, '.breadcrumb-title')
+    LINK_LIST_OF_NATIONAL = (By.CSS_SELECTOR, "a[href$='listsource']")
+    TITLE_LIST_OF_NATIONAL = (By.XPATH, "//*[@id='listsource']/h3")
+    LINK_API_KEY_TAB = (By.CSS_SELECTOR, "td a[target='_blank']")
+    LIST_API_KEYS = (By.CSS_SELECTOR, '.active')
+    BLOCK_LIST_SOURCE = (By.XPATH, '//*[@id="listsource"]/table')
+
+
+class ClimateForecastLocators:
+    URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
+    TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
+    LINK_HOW_TO_MAKE = (By.CSS_SELECTOR, "a[href$='geo-year']")
+    TITLE_HOW_TO_MAKE = (By.XPATH, '//*[@id="geo-year"]/h3')
+
+
+class FooterLocators:
+    FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")

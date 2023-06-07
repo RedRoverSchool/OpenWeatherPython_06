@@ -32,4 +32,5 @@ class MainPage(BasePage):
     def visibility_of_nwp_block(self):
         nwp = self.driver.find_element(*self.locator.NWP_MODEL)
         assert nwp.is_displayed()
-        
+
+

@@ -43,3 +43,9 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.check_link_in_new_window(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB)
+
+    def test_TC_011_17_01_verify_the_mobile_link_leads_to_correct_page(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.scroll_to_the_element(PPL.MOBILE_APP_BLOCK)
+        page.check_link(PPL.MOBILE_APP_LINK, links.MOBILE_APP)
