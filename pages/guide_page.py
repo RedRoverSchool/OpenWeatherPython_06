@@ -3,7 +3,6 @@ from locators.locators import GuideLocators
 
 class GuidePage(BasePage):
 
-    link = 'https://openweathermap.org/guide'
 
     def industry_standard_apis_link_redirection(self):
         element = self.driver.find_element(*GuideLocators.INDUSTRY_APIS_LOCATOR)

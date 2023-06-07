@@ -6,3 +6,4 @@ class Links:
     URL_SOLAR_API = "https://openweathermap.org/api/solar-energy-prediction"
     PRIVACY_POLICY_URL = "https://openweather.co.uk/privacy-policy"
     URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
+    GUIDE_PAGE = 'https://openweathermap.org/guide'
