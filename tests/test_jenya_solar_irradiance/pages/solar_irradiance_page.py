@@ -37,6 +37,10 @@ class SolarIrradiancePage(BasePage):
         element = self.driver.find_element(*locator)
         assert element.is_displayed()
 
+    def verify_image_visibility(self):
+        locator = self.locators.IMAGE_SOLAR_RADIATION
+        element = self.driver.find_element(*locator)
+        assert element.is_displayed()
 # check link clickability
 
 #check table visibility
