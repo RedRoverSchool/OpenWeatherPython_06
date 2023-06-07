@@ -1,5 +1,8 @@
+import pytest
+
 from pages.main_page import MainPage
 from locators.locators import MainPageLocators
+from test_data.urls import MainPageUrls
 
 
 class TestMainPage:
@@ -74,28 +77,52 @@ class TestMainPage:
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
 
+    def test_TC_001_02_01_verify_temperature_switched_on_metric_system(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.checking_the_temperature_system_switching("°C")
+
+    def test_TC_001_02_02_verify_temperature_switched_on_imperial_system(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.checking_the_temperature_system_switching("°F")
+
+    def test_TC_001_02_03_verify_temperature_metric_button_displayed_clickable(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_temperature_button_displayed_clickable("°C")
+
+    def test_TC_001_02_04_verify_temperature_imperial_button_displayed_clickable(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_temperature_button_displayed_clickable("°F")
+
+    def test_TC_001_05_01_verify_the_current_date_and_time(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_the_current_date_and_time()
+
+    def test_TC_001_05_02_verify_current_location(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_current_location(wait)
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)
             page.check_current_and_forecast_apis_functionality()
 
+        def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(self, driver, wait, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
 
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
             page = MainPage(driver)
             page.verify_clickability_current_and_forecast_apis()
 
-
         def test_tc_003_03_06_verify_widgets_clickability(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
             page.verify_widgets_clickability()
-
 
     class TestHowToStartLink:
         def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
             page.verify_how_to_start_visibility()
-
 
     class TestHeaderPage:
         def test_tc_002_02_07_placeholder_is_displayed_in_search_field(self, driver, open_and_load_main_page):
@@ -106,3 +133,35 @@ class TestMainPage:
                 self, driver, open_and_load_main_page, wait):
             main_page = MainPage(driver)
             main_page.check_placeholder_disappears("a", "value")
+
+        def test_tc_002_03_23_faq_link_is_visible_and_clickable(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            main_page.click_support_nav_menu()
+            main_page.faq_submenu_should_be_visible(wait=wait)
+
+    class TestMainPageFooter:
+        link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
+
+        def test_tc_003_12_12_widgets_link_functionality(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            expected_link = "https://openweathermap.org/widgets-constructor"
+            page.click_footer_product_collections_widgets(expected_link)
+
+        @pytest.mark.parametrize("link_product_collection", link_product_collections)
+        def test_tc_003_12_24_verify_product_collections_module_all_link_functionality(self, driver,
+                                                                                       open_and_load_main_page, wait,
+                                                                                       link_product_collection):
+            page = MainPage(driver)
+            expected_link = link_product_collection
+            link_number = self.link_product_collections.index(expected_link)
+            page.click_footer_product_collections_all_widgets(expected_link, link_number)
+
+    class TestMainPageHourlyForecast:
+        def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_chart_weather_is_present()
+
+    def test_tc_003_11_01_verify_the_copyright_information_is_present_on_the_page(self, driver,
+                                                                                  open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_the_copyright_information_is_present_on_the_page()

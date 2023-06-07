@@ -15,6 +15,13 @@ class RoadRiskApi:
     BLOCK_LIST_SOURCE = (By.XPATH, '//*[@id="listsource"]/table')
 
 
+class ClimateForecast:
+    URL_FORCAST30 = 'https://openweathermap.org/api/forecast30'
+    TITLE_FORCAST30 = (By.CSS_SELECTOR, '.col-sm-7 .breadcrumb-title')
+    LINK_HOW_TO_MAKE = (By.CSS_SELECTOR, "a[href$='geo-year']")
+    TITLE_HOW_TO_MAKE = (By.XPATH, '//*[@id="geo-year"]/h3')
+
+
 class WeatherConditions:
     DRIZZLE_LOCATOR = (By.XPATH, '//a[contains(@href, "#Drizzle")]/ancestor-or-self::table')
     CONDITION_URL = 'https://openweathermap.org/weather-conditions'
