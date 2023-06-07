@@ -161,4 +161,20 @@ class MainPage(BasePage):
         actual_list = self.get_num_days_by_page(driver)
         assert actual_list == expected_list, 'Module Search city widget 8-day-forecast contains invalid day numbers'
 
+    def verify_in_day_list_first_element_number_day(self):
+        number_day = self.driver.find_element(*MainLocator.FIRST_DAY_IN_8_DAY_FORECAST).text[-2:]
+        if number_day.startswith('0'):
+            number_day = number_day[1:]
+        number_day_by_computer = datetime.now().day
+        assert number_day == f'{number_day_by_computer}'
+
+    def verify_in_day_list_days_of_the_week(self):
+        days_by_page = []
+        days = self.driver.find_elements(*MainLocator.DAYS_IN_8_DAY_FORECAST)
+        for day in days:
+            days_by_page.append(day.text[:3])
+        number_day = datetime.now().weekday()
+        days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
+        assert days_by_page == days_by_computer
+
 

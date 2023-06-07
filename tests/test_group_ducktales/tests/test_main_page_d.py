@@ -55,3 +55,13 @@ class TestMainPage:
     def test_tc_001_04_07_verify_day_list_elements_numbers_days(self, driver, wait, open_and_load_main_page):
         page = MainPage(driver)
         page.check_in_day_list_numbers_days(driver)
+
+    def test_tc_001_04_05_verify_in_day_list_first_element_number_day(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_first_element_number_day()
+
+    def test_TC_001_04_06_verify_in_day_list_days_of_the_week(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_days_of_the_week()
+
+
