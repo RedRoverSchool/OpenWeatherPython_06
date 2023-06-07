@@ -152,6 +152,31 @@ class MarketplaceLocators:
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
 
+    HISTORY_BULK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
+    BUTTON_SEARCH_METHODS = (By.XPATH, "//div[@class='search-pop-up']/button")
+    MAP_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
+    BUTTON_BY_LOCATION = (By.XPATH, "//button[contains(text(), 'By location')]")
+    BUTTON_BY_COORDINATES = (By.XPATH, "//button[contains(text(), 'By coordinates')]")
+    FIRST_SEARCH_ITEMS = (By.XPATH, "/html/body/div[4]/div[1]/span[2]/span")
+    SEARCH_POP_UP_HEADER = (By.XPATH, "//div[@class='pop-up-marker']/div[@class='pop-up-header']/h3")
+    INPUT_LATITUDE = (By.XPATH, "//input[@placeholder='Latitude']")
+    INPUT_LONGITUDE = (By.XPATH, "//input[@placeholder='Longitude']")
+    LATITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[1]")
+    LONGITUDE_ON_MAP = (By.XPATH, "//div[@class='text']/p[2]")
+    BUTTON_IMPORT_CSV = (By.XPATH, "//button[contains(text(), 'Import CSV file')]")
+    INPUT_FIELD_UPLOAD_FILE = (By.ID, "importCSV")
+    DIV_FIELD_UPLOAD_FILE = (By.XPATH, "//*[@id='app']/div[2]/div")
+    LOCATION_NAME_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[2]")
+    LATITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[3]")
+    LONGITUDE_TABLE = (By.XPATH, "//table[@class='material-table']/tbody/tr/td[4]")
+    SATELLITE_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Satellite')]")
+    CHECKBOX_TERRAIN = (By.XPATH, "//li[@aria-label='Terrain']/span/span[2]")
+    CHECKBOX_LABELS = (By.XPATH, "//li[@aria-label='Labels']/span")
+    BUTTON_ZOOM_IN = (By.XPATH, "//button[@title='Zoom in']")
+    BUTTON_ZOOM_OUT = (By.XPATH, "//button[@title='Zoom out']")
+    BUTTON_STREET_VIEW = (By.XPATH, "//button[@title='Drag Pegman onto the map to open Street View']")
+    BUTTON_FULL_SCREEN = (By.XPATH, "//button[@title='Toggle fullscreen view']")
+
 
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'
