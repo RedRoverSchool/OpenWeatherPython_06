@@ -42,3 +42,9 @@ class TestApiKey:
         api_keys_page.click_generate_api_key_name_button()
         api_keys_page.check_is_api_key_not_generated(initial_api_keys_table_length)
 
+    def test_tc_017_03_10_api_key_is_not_generated_if_the_input_is_empty(self, driver):
+        api_keys_page = ApiKeysPage(driver)
+        api_keys_page.open_api_keys_page()
+        initial_api_keys_table_length = api_keys_page.get_length_of_table_api_keys()
+        api_keys_page.click_generate_api_key_name_button()
+        api_keys_page.check_is_api_key_not_generated(initial_api_keys_table_length)
