@@ -37,4 +37,15 @@ class TestPartnersPage:
     def test_TC_011_20_03_verify_that_the_Github_link_in_the_info_board_message_is_visible_and_clickable(self, driver):
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.link_visibility_and_clickability(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB_LINK)
+        page.link_visibility_and_clickability(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB)
+
+    def test_TC_011_20_04_Verify_that_the_Github_link_in_the_info_board_message_leads_to_correct_page(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.check_link_in_new_window(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB)
+
+    def test_TC_011_17_01_verify_the_mobile_link_leads_to_correct_page(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.scroll_to_the_element(PPL.MOBILE_APP_BLOCK)
+        page.check_link(PPL.MOBILE_APP_LINK, links.MOBILE_APP)

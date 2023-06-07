@@ -12,7 +12,11 @@ class SignInPage(BasePage):
     print('===========')
     locators = SignInLocators()
 
-    def open_sign_in_page(self, driver):
-        driver.get(*self.URL)
-        wait = WebDriverWait(driver, 3)
+    # def open_sign_in_page(self, driver):
+    #     driver.get(*self.URL)
+    #     wait = WebDriverWait(driver, 3)
+
+    def user_succesfuly_log_in(self, driver):
+        assert driver.find_element(*SignInLocators.DIV_ALLERT_SUCCESSFULLY_LOGIN_GREEN), \
+            " User failed to login. Failed to confirm that login success message <div> with class .panel.panel-green "
 
