@@ -3,6 +3,7 @@ import pytest
 from pages.main_page import MainPage
 from locators.locators import MainPageLocators
 from test_data.urls import MainPageUrls
+from test_data.all_links import Links
 
 
 class TestMainPage:
@@ -124,6 +125,11 @@ class TestMainPage:
             page = MainPage(driver)
             page.verify_how_to_start_visibility()
 
+        def test_tc_002_03_10_01_how_to_start_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            main_page.check_how_to_start_link_opens_opens_correct_page(wait, Links.HOW_TO_START_URL)
+            main_page.check_correct_header_is_displayed("How to start using professional collections")
+
     class TestHeaderPage:
         def test_tc_002_02_07_placeholder_is_displayed_in_search_field(self, driver, open_and_load_main_page):
             main_page = MainPage(driver)
@@ -136,8 +142,13 @@ class TestMainPage:
 
         def test_tc_002_03_23_faq_link_is_visible_and_clickable(self, driver, open_and_load_main_page, wait):
             main_page = MainPage(driver)
-            main_page.click_support_nav_menu()
+            main_page.click_support_link()
             main_page.faq_submenu_should_be_visible(wait=wait)
+
+        def test_tc_002_03_09_01_faq_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
+            main_page = MainPage(driver)
+            main_page.check_faq_link_opens_opens_correct_page(wait, Links.FAQ_URL)
+            main_page.check_correct_header_is_displayed("Frequently Asked Questions")
 
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS

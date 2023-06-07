@@ -7,3 +7,6 @@ class Links:
     PRIVACY_POLICY_URL = "https://openweather.co.uk/privacy-policy"
     URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
     URL_SUBSCRIPTION = "https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base"
+    FAQ_URL = 'https://openweathermap.org/faq'
+    HOW_TO_START_URL = 'https://openweathermap.org/appid'
+
