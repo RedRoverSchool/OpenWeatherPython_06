@@ -1,4 +1,3 @@
-from tests.test_group_100000.pages.main_page import FooterBlock
 from tests.test_group_100000.pages.main_page import *
 from tests.test_group_100000.locators.main_page_locators import EightDayForecast as D8
 
@@ -14,3 +13,10 @@ class TestEightDayForecastPage:
         page = EightDayForecastPage(driver, link=D8.URL)
         page.open_page()
         page.verify_state_of_sky_in_words_for_each_day_is_displayed()
+
+
+class TestMainPage:
+    def test_TC_003_13_01_verify_cookies_management_module_is_visible(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_manage_cookies_link_is_visible()
+
