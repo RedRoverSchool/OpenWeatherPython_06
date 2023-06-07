@@ -212,3 +212,8 @@ class MainPage(BasePage):
         footer = self.driver.find_element(*FooterLocators.FOOTER_COPYRIGHT)
         assert footer.is_displayed() and expected_footer_text in footer.text, \
             "The footer is not displayed or does not contain the expected text"
+    def about_us_link_leads_to_correct_page(self):
+        about_us_link = self.driver.find_element(*MainPageLocators.ABOUT_US_LINK)
+        self.go_to_element(about_us_link)
+        about_us_link.click()
+        assert '/about-us' in self.driver.current_url, "The about us link leads to an incorrect page"

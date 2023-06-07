@@ -184,6 +184,9 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
+    INDUSTRY_APIS_LOCATOR = (By.XPATH, "//*[contains(text(),'industry standard APIs')]")
+    ONE_CALL_API_BY_CALL_LOCATOR = (By.XPATH, "//*[text()='One Call API by call']")
+    SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.CSS_SELECTOR, "a[href='/price'].ow-btn.round.btn-orange")
 
 
 class PartnersLocators:

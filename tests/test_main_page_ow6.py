@@ -86,6 +86,10 @@ class TestMainPage:
             main_page = MainPage(driver)
             main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
 
+        def test_TC_003_12_07_about_us_link_leads_to_correct_page(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.about_us_link_leads_to_correct_page()
+
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
             page = MainPage(driver)
@@ -141,3 +145,5 @@ class TestMainPage:
                                                                                   open_and_load_main_page):
         page = MainPage(driver)
         page.verify_the_copyright_information_is_present_on_the_page()
+
+
