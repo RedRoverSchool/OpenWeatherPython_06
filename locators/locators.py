@@ -17,7 +17,7 @@ class BasePageLocators:
     ASK_A_QUESTION_OPTION = (
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
-
+    HEADER = (By.XPATH, "//h1")
 
 class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
@@ -241,3 +241,10 @@ class SubscriptionLocators:
     LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
     LOAD_PAGE = (By.XPATH, "//div[@class='wrapper']")
     ELEMENT_STRIPE = (By.CSS_SELECTOR, "#stripe-title")
+
+
+class FAQPageLocators:
+    FAQ_QUESTIONS_HEADINGS = (By.CSS_SELECTOR, ".question-heading")
+    FAQ_QUESTIONS_AREA = (By.CSS_SELECTOR, ".question.visible")
+    FAQ_ANSWER_SECTIONS = (By.XPATH, "./following-sibling::div[@class='question-content']")
+    FAQ_ANSWER_TEXT = (By.CSS_SELECTOR, "p")
