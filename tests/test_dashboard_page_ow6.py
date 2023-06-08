@@ -2,6 +2,7 @@ from locators.locators import DashboardPageLocators
 from pages.dashboard_page import Dashboard
 
 
+
 class TestDashboardPage:
 
     def test_006_04_03_Verify_that_the_subscribe_button_are_clickable_in_the_Pricing_and_limits_section(self,

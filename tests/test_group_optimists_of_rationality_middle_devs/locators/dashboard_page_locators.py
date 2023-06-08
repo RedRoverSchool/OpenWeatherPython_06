@@ -12,3 +12,4 @@ class DashboardLocators:
     PRICING_AND_LIMITS = (By.XPATH, '//h2[text()="Pricing and limits"]')
     PRICING_AND_LIMITS1 = (By.XPATH, '//html/body/main/div[2]/section/div/p')
     PRICING_AND_LIMITS2 = (By.XPATH, '//html/body/main/div[2]/section/div/table')
+    PRICING_PLANS_SIGN_UP = (By.XPATH, "//a[text()='Sign Up']")

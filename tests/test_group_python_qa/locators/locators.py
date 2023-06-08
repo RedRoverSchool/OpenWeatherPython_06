@@ -28,9 +28,18 @@ class SolarApiLocators:
     PRODUCT_CONCEPT_TITLE_LOCATOR = (By.CSS_SELECTOR, "#concept h2")
 
 
+class CookiesSettingsLocators:
+    RADIOBUTTON_1_LOCATOR = (By.ID, 'inlineCheckbox1')
+    RADIOBUTTON_2_LOCATOR = (By.ID, 'inlineCheckbox2')
+    SAVE_CHANGES_BUTTON = (By.ID, 'remove-stick-footer')
+    ALLOW_BUTTON = (By.XPATH, '//button[text()="Allow all"]')
+    ALERT_BANNER = (By.XPATH, '//b[text() = "Your cookie settings were saved"]')
+
+
 class OpenAgroLocators:
     REQUEST_DATA_LOCATOR = (By.XPATH, '//a[text()="Request data"]')
     REQUEST_DATA_BUTTON = (By.CSS_SELECTOR, ".open-agro-banner__actions a")
+
 
 
 class PartnersAndSolutionsLocators:
