@@ -21,3 +21,8 @@ class TestGuidePage:
         page.footer_click_allow()
         page.find_element_and_click(GuidePageLocators.LINK_HISTORICAL_ARCHIVE)
         page.check_for_redirection(URL_HISTORY_BULK)
+
+    def test_tc_004_08_04_verify_all_historical_collection_links_same_color(self, driver):
+        page = GuidePage(driver, GUIDE_PAGE)
+        page.open_page()
+        page.verify_several_links_color(GuidePageLocators.HISTORICAL_COLLECTION_LINKS)

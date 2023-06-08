@@ -27,3 +27,38 @@ class TestSignInPage:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_registration_link_functionality()
+
+    def test_tc_014_01_01_verify_registration_form_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_registration_form_is_visible()
+
+    def test_tc_014_01_02_verify_email_field_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_email_field_is_visible()
+
+    def test_tc_014_01_03_verify_password_field_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_password_field_is_visible()
+
+    def test_tc_014_01_05_verify_remember_me_record_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_remember_me_record_is_visible()
+
+    def test_tc_014_01_06_verify_checkbox_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_checkbox_is_visible()
+
+    def test_tc_014_01_07_verify_submit_button_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_submit_button_is_visible()
+
+    def test_tc_014_01_08_verify_link_for_password_recovery_visibility(self, driver):
+        page = SignInPage(driver, SignInUrls.url_sign_in_page)
+        page.open_page()
+        page.check_link_for_password_recovery_is_visible()
