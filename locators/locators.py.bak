@@ -17,7 +17,6 @@ class BasePageLocators:
     ASK_A_QUESTION_OPTION = (
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
-    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
     HEADER = (By.XPATH, "//h1")
 
 
@@ -70,22 +69,10 @@ class MainPageLocators:
     CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
     LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
     LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
-    INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
-    sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
-    section_locator = lambda section: (By.XPATH, f"//span[contains(text(), '{section}')]")
-    QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
-    EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
-    EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
-    MODULE_DOWNLOAD_OPENWEATHER_APP = (By.XPATH, "//div[@class='my-5']/p")
-    FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
-    LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
-    DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
-    DAYS_IN_8_DAY_FORECAST_NUM = By.CSS_SELECTOR, 'div .day-list li span:nth-child(1)'
-    APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
-    GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
 
 
 class DashboardPageLocators:
+<<<<<<< HEAD
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
     HEADER_DASHBOARD = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[3]/a')
     PRICING_PLANS_SUBSCRIBE = By.XPATH, '//tr[1]/th[3]/p/a'
@@ -96,12 +83,14 @@ class DashboardPageLocators:
     PRICING_AND_LIMITS = (By.XPATH, '//h2[text()="Pricing and limits"]')
     PRICING_AND_LIMITS1 = (By.XPATH, '//html/body/main/div[2]/section/div/p')
     PRICING_AND_LIMITS2 = (By.XPATH, '//html/body/main/div[2]/section/div/table')
+=======
     BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
     TRY_THE_DASHBOARD2_BTN = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
     PANEL_SIGN_IN_FORM = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
     WEATHER_SYMBOL = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
-    PRICING_PLANS_SIGN_UP = (By.XPATH, "//a[text()='Sign Up']")
+>>>>>>> 9d03b08dabcf188b1858c77392b5a8ddd2c8e9c4
+
 
 class PricingPageLocators:
     URL_PRICING = 'https://openweathermap.org/price'
@@ -111,7 +100,6 @@ class PricingPageLocators:
 class ApiPageLocators:
     API_PAGE = 'https://openweathermap.org/api'
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
-    button_history_api_full_archive = (By.XPATH, "//*[@id='history']//*[@href='/api/history-api-full-archive']")
     ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
     ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
 
@@ -124,8 +112,6 @@ class AboutUsPageLocators:
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
-    CONTACT_US_BUTTON = (By.CSS_SELECTOR, 'div.contact-us.blue-transparent-container.white-text a')
-    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
 
 
 class AppStorePageLocators:
@@ -163,13 +149,6 @@ class ApiKeysLocator:
 class SignInPageLocators:
     CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")
     REGISTRATION_QUESTION = By.XPATH, "//p[contains(text(), 'Not registered?')]"
-    REGISTRATION_FORM_DISPLAY = (By.CSS_SELECTOR, ".sign-form")
-    EMAIL_FIELD_DISPLAY = (By.CSS_SELECTOR, ".new_user > :nth-child(3)")
-    PASSWORD_FIELD_DISPLAY = (By.CSS_SELECTOR, "#user_password")
-    REMEMBER_ME_RECORD_DISPLAY = (By.CSS_SELECTOR, "label.boolean")
-    CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
-    SUBMIT_BUTTON_DISPLAY = (By.CSS_SELECTOR, ".new_user > .btn")
-    LINK_FOR_PASSWORD_RECOVERY_DISPLAY = (By.CSS_SELECTOR, ".pwd-lost-q > a")
 
 
 class SignInLocator:
@@ -235,13 +214,6 @@ class GuideLocators:
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-    GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
-    GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
-
-
-
-class WidgetsConstractorLocators:
-    FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
 
 
 class RoadRiskApiLocators:
