@@ -1,9 +1,9 @@
 class MainPageUrls:
     url_main_page = "https://home.openweathermap.org"
     PRODUCT_COLLECTION_LINKS = ["https://openweathermap.org/api#current", "https://openweathermap.org/api#history",
-                                "https://openweathermap.org/api#maps",
-                                "https://openweathermap.org/weather-dashboard",
-                                "https://openweathermap.org/widgets-constructor"]
+                                    "https://openweathermap.org/api#maps",
+                                    "https://openweathermap.org/weather-dashboard",
+                                    "https://openweathermap.org/widgets-constructor"]
 
 
 class SignInUrls:
@@ -33,8 +33,6 @@ class SuitsUrls:
 class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
-    GIT_PHP_URL = 'https://github.com/cmfcmf/OpenWeatherMap-PHP-Api'
-    GIT_PYTHON_URL = 'https://github.com/csparpa/pyowm'
 
 
 class MigratePageUrls:
@@ -47,6 +45,6 @@ class OurInitiativesPageUrls:
     EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 
 
-class AboutUsPageUrls:
-    CONTACT_US_URL = "https://home.openweathermap.org/questions"
-    ABOUT_US_URL = "https://openweathermap.org/about-us"
+class ForBusinessPageUrls:
+    FOR_BUSINESS_PAGE_URL = "https://openweather.co.uk/"
+

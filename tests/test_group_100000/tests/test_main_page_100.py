@@ -27,3 +27,7 @@ class TestMainPage:
     def test_TC_003_13_01_verify_cookies_management_module_is_visible(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_manage_cookies_link_is_visible()
+
+    def test_TC_003_14_02_manage_cookies_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_manage_cookies_link_is_functionality()
