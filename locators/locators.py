@@ -83,7 +83,7 @@ class MainPageLocators:
     DAYS_IN_8_DAY_FORECAST_NUM = By.CSS_SELECTOR, 'div .day-list li span:nth-child(1)'
     APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
     GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
-
+    FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 
 class DashboardPageLocators:
     BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
@@ -302,3 +302,8 @@ class ForBusinessPageLocators:
     WEATHER_MAPS = By.XPATH, "(//a[@class='stats white-text'])[4]"
     ENERGY_PREDICTION = By.XPATH, "(//a[@class='stats white-text'])[5]"
 
+class SearchResultPageLocators:
+    ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
+    STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
+    NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
+    NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
