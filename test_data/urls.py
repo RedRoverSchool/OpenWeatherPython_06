@@ -44,3 +44,7 @@ class OurInitiativesPageUrls:
     OUR_INITIATIVES_PAGE = "https://openweathermap.org/our-initiatives"
     EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 
+
+class ForBusinessPageUrls:
+    FOR_BUSINESS_PAGE_URL = "https://openweather.co.uk/"
+
