@@ -230,6 +230,10 @@ class PartnersLocators:
 
 
 
+class WidgetsConstractorLocators:
+    FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
+
+
 class RoadRiskApiLocators:
     ROAD_RISK_API_LINK = 'https://openweathermap.org/api/road-risk'
     LINK_API_KEYS = 'https://home.openweathermap.org/api_keys'
