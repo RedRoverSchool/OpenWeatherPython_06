@@ -1,9 +1,9 @@
 class MainPageUrls:
     url_main_page = "https://home.openweathermap.org"
     PRODUCT_COLLECTION_LINKS = ["https://openweathermap.org/api#current", "https://openweathermap.org/api#history",
-                                    "https://openweathermap.org/api#maps",
-                                    "https://openweathermap.org/weather-dashboard",
-                                    "https://openweathermap.org/widgets-constructor"]
+                                "https://openweathermap.org/api#maps",
+                                "https://openweathermap.org/weather-dashboard",
+                                "https://openweathermap.org/widgets-constructor"]
 
 
 class SignInUrls:
