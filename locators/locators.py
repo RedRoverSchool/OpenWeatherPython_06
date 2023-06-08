@@ -230,6 +230,12 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
+    NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+    TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
+    HISTORICAL_COLLECTION_LINKS = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2) a")
+    HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
+    LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
+    CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
 
 
 class PartnersLocators:
