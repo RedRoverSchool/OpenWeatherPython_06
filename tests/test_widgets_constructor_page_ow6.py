@@ -8,8 +8,9 @@ class TestWidgetsConstractorPage:
         widget_page = WidgetsConstructorPage(driver)
         widget_page.verify_visibility_of_fahrenheit()
 
-
-
+    def test_tc_001_09_03_verify_visibility_of_celsius(self, driver):
+        widget_page = WidgetsConstructorPage(driver)
+        widget_page.verify_visibility_of_celsius()
 
 
 
