@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#multi
-link text: Multilingual support
-198.5   85.703125
-
-quit browser...
