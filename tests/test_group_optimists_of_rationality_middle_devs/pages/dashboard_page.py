@@ -39,5 +39,6 @@ class Dashboard(BasePage):
         return [element.is_displayed() for element in links]
 
     def verify_sign_up_button_is_clickable(self):
-        sign_up_button = self.driver.find_element(*DashboardLocators.PRICING_PLANS_SIGN_UP)
+        sign_up_button = self.driver.find_element(*DashboardPageLocators.PRICING_PLANS_SIGN_UP)
         assert sign_up_button.is_enabled(), "Sign up link is not clickable"
+

@@ -37,3 +37,7 @@ class DashboardPage(BasePage):
     def check_sections_are_display(self):
         links = self.check_pricing_and_limits_section()
         return [element.is_displayed() for element in links]
+
+    def verify_sign_up_button_is_clickable(self):
+        sign_up_button = self.driver.find_element(*DashboardLocators.PRICING_PLANS_SIGN_UP)
+        assert sign_up_button.is_enabled(), "Sign up link is not clickable"
