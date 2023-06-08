@@ -69,6 +69,19 @@ class MainPageLocators:
     CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
     LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
     LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
+    INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
+    sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+    section_locator = lambda section: (By.XPATH, f"//span[contains(text(), '{section}')]")
+    QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
+    EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
+    EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
+    MODULE_DOWNLOAD_OPENWEATHER_APP = (By.XPATH, "//div[@class='my-5']/p")
+    FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
+    LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
+    DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
+    DAYS_IN_8_DAY_FORECAST_NUM = By.CSS_SELECTOR, 'div .day-list li span:nth-child(1)'
+    APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
+    GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
 
 
 class DashboardPageLocators:
