@@ -8,6 +8,5 @@ class OurInitiativesPage(BasePage):
     locator = OurInitiativesPageLocators
 
     def verify_main_logo(self):
-        response = requests.get(MAIN_PAGE)
-        assert response.status_code == 200
+        assert self.driver.current_url == MAIN_PAGE
 
