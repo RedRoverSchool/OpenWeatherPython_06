@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from ..locators.API_keys_locators import ApiKeysLocator
+from ..locators.API_keys_locators_d import ApiKeysLocator
 from tests.test_group_ducktales.pages.sign_in_page import SignInPage
 from ..test_data.sign_in_page_data import LINK_SIGN_IN_PAGE
 
@@ -76,11 +76,8 @@ class ApiKeysPage(BasePage):
 
 
 
-    def check_api_key_is_not_generated(self, new_api_name):
-        initial_api_keys_table_length = self.get_length_of_table_api_keys()
-        self.enter_created_api_key_name(new_api_name)
-        self.click_generate_api_key_name_button()
-        final_api_keys_table_length = self.get_length_of_table_api_keys()
-        assert initial_api_keys_table_length == final_api_keys_table_length
+    def check_is_api_key_not_generated(self, initial_table_lenght):
+        actual_api_keys_table_length = self.get_length_of_table_api_keys()
+        assert actual_api_keys_table_length == initial_table_lenght
 
 
