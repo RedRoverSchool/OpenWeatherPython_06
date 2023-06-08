@@ -48,3 +48,8 @@ class OurInitiativesPageUrls:
 class ForBusinessPageUrls:
     FOR_BUSINESS_PAGE_URL = "https://openweather.co.uk/"
 
+
+class GuidePageUrls:
+    GUIDE_PAGE = "https://openweathermap.org/guide"
+    URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
+
