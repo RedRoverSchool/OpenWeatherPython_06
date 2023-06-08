@@ -96,6 +96,8 @@ class AboutUsPageLocators:
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
+    CONTACT_US_BUTTON = (By.CSS_SELECTOR, 'div.contact-us.blue-transparent-container.white-text a')
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
 
 
 class AppStorePageLocators:
@@ -198,6 +200,9 @@ class GuideLocators:
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
+    GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
+
 
 
 class RoadRiskApiLocators:

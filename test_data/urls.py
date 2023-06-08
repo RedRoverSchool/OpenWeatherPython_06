@@ -33,6 +33,8 @@ class SuitsUrls:
 class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
+    GIT_PHP_URL = 'https://github.com/cmfcmf/OpenWeatherMap-PHP-Api'
+    GIT_PYTHON_URL = 'https://github.com/csparpa/pyowm'
 
 
 class MigratePageUrls:
@@ -44,3 +46,7 @@ class OurInitiativesPageUrls:
     OUR_INITIATIVES_PAGE = "https://openweathermap.org/our-initiatives"
     EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
 
+
+class AboutUsPageUrls:
+    CONTACT_US_URL = "https://home.openweathermap.org/questions"
+    ABOUT_US_URL = "https://openweathermap.org/about-us"
