@@ -1,9 +1,9 @@
 from pages.base_page import BasePage
-from tests.test_group_optimists_of_rationality_middle_devs.locators.dashboard_page_locators import DashboardLocators
+from locators.locators import DashboardPageLocators
 
 
 class DashboardPage(BasePage):
-    locators = DashboardLocators
+    locators = DashboardPageLocators
 
     def subscribe_buttons_are_clickable(self):
         clickable_elements = self.check_links_are_clickable()
@@ -21,7 +21,7 @@ class DashboardPage(BasePage):
         return [element.is_enabled() for element in links]
 
     def verify_display_of_client_logos(self):
-        logo = self.driver.find_element(*DashboardLocators.DASHBOARD_LOGO_IMAGE)
+        logo = self.driver.find_element(*DashboardPageLocators.DASHBOARD_LOGO_IMAGE)
         assert logo.is_displayed(), 'Dynamic image with customer logos not showing up in the "Our users" section'
 
     def verify_display_of_Pricing_and_limits_section(self):
@@ -39,5 +39,5 @@ class DashboardPage(BasePage):
         return [element.is_displayed() for element in links]
 
     def verify_sign_up_button_is_clickable(self):
-        sign_up_button = self.driver.find_element(*DashboardLocators.PRICING_PLANS_SIGN_UP)
+        sign_up_button = self.driver.find_element(*DashboardPageLocators.PRICING_PLANS_SIGN_UP)
         assert sign_up_button.is_enabled(), "Sign up link is not clickable"
