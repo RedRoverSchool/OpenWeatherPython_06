@@ -476,3 +476,6 @@ class MainPage(BasePage):
         assert days_by_page == days_by_computer
 
 
+    def enter_city_in_weather_in_your_city_field(self, city):
+        input_city = self.driver.find_element(*self.locators.FIELD_WEATHER_IN_YUOR_CITY)
+        input_city.send_keys(city)
