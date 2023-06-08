@@ -52,6 +52,17 @@ class SignInPage(BasePage):
         link_for_password_recovery = self.element_is_visible(self.locators.LINK_FOR_PASSWORD_RECOVERY_DISPLAY)
         assert link_for_password_recovery.is_displayed(), "Link for password recovery display is not visible"
 
+    def check_authorization(self, email=None, password=None):
+        if email:
+            self.driver.find_element(*self.locators.EMAIL_INPUT2).send_keys(email)
+        if password:
+            self.driver.find_element(*self.locators.PASSWORD_FIELD_DISPLAY).send_keys(password)
+        self.driver.find_element(*self.locators.SUBMIT_BUTTON_DISPLAY).click()
+
+    def check_error_alert_text(self):
+        error_alert_text = self.driver.find_element(*self.locators.ERROR_ALERT).text
+        assert error_alert_text == 'Invalid Email or password.'
+
 
 class SigninPage(BasePage):
 

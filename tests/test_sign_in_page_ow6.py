@@ -1,5 +1,7 @@
+from pages.profile_page import ProfilePage
 from pages.sign_in_page import SignInPage
 from test_data.urls import SignInUrls
+from test_data.credentials import credentials
 
 from pages.main_page import MainPage
 from test_data.urls import MainPageUrls
@@ -62,3 +64,24 @@ class TestSignInPage:
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_link_for_password_recovery_is_visible()
+
+    def test_tc_014_04_01_verify_authorization_with_valid_data(self, driver, open_and_load_sign_in_page):
+        sign_in_page = SignInPage(driver)
+        sign_in_page.check_authorization(credentials['email'], credentials['password'])
+        profile_page = ProfilePage(driver)
+        profile_page.check_auth_notification()
+
+    def test_tc_014_04_02_verify_authorization_with_empty_fields(self, driver, open_and_load_sign_in_page):
+        sign_in_page = SignInPage(driver)
+        sign_in_page.check_authorization()
+        sign_in_page.check_error_alert_text()
+
+    def test_tc_014_04_05_verify_authorization_with_valid_email_and_empty_password_field(self, driver, open_and_load_sign_in_page):
+        check_email_without_password = SignInPage(driver)
+        check_email_without_password.check_authorization(credentials['email'])
+        check_email_without_password.check_error_alert_text()
+
+    def test_tc_014_04_06_verify_authorization_with_valid_password_and_empty_email_field(self, driver, open_and_load_sign_in_page):
+        check_password_without_email = SignInPage(driver)
+        check_password_without_email.check_authorization(credentials['password'])
+        check_password_without_email.check_error_alert_text()
