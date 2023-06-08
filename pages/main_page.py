@@ -290,3 +290,17 @@ class MainPage(BasePage):
         self.click_support_link()
         self.click_how_to_start_option(wait=wait)
         self.check_header_link(link), "The current URL doesn't match expected link."
+
+    def check_manage_cookies_link_is_visible(self):
+        manage_cookies_btn = self.element_is_visible(self.locators.MANAGE_COOKIES_BTN)
+        assert manage_cookies_btn.is_displayed(), "The Manage cookies module is not visible"
+
+    def check_manage_cookies_link_is_functionality(self):
+        manage_cookies_btn = self.find_element_and_click(self.locators.MANAGE_COOKIES_BTN)
+        current_url = self.driver.current_url
+        expected_url = "https://openweathermap.org/cookies-settings"
+        assert current_url == expected_url, f"The Manage cookie link leads to an incorrect page. Actual: {current_url}"
+
+    def verify_how_to_start_link_is_clickable(self):
+        how_to_start = self.driver.find_element(*self.locators.HOW_TO_START_LINK)
+        assert how_to_start.is_enabled(), "The 'How to start' link does not clickable"
