@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from locators.locators import GuideLocators
 from selenium.webdriver.support.color import Color
-from test_data.miscellaneous import EXPECTED_LINK_COLOR_HEX
+from test_data.miscellaneous import BasePageMisc
 
 
 class GuidePage(BasePage):
@@ -20,5 +20,5 @@ class GuidePage(BasePage):
         for link in links:
             link_color_rgba = link.value_of_css_property("color")
             link_color_hex = Color.from_string(link_color_rgba).hex
-            assert link_color_hex == EXPECTED_LINK_COLOR_HEX, f"The link color is {link_color_hex}, " \
-                                                              f"while {EXPECTED_LINK_COLOR_HEX} is expected"
+            assert link_color_hex == BasePageMisc.EXPECTED_LINK_COLOR_HEX, f"The link color is {link_color_hex}, " \
+                                                              f"while {BasePageMisc.EXPECTED_LINK_COLOR_HEX} is expected"
