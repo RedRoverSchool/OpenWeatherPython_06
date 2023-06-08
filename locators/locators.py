@@ -17,6 +17,7 @@ class BasePageLocators:
     ASK_A_QUESTION_OPTION = (
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
     HEADER = (By.XPATH, "//h1")
 
 
@@ -69,15 +70,38 @@ class MainPageLocators:
     CITY_NAME = (By.CSS_SELECTOR, "div.current-container.mobile-padding div h2")
     LOC = (By.CSS_SELECTOR, "div.control-el svg.icon-current-location")
     LOAD_DIV = (By.CSS_SELECTOR, 'div.owm-loader-container > div')
-
+    INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
+    sections = ["Education", "Healthcare", "Open Source", "Weather stations"]
+    section_locator = lambda section: (By.XPATH, f"//span[contains(text(), '{section}')]")
+    QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
+    EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
+    EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
+    MODULE_DOWNLOAD_OPENWEATHER_APP = (By.XPATH, "//div[@class='my-5']/p")
+    FIRST_DAY_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'ul.day-list li:nth-child(1) span:nth-child(1)'
+    LIST_DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list'
+    DAYS_IN_8_DAY_FORECAST = By.CSS_SELECTOR, 'div .day-list li'
+    DAYS_IN_8_DAY_FORECAST_NUM = By.CSS_SELECTOR, 'div .day-list li span:nth-child(1)'
+    APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
+    GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
+    FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
 
 class DashboardPageLocators:
+    HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
+    HEADER_DASHBOARD = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[3]/a')
+    PRICING_PLANS_SUBSCRIBE = (By.XPATH, '//tr[1]/th[3]/p/a')
+    PRICING_PLANS_SUBSCRIBE1 = (By.XPATH, '//tr[1]/th[4]/p/a')
+    PRICING_PLANS_SUBSCRIBE2 = (By.XPATH, '//tr[1]/th[5]/p/a')
+    PRICING_PLANS_SUBSCRIBE3 = (By.XPATH, '//tr[1]/th[6]/p/a')
+    DASHBOARD_LOGO_IMAGE = (By.XPATH, '//html/body/main/div[2]/div[8]/div/div/div[2]/img')
+    PRICING_AND_LIMITS = (By.XPATH, '//h2[text()="Pricing and limits"]')
+    PRICING_AND_LIMITS1 = (By.XPATH, '//html/body/main/div[2]/section/div/p')
+    PRICING_AND_LIMITS2 = (By.XPATH, '//html/body/main/div[2]/section/div/table')
     BTN_DASHBOARD = (By.CSS_SELECTOR, "#desktop-menu [href$=-dashboard]")
     TITLE_HOW_TO_START = (By.XPATH, "//div/h2[contains(text(),'How to Start')]")
     TRY_THE_DASHBOARD2_BTN = (By.XPATH, "//div[6]//a[text()='Try the Dashboard']")
     PANEL_SIGN_IN_FORM = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
     WEATHER_SYMBOL = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
-
+    PRICING_PLANS_SIGN_UP = (By.XPATH, "//a[text()='Sign Up']")
 
 class PricingPageLocators:
     URL_PRICING = 'https://openweathermap.org/price'
@@ -87,6 +111,7 @@ class PricingPageLocators:
 class ApiPageLocators:
     API_PAGE = 'https://openweathermap.org/api'
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
+    button_history_api_full_archive = (By.XPATH, "//*[@id='history']//*[@href='/api/history-api-full-archive']")
     ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
     ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
 
@@ -99,6 +124,8 @@ class AboutUsPageLocators:
     NEWS_AND_UPDATES_BUTTON = (By.XPATH, "// div / a[contains( @ href, 'blog/category/weather')]")
     APP_STORE_BUTTON = (By.XPATH, "//a[contains(@href, 'app/openweather')]/img")
     BYU_BY_SUBSCRIPTIONS = (By.XPATH, "//a[contains(@href, 'subscriptions')]")
+    CONTACT_US_BUTTON = (By.CSS_SELECTOR, 'div.contact-us.blue-transparent-container.white-text a')
+    ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
 
 
 class AppStorePageLocators:
@@ -203,6 +230,12 @@ class GuideLocators:
                                      (By.XPATH, '//p[2]//*[@href="/api"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/road-risk"]'),
                                      (By.XPATH, '//p[2]//*[@href="/api/solar-energy-prediction"]')]
+    NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+    TITLE_NWP_MODEL_LOCATOR = (By.CSS_SELECTOR, '.col-sm-12 ol h2:nth-of-type(2)')
+    HISTORICAL_COLLECTION_LINKS = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2) a")
+    HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
+    LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
+    CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
     INDUSTRY_APIS_LOCATOR = (By.XPATH, "//*[contains(text(),'industry standard APIs')]")
     ONE_CALL_API_BY_CALL_LOCATOR = (By.XPATH, "//*[text()='One Call API by call']")
     SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.CSS_SELECTOR, "a[href='/price'].ow-btn.round.btn-orange")
@@ -211,6 +244,13 @@ class GuideLocators:
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
+    GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
+
+
+
+class WidgetsConstractorLocators:
+    FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
 
 
 class RoadRiskApiLocators:
@@ -285,3 +325,8 @@ class ForBusinessPageLocators:
     WEATHER_MAPS = By.XPATH, "(//a[@class='stats white-text'])[4]"
     ENERGY_PREDICTION = By.XPATH, "(//a[@class='stats white-text'])[5]"
 
+class SearchResultPageLocators:
+    ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
+    STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
+    NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
+    NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
