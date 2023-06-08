@@ -78,6 +78,14 @@ class TestMainPage:
         expected_link = "https://openweather.co.uk/"
         page.check_openweather_for_business_link_functionality(expected_link)
 
+    def test_TC_003_13_01_verify_cookies_management_module_is_visible(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_manage_cookies_link_is_visible()
+
+    def test_TC_003_14_02_manage_cookies_link_functionality(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_manage_cookies_link_is_functionality()
+
     def test_TC_001_02_01_verify_temperature_switched_on_metric_system(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.checking_the_temperature_system_switching("°C")
@@ -124,6 +132,10 @@ class TestMainPage:
         def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
             page.verify_how_to_start_visibility()
+
+        def test_tc_003_05_03_verify_how_to_start_link_is_clickable(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.verify_how_to_start_link_is_clickable()
 
         def test_tc_002_03_10_01_how_to_start_link_leads_to_correct_page(self, driver, open_and_load_main_page, wait):
             main_page = MainPage(driver)

@@ -45,6 +45,7 @@ class MainPageLocators:
     DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    MANAGE_COOKIES_BTN = (By.XPATH, '//*[@id="stick-footer-panel"]//a')
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
@@ -86,6 +87,8 @@ class PricingPageLocators:
 class ApiPageLocators:
     API_PAGE = 'https://openweathermap.org/api'
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
+    ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
+    ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
 
 
 class AboutUsPageLocators:
