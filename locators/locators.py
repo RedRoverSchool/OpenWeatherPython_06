@@ -17,6 +17,7 @@ class BasePageLocators:
     ASK_A_QUESTION_OPTION = (
         By.XPATH, "//*[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']")
     API_LINK = (By.CSS_SELECTOR, "#desktop-menu a[href*='api']")
+    HEADER = (By.XPATH, "//h1")
 
 
 class MainPageLocators:
@@ -44,6 +45,7 @@ class MainPageLocators:
     DISPLAYED_CITY = (By.CSS_SELECTOR, '.grid-container.grid-4-5 h2')
     NO_RESULTS_NOTIFICATION = (By.CSS_SELECTOR, '.widget-notification > span')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    MANAGE_COOKIES_BTN = (By.XPATH, '//*[@id="stick-footer-panel"]//a')
     ABOUT_US_BUTTON = (By.XPATH, "//a[@href='/about-us']")
     C_TEMP_LOCATOR = (By.CSS_SELECTOR, '.switch-container .option:nth-child(2)')
     LINE_IN_8_DAYS_FORECAST_LOCATOR = (By.XPATH, "//div[@class='day-list-values']/div/span[contains(text(), '°C')]")
@@ -85,6 +87,8 @@ class PricingPageLocators:
 class ApiPageLocators:
     API_PAGE = 'https://openweathermap.org/api'
     button_weather_alerts_api_doc = (By.CSS_SELECTOR, "//*[@id='current']//a[@href='/api/push-weather-alerts']")
+    ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
+    ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
 
 
 class AboutUsPageLocators:
@@ -132,6 +136,13 @@ class ApiKeysLocator:
 class SignInPageLocators:
     CREATE_AN_ACCOUNT_LINK = (By.CSS_SELECTOR, ".sign-form > :nth-child(4) > a")
     REGISTRATION_QUESTION = By.XPATH, "//p[contains(text(), 'Not registered?')]"
+    REGISTRATION_FORM_DISPLAY = (By.CSS_SELECTOR, ".sign-form")
+    EMAIL_FIELD_DISPLAY = (By.CSS_SELECTOR, ".new_user > :nth-child(3)")
+    PASSWORD_FIELD_DISPLAY = (By.CSS_SELECTOR, "#user_password")
+    REMEMBER_ME_RECORD_DISPLAY = (By.CSS_SELECTOR, "label.boolean")
+    CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
+    SUBMIT_BUTTON_DISPLAY = (By.CSS_SELECTOR, ".new_user > .btn")
+    LINK_FOR_PASSWORD_RECOVERY_DISPLAY = (By.CSS_SELECTOR, ".pwd-lost-q > a")
 
 
 class SignInLocator:
@@ -226,6 +237,7 @@ class ClimateForecastLocators:
 class FooterLocators:
     FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
 
+
 class MigratePageLocators:
     SUBSCRIBE_FOR_FREE_LINK = (By.XPATH, "//a[contains(@ href, '/home/sign_up')]")
 
@@ -244,3 +256,32 @@ class SubscriptionLocators:
     LOADING = (By.CSS_SELECTOR, "div.LOADING-container.LOADING-double")
     LOAD_PAGE = (By.XPATH, "//div[@class='wrapper']")
     ELEMENT_STRIPE = (By.CSS_SELECTOR, "#stripe-title")
+
+
+class FAQPageLocators:
+    FAQ_QUESTIONS_HEADINGS = (By.CSS_SELECTOR, ".question-heading")
+    FAQ_QUESTIONS_AREA = (By.CSS_SELECTOR, ".question.visible")
+    FAQ_ANSWER_SECTIONS = (By.XPATH, "./following-sibling::div[@class='question-content']")
+    FAQ_ANSWER_TEXT = (By.CSS_SELECTOR, "p")
+
+
+class OurInitiativesPageLocators:
+    INITIATIVES = By.CSS_SELECTOR, "ul[id='first-level-nav'] li:nth-child(7) a:nth-child(1)"
+    SECTION = By.XPATH, "//span[contains(text(), '{}')]"
+    EDUCATION_LEARN_MORE = By.CSS_SELECTOR, ".ow-btn.round.btn-black"
+    QUESTION_XPATH = "//*[@id='faq']/div[{i}]/p"
+
+
+class ForBusinessPageLocators:
+    FOR_BUSINESS = By.CSS_SELECTOR, "div[id='desktop-menu'] a[class='marketplace']"
+    PRODUCTS_IN_HEADER = By.CSS_SELECTOR, "a[href='/products']"
+    PRODUCTS_HEADINGS = By.CSS_SELECTOR, "a big"
+    BLACK_BUTTONS = By.CSS_SELECTOR, "a[class='ow-btn round btn-black']"
+    ORANGE_BUTTONS = By.CSS_SELECTOR, "a[class='btn_block orange round']"
+    TALK_TO_US_BUTTON = By.XPATH, "(//a[contains(text(), 'Talk to us')])[1]"
+    CURRENT_AND_FORECASTS = By.XPATH, "(//a[@class='stats white-text'])[1]"
+    HISTORICAL_DATA = By.XPATH, "(//a[@class='stats white-text'])[2]"
+    WEATHER_ALERTS = By.XPATH, "(//a[@class='stats white-text'])[3]"
+    WEATHER_MAPS = By.XPATH, "(//a[@class='stats white-text'])[4]"
+    ENERGY_PREDICTION = By.XPATH, "(//a[@class='stats white-text'])[5]"
+

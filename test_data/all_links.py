@@ -8,3 +8,6 @@ class Links:
     URL_MARKETPLACE = 'https://home.openweathermap.org/marketplace'
     URL_SUBSCRIPTION = "https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base"
     GUIDE_PAGE = 'https://openweathermap.org/guide'
+    FAQ_URL = 'https://openweathermap.org/faq'
+    HOW_TO_START_URL = 'https://openweathermap.org/appid'
+

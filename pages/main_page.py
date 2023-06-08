@@ -1,6 +1,7 @@
 from .base_page import BasePage
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import MainPageLocators, FooterLocators
+from locators.locators import MainPageLocators, FooterLocators, BasePageLocators
 from test_data.all_links import Links
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -185,11 +186,11 @@ class MainPage(BasePage):
         self.driver.switch_to.window(driver.window_handles[1])
         assert self.driver.current_url == Links.PRIVACY_POLICY_URL
 
-    def click_support_nav_menu(self):
+    def click_support_link(self):
         return self.driver.find_element(*self.locators.SUPPORT_MENU).click()
 
     def faq_submenu_should_be_visible(self, wait):
-        element = wait.until(EC.visibility_of_element_located(self.locators.SUPPORT_FAQ_SUBMENU))
+        element = wait.until(EC.visibility_of_element_located(BasePageLocators.FAQ_OPTION))
         assert element.is_displayed() and element.is_enabled(), f'"{element}" link is not visible or clickable'
 
     def click_footer_product_collections_widgets(self, expected_link):
@@ -268,3 +269,43 @@ class MainPage(BasePage):
         current_city_name = self.driver.find_element(*self.locators.CITY_NAME)
         assert expected_city_name == current_city_name.text, \
             "The current name of the city does not match the expected name of the city"
+
+    def click_faq_option(self, wait):
+        submenu = wait.until(EC.visibility_of_element_located(BasePageLocators.FAQ_OPTION))
+        actions = ActionChains(self.driver)
+        actions.click(submenu).perform()
+        return submenu
+
+    def check_correct_header_is_displayed(self, text):
+        element_text = self.driver.find_element(*BasePageLocators.HEADER).text
+        assert element_text == text, f'""Expected {text} is not present or is incorrect.'
+
+    def check_faq_link_opens_opens_correct_page(self, wait, link):
+        self.click_support_link()
+        self.click_faq_option(wait=wait)
+        self.check_header_link(link), "The current URL doesn't match expected link."
+
+    def click_how_to_start_option(self, wait):
+        submenu = wait.until(EC.visibility_of_element_located(BasePageLocators.HOW_TO_START_OPTION))
+        actions = ActionChains(self.driver)
+        actions.click(submenu).perform()
+        return submenu
+
+    def check_how_to_start_link_opens_opens_correct_page(self, wait, link):
+        self.click_support_link()
+        self.click_how_to_start_option(wait=wait)
+        self.check_header_link(link), "The current URL doesn't match expected link."
+
+    def check_manage_cookies_link_is_visible(self):
+        manage_cookies_btn = self.element_is_visible(self.locators.MANAGE_COOKIES_BTN)
+        assert manage_cookies_btn.is_displayed(), "The Manage cookies module is not visible"
+
+    def check_manage_cookies_link_is_functionality(self):
+        manage_cookies_btn = self.find_element_and_click(self.locators.MANAGE_COOKIES_BTN)
+        current_url = self.driver.current_url
+        expected_url = "https://openweathermap.org/cookies-settings"
+        assert current_url == expected_url, f"The Manage cookie link leads to an incorrect page. Actual: {current_url}"
+
+    def verify_how_to_start_link_is_clickable(self):
+        how_to_start = self.driver.find_element(*self.locators.HOW_TO_START_LINK)
+        assert how_to_start.is_enabled(), "The 'How to start' link does not clickable"
