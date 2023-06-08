@@ -29,6 +29,11 @@ class TestFooterLinksclickability:
         page.verify_clickability_current_and_forecast_apis()
 
 
+    def test_tc_003_03_06_verify_widgets_clickability(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.verify_widgets_clickability()
+
+
 class TestHowToStartLink:
     def test_tc_003_05_02_verify_how_to_start_visibility(self, driver, open_and_load_main_page, wait):
         page = MainPage(driver)
