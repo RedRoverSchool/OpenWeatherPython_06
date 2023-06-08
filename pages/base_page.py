@@ -46,6 +46,7 @@ class BasePage:
             case 'api':
                 self.driver.find_element(*self.locators.API_LINK).click()
 
+
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
         assert link_name in self.driver.current_url
