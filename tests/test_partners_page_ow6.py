@@ -1,3 +1,4 @@
+import pytest
 from pages.partners_page import PartnersPage
 from test_data.urls import PartnersPageUrls
 from locators.locators import PartnersLocators
@@ -37,6 +38,26 @@ class TestPartnersPage:
         page = PartnersPage(driver)
         page.verify_visibility_and_clickability_of_the_github_button_php(wait)
 
+    def test_TC_011_03_01_verify_the_link_view_on_github_is_visible(self, driver):
+        page = PartnersPage(driver)
+        page.verify_the_link_view_on_github_is_visible()
+
+    def test_TC_011_03_02_verify_the_link_view_on_github_is_clickable(self, driver):
+        page = PartnersPage(driver)
+        page.verify_the_link_view_on_github_is_clickable()
+
+    def test_TC_011_03_01_verify_the_link_open_manual_is_visible(self, driver):
+        page = PartnersPage(driver)
+        page.verify_the_link_open_manual_is_visible()
+
+    def test_TC_011_03_04_verify_the_link_open_manual_is_clickable(self, driver):
+        page = PartnersPage(driver)
+        page.verify_the_link_open_manual_is_clickable()
+
+
+    def test_TC_011_01_03_verify_17_sections_are_visible(self, driver):
+        page = PartnersPage(driver)
+        page.verify_17_sections_are_visible()
     def test_TC_011_12_01_verify_the_link_in_raspberry_is_visible_and_clickable(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
