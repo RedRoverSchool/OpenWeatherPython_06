@@ -10,4 +10,5 @@ class Links:
     URL_SUBSCRIPTION = "https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base"
     FAQ_URL = 'https://openweathermap.org/faq'
     HOW_TO_START_URL = 'https://openweathermap.org/appid'
+    URL_PARTNERS = 'https://openweathermap.org/examples'
 
