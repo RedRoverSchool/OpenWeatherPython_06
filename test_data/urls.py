@@ -33,7 +33,24 @@ class SuitsUrls:
 class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
+    WEATHER_INDICATOR_URL = "https://launchpad.net/my-weather-indicator"
+    GIT_PYTHON_URL = 'https://github.com/csparpa/pyowm'
 
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'
     URL_SIGN_UP = 'https://home.openweathermap.org/users/sign_up'
+
+
+class OurInitiativesPageUrls:
+    OUR_INITIATIVES_PAGE = "https://openweathermap.org/our-initiatives"
+    EDUCATION_SECTION_PAGE = "https://openweathermap.org/our-initiatives/student-initiative"
+
+
+class ForBusinessPageUrls:
+    FOR_BUSINESS_PAGE_URL = "https://openweather.co.uk/"
+
+
+class GuidePageUrls:
+    GUIDE_PAGE = "https://openweathermap.org/guide"
+    URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
+
