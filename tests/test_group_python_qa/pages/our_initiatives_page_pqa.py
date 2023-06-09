@@ -5,8 +5,5 @@ from tests.test_group_python_qa.links.links_all_pages import MAIN_PAGE
 
 
 class OurInitiativesPage(BasePage):
-    locator = OurInitiativesPageLocators
-
-    def verify_main_logo(self):
-        assert self.driver.current_url == MAIN_PAGE
+    pass
 
