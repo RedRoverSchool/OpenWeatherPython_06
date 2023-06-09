@@ -244,6 +244,8 @@ class PartnersLocators:
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
     GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
+    UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
+
 
 
 
