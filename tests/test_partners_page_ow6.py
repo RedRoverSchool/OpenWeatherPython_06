@@ -3,8 +3,6 @@ from pages.partners_page import PartnersPage
 from test_data.urls import PartnersPageUrls
 from locators.locators import PartnersLocators
 
-from test_data.partners_page_data import sections
-
 
 class TestPartnersPage:
 
