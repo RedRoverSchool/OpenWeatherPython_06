@@ -2,7 +2,7 @@ from locators.locators import PartnersLocators
 from pages.base_page import BasePage
 from test_data.urls import PartnersPageUrls
 from test_data.all_links import Links
-from test_data.partners_page_data import data
+from test_data.partners_page_data import *
 
 
 class PartnersPage(BasePage):
