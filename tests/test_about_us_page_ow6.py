@@ -33,4 +33,11 @@ class TestAboutUsPage:
         element = about_us_page.element_is_visible(about_us_page.locators.BYU_BY_SUBSCRIPTIONS)
         about_us_page.check_cursor_style_transformation(element)
 
+    def test_tc_001_15_08_contact_us_button_is_clickable(self, driver):
+        about_us_page = AboutUsPage(driver)
+        about_us_page.contact_us_button_is_visible_and_clickable()
 
+
+    def test_TC_001_15_06_verify_correct_redirection_of_the_contact_us_button(self, driver):
+        about_us_page = AboutUsPage(driver)
+        about_us_page.verify_redirection_contact_us_button_to_the_new_webpage()
