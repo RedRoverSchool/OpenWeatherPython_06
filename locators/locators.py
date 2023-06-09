@@ -252,7 +252,6 @@ class PartnersLocators:
 
 
 
-
 class WidgetsConstractorLocators:
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
     CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
