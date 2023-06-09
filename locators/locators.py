@@ -245,7 +245,10 @@ class PartnersLocators:
     GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
     GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
-
+    BUTTON_VIEW_ON_GITHUB = (By.XPATH,
+                             "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
+    BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
+    HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
 
 
 
