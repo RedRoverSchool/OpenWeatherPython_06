@@ -37,3 +37,13 @@ class TestPartnersPage:
         page = PartnersPage(driver)
         page.verify_visibility_and_clickability_of_the_github_button_php(wait)
 
+    def test_TC_011_12_01_verify_the_link_in_raspberry_is_visible_and_clickable(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visible_and_clickable(PartnersLocators.RASPBERRY)
+
+    def test_TC_011_17_01_verify_the_mobile_link_leads_to_correct_page(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.scroll_to_the_element(PartnersLocators.MOBILE_APP_BLOCK)
+        page.check_link(PartnersLocators.MOBILE_APP_LINK, PartnersPageUrls.MOBILE_APP)
