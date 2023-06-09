@@ -1,5 +1,6 @@
 from tests.test_group_ducktales.pages.weather_conditions_page_d import WeatherConditionsPage
 from ..test_data.weather_conditions_page_data_d import WeatherConditionsData as data
+import pytest
 
 class TestWeatherConditionsPage:
 

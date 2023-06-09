@@ -1,4 +1,5 @@
 from pages.base_page import BasePage
+from ..locators.weather_conditions_locators_d import WeatherConditionsLocators as locs
 
 class WeatherConditionsPage(BasePage):
 
