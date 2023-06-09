@@ -84,6 +84,10 @@ class MainPageLocators:
     APP_STORE_BRAND_LINK = By.CSS_SELECTOR, "img[src='/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg']"
     GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
     FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
+    GRAPHIC_HOURLY_FORECAST_LOCATOR = (By.CSS_SELECTOR, "canvas[id=chart-component]")
+    WEATHER_ITEMS_LOCATOR = (By.CSS_SELECTOR, "ul.weather-items")
+    WEATHER_ITEM_LOCATOR = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
+
 
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
@@ -331,3 +335,8 @@ class SearchResultPageLocators:
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+
+
+class StudentInitiativeLocators:
+    WEBSITE_LINK_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
+    ASK_US_POPUP_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')

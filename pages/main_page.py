@@ -479,3 +479,15 @@ class MainPage(BasePage):
     def enter_city_in_weather_in_your_city_field(self, city):
         input_city = self.driver.find_element(*self.locators.FIELD_WEATHER_IN_YUOR_CITY)
         input_city.send_keys(city)
+
+
+
+    def graphic_hourly_forecast_is_displayed(self, wait):
+        graphic_hourly_forecast = self.driver.find_element(*self.locators.GRAPHIC_HOURLY_FORECAST_LOCATOR)
+        self.go_to_element(graphic_hourly_forecast)
+        assert self.element_is_displayed, 'Graphic hourly forecast is not displayed'
+
+    def weather_items_are_displayed(self, wait):
+        weather_items = self.driver.find_elements(*self.locators.WEATHER_ITEMS_LOCATOR)
+        self.driver.execute_script("arguments[0].scrolldown;", weather_items)
+        assert self.weather_items_are_displayed, 'Weather items are not displayed'
