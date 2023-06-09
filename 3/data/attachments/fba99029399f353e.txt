@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#limit
-link text: Limitation of result
-198.5   85.625
-
-quit browser...
