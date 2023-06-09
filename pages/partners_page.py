@@ -2,7 +2,7 @@ from locators.locators import PartnersLocators
 from pages.base_page import BasePage
 from test_data.urls import PartnersPageUrls
 from test_data.all_links import Links
-from test_data.partners_page_data import *
+from test_data.partners_page_data import data
 
 
 class PartnersPage(BasePage):
@@ -69,12 +69,6 @@ class PartnersPage(BasePage):
         self.go_to_element(button)
         assert button.is_enabled(), \
             "The 'Open manual' button is not clickable"
-
-    def get_section_element(self, section):
-        section_locator = (self.locators.HEADERS_ON_THE_PAGE[0], self.HEADERS_ON_THE_PAGE[1].format(section))
-        section_element = self.element_is_present(section_locator)
-        assert section_element.is_displayed(), f"Section '{section}' not found on the page"
-        return section_element
 
     def verify_17_sections_are_visible(self):
         self.driver.get(Links.URL_PARTNERS)
