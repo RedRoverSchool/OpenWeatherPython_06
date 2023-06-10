@@ -1,0 +1,710 @@
+<html lang="en"><head>
+        <!-- smart banner apple -->
+        <meta name="apple-itunes-app" content="app-id=1535923697">
+        <script src="https://partner.googleadservices.com/gampad/cookie.js?domain=openweathermap.org&amp;callback=_gfp_s_&amp;client=ca-pub-6837309406068967"></script><script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202306060101/show_ads_impl.js" id="google_shimpl"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script data-ad-client="ca-pub-6837309406068967" async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" data-checked-head="true"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+    <meta http-equiv="Expires" content="Tue, Sep 20 2018 15:27:22 GMT">
+    <meta http-equiv="Last-Modified" content="Tue, Sep 20 2018 15:27:22 GMT">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="weather, world, Openstreetmap, forecast, Openweather, current">
+    <meta name="description" content="OpenWeather Dashboard is a visual tool for working with weather data and timely tracking of dangerous phenomena. Global coverage, Email notifications, Track the main weather parameters: temperature, wind speed, precipitation.">
+    <meta name="author" content="OpenWeatherMap.org">
+    <meta name="domain" content="OpenWeatherMap.org">        
+    <meta name="p:domain_verify" content="34fe229eab8562dca90f4a5962ff80a9">
+    <meta property="title" content="Weather dashboard">                <link rel="shortcut icon" href="/themes/openweathermap/assets/vendor/owm/img/icons/favicon.ico">
+<link rel="icon" href="/themes/openweathermap/assets/vendor/owm/img/icons/logo_16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/themes/openweathermap/assets/vendor/owm/img/icons/logo_32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" sizes="60x60" type="image/png">   
+        <title>Weather dashboard - OpenWeatherMap</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-31601618-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-31601618-1');
+</script>        
+        <script src="//code.jquery.com/jquery-1.9.1.min.js" integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Array.from,Array.assign,fetch&amp;flags=always,gated"></script>
+<script src="/themes/openweathermap/assets/js/bundle_owm_preload.c31872127471c475ade1.js"></script><meta http-equiv="origin-trial" content="A7CQXglZzTrThjGTBEn1rWTxHOEtkWivwzgea+NjyardrwlieSjVuyG44PkYgIPGs8Q9svD8sF3Yedn0BBBjXAkAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A3vKT9yxRPjmXN3DpIiz58f5JykcWHjUo/W7hvmtjgh9jPpQgem9VbADiNovG8NkO6mRmk70Kex8/KUqAYWVWAEAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A4A26Ymj79UVY7C7JGUS4BG1s7MdcDokAQf/RP0paks+RoTYbXHxceT/5L4iKcsleFCngi75YfNRGW2+SpVv1ggAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="As0hBNJ8h++fNYlkq8cTye2qDLyom8NddByiVytXGGD0YVE+2CEuTCpqXMDxdhOMILKoaiaYifwEvCRlJ/9GcQ8AAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3MTk1MzI3OTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="AgRYsXo24ypxC89CJanC+JgEmraCCBebKl8ZmG7Tj5oJNx0cmH0NtNRZs3NB5ubhpbX/bIt7l2zJOSyO64NGmwMAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3MTk1MzI3OTksImlzU3ViZG9tYWluIjp0cnVlfQ==">            
+        <link href="/themes/openweathermap/assets/css/bundle_owm_styles.c31872127471c475ade1.css" rel="stylesheet"> 
+<link href="/themes/openweathermap/assets/css/stick_footer_panel.c31872127471c475ade1.css" rel="stylesheet">
+<!-- Resources -->
+<!--link href='/themes/openweathermap/assets/vendor/mosaic/fonts/font-awesome/css/font-awesome.min.css' rel="stylesheet"-->            
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,500italic" rel="stylesheet">        <link href="/themes/openweathermap/assets/css/new_owm_styles.635b0c2ecd513644.css" rel="stylesheet"> 
+
+<!-- Resources -->
+<!--link href='/themes/openweathermap/assets/vendor/mosaic/fonts/font-awesome/css/font-awesome.min.css' rel="stylesheet"-->            
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,500italic" rel="stylesheet">    
+        
+    <link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=openweathermap.org" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=openweathermap.org"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=openweathermap.org" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=openweathermap.org"></script><meta http-equiv="origin-trial" content="A7CQXglZzTrThjGTBEn1rWTxHOEtkWivwzgea+NjyardrwlieSjVuyG44PkYgIPGs8Q9svD8sF3Yedn0BBBjXAkAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A3vKT9yxRPjmXN3DpIiz58f5JykcWHjUo/W7hvmtjgh9jPpQgem9VbADiNovG8NkO6mRmk70Kex8/KUqAYWVWAEAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A4A26Ymj79UVY7C7JGUS4BG1s7MdcDokAQf/RP0paks+RoTYbXHxceT/5L4iKcsleFCngi75YfNRGW2+SpVv1ggAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="As0hBNJ8h++fNYlkq8cTye2qDLyom8NddByiVytXGGD0YVE+2CEuTCpqXMDxdhOMILKoaiaYifwEvCRlJ/9GcQ8AAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3MTk1MzI3OTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="AgRYsXo24ypxC89CJanC+JgEmraCCBebKl8ZmG7Tj5oJNx0cmH0NtNRZs3NB5ubhpbX/bIt7l2zJOSyO64NGmwMAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3MTk1MzI3OTksImlzU3ViZG9tYWluIjp0cnVlfQ=="></head><iframe id="google_esf" name="google_esf" src="https://googleads.g.doubleclick.net/pagead/html/r20230607/r20190131/zrt_lookup.html" style="display: none;"></iframe>
+    <body class="body-orange" onclick="closePopUps()">
+                    <style>
+    .banner_stripe {
+        width: 100%; 
+        height: 80px; 
+        background-color: #1c1c1e;
+        display: none;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        font-family: Roboto,sans-serif;
+        position: relative;
+        z-index: 5;
+    }
+    .banner_container {
+        display: flex; 
+        flex-direction: row; 
+        align-items: center; 
+        margin-left: 18px;
+        }
+    .banner_icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 15px;
+        background-size: 64px 64px;
+        margin: 8px;
+    }
+    .google_button {
+        /* background-color: #3e83f8; */
+        background-color: #2196f3;
+        height: 36px;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,.26);
+        box-sizing: border-box;
+        color: #fff !important;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: .5px;
+        line-height: 24px;
+        margin: 6px;
+        min-width: 40px;
+        outline: 0;
+        padding: 10px 14px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .google_button:hover, .google_button:focus {
+        text-decoration: none;
+    }
+    .smartbanner__exit {
+        position: absolute;
+        top: calc(50% - 6px);
+        left: 12px;
+        display: block;
+        margin: 0;
+        width: 12px;
+        height: 12px;
+        border: 0;
+        text-align: center; 
+        }
+    .smartbanner__exit::before, .smartbanner__exit::after {
+      position: absolute;
+      width: 1px;
+      height: 12px;
+      content: ' ';
+      background: #767676;
+      }
+    .smartbanner__exit::before {
+      transform: rotate(45deg); }
+    .smartbanner__exit::after {
+      transform: rotate(-45deg); }
+    .smartbanner-text {
+        font-size: 12px; 
+        margin: 0; 
+        color: #96969c;
+     }
+</style>
+
+<div id="banner_android" class="banner_stripe">
+    <div class="banner_container">
+        <a class="smartbanner__exit" onclick="bannerClose()"></a>
+        <img src="/themes/openweathermap/assets/img/mobile_app/android-app-top-banner.png" class="banner_icon">
+        <div>
+            <p class="smartbanner-text" style="color: #ffffff;">OpenWeather</p>
+            <p class="smartbanner-text">OpenWeather Ltd.</p>
+            <p class="smartbanner-text">GET - on Google Play</p>
+        </div>
+    </div>
+    <a class="google_button" style="font-size: 16px;" href="https://play.google.com/store/apps/details?id=uk.co.openweather" onclick="ga('send', 'event', 'app', 'click', 'androidTopBanner');">VIEW</a>
+</div>
+
+<script>
+    
+    var bannerClosed = "owm_banner_android_closed"
+    
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    
+    function setCookie (name, value) {
+        var expires = new Date()
+        expires.setTime(expires.getTime() + (5 * 1000 * 60 * 60 * 24))
+        document.cookie = name + '=' + escape(value) + '; expires=' + expires.toGMTString() + '; path=/'
+      }
+      
+    function bannerClose() {
+        document.getElementById("banner_android").style.display = "none";
+        setCookie(bannerClosed, true)
+    }
+    
+    document.onload = function(bannerClosed) {
+       if ((document.cookie.indexOf() === -1)  && /Android/i.test(window.navigator.userAgent)) {
+           document.getElementById("banner_android").style.display = 'flex';
+        } 
+    }()
+    
+    
+</script><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><div id="aswift_0_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-6837309406068967&amp;output=html&amp;adk=1812271804&amp;adf=3025194257&amp;lmt=1686361027&amp;plat=3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C41%3A32%2C42%3A32&amp;format=0x0&amp;url=https%3A%2F%2Fopenweathermap.org%2Fweather-dashboard&amp;ea=0&amp;pra=5&amp;wgl=1&amp;uach=WyJMaW51eCIsIjUuMTUuMCIsIng4NiIsIiIsIjExMy4wLjU2NzIuMTI2IixbXSwwLG51bGwsIjY0IixbWyJIZWFkbGVzc0Nocm9tZSIsIjExMy4wLjU2NzIuMTI2Il0sWyJDaHJvbWl1bSIsIjExMy4wLjU2NzIuMTI2Il0sWyJOb3QtQS5CcmFuZCIsIjI0LjAuMC4wIl1dLDBd&amp;dt=1686361026894&amp;bpp=34&amp;bdt=93&amp;idt=120&amp;shv=r20230607&amp;mjsv=m202306060101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;nras=1&amp;correlator=906514904308&amp;frm=20&amp;pv=2&amp;ga_vid=85130232.1686361027&amp;ga_sid=1686361027&amp;ga_hid=1584243570&amp;ga_fc=1&amp;u_tz=0&amp;u_his=2&amp;u_h=600&amp;u_w=800&amp;u_ah=600&amp;u_aw=800&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=-12245933&amp;ady=-12245933&amp;biw=1382&amp;bih=754&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44792109%2C44759842%2C44759927%2C44788441%2C44793500&amp;oid=2&amp;pvsid=2891791635774348&amp;tmod=1994682975&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C800%2C0%2C1382%2C754%2C1382%2C754&amp;vis=1&amp;rsz=%7C%7Cs%7C&amp;abl=NS&amp;fu=32768&amp;bc=31&amp;ifi=1&amp;uci=a!1&amp;fsb=1&amp;dtd=141" data-google-container-id="a!1" data-load-complete="true"></iframe></div></ins>   
+                <nav id="nav-website" onclick="toggleMenu(event)">
+  <ul id="first-level-nav">
+    <li class="logo">
+      <a href="/">
+        <img src="/themes/openweathermap/assets/img/logo_white_cropped.png">
+      </a>
+    </li>
+    <li id="hamburger">
+      <img src="/themes/openweathermap/assets/img/owm_icons/icon_hamburger.svg">
+    </li>
+    <div id="desktop-menu">
+    <form role="search" action="/find" method="get">
+      <input type="text" name="q" placeholder="Weather in your city">
+      <input type="submit" style="display:none;">
+    </form>
+    <ul>
+      <li>
+        <a href="/guide" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Guide</a>
+      </li>
+      <li>
+        <a href="/api" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'api']);">API</a>
+      </li>
+        <li>
+        <a href="/weather-dashboard" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'dashboard']);">Dashboard</a>
+      </li>
+      <li>
+        <a href="https://home.openweathermap.org/marketplace" target="_blank" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'dashboard']);">Marketplace</a>
+      </li>
+      <li>
+        <a href="/price" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'price']);">Pricing</a>
+      </li>
+      <li>
+        <a href="/weathermap" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Maps</a>
+      </li>
+      <li>
+        <a href="/our-initiatives" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Our Initiatives</a>
+      </li>
+      <li>
+        <a href="/examples" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'examples']);">Partners</a>
+      </li>
+      <li>
+        <a href="https://openweather.co.uk/blog/category/weather" target="_blank" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'news']);">Blog</a>
+      </li>
+      <li>
+        <a href="https://openweather.co.uk" class="marketplace" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'marketplace']);" target="_blank">For Business</a>
+      </li>
+              <li class="user-li"><a href="https://openweathermap.org/home/sign_in">Sign in</a></li>
+              <li class="with-dropdown">
+          <div id="support-dropdown">Support</div>
+          <ul class="dropdown-menu" id="support-dropdown-menu">
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/appid">How to start</a></li>
+            <li><a href="https://home.openweathermap.org/questions" target="_blank">Ask a question</a></li>
+          </ul>
+        </li>
+      </ul>
+  </div>
+  </ul>
+  <ul id="mobile-menu">
+    <li>
+      <form role="search" action="/find" method="get">
+        <input type="text" name="q" placeholder="Weather in your city">
+        <input type="submit" style="display:none;">
+      </form>
+    </li>
+    <li>
+      <a href="/guide" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Guide</a>
+    </li>
+    <li>
+      <a href="/api" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'api']);">API</a>
+    </li>
+    <li>
+        <a href="/weather-dashboard" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'dashboard']);">Dashboard</a>
+      </li>
+      <li>
+        <a href="https://home.openweathermap.org/marketplace" target="_blank" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'dashboard']);">Marketplace</a>
+      </li>
+    <li>
+      <a href="/price" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'price']);">Pricing</a>
+    </li>
+    <li>
+      <a href="/weathermap" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Maps</a>
+    </li>
+    <li>
+      <a href="/our-initiatives" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'weather']);">Our Initiatives</a>
+    </li>
+    <li>
+      <a href="/examples" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'examples']);">Partners</a>
+    </li>
+    <li>
+      <a href="https://openweather.co.uk/blog/category/weather" target="_blank" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'news']);">Blog</a>
+    </li>
+    <li>
+        <a href="https://openweather.co.uk" class="marketplace" onclick="_gaq.push(['_trackEvent', 'Navbar', 'Main', 'marketplace']);" target="_blank">For Business</a>
+      </li>
+    <li>
+      <a href="https://home.openweathermap.org/questions">Ask a question</a>
+    </li>
+          <li><a href="https://openweathermap.org/home/sign_in">Sign in</a></li>
+      </ul>
+</nav>
+<div style="height: 48pt; width: 100%; visibility: hidden;"></div> 
+        <div id="notes_block"></div>
+        <main class="wrapper"> 
+                            <div class="topic">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7">
+                                    <h1 class="breadcrumb-title">Weather dashboard</h1>
+                            </div>
+            <div class="col-sm-5">
+                <ol class="breadcrumb pull-right hidden-xs">
+                    <li><a href="/">Home</a></li>
+                                                            
+                                                                        <li class="breadcrumb__leaf">Weather dashboard</li>
+                                                            </ol>
+            </div>
+        </div>
+    </div>   
+</div>       
+                                    <style rel="stylesheet">
+
+.container {
+padding-left: 10px;
+padding-right: 10px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.4;
+    }
+ .logos {
+    margin: 0 auto;
+    height: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.responsive {
+   width: 100%;
+  height: auto;   
+}
+
+.logos img {
+  height: 60px;
+  display: inline-block;
+  padding-left: 970px;
+  animation: logoScroll 50s linear infinite;
+}
+
+.logos2 img {
+  animation-delay: 25s;
+}
+
+.weather {
+    margin-bottom: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.h1-break {
+    margin-bottom: 35px;
+}
+
+.h2-break {
+    margin-bottom: 25px;
+}
+
+h4 {
+ font-weight: bold;   
+}
+
+.headline {
+padding-bottom: 1px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+    line-height: 50px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.below {
+  margin-bottom: 0px;   
+}
+
+table {
+ border: 1px solid #ddd !important;
+box-shadow:1px 1px 23px 0px rgba(0,0,0,0.15);
+-webkit-box-shadow:1px 1px 23px 0px rgba(0,0,0,0.15);
+-moz-box-shadow:1px 1px 23px 0px rgba(0,0,0,0.15);
+
+
+}
+
+th {
+ padding-left: 10px;  
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border: 1px solid #ddd !important;
+  align-items: center;
+}
+
+td {
+ padding-left: 10px;
+ padding-bottom: 10px;
+  padding-top: 10px;
+  border: 1px solid #ddd !important;
+}
+
+li {
+ padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+
+@keyframes logoScroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-5350px, 0);
+  }
+}
+
+</style>
+
+<script src="/themes/openweathermap/assets/js/pricing.js"></script>
+
+   <div class="container">
+   
+   <div class="row weather">
+   <div class="col-lg-6">
+   <h1 class="h1-break"><span class="orange-text"><b>OpenWeather </b></span><br><b>Dashboard</b></h1>
+   <h3>A visual tool for working with weather data and timely tracking of dangerous phenomena</h3>
+   <div class="row weather text-center below">
+       <p><a class="btn_like btn-orange owm-block-mainpage__btn" href="https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website" target="_blank">Try the Dashboard</a></p>
+   </div>
+   </div>
+   <div class="col-md-6">
+      <img class="responsive" src="/themes/openweathermap/assets/img/weather_db.jpg">
+   </div>
+   </div>
+ <br>  
+      <div class="row weather">
+      <p align="center"><big><b><a href="https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website">The OpenWeather Dashboard</a> is a lightweight and flexible visual tool for our customers who would like to be notified weather events to make informed decisions and plan actions based on the weather input.</b></big></p>
+      </div>
+      
+<div class="row weather" style="display: flex; justify-content: space-between; align-items: center;">
+    <div href="/current" class="stats" style="color: #48484a;">
+        <div>
+           <img src="/themes/openweathermap/assets/img/landing/icon-1.png">
+        </div>
+        <span>Set triggers to track weather <br>conditions</span>
+     </div>
+     <div href="/api/hourly-forecast" class="stats" style="color: #48484a;">
+        <div>
+           <img src="/themes/openweathermap/assets/img/landing/icon-2.png">
+        </div>
+        <span>Track trigger events in the dashboard or receive <br>email notifications</span>
+     </div>
+     <div href="/forecast16" class="stats" style="color: #48484a;">
+        <div>
+           <img src="/themes/openweathermap/assets/img/landing/icon-4.png">
+        </div>
+        <span>Make timely decisions once trigger<br> conditions are met</span>
+     </div>
+</div>      
+<br>
+<div class="row weather">
+  <h2 class="orange-text h2-break">Product Features</h2>
+  <ul>
+         <div class="col-lg-3">
+             <p><b>Global coverage</b><br> 
+             Choose any location on <br>the globe</p>
+             </div>
+             
+             <div class="col-lg-3">
+             <p><b>Email notifications</b><br> 
+             Set up triggers. You will be notified by email and in the Dashboard once trigger conditions are met</p>
+             </div>
+             
+             <div class="col-lg-3">
+             <p><b>Weather parameters</b><br> 
+             Track the main weather parameters: temperature, wind speed, precipitations</p>
+             </div>
+             
+             <div class="col-lg-3">
+             <p><b>Accuracy</b><br> 
+             Weather data are updated every hour (based on <a href="/api/hourly-forecast" target="_blank">Hourly forecast API</a>)</p>
+             </div>
+             
+             </ul>
+
+</div>     
+
+
+<div class="row weather"> 
+    <h2 class="orange-text h2-break">How to Start</h2>
+     <p>It is easy to start working with the Dashboard. There are 3 steps:</p>
+                <ol>
+                    <li><p><a href="https://home.openweathermap.org/users/sign_up?campaign_id=weather_dashboard_website" target="_blank"><b>Sign up</b></a> to our service. Alternatively, please use your existing <a href="https://home.openweathermap.org/users/sign_in?campaign_id=weather_dashboard_website">OpenWeather username and password</a>.</p></li>
+                    <li><p><a href="https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website"><b>Go to the Dashboard</b></a>. Then, you will be taken to the <a href="https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website">"Events" section</a> (the events list will be empty because you haven't set up any triggers yet).</p></li>
+                    <li><p><a href="https://home.openweathermap.org/dashboard/triggers/create?campaign_id=weather_dashboard_website"><b>Go to the "New trigger" section</b></a> and set up the conditions of your first trigger by choosing a trigger location, weather conditions, etc.<br>
+                    Detailed instruction of how to set up a trigger is available <a href="/weather-dashboard/dashboard-documentation#setup">here</a>.</p></li>
+                </ol>
+                <p><b>Well done!</b> From now on, you will receive email notifications and see future events on the Dashboard's main screen as soon as the trigger conditions are met. </p>
+      <!-- <img class="responsive" src="/themes/openweathermap/assets/img/forecasted-events.png"> -->
+<p>Our <a href="/weather-dashboard/dashboard-documentation"><b>detailed user manual</b></a> contains complete information about the functions of the Dashboard and how to work with them.</p>
+</div>
+
+<div class="row weather text-center below">
+    
+    <p><a class="btn_like btn-orange owm-block-mainpage__btn" href="https://home.openweathermap.org/dashboard/events?campaign_id=weather_dashboard_website" target="_blank">Try the Dashboard</a></p>
+</div>
+
+<div class="row weather">
+<h2 class="orange-text h2-break">Our users</h2>
+<p>Weather Dashboard can be easily used in a wide range of cases, from large enterprises who need to monitor critical business functions across the world to individual users who want to track the weather for various other purposes.</p>
+</div>
+
+<div class="row weather">         
+<div class="section grey-background" style="min-height: 130px;">
+  <div class="section-content mobile-padding" style="position: relative; min-height: 60px;">
+    <div class="logos">
+      <img src="/themes/openweathermap/assets/img/owm-clients-logos-2.png">
+    </div>
+    <div class="logos logos2">
+      <img src="/themes/openweathermap/assets/img/owm-clients-logos-2.png">
+    </div>
+  </div>
+</div>
+</div>
+<section id="price">
+
+<div class="row weather">
+  <h2 class="orange-text h2-break">Pricing and limits</h2>
+<p>Please note that access to the Dashboard is included in the <a href="/full-price">Current &amp; Forecasts subscription plans collection</a>. This means that, should you subscribe to one of these plans, you automatically obtain access to both the Dashboard and other products included in that plan. </p>
+<table>
+<tbody>
+<tr>
+
+<th style="vertical-align: bottom" width="200"> Price is fixed, no other hidden costs <br>(VAT is not included)</th>
+
+<th class="text-center"><h4 class="orange-text">Free</h4><h4 class="before-buttons">&nbsp;</h4><br> <p><a class="btn_block transparent round" href="https://home.openweathermap.org/users/sign_up?campaign_id=weather_dashboard_website">Sign Up</a></p></th>
+
+<th class="text-center"><h4 class="orange-text">Startup</h4><h4 class="before-buttons" id="price_startup"><b>40 USD</b><small>/ month</small></h4> <br> <p><a class="btn_block transparent round" href="https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/startup">Subscribe</a></p></th>
+
+<th class="text-center"><h4 class="orange-text">Developer</h4><h4 class="before-buttons" id="price_dev"><b>180 USD</b><small>/ month</small></h4><br> <p><a class="btn_block transparent round" href="https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/dev">Subscribe</a></p></th>
+
+<th class="text-center"><h4 class="orange-text">Professional</h4><h4 class="before-buttons" id="price_pro"><b>470 USD</b><small>/ month</small></h4><br> <p><a class="btn_block transparent round" href="https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/pro">Subscribe</a></p></th>
+
+<th class="text-center"><h4 class="orange-text">Enterprise</h4><h4 class="before-buttons" id="price_ent"><b>2000 USD</b><small>/ month</small></h4><br> <p><a class="btn_block transparent round" href="https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/ent">Subscribe</a></p></th>
+
+</tr>
+
+<tr>
+
+<td>Number of available triggers</td>
+<td>3</td>
+<td>5</td>
+<td>10</td>
+<td>200</td>
+<td>Custom</td>
+</tr>
+
+<tr>
+
+<td>How to get notifications</td>
+<td>Only via Dashboard</td>
+<td>Dashboard and emails</td>
+<td>Dashboard and emails</td>
+<td>Dashboard and emails</td>
+<td>Dashboard and emails</td>
+</tr>
+
+<tr>
+
+<td>Number of email addresses for each trigger</td>
+<td>-</td>
+<td>3</td>
+<td>10</td>
+<td>20</td>
+<td>100</td>
+</tr>
+
+</tbody>
+
+</table>
+
+
+</div>
+</section>
+
+
+<div class="row weather text-center below">
+If you have any questions or suggestions, please contact us:
+
+<p class="below">
+<a class="btn_like btn-orange owm-block-mainpage__btn" href="https://home.openweathermap.org/questions" target="_blank">Contact Us</a>
+</p>
+
+</div>
+
+</div>     
+                        <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 728x90 -->
+<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 0px;" data-ad-client="ca-pub-6837309406068967" data-ad-slot="6027350861" data-adsbygoogle-status="done"><div id="aswift_1_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 728px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: hidden; opacity: 0;"><iframe id="aswift_1" name="aswift_1" style="left: 0px; position: absolute; top: 0px; border: 0px; width: 728px; height: 0px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="728" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-6837309406068967&amp;output=html&amp;h=90&amp;slotname=6027350861&amp;adk=897285760&amp;adf=1049984056&amp;pi=t.ma~as.6027350861&amp;w=728&amp;lmt=1686361027&amp;format=728x90&amp;url=https%3A%2F%2Fopenweathermap.org%2Fweather-dashboard&amp;wgl=1&amp;uach=WyJMaW51eCIsIjUuMTUuMCIsIng4NiIsIiIsIjExMy4wLjU2NzIuMTI2IixbXSwwLG51bGwsIjY0IixbWyJIZWFkbGVzc0Nocm9tZSIsIjExMy4wLjU2NzIuMTI2Il0sWyJDaHJvbWl1bSIsIjExMy4wLjU2NzIuMTI2Il0sWyJOb3QtQS5CcmFuZCIsIjI0LjAuMC4wIl1dLDBd&amp;dt=1686361027110&amp;bpp=19&amp;bdt=309&amp;idt=19&amp;shv=r20230607&amp;mjsv=m202306060101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3Df474dbd3ba0ae58d-22a58d5c6ce100a9%3AT%3D1686361027%3ART%3D1686361027%3AS%3DALNI_Mb3r4bA4qRV-Leuw7C2R1iDa8OYLg&amp;gpic=UID%3D00000c4649532b47%3AT%3D1686361027%3ART%3D1686361027%3AS%3DALNI_MaEue6Xtbfynrik_-wCA_oyY0Q1oQ&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=906514904308&amp;frm=20&amp;pv=1&amp;ga_vid=85130232.1686361027&amp;ga_sid=1686361027&amp;ga_hid=1584243570&amp;ga_fc=1&amp;u_tz=0&amp;u_his=2&amp;u_h=600&amp;u_w=800&amp;u_ah=600&amp;u_aw=800&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=194&amp;ady=2585&amp;biw=1367&amp;bih=754&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44792109%2C44759842%2C44759927%2C44788441%2C44793500&amp;oid=2&amp;pvsid=2891791635774348&amp;tmod=1994682975&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C800%2C0%2C1382%2C754%2C1382%2C754&amp;vis=1&amp;rsz=%7C%7CpeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=0&amp;bc=31&amp;ifi=2&amp;uci=a!2&amp;btvi=1&amp;fsb=1&amp;xpc=R8M03NVWiS&amp;p=https%3A//openweathermap.org&amp;dtd=26" data-google-container-id="a!2" data-google-query-id="CLXx8q_It_8CFQYDswAd2ZMGnA" data-load-complete="true"></iframe></div></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>                    </div>
+                </div>                
+            </div>
+                                    
+        </main>
+        <div id="stick-footer-panel"><div class="stick-footer-panel"><div class="container"><div class="row"><div class="stick-footer-panel__container"><p class="stick-footer-panel__description">We use cookies which are essential for the site to work. We also use non-essential cookies to help us improve our services. Any data collected is anonymised. You can allow all cookies or manage them individually.</p><div class="stick-footer-panel__btn-container"><button type="button" class="stick-footer-panel__link">Allow all</button><a href="/cookies-settings" class="stick-footer-panel__link" rel="noopener noreferrer"> Manage cookies </a></div></div></div></div></div></div>
+                    <div id="footer-website" onclick="toggleFooterSection(event)">
+   <div class="inner-footer-container">
+      <div class="horizontal-section">
+         <div class="footer-section">
+            <p class="section-heading">Product Collections</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="/api#current">Current and Forecast APIs</a></li>
+                  <li><a href="/api#history">Historical Weather Data</a></li>
+                  <li><a href="/api#maps">Weather Maps</a></li>
+                  <li><a href="/weather-dashboard">Weather Dashboard</a></li>
+                  <li><a href="/widgets-constructor">Widgets</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Subscription</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="/appid">How to start</a></li>
+                  <li><a href="/price">Pricing</a></li>
+                  <li><a href="https://home.openweathermap.org/users/sign_up">Subscribe for free</a></li>
+                  <li><a href="/faq">FAQ</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Company</p>
+            <div class="section-content">
+               <p>OpenWeather is a team of IT experts and data scientists that has been practising deep weather data science. For each point on the globe, OpenWeather provides historical, current and forecasted weather data via light-speed APIs. Headquarters in London, UK.</p>
+            </div>
+         </div>
+      </div>
+      <div class="horizontal-section">
+         <div class="footer-section">
+            <p class="section-heading">Technologies</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="/technology">Our technology</a></li>
+                  <li><a href="/accuracy-and-quality">Accuracy and quality of weather data</a></li>
+                  <li><a href="/stations">Connect your weather station</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section">
+            <p class="section-heading">Terms &amp; Conditions</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf" target="_blank">Terms and conditions of sale</a></li>
+                  <li><a href="https://openweather.co.uk/privacy-policy" target="_blank">Privacy Policy</a></li>
+                  <li><a href="https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf" target="_blank">Website	terms	and	conditions</a></li>
+               </ul>
+            </div>
+         </div>
+         <div class="footer-section not-foldable">
+            <p class="section-heading" style="visibility: hidden">Contact us</p>
+            <div class="section-content">
+               <ul>
+                  <li><a href="/about-us">About us</a></li>
+                  <li><a href="https://openweather.co.uk/blog/category/weather" target="_blank">Blog</a></li>
+                   <li><a href="https://openweather.co.uk/" target="_blank">OpenWeather for Business</a></li>
+                  <li><a href="https://home.openweathermap.org/questions" target="_blank">Ask a question</a></li>
+                 <!--  <li><a href="mailto:info@openweathermap.org">info@openweathermap.org</a>  -->
+                 
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="my-5">
+         <p style="margin: 0;">Download OpenWeather app</p>
+         <div style="display: flex; flex-direction: row;">
+            <a style="margin-left: -10px;" href="https://apps.apple.com/gb/app/openweather/id1535923697" target="_blank">
+            <img style="height:60px; padding:10px;" src="/themes/openweathermap/assets/img/mobile_app/app-store-badge.svg">
+            </a>  
+            <a href="https://play.google.com/store/apps/details?id=uk.co.openweather" target="_blank">
+            <img style="height:60px;" alt="Get it on Google Play" src="/themes/openweathermap/assets/img/mobile_app/google-play-badge.png">
+            </a>
+         </div>
+      </div>
+      <div class="horizontal-section my-5" style="align-items: start">
+      <div>
+         <span>Supplier of Achilles UVDB community</span><br>
+         <span>© 2012 — 2023 OpenWeather ® All rights reserved</span><br><br>
+       </div>
+         <div class="social">
+            <a href="https://www.facebook.com/groups/270748973021342" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_facebook.png"></a>
+            <a href="https://twitter.com/OpenWeatherMap" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_twitter.png"></a>
+            <a href="https://www.linkedin.com/company/9816754" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_linkedin.png"></a>
+            <a href="https://medium.com/@openweathermap" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_medium.png"></a>
+            <a href="https://t.me/openweathermap" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_telegram.png"></a>
+            <a href="https://github.com/search?q=openweathermap&amp;ref=cmdform" target="_blank"><img src="/themes/openweathermap/assets/img/owm_icons/icon_github.png"></a>
+         </div>
+      </div>
+      <div class="horizontal-section"></div>
+   </div>
+</div>   
+                 
+        <script src="https://cdn.ravenjs.com/3.6.1/raven.min.js"></script>
+<script>Raven.config('http://66df88eb63e94f27964b84031e49b358@sentry.owm.io/16').install()</script>  
+        <script src="/themes/openweathermap/assets/js/bundle_owm_postload.c31872127471c475ade1.js"></script>
+<script src="/themes/openweathermap/assets/js/stick_footer_panel.c31872127471c475ade1.js"></script>
+<script src="/themes/openweathermap/assets/js/postload_scripts_js.c31872127471c475ade1.js"></script>
+<script src="/themes/openweathermap/assets/js/advertising.js"></script>           
+    
+<div id="topcontrol" title="" style="position: fixed; bottom: 5px; right: 5px; opacity: 0; cursor: pointer;"><i class="fa fa-angle-up backtotop"></i></div><script type="text/javascript" src="https://tpc.googlesyndication.com/sodar/sodar2.js"></script></body></html>
