@@ -58,3 +58,9 @@ class TestPartnersPage:
     def test_TC_011_01_03_verify_17_sections_are_visible(self, driver):
         page = PartnersPage(driver)
         page.verify_17_sections_are_visible()
+
+    def test_TC_011_02_02_Verify_that_user_is_redirected_to_a_new_window_page_after_click_on_the_link_More_detailes_with_source_code(self,
+            driver, wait):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.redirecting_to_more_details_with_source_code_page(wait)

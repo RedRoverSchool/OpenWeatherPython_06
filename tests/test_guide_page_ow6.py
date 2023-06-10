@@ -26,3 +26,9 @@ class TestGuidePage:
         page = GuidePage(driver, GuidePageUrls.GUIDE_PAGE)
         page.open_page()
         page.verify_several_links_color(GuideLocators.HISTORICAL_COLLECTION_LINKS)
+
+    def test_TC_004_06_02_verify_visibility_and_clickability_One_Call_API_by_call_link(self, driver):
+        page = GuidePage(driver, GuidePageUrls.GUIDE_PAGE)
+        page.open_page()
+        page.one_call_api_link_is_visible()
+        page.one_call_api_link_is_clickable()

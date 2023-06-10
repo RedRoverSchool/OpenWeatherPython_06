@@ -22,3 +22,12 @@ class GuidePage(BasePage):
             link_color_hex = Color.from_string(link_color_rgba).hex
             assert link_color_hex == BasePageMisc.EXPECTED_LINK_COLOR_HEX, f"The link color is {link_color_hex}, " \
                                                               f"while {BasePageMisc.EXPECTED_LINK_COLOR_HEX} is expected"
+
+    def one_call_api_link_is_visible(self):
+        one_call_api = self.driver.find_element(*GuideLocators.ONE_CALL_API_BY_CALL)
+        assert one_call_api.is_displayed(), "One call api link is not visible"
+
+
+    def one_call_api_link_is_clickable(self):
+        one_call_api = self.driver.find_element(*GuideLocators.ONE_CALL_API_BY_CALL)
+        assert one_call_api.is_enabled(), "One call api link is not clackable"
