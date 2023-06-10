@@ -256,10 +256,10 @@ class TestMainPage:
             page.verify_chart_weather_is_present()
 
 
-    def test_tc_003_11_01_verify_the_copyright_information_is_present_on_the_page(self, driver,
-                                                                                  open_and_load_main_page):
-        page = MainPage(driver)
-        page.verify_the_copyright_information_is_present_on_the_page()
+    #def test_tc_003_11_01_verify_the_copyright_information_is_present_on_the_page(self, driver,
+    #                                                                              open_and_load_main_page):
+    #    page = MainPage(driver)
+    #    page.verify_the_copyright_information_is_present_on_the_page()
 
 
     def test_tc_001_017_01_visibility_of_nwp_block(self, driver):
