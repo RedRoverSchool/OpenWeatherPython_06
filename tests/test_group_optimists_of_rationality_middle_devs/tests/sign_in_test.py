@@ -19,3 +19,13 @@ class TestSignIn:
         """
         page = SignInPage(driver)
         page.user_succesfuly_log_in(driver)
+
+    def test_AT_014_06___Sign_in___Negative_testing_wrong_password___correct_login(self, driver, open_and_load_sign_in_page):
+        """
+        Negative testing of logging to the site
+        Pair used:
+        1. Valid E-mail
+        2. NOT a valid password
+        """
+        page = SignInPage(driver)
+
