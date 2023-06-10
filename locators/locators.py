@@ -327,11 +327,6 @@ class ForBusinessPageLocators:
     ENERGY_PREDICTION = By.XPATH, "(//a[@class='stats white-text'])[5]"
 
 
-class WeatherConditionsLocators:
-    WEATHER_CONDITIONS_PAGE_URL = "https://openweathermap.org/weather-conditions"
-    ELEMENTS_LOCATOR_CODES = lambda table: (By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[1]")
-    ELEMENTS_LOCATOR_DESC = lambda table: (
-    By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[3]")
 
 class SearchResultPageLocators:
     ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
