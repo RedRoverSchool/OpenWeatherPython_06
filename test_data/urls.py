@@ -35,12 +35,16 @@ class SuitsUrls:
 class WeatherConditionsUrls:
     url_weather_conditions = "https://openweathermap.org/weather-conditions"
 
-    
+
 class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
     WEATHER_INDICATOR_URL = "https://launchpad.net/my-weather-indicator"
     GIT_PYTHON_URL = 'https://github.com/csparpa/pyowm'
+    RASPBERRY_GITHUB = 'https://github.com/DzikuVx/raspberry_temperature_log'
+    ANDROID_WEATHER = 'http://www.survivingwithandroid.com/2016/01/4-free-weather-providers-api-to-develop.html'
+    INFO_BOARD_GITHUB = "https://github.com/search?q=openweathermap&ref=cmdform"
+    MOBILE_APP = 'http://owmgapp.glob3mobile.com'
 
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'
@@ -60,4 +64,6 @@ class GuidePageUrls:
     GUIDE_PAGE = "https://openweathermap.org/guide"
     URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 
-    
+
+class CookiesSettingPageUrls:
+    COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
