@@ -178,6 +178,8 @@ class SignInLocator:
     EMAIL_INPUT = By.CSS_SELECTOR, '#user_email'
     PASSWORD_INPUT = By.CSS_SELECTOR, '#user_password'
     SUBMIT_BUTTON = By.CSS_SELECTOR, "input[value='Submit']"
+    ERROR_LOGIN_MESSAGE_DIV = (By.CSS_SELECTOR, '.panel.panel-red')
+    SUCCESS_LOGIN_MESSAGE_DIV = By.CSS_SELECTOR, '.panel.panel-green'
 
 
 class MarketplaceLocators:

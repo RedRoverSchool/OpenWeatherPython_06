@@ -54,13 +54,18 @@ class SignInPage(BasePage):
 
 
 class SigninPage(BasePage):
+    locators = SignInLocator()
 
     def log_in(self):
         self.driver.find_element(*SignInLocator.EMAIL_INPUT).send_keys(cr.credentials["email"])
         self.driver.find_element(*SignInLocator.PASSWORD_INPUT).send_keys(cr.credentials["password"])
         self.driver.find_element(*SignInLocator.SUBMIT_BUTTON).click()
 
-    def log_in_with_custom_values(self,email_text,password_text):
+    def log_in_with_custom_values(self, email_text, password_text):
         self.driver.find_element(*SignInLocator.EMAIL_INPUT).send_keys(email_text)
         self.driver.find_element(*SignInLocator.PASSWORD_INPUT).send_keys(password_text)
         self.driver.find_element(*SignInLocator.SUBMIT_BUTTON).click()
+
+    def confirm_error_message_is_visible(self):
+        assert_massage = self.element_is_visible(self.locators.ERROR_LOGIN_MESSAGE_DIV)
+        assert assert_massage, "Error: missing logging error message"

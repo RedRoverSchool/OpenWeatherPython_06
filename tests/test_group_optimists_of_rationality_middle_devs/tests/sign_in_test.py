@@ -9,7 +9,7 @@ from tests.test_group_optimists_of_rationality_middle_devs.locators.sign_in_loca
 import pytest
 
 from tests.test_group_optimists_of_rationality_middle_devs.pages.sign_in_page import SignInPage
-
+from pages.sign_in_page import SigninPage
 
 class TestSignIn:
     def test_TC_014_04_01_AT_014_04_01_01_Sign_in_Functionality_for_registered_User_Verify_authorization_with_valid_data_optimized(self, driver, open_and_load_sign_in_page, sign_in):
@@ -27,6 +27,6 @@ class TestSignIn:
         1. Valid E-mail
         2. NOT a valid password
         """
-        page = SignInPage(driver)
-        page.log_in_with_custom_values(self,'2ta3ukw@fbpoint.net',' ')
-        time.sleep(10)
+        page = SigninPage(driver)
+        page.log_in_with_custom_values('2ta3ukw@fbpoint.net', ' ')
+        page.confirm_error_message_is_visible()
