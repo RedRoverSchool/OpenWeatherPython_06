@@ -68,3 +68,8 @@ class TestPartnersPage:
         page.open_page()
         page.scroll_to_the_element(PartnersLocators.MOBILE_APP_BLOCK)
         page.check_link(PartnersLocators.MOBILE_APP_LINK, PartnersPageUrls.MOBILE_APP)
+
+    def test_TC_011_06_01_verify_the_first_link_in_android_section_is_visible_and_clickable(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visible_and_clickable(PartnersLocators.ANDROID_FIRST_LINK)
