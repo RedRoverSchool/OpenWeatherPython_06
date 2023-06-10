@@ -4,6 +4,7 @@ class MainPageUrls:
                                     "https://openweathermap.org/api#maps",
                                     "https://openweathermap.org/weather-dashboard",
                                     "https://openweathermap.org/widgets-constructor"]
+    QUALITY_INFO_PAGE = "https://openweathermap.org/accuracy-and-quality"
 
 
 class SignInUrls:
@@ -28,6 +29,11 @@ class SuitsUrls:
             'https://openweathermap.org/stations',
             'https://openweathermap.org/about-us'
             ]
+
+
+
+class WeatherConditionsUrls:
+    url_weather_conditions = "https://openweathermap.org/weather-conditions"
 
 
 class PartnersPageUrls:
@@ -57,6 +63,7 @@ class ForBusinessPageUrls:
 class GuidePageUrls:
     GUIDE_PAGE = "https://openweathermap.org/guide"
     URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
+
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
