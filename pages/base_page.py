@@ -155,3 +155,7 @@ class BasePage:
 
     def check_for_redirection(self, expected_url):
         assert self.driver.current_url == expected_url
+
+    def find_element(self, locator):
+        return self.driver.find_element(*locator)
+

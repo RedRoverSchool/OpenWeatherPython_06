@@ -1,9 +1,10 @@
 import pytest
 
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators
+from locators.locators import MainPageLocators, FooterLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
+from test_data.main_page_data import *
 
 
 class TestMainPage:
@@ -253,3 +254,20 @@ class TestMainPage:
         page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
         page.open_page()
         page.element_is_visible(MainPageLocators.NWP_MODEL)
+
+    @pytest.mark.parametrize('page', data["pages"])
+    def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(self, driver, page):
+        footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+        footer.open_page()
+        footer_actual_result = footer.find_element(FooterLocators.FOOTER_WEBSITE)
+        footer.go_to_element(footer_actual_result)
+        footer.check_footer_website_is_displayed(footer_actual_result)
+
+    @pytest.mark.parametrize('page', data["pages"])
+    def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_data(self, driver, page):
+        footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+        footer.open_page()
+        copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
+        footer.go_to_element(copyright_actual_result)
+        footer.check_copyright_is_displayed(copyright_actual_result)
+
