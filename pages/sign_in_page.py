@@ -60,5 +60,7 @@ class SigninPage(BasePage):
         self.driver.find_element(*SignInLocator.PASSWORD_INPUT).send_keys(cr.credentials["password"])
         self.driver.find_element(*SignInLocator.SUBMIT_BUTTON).click()
 
-    def log_in_email_only(self):
-        self.driver.find_element(*SignInLocator.EMAIL_INPUT).send_keys(cr.credentials["email"])
+    def log_in_with_custom_values(self,email_text,password_text):
+        self.driver.find_element(*SignInLocator.EMAIL_INPUT).send_keys(email_text)
+        self.driver.find_element(*SignInLocator.PASSWORD_INPUT).send_keys(password_text)
+        self.driver.find_element(*SignInLocator.SUBMIT_BUTTON).click()

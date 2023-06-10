@@ -1,7 +1,7 @@
 # Import for writing tests and debugging, not for Prod
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
+import time
 
 # Imports required to work on Prod
 from pages.base_page import BasePage
@@ -28,4 +28,5 @@ class TestSignIn:
         2. NOT a valid password
         """
         page = SignInPage(driver)
-
+        page.log_in_with_custom_values(self,'2ta3ukw@fbpoint.net',' ')
+        time.sleep(10)
