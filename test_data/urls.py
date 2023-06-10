@@ -4,6 +4,7 @@ class MainPageUrls:
                                     "https://openweathermap.org/api#maps",
                                     "https://openweathermap.org/weather-dashboard",
                                     "https://openweathermap.org/widgets-constructor"]
+    QUALITY_INFO_PAGE = "https://openweathermap.org/accuracy-and-quality"
 
 
 class SignInUrls:
@@ -30,6 +31,11 @@ class SuitsUrls:
             ]
 
 
+
+class WeatherConditionsUrls:
+    url_weather_conditions = "https://openweathermap.org/weather-conditions"
+
+    
 class PartnersPageUrls:
     PARTNERS_AND_SOLUTIONS = 'https://openweathermap.org/examples'
     APACHE_CAMEL_URL = 'https://camel.apache.org/components/next/weather-component.html'
@@ -54,3 +60,4 @@ class GuidePageUrls:
     GUIDE_PAGE = "https://openweathermap.org/guide"
     URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 
+    

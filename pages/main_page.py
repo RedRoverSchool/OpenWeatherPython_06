@@ -1,11 +1,12 @@
 from .base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import MainPageLocators, FooterLocators, BasePageLocators
+from locators.locators import MainPageLocators, BasePageLocators
 from test_data.all_links import Links
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 from test_data.main_page_data import *
+
 
 class MainPage(BasePage):
     locators = MainPageLocators()
@@ -208,13 +209,6 @@ class MainPage(BasePage):
 
     def verify_chart_weather_is_present(self):
         assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
-
-    def verify_the_copyright_information_is_present_on_the_page(self):
-        self.allow_all_cookies()
-        expected_footer_text = "© 2012 — 2023 OpenWeather"
-        footer = self.driver.find_element(*FooterLocators.FOOTER_COPYRIGHT)
-        assert footer.is_displayed() and expected_footer_text in footer.text, \
-            "The footer is not displayed or does not contain the expected text"
 
     def checking_the_temperature_system_switching(self, system):
         match system:
