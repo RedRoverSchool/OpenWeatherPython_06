@@ -200,6 +200,12 @@ class MarketplaceLocators:
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
 
+
+class WeatherConditionsLocators:
+    WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
+    ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')
+
+    
     HISTORY_BULK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
     BUTTON_SEARCH_METHODS = (By.XPATH, "//div[@class='search-pop-up']/button")
     MAP_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
@@ -335,3 +341,4 @@ class SearchResultPageLocators:
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+
