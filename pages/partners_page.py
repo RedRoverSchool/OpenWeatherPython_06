@@ -1,6 +1,8 @@
 from locators.locators import PartnersLocators
 from pages.base_page import BasePage
 from test_data.urls import PartnersPageUrls
+from test_data.all_links import Links
+from test_data.partners_page_data import data
 
 
 class PartnersPage(BasePage):
@@ -40,3 +42,36 @@ class PartnersPage(BasePage):
         assert self.element_is_displayed(self.locators.GIT_BUTTON_PHP, wait) and self. \
             element_is_clickable(self.locators.GIT_BUTTON_PHP), "GitHub PHP button is not visible or not clickable"
 
+    def verify_the_link_view_on_github_is_visible(self):
+        self.driver.get(Links.URL_PARTNERS)
+        button = self.driver.find_element(*PartnersLocators.BUTTON_VIEW_ON_GITHUB)
+        self.go_to_element(button)
+        assert button.is_displayed(), \
+            "The 'View on Github' button is not displayed"
+
+    def verify_the_link_view_on_github_is_clickable(self):
+        self.driver.get(Links.URL_PARTNERS)
+        button = self.driver.find_element(*PartnersLocators.BUTTON_VIEW_ON_GITHUB)
+        self.go_to_element(button)
+        assert button.is_enabled(), \
+            "The 'View on Github' button is not clickable"
+
+    def verify_the_link_open_manual_is_visible(self):
+        self.driver.get(Links.URL_PARTNERS)
+        button = self.driver.find_element(*PartnersLocators.BUTTON_OPEN_MANUAL)
+        self.go_to_element(button)
+        assert button.is_displayed(), \
+            "The 'Open manual' button is not displayed"
+
+    def verify_the_link_open_manual_is_clickable(self):
+        self.driver.get(Links.URL_PARTNERS)
+        button = self.driver.find_element(*PartnersLocators.BUTTON_OPEN_MANUAL)
+        self.go_to_element(button)
+        assert button.is_enabled(), \
+            "The 'Open manual' button is not clickable"
+
+    def verify_17_sections_are_visible(self):
+        self.driver.get(Links.URL_PARTNERS)
+        find_all_headers = self.driver.find_elements(*PartnersLocators.HEADERS_ON_THE_PAGE)
+        headers_on_the_page = [i.text for i in find_all_headers]
+        assert data["sections"] == headers_on_the_page

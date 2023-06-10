@@ -254,3 +254,8 @@ class TestMainPage:
         page.verify_the_copyright_information_is_present_on_the_page()
 
 
+
+    def test_tc_001_017_01_visibility_of_nwp_block(self, driver):
+        page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
+        page.open_page()
+        page.element_is_visible(MainPageLocators.NWP_MODEL)

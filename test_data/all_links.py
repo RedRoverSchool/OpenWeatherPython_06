@@ -11,4 +11,4 @@ class Links:
     GUIDE_PAGE = 'https://openweathermap.org/guide'
     FAQ_URL = 'https://openweathermap.org/faq'
     HOW_TO_START_URL = 'https://openweathermap.org/appid'
-
+    URL_PARTNERS = 'https://openweathermap.org/examples'
