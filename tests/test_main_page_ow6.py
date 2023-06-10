@@ -240,6 +240,23 @@ class TestMainPage:
             link_number = self.link_product_collections.index(expected_link)
             page.click_footer_product_collections_all_widgets(expected_link, link_number)
 
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            footer_actual_result = footer.find_element(FooterLocators.FOOTER_WEBSITE)
+            footer.go_to_element(footer_actual_result)
+            footer.check_footer_website_is_displayed(footer_actual_result)
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
+            footer.go_to_element(copyright_actual_result)
+            footer.check_copyright_is_displayed(copyright_actual_result)
+
+
     class TestMainPageHourlyForecast:
         def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
@@ -254,20 +271,4 @@ class TestMainPage:
         page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
         page.open_page()
         page.element_is_visible(MainPageLocators.NWP_MODEL)
-
-    @pytest.mark.parametrize('page', data["pages"])
-    def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(self, driver, page):
-        footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
-        footer.open_page()
-        footer_actual_result = footer.find_element(FooterLocators.FOOTER_WEBSITE)
-        footer.go_to_element(footer_actual_result)
-        footer.check_footer_website_is_displayed(footer_actual_result)
-
-    @pytest.mark.parametrize('page', data["pages"])
-    def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_data(self, driver, page):
-        footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
-        footer.open_page()
-        copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
-        footer.go_to_element(copyright_actual_result)
-        footer.check_copyright_is_displayed(copyright_actual_result)
 
