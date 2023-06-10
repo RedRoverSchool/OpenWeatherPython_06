@@ -20,6 +20,19 @@ class TestOneCallApi:
 
 class TestCopyrightBlock:
     def test_TC_003_11_02_verify_the_copyright_information_is_present_on_the_site_page(self, driver):
-        page = FooterApiPage(driver, link=O.API_PAGE)
+        page = FooterApiPage(driver, O.API_PAGE)
         page.open_page()
         page.verify_the_copyright_information_is_present_on_the_site_page()
+
+
+class TestClimaticForecast30:
+    def test_TC_005_06_1_visibility_climatic_forecast_30_days_page_title(self, driver):
+        page = ClimaticForecast(driver, ClimateForecast.URL_FORCAST30)
+        page.open_page()
+        page.check_visibility_climatic_forecast_30_days_page_title()
+
+    def test_TC_005_06_02_redirect_to_the_how_to_make_an_api_call_section_of_the_page(self, driver):
+        page = ClimaticForecast(driver, ClimateForecast.URL_FORCAST30)
+        page.open_page()
+        page.check_redirect_to_the_how_to_make_of_the_page()
+

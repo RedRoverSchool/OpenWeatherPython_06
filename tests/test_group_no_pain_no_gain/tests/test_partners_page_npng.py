@@ -2,7 +2,7 @@ from tests.test_group_no_pain_no_gain.pages.partners_page import Partners
 from tests.test_group_no_pain_no_gain import links
 from tests.test_group_no_pain_no_gain.test_data.partners_page_data import PartnersPageData as PPD
 from tests.test_group_no_pain_no_gain.locators.partners_page_locators import PartnersPageLocators as PPL
-
+import pytest
 class TestPartnersPage:
     def test_TC_011_01_01_verify_that_Partners_and_solutions_page_title_is_correct(self, driver):
         page = Partners(driver, link=links.PARTNERS_AND_SOLUTIONS)
@@ -43,3 +43,16 @@ class TestPartnersPage:
         page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.check_link_in_new_window(PPL.INFO_BOARD_GITHUB_LINK, links.INFO_BOARD_GITHUB)
+
+    def test_TC_011_17_01_verify_the_mobile_link_leads_to_correct_page(self, driver):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.scroll_to_the_element(PPL.MOBILE_APP_BLOCK)
+        page.check_link(PPL.MOBILE_APP_LINK, links.MOBILE_APP)
+
+    @pytest.mark.parametrize('anchor_locators', PPL.ANCHOR_LOCATORS)
+    def test_TC_011_19_01_Verify_that_the_anchor_links_are_clickable(self, driver, anchor_locators):
+        page = Partners(driver, links.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.element_clickability(anchor_locators)
+
