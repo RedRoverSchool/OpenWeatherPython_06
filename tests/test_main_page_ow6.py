@@ -123,6 +123,7 @@ class TestMainPage:
         page = MainPage(driver, Links.URL_MAIN_PAGE)
         page.open_page()
         page.check_buttons_displayed_and_enabled()
+
     def test_tc_001_04_03_verify_in_day_list_first_element_day_by_week(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_day()
@@ -168,7 +169,6 @@ class TestMainPage:
         page = MainPage(driver, Links.URL_MAIN_PAGE)
         page.open_page()
         page.check_google_play_brand_link_display()
-
 
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
@@ -248,3 +248,4 @@ class TestMainPage:
                                                                                   open_and_load_main_page):
         page = MainPage(driver)
         page.verify_the_copyright_information_is_present_on_the_page()
+
