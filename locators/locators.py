@@ -140,3 +140,7 @@ class MarketplaceLocators:
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
 
+
+class WeatherConditionsLocators:
+    WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
+    ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')

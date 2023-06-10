@@ -24,3 +24,7 @@ class SuitsUrls:
             'https://openweathermap.org/stations',
             'https://openweathermap.org/about-us'
             ]
+
+
+class WeatherConditionsUrls:
+    url_weather_conditions = "https://openweathermap.org/weather-conditions"
