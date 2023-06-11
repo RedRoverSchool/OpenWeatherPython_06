@@ -114,6 +114,7 @@ class TestMarketplacePage:
         page = MarketplacePage(driver)
         page.verify_search_by_import_csv()
 
+
     def test_TC_007_02_06_verify_visibility_clickability_satellite_btn(self, driver):
         page = MarketplacePage(driver)
         page.verify_visibility_clickability_satellite_btn()

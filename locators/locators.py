@@ -182,7 +182,6 @@ class SignInLocator:
     ERROR_LOGIN_MESSAGE_DIV = (By.CSS_SELECTOR, '.panel.panel-red')
     SUCCESS_LOGIN_MESSAGE_DIV = By.CSS_SELECTOR, '.panel.panel-green'
 
-
 class MarketplaceLocators:
     URL_HISTORICAL_WEATHER = 'https://home.openweathermap.org/zip_code_data/new'
     SELECT_STATE_FIELD = (By.CSS_SELECTOR, '#__BVID__10 .form-control.dropdown-selector')
@@ -202,13 +201,6 @@ class MarketplaceLocators:
     CITY_NAME_ON_MAP = (By.CSS_SELECTOR, "div .pop-up-marker .pop-up-header >h3")
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, '.footer-content .orange-button-square')
     ADD_LOCATION_BTN = (By.CSS_SELECTOR, "button.button-round.dark:nth-child(2)")
-
-
-class WeatherConditionsLocators:
-    WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
-    ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')
-
-
     HISTORY_BULK_TITLE = (By.XPATH, "//h5/a[contains(text(), 'History Bulk')]")
     BUTTON_SEARCH_METHODS = (By.XPATH, "//div[@class='search-pop-up']/button")
     MAP_BUTTON_LOC = (By.XPATH, "//div[@class='gm-style-mtc']/button[contains(text(), 'Map')]")
@@ -234,6 +226,9 @@ class WeatherConditionsLocators:
     BUTTON_STREET_VIEW = (By.XPATH, "//button[@title='Drag Pegman onto the map to open Street View']")
     BUTTON_FULL_SCREEN = (By.XPATH, "//button[@title='Toggle fullscreen view']")
 
+class WeatherConditionsLocators:
+    WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
+    ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')
 
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'
