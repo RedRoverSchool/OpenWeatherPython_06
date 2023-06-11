@@ -138,3 +138,13 @@ class TestMarketplacePage:
     def test_TC_007_02_08_verify_visibility_clickability_labels_checkbox(self, driver):
         page = MarketplacePage(driver)
         page.verify_visibility_clickability_labels_checkbox()
+
+    def test_TC_007_03_04_verify_name_of_location_and_its_coordinates_are_displayed_in_the_order(self, driver, wait):
+        page = MarketplacePage(driver, link=M.URL_HISTORY_FORECAST_BULK)
+        page.open_page()
+        page.click_marketplace_search_field()
+        page.select_by_location_method()
+        page.fill_marketplace_search_field()
+        page.select_city_from_dropdown_list(wait)
+        page.element_is_clickable(M.ADD_LOCATION_BTN)
+        page.verify_name_of_location_and_its_coordinates_were_added_to_the_order(wait)

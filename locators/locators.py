@@ -225,6 +225,9 @@ class MarketplaceLocators:
     BUTTON_ZOOM_OUT = (By.XPATH, "//button[@title='Zoom out']")
     BUTTON_STREET_VIEW = (By.XPATH, "//button[@title='Drag Pegman onto the map to open Street View']")
     BUTTON_FULL_SCREEN = (By.XPATH, "//button[@title='Toggle fullscreen view']")
+    LST_NAME_CITY = (By.XPATH, "//*[contains(text(), 'Paris')]")
+    LST_LATITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[3]')
+    LST_LONGITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[4]')
 
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
@@ -242,7 +245,6 @@ class GuideLocators:
     HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
     LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
     CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
-
 
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
