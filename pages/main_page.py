@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import MainPageLocators, BasePageLocators
+from locators.locators import MainPageLocators, BasePageLocators, FooterLocators
 from test_data.all_links import Links
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -472,3 +472,8 @@ class MainPage(BasePage):
     def enter_city_in_weather_in_your_city_field(self, city):
         input_city = self.driver.find_element(*self.locators.FIELD_WEATHER_IN_YUOR_CITY)
         input_city.send_keys(city)
+
+    def website_footer_visibility(self):
+        module_footer = self.driver.find_element(*FooterLocators.FOOTER_LOCATOR)
+        assert module_footer.is_displayed()
+

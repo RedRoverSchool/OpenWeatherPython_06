@@ -318,6 +318,7 @@ class ClimateForecastLocators:
 
 class FooterLocators:
     FOOTER_COPYRIGHT = (By.XPATH, "//div[@class='horizontal-section my-5']/div[1]")
+    FOOTER_LOCATOR = (By.CSS_SELECTOR, '[id="footer-website"]')
 
 
 class MigratePageLocators:

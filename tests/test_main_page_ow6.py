@@ -6,6 +6,7 @@ from test_data.urls import MainPageUrls
 from test_data.all_links import Links
 from locators.locators import BasePageLocators
 from locators.locators import PartnersLocators
+from test_data.urls import SitePagesUrls
 
 
 class TestMainPage:
@@ -259,3 +260,10 @@ class TestMainPage:
         page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
         page.open_page()
         page.element_is_visible(MainPageLocators.NWP_MODEL)
+
+    class TestFooterModule:
+        @pytest.mark.parametrize('url', SitePagesUrls.LINK)
+        def test_tc_003_02_01_website_footer_visibility(self, driver, url):
+            page = MainPage(driver, link=url)
+            page.open_page()
+            page.website_footer_visibility()
