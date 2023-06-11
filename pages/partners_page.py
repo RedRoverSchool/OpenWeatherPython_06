@@ -75,3 +75,10 @@ class PartnersPage(BasePage):
         find_all_headers = self.driver.find_elements(*PartnersLocators.HEADERS_ON_THE_PAGE)
         headers_on_the_page = [i.text for i in find_all_headers]
         assert data["sections"] == headers_on_the_page
+
+    def link_see_library_visibility(self, wait):
+        self.element_is_displayed(PartnersLocators.LINK_SEE_LIBRARY, wait)
+
+    def link_see_library_is_clickable(self, wait):
+        see_library_link = self.element_is_clickable(PartnersLocators.LINK_SEE_LIBRARY)
+        assert see_library_link.is_enabled(), "The link is not clickable"

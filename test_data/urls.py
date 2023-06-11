@@ -45,6 +45,8 @@ class PartnersPageUrls:
     ANDROID_WEATHER = 'http://www.survivingwithandroid.com/2016/01/4-free-weather-providers-api-to-develop.html'
     INFO_BOARD_GITHUB = "https://github.com/search?q=openweathermap&ref=cmdform"
     MOBILE_APP = 'http://owmgapp.glob3mobile.com'
+    GO_LIBRARY_PAGE = "http://briandowns.github.io/openweathermap/"
+
 
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'
@@ -67,3 +69,8 @@ class GuidePageUrls:
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
+
+
+class MembersPageUrls:
+    URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
+
