@@ -1,6 +1,7 @@
 from pages.guide_page import GuidePage
-from locators.locators import GuideLocators
+from locators.locators import GuideLocators, BasePageLocators
 from test_data.urls import GuidePageUrls
+from test_data.all_links import Links
 
 
 class TestGuidePage:
@@ -26,3 +27,8 @@ class TestGuidePage:
         page = GuidePage(driver, GuidePageUrls.GUIDE_PAGE)
         page.open_page()
         page.verify_several_links_color(GuideLocators.HISTORICAL_COLLECTION_LINKS)
+
+    def test_TC_002_01_01_return_from_guide_page_to_main_page_by_clicking_on_logo(self, driver):
+        page = GuidePage(driver, GuidePageUrls.GUIDE_PAGE)
+        page.open_page()
+        page.check_link(BasePageLocators.LOGO_LOCATOR, Links.URL_MAIN_PAGE)
