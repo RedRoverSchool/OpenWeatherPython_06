@@ -10,6 +10,6 @@ class TestHeader:
         page = Header(driver)
         page.link_visibility_and_clickability(HL.PARTNERS_LINK, links.PARTNERS_AND_SOLUTIONS)
 
-    def test_partners_link_leads_to_page_with_correct_header(self, driver, open_and_load_main_page):
+    def test_TC_002_03_21_partners_link_leads_to_page_with_correct_header(self, driver, open_and_load_main_page):
         page = Header(driver)
         page.link_leads_to_page_with_correct_header(HL.PARTNERS_LINK, PPL.PARTNERS_PAGE_HEADING)

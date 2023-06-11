@@ -43,6 +43,11 @@ class MainPage(BasePage):
         background_color_of_the_element =  element.value_of_css_property("background-color")
         assert background_color_of_the_element == data, 'Wrong background color'
 
+    def link_visible_and_clickable(self, locator):
+        link = wait(self.driver, timeout=3).until(EC.visibility_of_element_located(locator))
+        link_text = link.get_attribute('href')
+        assert link.is_displayed() and link.is_enabled(), f'"{link_text}" link is not visible or clickable'
+
     def link_visibility_and_clickability(self, locator, link):
         element = wait(self.driver, timeout=3).until(EC.visibility_of_element_located(locator))
         assert element.is_displayed() and element.is_enabled(), f'"{link}" link is not visible or clickable'
