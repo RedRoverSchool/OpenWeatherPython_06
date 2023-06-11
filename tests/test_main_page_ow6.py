@@ -4,6 +4,8 @@ from pages.main_page import MainPage
 from locators.locators import MainPageLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
+from locators.locators import BasePageLocators
+from locators.locators import PartnersLocators
 
 
 class TestMainPage:
@@ -123,6 +125,7 @@ class TestMainPage:
         page = MainPage(driver, Links.URL_MAIN_PAGE)
         page.open_page()
         page.check_buttons_displayed_and_enabled()
+
     def test_tc_001_04_03_verify_in_day_list_first_element_day_by_week(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_day()
@@ -168,7 +171,6 @@ class TestMainPage:
         page = MainPage(driver, Links.URL_MAIN_PAGE)
         page.open_page()
         page.check_google_play_brand_link_display()
-
 
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
@@ -225,6 +227,15 @@ class TestMainPage:
             main_page = MainPage(driver)
             main_page.check_faq_link_opens_opens_correct_page(wait, Links.FAQ_URL)
             main_page.check_correct_header_is_displayed("Frequently Asked Questions")
+
+        def test_TC_002_03_22_partners_link_is_visible_and_clickable(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.link_visible_and_clickable(BasePageLocators.PARTNERS_LINK)
+
+        def test_TC_002_03_21_partners_link_leads_to_page_with_correct_header(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.link_leads_to_page_with_correct_header(BasePageLocators.PARTNERS_LINK,
+                                                        PartnersLocators.PARTNERS_PAGE_HEADING)
 
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS

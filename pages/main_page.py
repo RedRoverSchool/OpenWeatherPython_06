@@ -1,11 +1,12 @@
 from .base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import MainPageLocators, FooterLocators, BasePageLocators
+from locators.locators import MainPageLocators, BasePageLocators
 from test_data.all_links import Links
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
 from test_data.main_page_data import *
+
 
 class MainPage(BasePage):
     locators = MainPageLocators()
@@ -479,7 +480,6 @@ class MainPage(BasePage):
         number_day = datetime.now().weekday()
         days_by_computer = WEEKDAYS[number_day:] + WEEKDAYS[:number_day] + WEEKDAYS[(number_day):(number_day + 1):]
         assert days_by_page == days_by_computer
-
 
     def enter_city_in_weather_in_your_city_field(self, city):
         input_city = self.driver.find_element(*self.locators.FIELD_WEATHER_IN_YUOR_CITY)
