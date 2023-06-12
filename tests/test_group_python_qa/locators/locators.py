@@ -48,10 +48,5 @@ class PartnersAndSolutionsLocators:
 
 
 class HistoryBulkLocators:
-    FEATURES_OF_HISTORY_BULK_BLOCK = (By.XPATH, "//h2[text()='Features of History Bulk']")
-    HOW_TO_GET_HISTORICAL_WEATHER_DATA_BLOCK = (By.XPATH, "//h2[text()='How to get historical weather data']")
-    SAMPLE_DATA_BLOCK = (By.XPATH, "//h2[text()='Sample data']")
-    WEATHER_FIELDS_IN_HISTORY_BULK_BLOCK = (By.XPATH, "//h2[text()='Weather fields in History Bulk']")
-    PARAMETERS_BLOCK = (By.XPATH, "//h3[text()='Parameters']")
-    EXAMPLE_BLOCK = (By.XPATH, "//h3[text()='Example']")
-    LIST_OF_WEATHER_CONDITIONS_CODES = (By.XPATH, "//h3[text()='List of weather condition codes']")
+    BLOCK_LOCATORS = (By.TAG_NAME, "h2")
+    BLOCK_2_LOCATORS = (By.TAG_NAME, "h3")
