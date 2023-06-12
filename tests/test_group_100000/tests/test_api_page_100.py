@@ -1,5 +1,5 @@
 from tests.test_group_100000.pages.api_page import *
-from tests.test_group_100000.pages.api_page import OneCallApiPage
+from tests.test_group_100000.pages.api_page import OneCallApiPage, WeatherConditionsPage
 from tests.test_group_100000.locators.api_page_locators import WeatherConditions as W
 from tests.test_group_100000.locators.api_page_locators import OneCallApi as O
 
@@ -9,6 +9,11 @@ class TestWeatherConditions:
         page = WeatherConditionsPage(driver, link=W.CONDITION_URL)
         page.open_page()
         page.check_visibility_drizzle_group()
+
+    def test_RF_TC_001_12_06_Verify_that_drizzel_group_of_codes_contains_more_than_1_item(self, driver):
+        page = WeatherConditionsPage(driver, link=W.CONDITION_URL)
+        page.open_page()
+        page.verify_that_drizzle_group_of_codes_contains_more_than_1_item()
 
 
 class TestOneCallApi:
@@ -35,4 +40,3 @@ class TestClimaticForecast30:
         page = ClimaticForecast(driver, ClimateForecast.URL_FORCAST30)
         page.open_page()
         page.check_redirect_to_the_how_to_make_of_the_page()
-

@@ -60,6 +60,17 @@ class WeatherConditionsPage(BasePage):
         drizzle_codes = self.driver.find_element(*W.DRIZZLE_LOCATOR)
         assert drizzle_codes.is_displayed()
 
+    def verify_that_drizzle_group_of_codes_contains_more_than_1_item(self):
+        list_of_item = self.driver.find_elements(*W.DRIZZLE_LOCATOR1)
+        assert len(list_of_item) >= 2, "drizzle_group_of_codes_contains 1 or less item"
+        # print(len(list_of_item))
+
+        # def init(self, list_of_item):
+        #     self.данные = данные
+        #
+        # def len(self):
+        #     return len(self.данные)
+
 
 class OneCallApiPage(BasePage):
     def verify_redirection_one_call_api_3_link(self):

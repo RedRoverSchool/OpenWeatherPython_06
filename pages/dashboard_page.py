@@ -41,3 +41,11 @@ class DashboardPage(BasePage):
     def verify_sign_up_button_is_clickable(self):
         sign_up_button = self.driver.find_element(*DashboardPageLocators.PRICING_PLANS_SIGN_UP)
         assert sign_up_button.is_enabled(), "Sign up link is not clickable"
+
+    def click_dashboard_link(self):
+        dashboard_link = self.element_is_present(self.locators.HEADER_DASHBOARD)
+        dashboard_link.click()
+
+    def check_image_is_visible(self):
+        image = self.driver.find_element(*self.locators.IMAGE_LOCATOR)
+        assert image.is_displayed(), "Image is not visible"
