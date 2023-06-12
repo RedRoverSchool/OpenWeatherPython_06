@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#data
-link text: Units of measurement
-198.5   90.703125
-
-quit browser...

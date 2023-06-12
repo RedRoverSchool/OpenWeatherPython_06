@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#other
-link text: Other features
-198.5   86.203125
-
-quit browser...

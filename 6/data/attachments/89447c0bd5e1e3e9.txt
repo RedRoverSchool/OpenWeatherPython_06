@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#call
-link text: Call back function for JavaScript code
-198.5   90.5
-
-quit browser...
