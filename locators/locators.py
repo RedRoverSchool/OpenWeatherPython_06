@@ -104,6 +104,10 @@ class DashboardPageLocators:
     PANEL_SIGN_IN_FORM = (By.CSS_SELECTOR, '.col-md-6 .panel-heading')
     WEATHER_SYMBOL = (By.CSS_SELECTOR, "ul  > li:nth-child(3) > span.symbol")
     PRICING_PLANS_SIGN_UP = (By.XPATH, "//a[text()='Sign Up']")
+    DASHBOARD_BUTTON_LOCATOR = (By.CSS_SELECTOR, '#mobile-menu > li:nth-child(4) > a')
+    HOURLY_FORECAST_API_LOCATOR = (By.CSS_SELECTOR, 'div.col-lg-3 a')
+    URL = 'https://openweathermap.org/'
+
 
 class PricingPageLocators:
     URL_PRICING = 'https://openweathermap.org/price'
