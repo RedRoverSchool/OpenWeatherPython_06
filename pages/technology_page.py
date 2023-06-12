@@ -1,3 +1,3 @@
 from pages.base_page import BasePage
 
-class TechnologyPage(BasePage):
+# class TechnologyPage(BasePage):
