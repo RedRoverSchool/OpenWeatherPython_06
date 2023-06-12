@@ -14,3 +14,8 @@ class MainPage(BasePage):
     def check_chart_weather_is_displayed(self):
         chart = self.driver.find_element(*self.chart_weather)
         assert chart.is_displayed(), "Chart weather is not visible"
+
+    def check_search_result_contains_city(self, city):
+        cities = self.driver.find_elements(*self.result_locator)
+        for city_name in cities:
+            assert city in city_name.text

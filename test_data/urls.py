@@ -67,3 +67,7 @@ class GuidePageUrls:
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
+
+
+class ApiPageUrls:
+    GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
