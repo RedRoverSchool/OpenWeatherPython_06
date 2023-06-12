@@ -24,6 +24,7 @@ class ClimateForecast:
 
 class WeatherConditions:
     DRIZZLE_LOCATOR = (By.XPATH, '//a[contains(@href, "#Drizzle")]/ancestor-or-self::table')
+    DRIZZLE_LOCATOR1 = (By.XPATH, '//a[contains(@href, "#Drizzle")]/ancestor-or-self::table//tr')
     CONDITION_URL = 'https://openweathermap.org/weather-conditions'
 
 
