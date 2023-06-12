@@ -87,6 +87,7 @@ class MainPageLocators:
     GOOGLE_PLAY_BRAND_LINK = By.CSS_SELECTOR, "img[alt='Get it on Google Play']"
     FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
+    ASK_A_QUESTION_LINK = (By.XPATH, "(//*[contains(text(),'question')])[3]")
 
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
@@ -264,7 +265,6 @@ class PartnersLocators:
                              "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
     BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
     HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
-
     PARTNERS_PAGE_HEADING = (By.XPATH, '//h1')
     PARTNERS_PAGE_INFO_BOARD = (By.XPATH, "//div[@class='info-board info-board-orange']")
     RASPBERRY = (By.CSS_SELECTOR, '#raspberry > a')
