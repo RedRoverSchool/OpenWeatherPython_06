@@ -38,3 +38,8 @@ def test_TC_004_06_07_verify_button_subscribe_to_onecall_by_call_is_visible(driv
     page = GuidePage(driver, GuidePage.link)
     page.open_page()
     page.subscribe_to_onecall_by_call_button_is_visible()
+
+def test_TC_004_06_06_verify_one_call_api_link_color(driver, wait):
+    page = GuidePage(driver, GuidePage.link)
+    page.open_page()
+    page.one_call_api_link_check_color()
