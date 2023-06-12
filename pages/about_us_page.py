@@ -4,6 +4,8 @@ from locators.locators import AboutUsPageLocators
 
 class AboutUsPage(BasePage):
     locators = AboutUsPageLocators()
+    ABOUT_US_URL = 'https://openweathermap.org/about-us'
+
 
     def verify_correct_header_about_us_page(self):
         self.element_is_visible(self.locators.HEADER)
@@ -34,3 +36,18 @@ class AboutUsPage(BasePage):
         cursor_style = element.value_of_css_property("cursor")
 
         assert cursor_style == "pointer", "Cursor is not transformed into a hand pointer."
+
+    def contact_us_button_is_visible_and_clickable(self):
+        self.driver.get(self.ABOUT_US_URL)
+        self.allow_all_cookies()
+        link = self.element_is_clickable(self.locators.CONTACT_US_BUTTON)
+        assert link.is_enabled(), "The 'Contact us' button is not clickable"
+
+    def verify_redirection_contact_us_button_to_the_new_webpage(self):
+        self.driver.get(self.ABOUT_US_URL)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.CONTACT_US_BUTTON)
+        self.switch_to_new_window()
+        contact_us_button_link = self.driver.current_url
+        assert contact_us_button_link == "https://home.openweathermap.org/questions"
+

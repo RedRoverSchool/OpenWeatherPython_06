@@ -1,7 +1,5 @@
-from tests.test_group_ducktales.pages.sign_in_page import SignInPage
-from tests.test_group_ducktales.test_data.sign_in_page_data import *
-from tests.test_group_ducktales.pages.API_keys_page import ApiKeysPage
-from ..test_data.api_keys_page_data import SPACEKITS
+from tests.test_group_ducktales.pages.API_keys_page_d import ApiKeysPage
+from ..test_data.api_keys_page_data_d import SPACEKITS
 import pytest
 
 
@@ -39,5 +37,14 @@ class TestApiKey:
     def test_tc_017_03_11_api_key_is_not_generated_if_the_input_consists_of_spaces(self, driver, spacekit):
         api_keys_page = ApiKeysPage(driver)
         api_keys_page.open_api_keys_page()
-        api_keys_page.check_api_key_is_not_generated(spacekit)
+        api_keys_page.enter_created_api_key_name(spacekit)
+        initial_api_keys_table_length = api_keys_page.get_length_of_table_api_keys()
+        api_keys_page.click_generate_api_key_name_button()
+        api_keys_page.check_is_api_key_not_generated(initial_api_keys_table_length)
 
+    def test_tc_017_03_10_api_key_is_not_generated_if_the_input_is_empty(self, driver):
+        api_keys_page = ApiKeysPage(driver)
+        api_keys_page.open_api_keys_page()
+        initial_api_keys_table_length = api_keys_page.get_length_of_table_api_keys()
+        api_keys_page.click_generate_api_key_name_button()
+        api_keys_page.check_is_api_key_not_generated(initial_api_keys_table_length)

@@ -46,6 +46,7 @@ class BasePage:
             case 'api':
                 self.driver.find_element(*self.locators.API_LINK).click()
 
+
     def check_header_link(self, link_name):
         self.click_header_link(link_name)
         assert link_name in self.driver.current_url
@@ -154,3 +155,36 @@ class BasePage:
 
     def check_for_redirection(self, expected_url):
         assert self.driver.current_url == expected_url
+
+    def scroll_to_the_element(self, locator):
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def link_visible_and_clickable(self, locator):
+        """
+        В случае ошибки подставляет в ответ адрес несработавшей ссылки
+        """
+        link = wait(self.driver, timeout=3).until(EC.visibility_of_element_located(locator))
+        link_text = link.get_attribute('href')
+        assert link.is_displayed() and link.is_enabled(), \
+            f'"{link_text}" link is not visible or clickable'
+
+    def link_leads_to_page_with_correct_header(self, locator, result_header_locator):
+        """
+        Применим, когда название гиперссылки отличается от текста в адресной строке. Позволяет убедиться, что заголовок
+        открытой страницы связан с названием гиперссылки
+        """
+        element = self.driver.find_element(*locator)
+        element_text = element.text
+        element.click()
+        header_text = self.driver.find_element(*result_header_locator).text
+        assert element_text in header_text, \
+            f'{element_text} link leads to a page with an incorrect header'
+
+    def check_link(self, locator, link):
+        """
+        Проверка переадресации после нажатия на соответствующую ссылку
+        """
+        self.driver.find_element(*locator).click()
+        assert link in self.driver.current_url, \
+            f'"{link}" link does not redirect correctly'
