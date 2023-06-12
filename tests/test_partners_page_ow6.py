@@ -1,6 +1,6 @@
 import pytest
 
-import test_data.partners_page_data
+from test_data import partners_page_data as PartnersData
 from pages.partners_page import PartnersPage
 from test_data.urls import PartnersPageUrls
 from locators.locators import PartnersLocators
@@ -79,22 +79,22 @@ class TestPartnersPage:
     def test_TC_011_01_01_verify_that_Partners_and_solutions_page_title_is_correct(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.check_page_title(test_data.partners_page_data.PARTNERS_PAGE_TITLE)
+        page.check_page_title(PartnersData.PARTNERS_PAGE_TITLE)
 
     def test_TC_011_01_02_verify_that_the_heading_of_the_page_equals_to_Partners_and_solutions(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_HEADING, test_data.partners_page_data.PARTNERS_PAGE_HEADING)
+        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_HEADING, PartnersData.PARTNERS_PAGE_HEADING)
 
     def test_TC_011_20_01_verify_that_the_info_board_message_at_the_top_of_the_page_is_displayed(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, test_data.partners_page_data.PARTNERS_PAGE_INFO_BOARD_TEXT)
+        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, PartnersData.PARTNERS_PAGE_INFO_BOARD_TEXT)
 
     def test_TC_011_20_02_verify_the_color_of_the_info_board_message_at_the_top_of_the_page(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
-        page.get_background_color_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, test_data.partners_page_data.INFO_BOARD_BACKGROUND_COLOR)
+        page.get_background_color_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, PartnersData.INFO_BOARD_BACKGROUND_COLOR)
 
     def test_TC_011_20_03_verify_that_the_Github_link_in_the_info_board_message_is_visible_and_clickable(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
