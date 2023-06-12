@@ -3,9 +3,9 @@ from locators.locators import GuideLocators
 from selenium.webdriver.support.color import Color
 from test_data.miscellaneous import BasePageMisc
 
-from locators.locators import GuideLocators
 
 class GuidePage(BasePage):
+
     locators = GuideLocators()
 
     def link_to_history_archive_is_clickable(self):
@@ -22,9 +22,7 @@ class GuidePage(BasePage):
             link_color_rgba = link.value_of_css_property("color")
             link_color_hex = Color.from_string(link_color_rgba).hex
             assert link_color_hex == BasePageMisc.EXPECTED_LINK_COLOR_HEX, f"The link color is {link_color_hex}, " \
-                                                              f"while {BasePageMisc.EXPECTED_LINK_COLOR_HEX} is expected"
-
-
+                f"while {BasePageMisc.EXPECTED_LINK_COLOR_HEX} is expected"
 
     def industry_standard_apis_link_redirection(self):
         element = self.driver.find_element(*GuideLocators.INDUSTRY_APIS_LOCATOR)

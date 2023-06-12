@@ -3,8 +3,6 @@ from locators.locators import GuideLocators, BasePageLocators
 from test_data.urls import GuidePageUrls
 from test_data.all_links import Links
 
-from test_data.all_links import Links
-
 class TestGuidePage:
 
     def test_tc_004_08_01_historical_collection_block_visibility(self, driver):
