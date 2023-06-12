@@ -24,3 +24,9 @@ class TestDashboardPage:
         dashboard_page = DashboardPage(driver, DashboardPageLocators.HEADER_DASHBOARD_LINK)
         dashboard_page.open_page()
         dashboard_page.verify_sign_up_button_is_clickable()
+
+    def test_tc_006_01_05_image_is_visible(self, driver, open_and_load_main_page):
+        dash_page = DashboardPage(driver, DashboardPageLocators.HEADER_DASHBOARD_LINK)
+        dash_page.open_page()
+        dash_page.click_dashboard_link()
+        dash_page.check_image_is_visible()
