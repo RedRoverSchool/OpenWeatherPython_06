@@ -268,6 +268,19 @@ class TestMainPage:
             footer.check_copyright_is_displayed(copyright_actual_result)
 
 
+        def test_TC_003_08_02_ask_a_question_link_is_visible(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.element_is_visible(MainPageLocators.ASK_A_QUESTION_LINK)
+
+        def test_TC_003_08_03_ask_a_question_link_is_clickable(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.element_is_clickable(MainPageLocators.ASK_A_QUESTION_LINK)
+
+        def test_TC_003_12_05_ask_a_question_link_leads_to_correct_page(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.scroll_down_the_page()
+            page.check_link_in_new_window(MainPageLocators.ASK_A_QUESTION_LINK, MainPageUrls.ASK_A_QUESTION_PAGE)
+
     class TestMainPageHourlyForecast:
         def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
