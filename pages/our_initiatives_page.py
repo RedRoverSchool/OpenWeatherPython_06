@@ -8,6 +8,7 @@ from test_data.urls import OurInitiativesPageUrls
 class OurInitiativesPage(BasePage):
 
     locators = OurInitiativesPageLocators()
+#    locatorsBase = BasePageLocators
 
     def get_section_element(self, section):
         section_locator = (self.locators.SECTION[0], self.locators.SECTION[1].format(section))
@@ -52,4 +53,21 @@ class OurInitiativesPage(BasePage):
     @staticmethod
     def verify_question_headings_clickable(question_headings):
         assert all(heading.is_enabled() for heading in question_headings), "Error: FAQ section is not clickable"
+
+    def check_text_on_button_learn_more(self):
+        button_learn_more = self.driver.find_element(*self.locators.BUTTON_LEARN_MORE)
+        expected_text = "Learn more"
+        assert expected_text == button_learn_more.text
+
+    def verify_correct_url_out_initiative(self):
+        actual_url = self.driver.current_url
+        expected_url = OurInitiativesPageUrls.OUR_INITIATIVES_PAGE
+        assert actual_url == expected_url
+
+    def verify_learn_more_link_redirects_to_valid_page(self):
+        self.driver.execute_script("window.scrollTo(0, 500)")
+        self.driver.find_element(*self.locators.BUTTON_LEARN_MORE).click()
+        actual_title = self.driver.find_element(*self.locators.DISPLAYED_TITLE).text
+        expected_title = "Free Data for Students"
+        assert expected_title == actual_title
 
