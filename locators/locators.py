@@ -241,6 +241,10 @@ class MarketplaceLocators:
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
     ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')
+    ELEMENTS_LOCATOR_CODES = lambda table: (
+    By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[1]")
+    ELEMENTS_LOCATOR_DESC = lambda table: (
+        By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[3]")
 
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'

@@ -11,3 +11,13 @@ class WeatherConditionsPage(BasePage):
         assert len(icons) >= expected_minimum_icons_for_night_time
 
 
+    def check_codes_are_visible(self, driver, table):
+        list_of_codes_each_table = driver.find_elements(*WeatherConditionsLocators.ELEMENTS_LOCATOR_CODES(table))
+        for code in list_of_codes_each_table:
+            assert code.is_displayed()
+
+
+    def check_desc_are_visible(self, driver, table):
+        list_of_desc_each_table = driver.find_elements(*WeatherConditionsLocators.ELEMENTS_LOCATOR_DESC(table))
+        for desc in list_of_desc_each_table:
+            assert desc.is_displayed()
