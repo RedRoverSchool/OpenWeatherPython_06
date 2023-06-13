@@ -1,11 +1,12 @@
 import pytest
 
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators
+from locators.locators import MainPageLocators, FooterLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
 from locators.locators import BasePageLocators
 from locators.locators import PartnersLocators
+from test_data.main_page_data import *
 
 
 class TestMainPage:
@@ -250,6 +251,23 @@ class TestMainPage:
             link_number = self.link_product_collections.index(expected_link)
             page.click_footer_product_collections_all_widgets(expected_link, link_number)
 
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            footer_actual_result = footer.find_element(FooterLocators.FOOTER_WEBSITE)
+            footer.go_to_element(footer_actual_result)
+            footer.check_footer_website_is_displayed(footer_actual_result)
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
+            footer.go_to_element(copyright_actual_result)
+            footer.check_copyright_is_displayed(copyright_actual_result)
+
+
         def test_TC_003_08_02_ask_a_question_link_is_visible(self, driver, open_and_load_main_page):
             page = MainPage(driver)
             page.element_is_visible(MainPageLocators.ASK_A_QUESTION_LINK)
@@ -268,15 +286,7 @@ class TestMainPage:
             page = MainPage(driver)
             page.verify_chart_weather_is_present()
 
-
-    #def test_tc_003_11_01_verify_the_copyright_information_is_present_on_the_page(self, driver,
-    #                                                                              open_and_load_main_page):
-    #    page = MainPage(driver)
-    #    page.verify_the_copyright_information_is_present_on_the_page()
-
-
     def test_tc_001_017_01_visibility_of_nwp_block(self, driver):
         page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
         page.open_page()
         page.element_is_visible(MainPageLocators.NWP_MODEL)
-

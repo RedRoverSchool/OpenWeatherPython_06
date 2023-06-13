@@ -210,3 +210,7 @@ class BasePage:
         element = self.driver.find_element(*locator)
         background_color_of_the_element =  element.value_of_css_property("background-color")
         assert background_color_of_the_element == data, 'Wrong background color'
+
+    def find_element(self, locator):
+        return self.driver.find_element(*locator)
+
