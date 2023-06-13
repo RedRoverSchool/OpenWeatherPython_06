@@ -1,0 +1,2 @@
+class TestCookiesSettingsPage:
+    pass
