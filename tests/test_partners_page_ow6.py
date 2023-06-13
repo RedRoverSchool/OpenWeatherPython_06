@@ -1,4 +1,6 @@
 import pytest
+
+from test_data import partners_page_data as PartnersData
 from pages.partners_page import PartnersPage
 from test_data.urls import PartnersPageUrls
 from locators.locators import PartnersLocators
@@ -73,3 +75,49 @@ class TestPartnersPage:
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.link_visible_and_clickable(PartnersLocators.ANDROID_FIRST_LINK)
+
+    def test_TC_011_01_01_verify_that_Partners_and_solutions_page_title_is_correct(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.check_page_title(PartnersData.PARTNERS_PAGE_TITLE)
+
+    def test_TC_011_01_02_verify_that_the_heading_of_the_page_equals_to_Partners_and_solutions(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_HEADING, PartnersData.PARTNERS_PAGE_HEADING)
+
+    def test_TC_011_20_01_verify_that_the_info_board_message_at_the_top_of_the_page_is_displayed(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.get_text_content_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, PartnersData.PARTNERS_PAGE_INFO_BOARD_TEXT)
+
+    def test_TC_011_20_02_verify_the_color_of_the_info_board_message_at_the_top_of_the_page(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.get_background_color_of_the_element(PartnersLocators.PARTNERS_PAGE_INFO_BOARD, PartnersData.INFO_BOARD_BACKGROUND_COLOR)
+
+    def test_TC_011_20_03_verify_that_the_Github_link_in_the_info_board_message_is_visible_and_clickable(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_visible_and_clickable(PartnersLocators.INFO_BOARD_GITHUB_LINK)
+
+    def test_TC_011_20_04_Verify_that_the_Github_link_in_the_info_board_message_leads_to_correct_page(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.check_link_in_new_window(PartnersLocators.INFO_BOARD_GITHUB_LINK, PartnersPageUrls.INFO_BOARD_GITHUB)
+
+    @pytest.mark.parametrize('anchor_locators', PartnersLocators.ANCHOR_LOCATORS)
+    def test_TC_011_19_01_Verify_that_the_anchor_links_are_clickable(self, driver, anchor_locators):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.element_is_clickable(anchor_locators)
+
+    def test_TC_011_11_02_verify_redirection_awesome_button_to_the_right_website(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_wordpress_awesome_weather_widget_leads_to_the_new_website()
+
+    def test_TC_011_18_01_verify_redirection_view_solutions_button_to_the_right_website(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_the_link_view_solutions_leads_to_the_new_website()

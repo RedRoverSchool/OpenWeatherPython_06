@@ -1,6 +1,6 @@
 from pages.base_page import BasePage
 from locators.locators import ApiKeysLocator
-from tests.test_group_ducktales.pages.sign_in_page import SignInPage
+from oldTests.test_group_ducktales.pages.sign_in_page import SignInPage
 
 LINK_SIGN_IN_PAGE = "https://home.openweathermap.org/users/sign_in"
 

@@ -210,6 +210,18 @@ class MainPage(BasePage):
     def verify_chart_weather_is_present(self):
         assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
 
+    def verify_the_copyright_information_is_present_on_the_page(self):
+        self.allow_all_cookies()
+        expected_footer_text = "© 2012 — 2023 OpenWeather"
+        footer = self.driver.find_element(*FooterLocators.FOOTER_COPYRIGHT)
+        assert footer.is_displayed() and expected_footer_text in footer.text, \
+            "The footer is not displayed or does not contain the expected text"
+    def about_us_link_leads_to_correct_page(self):
+        about_us_link = self.driver.find_element(*MainPageLocators.ABOUT_US_LINK)
+        self.go_to_element(about_us_link)
+        about_us_link.click()
+        assert '/about-us' in self.driver.current_url, "The about us link leads to an incorrect page"
+
     def checking_the_temperature_system_switching(self, system):
         match system:
             case "°C":
@@ -472,3 +484,18 @@ class MainPage(BasePage):
     def enter_city_in_weather_in_your_city_field(self, city):
         input_city = self.driver.find_element(*self.locators.FIELD_WEATHER_IN_YUOR_CITY)
         input_city.send_keys(city)
+
+
+    def check_footer_website_is_displayed(self, element):
+        assert element.is_displayed() and self.driver.title not in 'Page not found (404) - OpenWeatherMap', \
+            f'\nFooter is not present on the page - {self.driver.current_url}'
+
+    def check_copyright_is_displayed(self, element):
+        copyright_expected_result = ['©', '2012 — 2023', 'OpenWeather', '® All rights reserved']
+        copyright_actual_result = element.text
+        copyright_flag = 1
+        for i in copyright_expected_result:
+            if i not in copyright_actual_result:
+                copyright_flag = 0
+        assert element.is_displayed() and copyright_flag == 1, f'\nCopyright is not present (actual) on the page - {self.driver.current_url}'
+
