@@ -83,3 +83,19 @@ class PartnersPage(BasePage):
         self.driver.switch_to.window(new_window)
         weather_based = self.driver.find_element(*PartnersLocators.WEATHER_BASED_COMPAIGN_MANAGEMENT)
         assert weather_based.is_displayed(), 'Weather-based Campaign Management header is not on this page'
+
+    def verify_wordpress_awesome_weather_widget_leads_to_the_new_website(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.BUTTON_SEE_ON_THE_WEBSITE)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert 'https://www.drupal.org/project/olowm' in self.driver.current_url, \
+        "See on the website link leads to an incorrect page"
+
+    def verify_the_link_view_solutions_leads_to_the_new_website(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.BUTTON_VIEW_SOLUTIONS)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert PartnersPageUrls.REPOSITORIES_OPENWEATHER, self.driver.current_url
+
