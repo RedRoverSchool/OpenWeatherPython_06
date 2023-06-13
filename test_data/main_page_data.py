@@ -7,7 +7,8 @@ data = {
     "searchTextInput": {
         "no_result_notification": "No result for ",
         "zip_code": ""
-    }
+    },
+    "pages": ['', 'guide', 'api', 'weather-dashboard', 'price', 'our-initiatives', 'examples', 'home/sign_in', 'faq', 'appid']
 }
 
 WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
