@@ -1,5 +1,6 @@
 import pytest
 from tests.group_files.group_100000.locators.marketplace_page_locators import MarketplaceLocators as M
+from tests.group_files.group_100000.pages.marketplace_page import MarketplacePage
 
 
 @pytest.mark.parametrize('locator', [M.STATE_TEXAS])

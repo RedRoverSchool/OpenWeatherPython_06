@@ -1,5 +1,5 @@
 from tests.group_files.group_100000.locators.main_page_locators import EightDayForecast as D8
-
+from tests.group_files.group_100000.pages.main_page import EightDayForecastPage, FooterBlock, FooterMainPage, MainPage
 
 
 class TestHowToStartLink:

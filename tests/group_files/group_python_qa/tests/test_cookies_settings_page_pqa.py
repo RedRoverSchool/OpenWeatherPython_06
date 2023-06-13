@@ -1,3 +1,4 @@
+from tests.group_files.group_python_qa.links.links_all_pages import URL_COOKIES_SETTINGS
 from tests.group_files.group_python_qa.pages.cookies_settings_page_pqa import CookiesSettings
 
 

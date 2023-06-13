@@ -1,5 +1,7 @@
 import pytest
 from tests.group_files.group_ducktales.pages.our_initiatives_page import OurInitiativesPage
+from tests.group_files.group_ducktales.test_data.our_initiatives_page_data import OUR_INITIATIVES_PAGE, sections, \
+    EDUCATION_SECTION_PAGE
 
 
 class TestOurInitiativesPage:

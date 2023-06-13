@@ -4,6 +4,9 @@ from datetime import datetime
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 
+from tests.group_files.group_ducktales.test_data.main_page_data_d import WEEKDAYS, MONTHS, KEYS_FOR_SEARCH_CITY_INPUT, \
+    EXPECTED_CITY, KEYS_FOR_SEARCH_CITY_INPUT_ZIP, MONTH_28, MONTH_31, MONTH_30
+
 
 class MainPage(BasePage):
 

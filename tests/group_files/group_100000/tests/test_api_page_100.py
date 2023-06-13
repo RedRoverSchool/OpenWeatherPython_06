@@ -1,5 +1,6 @@
-from tests.group_files.group_100000.pages.api_page import OneCallApiPage, WeatherConditionsPage
-from tests.group_files.group_100000.locators.api_page_locators import WeatherConditions as W
+from tests.group_files.group_100000.pages.api_page import OneCallApiPage, WeatherConditionsPage, ClimaticForecast, \
+    FooterApiPage
+from tests.group_files.group_100000.locators.api_page_locators import WeatherConditions as W, ClimateForecast
 from tests.group_files.group_100000.locators.api_page_locators import OneCallApi as O
 
 

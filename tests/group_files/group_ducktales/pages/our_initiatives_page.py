@@ -3,6 +3,7 @@ from selenium.common import ElementClickInterceptedException
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from tests.group_files.group_ducktales.locators.our_initiatives_page_locators import OurInitiativesPageLocators
+from tests.group_files.group_ducktales.test_data.our_initiatives_page_data import EDUCATION_SECTION_PAGE
 
 
 class OurInitiativesPage(BasePage):

@@ -1,4 +1,6 @@
 from tests.group_files.group_100000.locators.pricing_page_locators import PricingLocators as P
+from tests.group_files.group_100000.pages.pricing_page import PricingPage
+
 
 def test_TC_008_02_02_Visibility_the_title_OneCall_is_visible(driver):
     pricing_page = PricingPage(driver, link=P.URL_PRICING)

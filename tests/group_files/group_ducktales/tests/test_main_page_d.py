@@ -1,4 +1,5 @@
 from tests.group_files.group_ducktales.pages.main_page_d import MainPage
+from tests.group_files.group_ducktales.test_data.main_page_data_d import LINK_MAIN_PAGE
 
 
 class TestMainPage:

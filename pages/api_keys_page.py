@@ -1,17 +1,18 @@
 from pages.base_page import BasePage
 from locators.locators import ApiKeysLocator
-from tests.group_files.group_ducktales.pages.sign_in_page import SignInPage
+from pages.sign_in_page import SignInPage
+
 LINK_SIGN_IN_PAGE = "https://home.openweathermap.org/users/sign_in"
 
 
 class ApiKeysPage(BasePage):
 
-    def open_api_keys_page(self):
-        sign_in_page = SignInPage(self.driver, LINK_SIGN_IN_PAGE)
-        sign_in_page.open_page()
-        sign_in_page.log_in()
-        api_key_tab = self.driver.find_element(*ApiKeysLocator.TAB_API_KEYS)
-        api_key_tab.click()
+    # def open_api_keys_page(self):
+    #     sign_in_page = SignInPage(self.driver, LINK_SIGN_IN_PAGE)
+    #     sign_in_page.open_page()
+    #     sign_in_page.log_in()
+    #     api_key_tab = self.driver.find_element(*ApiKeysLocator.TAB_API_KEYS)
+    #     api_key_tab.click()
 
     def check_module_create_api_key_is_visible(self):
         module_create_api_key = self.driver.find_element(*ApiKeysLocator.MODULE_API_KEY_CREATE)

@@ -1,5 +1,6 @@
 import pytest
 from tests.group_files.group_future_auto_qa.pages.main_page import MainPageFooter
+from tests.group_files.group_future_auto_qa.test_data.urls import URLs
 
 
 @pytest.mark.parametrize('URL', URLs)
