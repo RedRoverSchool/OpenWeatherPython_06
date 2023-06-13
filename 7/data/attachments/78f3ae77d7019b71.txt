@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#JSON
-link text: JSON
-198.5   86.28125
-
-quit browser...
