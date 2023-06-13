@@ -8,10 +8,6 @@ from test_data.partners_page_data import data
 class PartnersPage(BasePage):
     locators = PartnersLocators()
 
-    def __init__(self, driver, link=None):
-        super().__init__(driver, link)
-        self.awesome_widget_button = None
-
     def verify_redirected_the_link_apache_camel_to_a_new_window(self, apache_camel):
         self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         self.allow_all_cookies()
