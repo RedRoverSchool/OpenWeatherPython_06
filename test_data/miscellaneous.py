@@ -5,3 +5,4 @@ class BasePageMisc:
 
 class MembersPageData:
     EXPECTED_NUMBER_OF_FIELDS = 7
+

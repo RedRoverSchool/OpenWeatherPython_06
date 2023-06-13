@@ -91,3 +91,4 @@ class TestPartnersPage:
         page.find_element_and_click(PartnersLocators.LINK_SEE_LIBRARY)
         page.switch_to_new_window()
         page.check_for_redirection(PartnersPageUrls.GO_LIBRARY_PAGE)
+
