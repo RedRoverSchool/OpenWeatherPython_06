@@ -5,6 +5,7 @@ class MainPageUrls:
                                     "https://openweathermap.org/weather-dashboard",
                                     "https://openweathermap.org/widgets-constructor"]
     QUALITY_INFO_PAGE = "https://openweathermap.org/accuracy-and-quality"
+    ASK_A_QUESTION_PAGE = "https://home.openweathermap.org/questions"
 
 
 class SignInUrls:

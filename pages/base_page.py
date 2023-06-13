@@ -188,3 +188,25 @@ class BasePage:
         self.driver.find_element(*locator).click()
         assert link in self.driver.current_url, \
             f'"{link}" link does not redirect correctly'
+
+    def scroll_down_the_page(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    def check_link_in_new_window(self, locator, link):
+        self.driver.find_element(*locator).click()
+        new_window = self.driver.window_handles[1]
+        self.driver.switch_to.window(new_window)
+        assert link in self.driver.current_url
+
+    def check_page_title(self, data):
+        title = self.driver.title
+        assert data in title, f'{data} is not in the page title'
+
+    def get_text_content_of_the_element(self, locator, data):
+        element = self.driver.find_element(*locator).text
+        assert element == data, f'{data} is not in the text content of the element'
+
+    def get_background_color_of_the_element(self, locator, data):
+        element = self.driver.find_element(*locator)
+        background_color_of_the_element =  element.value_of_css_property("background-color")
+        assert background_color_of_the_element == data, 'Wrong background color'

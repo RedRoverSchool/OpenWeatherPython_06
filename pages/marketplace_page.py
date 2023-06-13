@@ -161,3 +161,17 @@ class MarketplacePage(BasePage):
         labels_checkbox = self.element_is_clickable(M.CHECKBOX_LABELS)
         assert labels_checkbox.is_displayed() and labels_checkbox.is_enabled(), \
             "The 'Terrain' checkbox is not displayed on the map or is not clickable"
+
+    def verify_name_of_location_and_its_coordinates_were_added_to_the_order(self, wait):
+        self.driver.find_element(*M.ADD_LOCATION_BTN).click()
+        displayed_text = wait.until(EC.visibility_of_element_located(M.LST_NAME_CITY)).text
+        displayed_latitude = wait.until(EC.visibility_of_element_located(M.LST_LATITUDE_COORDINATE)).text
+        displayed_longitude = wait.until(EC.visibility_of_element_located(M.LST_LONGITUDE_COORDINATE)).text
+        return displayed_text, displayed_latitude, displayed_longitude
+        expected_city = "Paris"
+        expected_latitude = "48.856614"
+        expected_longitude = "2.352222"
+        assert displayed_text == expected_city \
+               and displayed_latitude == expected_latitude \
+               and displayed_longitude == expected_longitude
+
