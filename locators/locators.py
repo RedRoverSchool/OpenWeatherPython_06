@@ -410,3 +410,7 @@ class CookiesSettingsPageLocators:
     LEARN_MORE_COOKIES = (By.CSS_SELECTOR, "a[href='/cookies-details']")
     SAVE_CHANGES_BUTTON = (By.XPATH, "//*[contains(text(), 'Save')]")
     SUCCESSFUL_SAVING_SETTINGS_MESSAGE = (By.CSS_SELECTOR, 'div.alert-block')
+
+class StudentInitiativeLocators:
+    WEBSITE_LINK_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
+    ASK_US_POPUP_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
