@@ -258,6 +258,7 @@ class GuideLocators:
     ONE_CALL_API_BY_CALL_LOCATOR = (By.XPATH, "//*[text()='One Call API by call']")
     SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.CSS_SELECTOR, "a[href='/price'].ow-btn.round.btn-orange")
 
+
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
@@ -268,6 +269,8 @@ class PartnersLocators:
                              "//a[@href='https://github.com/google/maps-for-work-samples/blob/master/samples/maps/OpenWeatherMapLayer/index.html']")
     BUTTON_OPEN_MANUAL = (By.XPATH, "//a[text()='Open manual']")
     HEADERS_ON_THE_PAGE = (By.XPATH, "//h2")
+    MORE_DETAILS_LOCATOR = (By.CSS_SELECTOR, '#google1 > a')
+    WEATHER_BASED_COMPAIGN_MANAGEMENT = (By.CSS_SELECTOR, '.devsite-page-title')
     PARTNERS_PAGE_HEADING = (By.XPATH, '//h1')
     PARTNERS_PAGE_INFO_BOARD = (By.XPATH, "//div[@class='info-board info-board-orange']")
     RASPBERRY = (By.CSS_SELECTOR, '#raspberry > a')
@@ -299,7 +302,6 @@ class PartnersLocators:
     BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
     BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
     BUTTON_VIEW_SOLUTIONS = (By.XPATH, "//a[text()='View solutions']")
-
 
 class WidgetsConstractorLocators:
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
@@ -387,6 +389,19 @@ class SearchResultPageLocators:
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
 
+class AccuracyAndQualityOfWeatherDataPageLocators:
+    NUMBER_OF_CITIES_FOR_EVALUATION = (By.CSS_SELECTOR, ".col-sm-12 p>a")
+
+class MapsPageLocators:
+    CITIES_CHECKBOX_INPUT = (By.CSS_SELECTOR, 'input#citiesConditions')
+    CITIES_CHECKBOX_LABEL = (By.CSS_SELECTOR, 'label.weather-layer-container__label')
+
+
+class MembersPageLocators:
+    INDIVIDUAL_RADIOBUTTON = (By.CSS_SELECTOR, 'input[value="individual"]')
+    ORGANISATION_RADIOBUTTON = (By.CSS_SELECTOR, 'input[value="organisation"]')
+    LEFT_FIELDS_FOR_SUBSCRIPTION = (By.CSS_SELECTOR, 'div.col-xs-6:nth-child(1)')
+
 class CookiesSettingsPageLocators:
     RADIO_BUTTON_1 = (By.XPATH, '(//div/input)[1]')
     RADIO_BUTTON_2 = (By.XPATH, '(//div/input)[2]')
@@ -394,3 +409,4 @@ class CookiesSettingsPageLocators:
     RADIO_BUTTON_4 = (By.XPATH, '(//div/input)[4]')
     LEARN_MORE_COOKIES = (By.CSS_SELECTOR, "a[href='/cookies-details']")
     SAVE_CHANGES_BUTTON = (By.XPATH, "//*[contains(text(), 'Save')]")
+    SUCCESSFUL_SAVING_SETTINGS_MESSAGE = (By.CSS_SELECTOR, 'div.alert-block')

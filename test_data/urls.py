@@ -69,6 +69,15 @@ class GuidePageUrls:
     GUIDE_PAGE = "https://openweathermap.org/guide"
     URL_HISTORY_BULK = "https://openweathermap.org/history-bulk"
 
+class AccuracyAndQualityOfWeatherDataPageUrls:
+    ACCURACY_AND_QUALITY_PAGE_LINK = "https://openweathermap.org/accuracy-and-quality"
+
+class MapsPageUrls:
+    PAGE_WITH_MAP_LINK = 'https://openweathermap.org/weathermap'
+
+class MembersPageUrls:
+    MEMBERS_PAGE_LINK = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/startup'
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
+
