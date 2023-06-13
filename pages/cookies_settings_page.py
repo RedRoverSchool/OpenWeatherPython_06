@@ -8,12 +8,12 @@ class CookiesSettingsPage(BasePage):
 
     def click_cookies_that_analyse_radiobutton(self, wait):
         cookies_that_analyse_radiobutton = self.driver.\
-            find_element(*CookiesSettingsPageLocators.COOKIES_THAT_ANALYSE_RADIOBUTTON)
+            find_element(*CookiesSettingsPageLocators.RADIO_BUTTON_1)
         cookies_that_analyse_radiobutton.click()
 
     def click_google_advertising_radiobutton(self, wait):
         google_advertising_radiobutton = self.driver.\
-            find_element(*CookiesSettingsPageLocators.GOOGLE_ADVERTISING_RADIOBUTTON)
+            find_element(*CookiesSettingsPageLocators.RADIO_BUTTON_3)
         google_advertising_radiobutton.click()
 
     def click_save_changes_button(self, wait):
