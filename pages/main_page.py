@@ -210,6 +210,18 @@ class MainPage(BasePage):
     def verify_chart_weather_is_present(self):
         assert self.element_is_present(self.locators.CHART_WEATHER), "Chart weather is not present"
 
+    def verify_the_copyright_information_is_present_on_the_page(self):
+        self.allow_all_cookies()
+        expected_footer_text = "© 2012 — 2023 OpenWeather"
+        footer = self.driver.find_element(*FooterLocators.FOOTER_COPYRIGHT)
+        assert footer.is_displayed() and expected_footer_text in footer.text, \
+            "The footer is not displayed or does not contain the expected text"
+    def about_us_link_leads_to_correct_page(self):
+        about_us_link = self.driver.find_element(*MainPageLocators.ABOUT_US_LINK)
+        self.go_to_element(about_us_link)
+        about_us_link.click()
+        assert '/about-us' in self.driver.current_url, "The about us link leads to an incorrect page"
+
     def checking_the_temperature_system_switching(self, system):
         match system:
             case "°C":
