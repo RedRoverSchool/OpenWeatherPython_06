@@ -76,6 +76,13 @@ class PartnersPage(BasePage):
         headers_on_the_page = [i.text for i in find_all_headers]
         assert data["sections"] == headers_on_the_page
 
+    def link_see_library_visibility(self, wait):
+        self.element_is_displayed(PartnersLocators.LINK_SEE_LIBRARY, wait)
+
+    def link_see_library_is_clickable(self, wait):
+        see_library_link = self.element_is_clickable(PartnersLocators.LINK_SEE_LIBRARY)
+        assert see_library_link.is_enabled(), "The link is not clickable"
+
     def redirecting_to_more_details_with_source_code_page(self, wait):
         more_details_link = self.driver.find_element(*PartnersLocators.MORE_DETAILS_LOCATOR)
         self.driver.execute_script("arguments[0].click();", more_details_link)
