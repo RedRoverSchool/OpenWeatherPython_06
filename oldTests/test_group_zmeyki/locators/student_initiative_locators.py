@@ -5,5 +5,5 @@ class StudentInitiativeLocators:
 
     URL = 'https://openweathermap.org/'
     STUDENT_INITIATIVE_URL = 'https://openweathermap.org/our-initiatives/student-initiative'
-    website_link_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
-    ask_us_popup_locator = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
+    WEBSITE_LINK_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
+    ASK_US_POPUP_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
