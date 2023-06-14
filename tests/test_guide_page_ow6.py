@@ -53,3 +53,8 @@ class TestGuidePage:
         page.open_page()
         page.check_link(BasePageLocators.LOGO_LOCATOR, Links.URL_MAIN_PAGE)
 
+    def test_tc_004_05_01(self, driver):
+        driver.get(GuideLocators.GUIDE_URL)
+        for url_locators in GuideLocators.guide_fast_way_links_locators:
+            link_fast_way = driver.find_element(*url_locators)
+            assert link_fast_way.is_displayed()

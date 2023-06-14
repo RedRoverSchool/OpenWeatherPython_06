@@ -11,7 +11,6 @@ class APIPage(BasePage):
     GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
     button_get_access = 'href="mailto:info@openweathermap.org"'
 
-
     def click_button_api_doc_history_full_archive(self):
         btn_history_api = self.driver.find_element(*self.button_history_api_full_archive)
         self.action_move_to_element(btn_history_api)
