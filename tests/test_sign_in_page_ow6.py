@@ -1,6 +1,6 @@
 from pages.sign_in_page import SignInPage
 from test_data.urls import SignInUrls
-from pages.sign_in_page import SigninPage #Someone did with a lowercase "i", this is not a double, if you remove this import, the tests below will break
+from pages.sign_in_page import SigninPage #Someone did with a lowercase "i", this is not a double, if you remove this import, the oldTests below will break
 from pages.main_page import MainPage
 from test_data.urls import MainPageUrls
 
