@@ -198,6 +198,7 @@ class TestMainPage:
             google_link = MainPage(driver)
             google_link.check_leads_link_Googl_Play()
 
+
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
             page = MainPage(driver)

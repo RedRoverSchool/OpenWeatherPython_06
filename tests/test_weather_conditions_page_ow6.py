@@ -4,7 +4,6 @@ from test_data.urls import WeatherConditionsUrls
 from test_data.weather_conditions_page_data import WeatherConditionsData as data
 import pytest
 
-
 class TestWeatherConditions:
 
     def test_tc_001_10_03_verify_count_of_icons_for_night_time(self, driver):

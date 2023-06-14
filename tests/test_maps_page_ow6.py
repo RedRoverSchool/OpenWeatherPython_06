@@ -12,6 +12,7 @@ class TestMapsPage:
         maps_page = MapsPage(driver)
         maps_page.check_open_maps('maps')
 
+
     def test_TC_002_01_06_Verify_return_to_Main_page_from_Interactive_weather_maps(self, driver):
         maps_page = MapsPage(driver, MapsPageUrls.PAGE_WITH_MAP_LINK)
         maps_page.open_page()
