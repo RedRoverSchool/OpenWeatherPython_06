@@ -24,3 +24,8 @@ class TestWeatherConditions:
         weather_conditions_page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
         weather_conditions_page.open_page()
         weather_conditions_page.check_desc_are_visible(driver, table)
+
+    def test_TC_001_12_05_Clouds_group_of_codes_visible(self, driver):
+        page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
+        page.open_page()
+        page.check_visible_group_of_codes('clouds')
