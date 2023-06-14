@@ -302,6 +302,7 @@ class PartnersLocators:
     ANCHOR_LOCATORS = [
         GOOGLE_01, GOOGLE_02, MOZILLA, UBUNTU, ANDROID, LEAFLET, JAVA,
         GO, JS, CMS, RASPBERRY_ANCHOR, PYTHON, PHP, APACHE, DESKTOP, MOBILE_APP, BIG_LIBRARY
+    ]
     LINK_SEE_LIBRARY = (By.XPATH, '//a[text()="See library"]')
     BUTTON_SEE_ON_THE_WEBSITE = (By.XPATH, "//a[@href='http://drupal.org/project/olowm']")
     BUTTON_VIEW_WIDGET = (By.XPATH, "//a[@href='http://wordpress.org/extend/plugins/awesome-weather/']")
