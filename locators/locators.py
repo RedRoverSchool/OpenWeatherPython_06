@@ -241,6 +241,10 @@ class MarketplaceLocators:
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
     ICONS_FOR_NIGHT_TIME = (By.XPATH, '//td[contains(text(), "n.png")]')
+    ELEMENTS_LOCATOR_CODES = lambda table: (
+    By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[1]")
+    ELEMENTS_LOCATOR_DESC = lambda table: (
+        By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[3]")
 
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'
@@ -383,11 +387,14 @@ class ForBusinessPageLocators:
     WEATHER_MAPS = By.XPATH, "(//a[@class='stats white-text'])[4]"
     ENERGY_PREDICTION = By.XPATH, "(//a[@class='stats white-text'])[5]"
 
+
+
 class SearchResultPageLocators:
     ALERT_NOTIFICATION = (By.CSS_SELECTOR, "#forecast_list_ul .alert.alert-warning")
     STRING_ENTERED_CITY = (By.CSS_SELECTOR, "#search_str")
     NOTIFICATION_PANE = (By.ID, 'forecast_list_ul')
     NOTIFICATION_BUTTON = (By.CSS_SELECTOR, '.alert.alert-warning a.close')
+
 
 class AccuracyAndQualityOfWeatherDataPageLocators:
     NUMBER_OF_CITIES_FOR_EVALUATION = (By.CSS_SELECTOR, ".col-sm-12 p>a")
@@ -401,6 +408,7 @@ class MembersPageLocators:
     INDIVIDUAL_RADIOBUTTON = (By.CSS_SELECTOR, 'input[value="individual"]')
     ORGANISATION_RADIOBUTTON = (By.CSS_SELECTOR, 'input[value="organisation"]')
     LEFT_FIELDS_FOR_SUBSCRIPTION = (By.CSS_SELECTOR, 'div.col-xs-6:nth-child(1)')
+    
 
 class CookiesSettingsPageLocators:
     RADIO_BUTTON_1 = (By.XPATH, '(//div/input)[1]')
@@ -419,3 +427,4 @@ class MembersLocators:
 class StudentInitiativeLocators:
     WEBSITE_LINK_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
     ASK_US_POPUP_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
+
