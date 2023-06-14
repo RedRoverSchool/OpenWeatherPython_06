@@ -1,5 +1,6 @@
 from pages.weather_api_page import WeatherApiPage
 from locators.locators import ClimateForecastLocators as CFL
+from pages.api_page import APIPage
 
 
 class TestWeatherApiPage:
@@ -12,3 +13,15 @@ class TestWeatherApiPage:
         page = WeatherApiPage(driver, CFL.URL_FORCAST30)
         page.open_page()
         page.check_redirect_to_the_how_to_make_of_the_page()
+
+    def test_005_13_01_check_title_on_page_weather_alert(self, driver, open_and_load_main_page):
+        weather_api = APIPage(driver)
+        weather_api.click_header_link('api')
+        weather_api.click_button_api_doc_in_global_weather_alerts()
+        weather_api.check_title_features_global_weather_alert()
+
+    def test_005_17_01_check_title_history_api_full_archive(self, driver, open_and_load_main_page):
+        history_api_full = APIPage(driver)
+        history_api_full.click_header_link('api')
+        history_api_full.click_button_api_doc_history_full_archive()
+        history_api_full.check_title_history_api_full_archive()

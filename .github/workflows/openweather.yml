@@ -1,4 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# This workflow will install Python dependencies, run oldTests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
 name: OpenWeather_06
@@ -38,7 +38,7 @@ jobs:
       uses: tj-actions/changed-files@v23
       with:
         files: |
-          **/*.py
+          tests/
 
     - name: Run Pytest on changed files
       if: steps.changed-py-files.outputs.any_changed == 'true'
