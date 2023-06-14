@@ -499,3 +499,13 @@ class MainPage(BasePage):
                 copyright_flag = 0
         assert element.is_displayed() and copyright_flag == 1, f'\nCopyright is not present (actual) on the page - {self.driver.current_url}'
 
+    def graphic_hourly_forecast_is_displayed(self, wait):
+        graphic_hourly_forecast = self.driver.find_element(*self.locators.CHART_WEATHER)
+        self.go_to_element(graphic_hourly_forecast)
+        assert self.element_is_visible
+
+    def weather_items_are_displayed(self, wait):
+        self.driver.get('https://openweathermap.org/')
+        weather_items = self.driver.find_elements(*self.locators.WEATHER_ITEMS_LOCATOR)
+        self.driver.execute_script("arguments[0].scrolldown;", weather_items)
+        assert self.weather_items_are_displayed

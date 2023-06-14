@@ -294,3 +294,12 @@ class TestMainPage:
         page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
         page.open_page()
         page.element_is_visible(MainPageLocators.NWP_MODEL)
+
+    class TestMainPageGraphicAndWeather:
+        def test_tc_001_08_01_graphic_hourly_forecast_is_displayed(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.graphic_hourly_forecast_is_displayed(wait=wait)
+
+        def test_tc_001_08_02_weather_items_are_displayed(self, driver, open_and_load_main_page, wait):
+            page = MainPage(driver)
+            page.weather_items_are_displayed(wait=wait)

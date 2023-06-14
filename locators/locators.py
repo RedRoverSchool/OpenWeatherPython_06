@@ -89,6 +89,9 @@ class MainPageLocators:
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
     ASK_A_QUESTION_LINK = (By.XPATH, "(//*[contains(text(),'question')])[3]")
 
+    WEATHER_ITEMS_LOCATOR = (By.CSS_SELECTOR, "ul.weather-items")
+    WEATHER_ITEM_LOCATOR = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
+
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
     HEADER_DASHBOARD = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[3]/a')
