@@ -78,10 +78,8 @@ class MapsPageUrls:
 
 class MembersPageUrls:
     MEMBERS_PAGE_LINK = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/startup'
+    URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
-
-class MembersPageUrls:
-    URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
 
