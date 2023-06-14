@@ -82,3 +82,27 @@ class PartnersPage(BasePage):
     def link_see_library_is_clickable(self, wait):
         see_library_link = self.element_is_clickable(PartnersLocators.LINK_SEE_LIBRARY)
         assert see_library_link.is_enabled(), "The link is not clickable"
+
+    def redirecting_to_more_details_with_source_code_page(self, wait):
+        more_details_link = self.driver.find_element(*PartnersLocators.MORE_DETAILS_LOCATOR)
+        self.driver.execute_script("arguments[0].click();", more_details_link)
+        new_window = self.driver.window_handles[1]
+        self.driver.switch_to.window(new_window)
+        weather_based = self.driver.find_element(*PartnersLocators.WEATHER_BASED_COMPAIGN_MANAGEMENT)
+        assert weather_based.is_displayed(), 'Weather-based Campaign Management header is not on this page'
+
+    def verify_wordpress_awesome_weather_widget_leads_to_the_new_website(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.BUTTON_SEE_ON_THE_WEBSITE)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert 'https://www.drupal.org/project/olowm' in self.driver.current_url, \
+        "See on the website link leads to an incorrect page"
+
+    def verify_the_link_view_solutions_leads_to_the_new_website(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.BUTTON_VIEW_SOLUTIONS)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert PartnersPageUrls.REPOSITORIES_OPENWEATHER, self.driver.current_url
+

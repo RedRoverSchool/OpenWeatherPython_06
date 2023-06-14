@@ -60,6 +60,13 @@ class TestPartnersPage:
     def test_TC_011_01_03_verify_17_sections_are_visible(self, driver):
         page = PartnersPage(driver)
         page.verify_17_sections_are_visible()
+
+    def test_TC_011_02_02_Verify_that_user_is_redirected_to_a_new_window_page_after_click_on_the_link_More_detailes_with_source_code(self,
+            driver, wait):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.redirecting_to_more_details_with_source_code_page(wait)
+
     def test_TC_011_12_01_verify_the_link_in_raspberry_is_visible_and_clickable(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
@@ -129,3 +136,13 @@ class TestPartnersPage:
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.element_is_clickable(anchor_locators)
+
+    def test_TC_011_11_02_verify_redirection_awesome_button_to_the_right_website(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_wordpress_awesome_weather_widget_leads_to_the_new_website()
+
+    def test_TC_011_18_01_verify_redirection_view_solutions_button_to_the_right_website(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_the_link_view_solutions_leads_to_the_new_website()

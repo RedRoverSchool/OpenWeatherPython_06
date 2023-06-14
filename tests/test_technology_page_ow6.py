@@ -1,4 +1,3 @@
-from pages.technology_page import TechnologyPage
+# from pages.technology_page import TechnologyPage
 
-class TestTechnologyPage:
-    pass
+# class TestTechnologyPage:
