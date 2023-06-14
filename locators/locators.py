@@ -108,6 +108,7 @@ class DashboardPageLocators:
 class PricingPageLocators:
     URL_PRICING = 'https://openweathermap.org/price'
     LINK_TEXT_ONE_CALL = (By.CSS_SELECTOR, "#onecall > div > div > h2")
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 
 class ApiPageLocators:
@@ -245,6 +246,7 @@ class GuideLocators:
     HISTORICAL_COLLECTION_MODULE = (By.CSS_SELECTOR, ".col-sm-12 ol ul:nth-of-type(2)")
     LINK_HISTORICAL_ARCHIVE = (By.PARTIAL_LINK_TEXT, "archive")
     CLICK_ALLOW_IN_STICK_FOOTER = (By.CLASS_NAME, 'stick-footer-panel__link')
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
@@ -342,6 +344,7 @@ class FAQPageLocators:
     FAQ_QUESTIONS_AREA = (By.CSS_SELECTOR, ".question.visible")
     FAQ_ANSWER_SECTIONS = (By.XPATH, "./following-sibling::div[@class='question-content']")
     FAQ_ANSWER_TEXT = (By.CSS_SELECTOR, "p")
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 
 class OurInitiativesPageLocators:
@@ -377,3 +380,9 @@ class CookiesSettingsPageLocators:
     RADIO_BUTTON_4 = (By.XPATH, '(//div/input)[4]')
     LEARN_MORE_COOKIES = (By.CSS_SELECTOR, "a[href='/cookies-details']")
     SAVE_CHANGES_BUTTON = (By.XPATH, "//*[contains(text(), 'Save')]")
+
+class AskAQuestionPageLocators:
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h4.headline')
+
+class HowToStartLocators:
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
