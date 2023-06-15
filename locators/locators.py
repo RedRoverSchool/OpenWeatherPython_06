@@ -114,6 +114,7 @@ class PricingPageLocators:
     LINK_TEXT_ONE_CALL = (By.CSS_SELECTOR, "#onecall > div > div > h2")
     button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
                                         (By.XPATH, '//*[@id="history"]//a[2]')]
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 
 class ApiPageLocators:
@@ -261,7 +262,7 @@ class GuideLocators:
     INDUSTRY_APIS_LOCATOR = (By.XPATH, "//*[contains(text(),'industry standard APIs')]")
     ONE_CALL_API_BY_CALL_LOCATOR = (By.XPATH, "//*[text()='One Call API by call']")
     SUBSCRIBE_TO_ONE_CALL_BY_CALL_BUTTON = (By.CSS_SELECTOR, "a[href='/price'].ow-btn.round.btn-orange")
-
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
@@ -364,6 +365,7 @@ class FAQPageLocators:
     FAQ_QUESTIONS_AREA = (By.CSS_SELECTOR, ".question.visible")
     FAQ_ANSWER_SECTIONS = (By.XPATH, "./following-sibling::div[@class='question-content']")
     FAQ_ANSWER_TEXT = (By.CSS_SELECTOR, "p")
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
 
 
 class OurInitiativesPageLocators:
@@ -412,7 +414,8 @@ class MembersPageLocators:
     CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
     CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
     SUCCESSFUL_SAVING_SETTINGS_MESSAGE = (By.CSS_SELECTOR, 'div.alert-block')
-    
+
+
 
 class CookiesSettingsPageLocators:
     RADIO_BUTTON_1 = (By.XPATH, '(//div/input)[1]')
@@ -427,3 +430,10 @@ class StudentInitiativeLocators:
     WEBSITE_LINK_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="/"]')
     ASK_US_POPUP_LOCATOR = (By.CSS_SELECTOR, 'section#terms.anchor_el a[href="mailto:info@openweathermap.org"]')
 
+
+
+class AskAQuestionPageLocators:
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h4.headline')
+
+class HowToStartLocators:
+    DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')

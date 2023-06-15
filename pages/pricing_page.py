@@ -11,3 +11,10 @@ class PricingPage(BasePage):
         for pricing_locator in P.button_detailed_pricing_locators:
             button = self.driver.find_element(*pricing_locator)
             assert button.is_displayed()
+
+
+    def check_header_title(self, link_name):
+        self.click_header_link(link_name)
+        expected_title = "Pricing"
+        displayed_title = self.driver.find_element(*P.DISPLAYED_TITLE).text
+        assert displayed_title == expected_title
