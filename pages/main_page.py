@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from pages.base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators, BasePageLocators
