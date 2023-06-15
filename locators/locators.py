@@ -187,6 +187,8 @@ class SignInPageLocators:
     CHECKBOX_DISPLAY = (By.CSS_SELECTOR, "#user_remember_me")
     SUBMIT_BUTTON_DISPLAY = (By.CSS_SELECTOR, ".new_user > .btn")
     LINK_FOR_PASSWORD_RECOVERY_DISPLAY = (By.CSS_SELECTOR, ".pwd-lost-q > a")
+    ERROR_ALERT = (By.XPATH, "//div[@class='panel-body']")
+    EMAIL_INPUT2 = (By.XPATH, "//input[@class='string email optional form-control']")
 
 
 class SignInLocator:
@@ -316,6 +318,10 @@ class PartnersLocators:
 class WidgetsConstractorLocators:
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
     CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
+
+
+class ProfilePageLocators:
+    AUTH_NOTIFICATION = (By.XPATH, "//div[@class='panel-body']")
 
 
 class RoadRiskApiLocators:
