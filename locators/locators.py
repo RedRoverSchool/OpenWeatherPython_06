@@ -108,6 +108,10 @@ class DashboardPageLocators:
     PRICING_PLANS_SIGN_UP = (By.XPATH, "//a[text()='Sign Up']")
     IMAGE_LOCATOR = (By.XPATH, "//*[@class='responsive']")
 
+    DASHBOARD_BUTTON_LOCATOR = (By.CSS_SELECTOR, '#mobile-menu > li:nth-child(4) > a')
+    HOURLY_FORECAST_API_LOCATOR = (By.CSS_SELECTOR, 'div.col-lg-3 a')
+    URL = 'https://openweathermap.org/'
+
 
 class PricingPageLocators:
     URL_PRICING = 'https://openweathermap.org/price'

@@ -49,3 +49,14 @@ class DashboardPage(BasePage):
     def check_image_is_visible(self):
         image = self.driver.find_element(*self.locators.IMAGE_LOCATOR)
         assert image.is_displayed(), "Image is not visible"
+
+    def verify_hourly_forecast_api_link_redirects_to_valid_page(self, wait):
+        self.driver.get(self.locators.URL)
+        dashboard_button = self.driver.find_element(*self.locators.DASHBOARD_BUTTON_LOCATOR)
+        self.driver.execute_script("arguments[0].click();", dashboard_button)
+        hourly_forecast_api = self.driver.find_element(*self.locators.HOURLY_FORECAST_API_LOCATOR)
+        self.driver.execute_script("arguments[0].click();", hourly_forecast_api)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        assert '/api/hourly-forecast' in self.driver.current_url
+
+
