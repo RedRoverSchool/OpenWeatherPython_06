@@ -499,3 +499,6 @@ class MainPage(BasePage):
                 copyright_flag = 0
         assert element.is_displayed() and copyright_flag == 1, f'\nCopyright is not present (actual) on the page - {self.driver.current_url}'
 
+    def verify_marketplace_link_redirects_to_valid_page(self):
+        self.click_header_link("marketplace")
+        assert self.driver.current_url == Links.URL_MARKETPLACE

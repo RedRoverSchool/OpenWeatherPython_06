@@ -21,6 +21,7 @@ class BasePageLocators:
     HEADER = (By.XPATH, "//h1")
     GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
     LOGO_LOCATOR = (By.CSS_SELECTOR, ".logo > a > img")
+    MARKETPLACE_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(4) a')
 
 
 class MainPageLocators:
