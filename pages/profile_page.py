@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 from locators.locators import ProfilePageLocators
 
-
 class ProfilePage(BasePage):
     locators = ProfilePageLocators()
 

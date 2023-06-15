@@ -11,6 +11,8 @@ class ForBusinessPage(BasePage):
         headings = self.elements_are_present(self.locators.PRODUCTS_HEADINGS, 15)
         return headings
 
+    
+
     def assert_headings_present(self):
         headings = self.check_headings()
         assert len(headings) == 7, "Not all headings are present on the page"

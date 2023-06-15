@@ -1,9 +1,12 @@
 import pytest
 
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators
+from locators.locators import MainPageLocators, FooterLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
+from locators.locators import BasePageLocators
+from locators.locators import PartnersLocators
+from test_data.main_page_data import *
 
 
 class TestMainPage:
@@ -110,6 +113,66 @@ class TestMainPage:
         page = MainPage(driver)
         page.verify_current_location(wait)
 
+    def test_tc_001_01_01_verify_city_name_displayed_by_zip(self, driver, wait, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_city_name_displayed_by_zip(wait)
+
+    def test_tc_001_01_02_main_page_search_city_dropdown_options_valid_value(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_dropdown_options()
+
+    def test_tc_001_02_04_01_switch_toggle_buttons(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_buttons_displayed_and_enabled()
+
+    def test_tc_001_04_03_verify_in_day_list_first_element_day_by_week(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_day()
+
+    def test_tc_001_04_04_verify_in_day_list_first_element_month(self, driver, open_and_load_main_page):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_months()
+
+    def test_tc_001_04_05_verify_in_day_list_first_element_number_day(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_first_element_number_day()
+
+    def test_tc_001_04_06_verify_in_day_list_days_of_the_week(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.verify_in_day_list_days_of_the_week()
+
+    def test_tc_001_04_07_verify_day_list_elements_numbers_days(self, driver, wait, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_in_day_list_numbers_days(driver)
+
+    def test_tc_003_09_01_the_module_title_display(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_module_title_download_openweather_app()
+
+    def test_tc_003_09_02_app_store_brand_link_display(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_app_store_brand_link_display()
+
+    def test_tc_003_09_03_app_store_brand_link_clickable(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_app_store_brand_link_clickable()
+
+    def test_tc_003_09_04_google_play_brand_link_clickable(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_google_play_brand_link_clickable()
+
+    def test_tc_003_09_04_google_play_brand_link_display(self, driver):
+        page = MainPage(driver, Links.URL_MAIN_PAGE)
+        page.open_page()
+        page.check_google_play_brand_link_display()
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)
@@ -118,6 +181,10 @@ class TestMainPage:
         def test_TC_003_12_06_verify_privacy_policy_is_opened_after_click(self, driver, wait, open_and_load_main_page):
             main_page = MainPage(driver)
             main_page.verify_privacy_policy_is_opened_after_click(driver, wait)
+
+        def test_TC_003_12_07_about_us_link_leads_to_correct_page(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.about_us_link_leads_to_correct_page()
 
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
@@ -162,6 +229,15 @@ class TestMainPage:
             main_page.check_faq_link_opens_opens_correct_page(wait, Links.FAQ_URL)
             main_page.check_correct_header_is_displayed("Frequently Asked Questions")
 
+        def test_TC_002_03_22_partners_link_is_visible_and_clickable(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.link_visible_and_clickable(BasePageLocators.PARTNERS_LINK)
+
+        def test_TC_002_03_21_partners_link_leads_to_page_with_correct_header(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.link_leads_to_page_with_correct_header(BasePageLocators.PARTNERS_LINK,
+                                                        PartnersLocators.PARTNERS_PAGE_HEADING)
+
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
 
@@ -179,12 +255,42 @@ class TestMainPage:
             link_number = self.link_product_collections.index(expected_link)
             page.click_footer_product_collections_all_widgets(expected_link, link_number)
 
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_01_verify_footer_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            footer_actual_result = footer.find_element(FooterLocators.FOOTER_WEBSITE)
+            footer.go_to_element(footer_actual_result)
+            footer.check_footer_website_is_displayed(footer_actual_result)
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_01_02_verify_copyright_is_visible_from_all_pages_specified_in_data(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
+            footer.go_to_element(copyright_actual_result)
+            footer.check_copyright_is_displayed(copyright_actual_result)
+
+
+        def test_TC_003_08_02_ask_a_question_link_is_visible(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.element_is_visible(MainPageLocators.ASK_A_QUESTION_LINK)
+
+        def test_TC_003_08_03_ask_a_question_link_is_clickable(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.element_is_clickable(MainPageLocators.ASK_A_QUESTION_LINK)
+
+        def test_TC_003_12_05_ask_a_question_link_leads_to_correct_page(self, driver, open_and_load_main_page):
+            page = MainPage(driver)
+            page.scroll_down_the_page()
+            page.check_link_in_new_window(MainPageLocators.ASK_A_QUESTION_LINK, MainPageUrls.ASK_A_QUESTION_PAGE)
+
     class TestMainPageHourlyForecast:
         def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):
             page = MainPage(driver)
             page.verify_chart_weather_is_present()
 
-    def test_tc_003_11_01_verify_the_copyright_information_is_present_on_the_page(self, driver,
-                                                                                  open_and_load_main_page):
-        page = MainPage(driver)
-        page.verify_the_copyright_information_is_present_on_the_page()
+    def test_tc_001_017_01_visibility_of_nwp_block(self, driver):
+        page = MainPage(driver, MainPageUrls.QUALITY_INFO_PAGE)
+        page.open_page()
+        page.element_is_visible(MainPageLocators.NWP_MODEL)
