@@ -7,3 +7,7 @@ class TestFAQPage:
         faq_page = FAQPage(driver, Links.FAQ_URL)
         faq_page.open_page()
         faq_page.check_hidden_text_is_displayed()
+
+    def test_tc_002_03_09_open_faq(self, driver, open_and_load_main_page):
+        faq_page = FAQPage(driver)
+        faq_page.check_header_title("faq")

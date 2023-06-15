@@ -83,6 +83,24 @@ class TestPartnersPage:
         page.open_page()
         page.link_visible_and_clickable(PartnersLocators.ANDROID_FIRST_LINK)
 
+    def test_tc_011_09_01_link_see_library_visibility(self, driver, wait):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_see_library_visibility(wait)
+
+    def test_tc_011_09_02_link_see_library_is_clickable(self, driver, wait):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.link_see_library_is_clickable(wait)
+
+    def test_tc_011_09_03_link_see_library_redirects_correctly(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.allow_all_cookies()
+        page.find_element_and_click(PartnersLocators.LINK_SEE_LIBRARY)
+        page.switch_to_new_window()
+        page.check_for_redirection(PartnersPageUrls.GO_LIBRARY_PAGE)
+
     def test_TC_011_01_01_verify_that_Partners_and_solutions_page_title_is_correct(self, driver):
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
