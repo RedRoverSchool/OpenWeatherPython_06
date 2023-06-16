@@ -4,64 +4,71 @@
 #
 # Use validator in class methods to validate response data structure
 
-import requests
-import json
-from ..logger import setup_logging
-from ..validator import validator, _load_json_schema
 
+import requests
+from json.decoder import JSONDecodeError
+import json
+# from ..logger import setup_logging
+# from ..validator import validator, _load_json_schema
+from api_testing.utils.validator import ValidatorClass
 
 class HTTPHandler:
-    base_url = "https://reqres.in/api"
+    BASE_URL = "https://reqres.in/api"
 
     @staticmethod
     def validate_response(response):
         try:
             response_json = response.json()
-            # Ваш код валидации структуры данных в ответе
-            # Например, можно проверить наличие определенных полей или их типы
-            # Если структура данных не соответствует ожидаемой, можно вызвать исключение
+            # validator = ValidatorClass()
+            # is_valid = validator.validate(response_json, "response_schema.json")
+            # if not is_valid:
+            #     raise Exception("Invalid JSON response")
         except json.JSONDecodeError:
-            raise Exception("Invalid JSON response")
+            raise Exception("Invalid JSON response:", json.JSONDecodeError)
 
     @classmethod
     def get(cls, endpoint):
-        url = f"{cls.base_url}/{endpoint}"
+        url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.get(url)
-        cls.validate_response(response)
+        # cls.validate_response(response)
         return response.json()
 
     @classmethod
     def post(cls, endpoint, data):
-        url = f"{cls.base_url}/{endpoint}"
+        url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.post(url, json=data)
-        cls.validate_response(response)
+        # cls.validate_response(response)
         return response.json()
 
     @classmethod
     def put(cls, endpoint, data):
-        url = f"{cls.base_url}/{endpoint}"
+        url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.put(url, json=data)
         cls.validate_response(response)
         return response.json()
 
     @classmethod
     def patch(cls, endpoint, data):
-        url = f"{cls.base_url}/{endpoint}"
+        url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.patch(url, json=data)
         cls.validate_response(response)
         return response.json()
 
     @classmethod
     def delete(cls, endpoint):
-        url = f"{cls.base_url}/{endpoint}"
+        url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.delete(url)
         cls.validate_response(response)
         return response.json()
 
 
+post_create_data = {"name": "morpheus", "job": "leader"}
 handler = HTTPHandler()
-response = handler.get("users?page=2")
-print(response)
+response_get = handler.get("users?page=2")
+print('response_get: ', response_get)
+response_post = handler.post("users", post_create_data)
+print('response_post:', response_post)
+
 
 # import allure
 # import requests
