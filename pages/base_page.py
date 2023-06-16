@@ -45,6 +45,10 @@ class BasePage:
                 self.driver.switch_to.window(window_after)
             case 'api':
                 self.driver.find_element(*self.locators.API_LINK).click()
+            case 'marketplace':
+                self.driver.find_element(*self.locators.MARKETPLACE_LINK).click()
+                handles = self.driver.window_handles
+                self.driver.switch_to.window(handles[1])
 
 
     def check_header_link(self, link_name):

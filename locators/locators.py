@@ -90,6 +90,8 @@ class MainPageLocators:
     ASK_A_QUESTION_LINK = (By.XPATH, "(//*[contains(text(),'question')])[3]")
     ACTUAL_WEATHER = (By.CSS_SELECTOR, '#weather-widget div.current-container.mobile-padding div.bold')
     KEY_SEARCH_CITY = 'Saint Petersburg'
+    MARKETPLACE_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(4) a')
+
 
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"

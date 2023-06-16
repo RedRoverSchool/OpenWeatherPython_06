@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from pages.base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators, BasePageLocators
@@ -520,3 +520,6 @@ class MainPage(BasePage):
         dropdown_list = self.driver.find_elements(*self.locators.SEARCH_DROPDOWN)
         for city in dropdown_list:
             assert '°C' in city.text
+    def verify_marketplace_link_redirects_to_valid_page(self):
+        self.click_header_link("marketplace")
+        assert self.driver.current_url == Links.URL_MARKETPLACE

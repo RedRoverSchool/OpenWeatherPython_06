@@ -1,3 +1,4 @@
 .idea/
 __pycache__/
 allure-results
+api_testing/utils/logs
