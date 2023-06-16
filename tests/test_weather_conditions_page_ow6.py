@@ -4,7 +4,6 @@ from test_data.urls import WeatherConditionsUrls
 from test_data.weather_conditions_page_data import WeatherConditionsData as data
 import pytest
 
-
 class TestWeatherConditions:
 
     def test_tc_001_10_03_verify_count_of_icons_for_night_time(self, driver):
@@ -24,3 +23,8 @@ class TestWeatherConditions:
         weather_conditions_page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
         weather_conditions_page.open_page()
         weather_conditions_page.check_desc_are_visible(driver, table)
+
+    def test_TC_001_12_05_Clouds_group_of_codes_visible(self, driver):
+        page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
+        page.open_page()
+        page.check_visible_group_of_codes('clouds')
