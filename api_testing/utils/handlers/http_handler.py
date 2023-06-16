@@ -1,19 +1,9 @@
-# The class should contain methods for GET, POST, PUT, PATCH and DELETE request methods
-#
-# Specify base_url - https://reqres.in/api as class attribute
-#
-# Use validator in class methods to validate response data structure
-
-
 import requests
-from json.decoder import JSONDecodeError
 import json
-# from ..logger import setup_logging
-# from ..validator import validator, _load_json_schema
-from api_testing.utils.validator import ValidatorClass
+from api_testing.utils.validator import validator
 
 class HTTPHandler:
-    BASE_URL = "https://reqres.in/api"
+    BASE_URL = "https://reqres.in"
 
     @staticmethod
     def validate_response(response):
@@ -58,67 +48,6 @@ class HTTPHandler:
     def delete(cls, endpoint):
         url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.delete(url)
-        cls.validate_response(response)
-        return response.json()
-
-
-post_create_data = {"name": "morpheus", "job": "leader"}
-handler = HTTPHandler()
-response_get = handler.get("users?page=2")
-print('response_get: ', response_get)
-response_post = handler.post("users", post_create_data)
-print('response_post:', response_post)
-
-
-# import allure
-# import requests
-# from src.logger import Logger
-# from data.urls import BASE_URL
-#
-#
-# class MyRequests:
-#     @staticmethod
-#     def post(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
-#         with allure.step(f"POST request to URL '{url}'"):
-#             return MyRequests._send(url, data, headers, cookies, "POST")
-#
-#     @staticmethod
-#     def get(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
-#         with allure.step(f"GET request to URL '{url}'"):
-#             return MyRequests._send(url, data, headers, cookies, "GET")
-#
-#     @staticmethod
-#     def put(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
-#         with allure.step(f"PUT request to URL '{url}'"):
-#             return MyRequests._send(url, data, headers, cookies, "PUT")
-#
-#     @staticmethod
-#     def delete(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
-#         with allure.step(f"DELETE request to URL '{url}'"):
-#             return MyRequests._send(url, data, headers, cookies, "DELETE")
-#
-#     @staticmethod
-#     def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
-#         url = f"""{BASE_URL}{url}"""
-#
-#         if headers is None:
-#             headers = {}
-#         if cookies is None:
-#             cookies = {}
-#
-#         Logger.add_request(url, data, headers, cookies, method)
-#
-#         if method == "GET":
-#             response = requests.get(url, params=data, headers=headers, cookies=cookies)
-#         elif method == "POST":
-#             response = requests.post(url, data=data, headers=headers, cookies=cookies)
-#         elif method == "PUT":
-#             response = requests.put(url, data=data, headers=headers, cookies=cookies)
-#         elif method == "DELETE":
-#             response = requests.delete(url, data=data, headers=headers, cookies=cookies)
-#         else:
-#             raise Exception(f"""Bad method '{method}' was received""")
-#
-#         Logger.add_response(response)
-#
-#         return response
+        # response_json = response.json()
+        # cls.validate_response(response)
+        return response.status_code
