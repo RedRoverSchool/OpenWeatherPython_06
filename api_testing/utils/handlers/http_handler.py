@@ -9,10 +9,9 @@ class HTTPHandler:
     def validate_response(response):
         try:
             response_json = response.json()
-            # validator = ValidatorClass()
-            # is_valid = validator.validate(response_json, "response_schema.json")
-            # if not is_valid:
-            #     raise Exception("Invalid JSON response")
+            is_valid = validator(response_json, "list_users.json")
+            if not is_valid:
+                raise Exception("Invalid JSON response")
         except json.JSONDecodeError:
             raise Exception("Invalid JSON response:", json.JSONDecodeError)
 
@@ -20,14 +19,14 @@ class HTTPHandler:
     def get(cls, endpoint):
         url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.get(url)
-        # cls.validate_response(response)
+        cls.validate_response(response)
         return response.json()
 
     @classmethod
     def post(cls, endpoint, data):
         url = f"{cls.BASE_URL}/{endpoint}"
         response = requests.post(url, json=data)
-        # cls.validate_response(response)
+        cls.validate_response(response)
         return response.json()
 
     @classmethod
