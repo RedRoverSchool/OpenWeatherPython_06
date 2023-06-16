@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#geo5
-link text: How to make an API call
-198.5   85.90625
-
-quit browser...
