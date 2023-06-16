@@ -238,6 +238,10 @@ class TestMainPage:
             page.link_leads_to_page_with_correct_header(BasePageLocators.PARTNERS_LINK,
                                                         PartnersLocators.PARTNERS_PAGE_HEADING)
 
+        def test_TC_002_03_07_marketplace_link_redirects_to_valid_page(self, driver, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_marketplace_link_redirects_to_valid_page()
+
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
 

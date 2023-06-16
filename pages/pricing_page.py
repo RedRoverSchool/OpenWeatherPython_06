@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
-from locators.locators import PricingPageLocators as P
+from locators.locators import PricingPageLocators as P, BasePageLocators as B
+from test_data.all_links import Links
 
 
 class PricingPage(BasePage):
@@ -18,3 +19,7 @@ class PricingPage(BasePage):
         expected_title = "Pricing"
         displayed_title = self.driver.find_element(*P.DISPLAYED_TITLE).text
         assert displayed_title == expected_title
+
+    def verify_clicking_on_the_logo_from_page_Pricing_redirects_to_main_page(self):
+        self.driver.find_element(*B.LOGO_LOCATOR).click()
+        assert self.driver.current_url == Links.URL_MAIN_PAGE

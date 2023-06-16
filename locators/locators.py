@@ -88,6 +88,8 @@ class MainPageLocators:
     FIELD_WEATHER_IN_YUOR_CITY = (By.CSS_SELECTOR, "#desktop-menu input[placeholder='Weather in your city']")
     NWP_MODEL = (By.CSS_SELECTOR, ".col-sm-12 > ul:first-of-type")
     ASK_A_QUESTION_LINK = (By.XPATH, "(//*[contains(text(),'question')])[3]")
+    MARKETPLACE_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(4) a')
+
 
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
