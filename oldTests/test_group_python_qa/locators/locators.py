@@ -49,3 +49,8 @@ class PartnersAndSolutionsLocators:
 class MembersLocators:
     CONTINUE_TO_PAYMENT_BUTTON = (By.CSS_SELECTOR, 'input[value ="Continue to payment"]')
     CANT_BE_BLANK = (By.CSS_SELECTOR, '.help-block')
+
+
+class HistoryBulkLocators:
+    BLOCK_LOCATORS = (By.TAG_NAME, "h2")
+    BLOCK_2_LOCATORS = (By.TAG_NAME, "h3")
