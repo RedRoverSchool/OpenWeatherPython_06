@@ -10,7 +10,7 @@ class HTTPHandler:
     def validate_response(response, schemas):
         try:
             response_json = response.json()
-            is_valid = validator(response_json, schemas)  # schemas == "list_users.json" etc
+            is_valid = validator(response_json, schemas)
             if not is_valid:
                 raise Exception("Invalid JSON response")
         except json.JSONDecodeError:
