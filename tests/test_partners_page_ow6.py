@@ -146,3 +146,9 @@ class TestPartnersPage:
         page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
         page.open_page()
         page.verify_the_link_view_solutions_leads_to_the_new_website()
+
+    def test_tc_011_14_02_verify_the_git_php_link_leads_to_correct_page(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_redirection_github_php_button_to_the_new_webpage()
+

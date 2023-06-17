@@ -50,7 +50,7 @@ class PartnersPageUrls:
     DRUPAL_BUTTON = 'https://www.drupal.org/project/olowm'
     AWESOME_WIDGET_BUTTON = 'http://wordpress.org/extend/plugins/awesome-weather/'
     REPOSITORIES_OPENWEATHER = 'https://github.com/search?q=openweathermap&ref=cmdform&type=repositories'
-
+    GIT_PHP_URL = 'https://github.com/cmfcmf/OpenWeatherMap-PHP-Api'
 
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'

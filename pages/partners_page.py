@@ -106,3 +106,9 @@ class PartnersPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[-1])
         assert PartnersPageUrls.REPOSITORIES_OPENWEATHER, self.driver.current_url
 
+    def verify_redirection_github_php_button_to_the_new_webpage(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.GIT_BUTTON_PHP)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert PartnersPageUrls.GIT_PHP_URL, self.driver.current_url
