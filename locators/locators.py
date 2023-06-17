@@ -266,7 +266,7 @@ class GuideLocators:
 class PartnersLocators:
     APACHE_CAMEL_BUTTON = (By.CSS_SELECTOR, 'a[href*="camel.apache"]')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
-    GIT_BUTTON_PHP = (By.CSS_SELECTOR, 'a[href*="php"]')
+    GIT_BUTTON_PHP = (By.XPATH, '//*[@id="php"]/a')
     GIT_BUTTON_PYTHON = (By.CSS_SELECTOR, 'a[href*="github.com/csparpa/pyowm"]')
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
     BUTTON_VIEW_ON_GITHUB = (By.XPATH,
