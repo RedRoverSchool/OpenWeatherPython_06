@@ -1,4 +1,4 @@
-from api_testing.utils.handlers.http_handler import HTTPHandler
+from api_testing.utils.http_handler import HTTPHandler
 
 # End points
 SINGLE_USER = '/api/users/2'
