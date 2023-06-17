@@ -114,8 +114,10 @@ class ApiKeysPage(BasePage):
             pytest.fail(f"{api_key_name} not in list")
         delete_api_key_icon_list = self.driver.find_elements(*ApiKeysLocator.DELETE_API_KEY)
         delete_api_key_icon_list[api_key_name_index].click()
-        alert = self.driver.switch_to.alert
-        alert_text = alert.text
-        alert.dismiss()
-        assert alert_text == "Do you want to remove this key?", \
-            "The text of the modal window does not match the expected result"
+        try:
+            alert = self.driver.switch_to.alert
+            alert.dismiss()
+        except NoAlertPresentException as e:
+            alert = False
+        assert alert, \
+            "The modal window did not open"

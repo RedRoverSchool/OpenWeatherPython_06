@@ -33,6 +33,7 @@ class TestApiKey:
         initial_api_keys_table_length = api_keys_page.get_length_of_table_api_keys()
         api_keys_page.click_generate_api_key_name_button()
         api_keys_page.check_is_api_key_generated(initial_api_keys_table_length)
+        api_keys_page.delete_api_key("Generate name")
 
     def test_tc_017_05_01_verify_visability_clickability_icon_for_deleting_selected_API_key(self, driver):
         api_key_name = ''.join(random.choices(string.ascii_letters, k=8))
