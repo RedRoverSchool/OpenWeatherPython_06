@@ -179,6 +179,8 @@ class ApiKeysLocator:
     NEW_API_KEY_NAME = By.CSS_SELECTOR, ".new_api_key_form .owm_input"
     GENERATE_BUTTON = By.CSS_SELECTOR, '.new_api_key_form .button-round.dark'
     TABLE_API_KEYS = By.CSS_SELECTOR, "tbody tr"
+    DELETE_API_KEY = By.XPATH, "//a[@class='edit_key_btn'][@data-method='delete']"
+    NOTICE_PANEL = By.XPATH, "//div[@class='panel-body']"
 
 
 class SignInPageLocators:
