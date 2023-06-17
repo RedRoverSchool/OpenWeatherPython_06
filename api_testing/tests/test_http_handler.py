@@ -6,6 +6,7 @@ CREATE_POST = 'api/users'
 PUT_UPDATE = 'api/users/2'
 PATCH_UPDATE = 'api/users/2'
 DELETE_USER_2 = 'api/users/2'
+SINGLE_USER = '/api/users/2'
 
 class Tests:
 
@@ -45,4 +46,14 @@ class Tests:
         print('response_get.status_code: ', response_delete)
         assert response_delete == 204, 'API response is incorrect'
 
+    def test_get_single_user_schemas(self):
+        get_single_user = HTTPHandler.get(SINGLE_USER, 'single_user.json')
+        print('\n', get_single_user)
+        assert get_single_user, 'API response is incorrect'
 
+    def test_post_single_user_schemas(self):
+        handler = HTTPHandler()
+        post_create_data = {"name": "morpheus", "job": "leader"}
+        response_get = handler.post(CREATE_POST, post_create_data)
+        print('response_get: ', response_get)
+        assert response_get['name'] == 'morpheus' and response_get['job'] == 'leader', 'API response is incorrect'
