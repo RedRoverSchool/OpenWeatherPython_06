@@ -29,7 +29,7 @@ class HTTPHandler:
     def post(cls, endpoint, data, schemas):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
-        url = f"{cls.BASE_URL}/{endpoint}"
+        url = f"{cls.BASE_URL}{endpoint}"
         response = requests.post(url, json=data)
         cls.validate_response(response, absolute_schemas_path_and_name)
         return response.json()
@@ -38,7 +38,7 @@ class HTTPHandler:
     def put(cls, endpoint, data, schemas):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
-        url = f"{cls.BASE_URL}/{endpoint}"
+        url = f"{cls.BASE_URL}{endpoint}"
         response = requests.put(url, json=data)
         cls.validate_response(response, absolute_schemas_path_and_name)
         return response.json()
@@ -47,15 +47,13 @@ class HTTPHandler:
     def patch(cls, endpoint, data, schemas):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
-        url = f"{cls.BASE_URL}/{endpoint}"
+        url = f"{cls.BASE_URL}{endpoint}"
         response = requests.patch(url, json=data)
         cls.validate_response(response, absolute_schemas_path_and_name)
         return response.json()
 
     @classmethod
     def delete(cls, endpoint):
-        url = f"{cls.BASE_URL}/{endpoint}"
+        url = f"{cls.BASE_URL}{endpoint}"
         response = requests.delete(url)
-        # response_json = response.json()
-        # cls.validate_response(response)
         return response.status_code
