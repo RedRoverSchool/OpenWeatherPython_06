@@ -132,7 +132,7 @@ class ApiPageLocators:
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
     actual_title_features = (By.XPATH, "//*[@id='about']/h2")
     GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
-    button_get_access = 'href="mailto:info@openweathermap.org"'
+    button_get_access = (By.XPATH, "//*[@id='how']/div/a[@href='mailto:info@openweathermap.org']")
     ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
     ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
 

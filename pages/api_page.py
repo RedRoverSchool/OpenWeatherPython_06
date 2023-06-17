@@ -29,3 +29,8 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.ONE_CALL_API_3).click()
         expected_link = APL.ONE_CALL_API_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
+
+    def verify_visibility_button_get_access(self):
+        btn_get_access = self.driver.find_element(*APL.button_get_access)
+        self.driver.find_element(*APL.button_get_access)
+        assert btn_get_access.is_displayed()

@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 from locators.locators import ClimateForecastLocators as CF
 
-
 class WeatherApiPage(BasePage):
     def check_visibility_climatic_forecast_30_days_page_title(self):
         title_page = self.driver.find_element(*CF.TITLE_FORCAST30).text
