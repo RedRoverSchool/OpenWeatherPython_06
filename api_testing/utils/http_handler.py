@@ -17,7 +17,7 @@ class HTTPHandler:
             raise Exception("Invalid JSON response:", json.JSONDecodeError)
 
     @classmethod
-    def get(cls, endpoint, schemas):
+    def get(cls, endpoint, schemas=None):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
         url = f"{cls.BASE_URL}{endpoint}"
@@ -26,7 +26,7 @@ class HTTPHandler:
         return response.json()
 
     @classmethod
-    def post(cls, endpoint, data, schemas):
+    def post(cls, endpoint, data, schemas=None):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
         url = f"{cls.BASE_URL}{endpoint}"
@@ -35,7 +35,7 @@ class HTTPHandler:
         return response.json()
 
     @classmethod
-    def put(cls, endpoint, data, schemas):
+    def put(cls, endpoint, data, schemas=None):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
         url = f"{cls.BASE_URL}{endpoint}"
@@ -44,7 +44,7 @@ class HTTPHandler:
         return response.json()
 
     @classmethod
-    def patch(cls, endpoint, data, schemas):
+    def patch(cls, endpoint, data, schemas=None):
         schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
         absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
         url = f"{cls.BASE_URL}{endpoint}"
