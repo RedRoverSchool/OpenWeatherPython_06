@@ -96,3 +96,15 @@ class TestSignInPage:
         check_password_without_email = SignInPage(driver)
         check_password_without_email.check_authorization(credentials['password'])
         check_password_without_email.check_error_alert_text()
+
+    def test_at_014_05_01_sign_in___negative_testing_wrong_email_and_correct_password(self, driver,
+                                                                                   open_and_load_sign_in_page):
+        """
+        Negative testing of logging to the site
+        Pair used:
+        1. NOT a valid E-mail
+        2. Valid password
+        """
+        page = SigninPage(driver)
+        page.log_in_with_custom_values('2ta3ukw2fbpoint.net', credentials['password'])
+        page.confirm_error_message_is_visible()
