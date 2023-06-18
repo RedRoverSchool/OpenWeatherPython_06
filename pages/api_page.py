@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from locators.locators import ApiPageLocators as APL
+from test_data.all_links import Links
 
 
 class APIPage(BasePage):
@@ -29,3 +30,8 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.ONE_CALL_API_3).click()
         expected_link = APL.ONE_CALL_API_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
+
+    def check_logo(self):
+        self.driver.find_element(*APL.API_LOGO).click()
+        assert self.driver.current_url == Links.URL_MAIN_PAGE
+
