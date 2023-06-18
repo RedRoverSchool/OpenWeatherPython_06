@@ -101,7 +101,7 @@ class TestSignInPage:
         check_password_without_email.check_authorization(credentials['password'])
         check_password_without_email.check_error_alert_text()
 
-    def test_at_014_05_01_sign_in___negative_testing_wrong_email_and_correct_password(self, driver,
+    def test_at_014_05_01_sign_in_negative_testing_wrong_email_and_correct_password(self, driver,
                                                                                       open_and_load_sign_in_page):
         """
         Negative testing of logging to the site
