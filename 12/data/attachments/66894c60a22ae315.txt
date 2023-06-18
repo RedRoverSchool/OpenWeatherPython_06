@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#name5
-link text: Built-in API request by city name
-198.5   85.671875
-
-quit browser...

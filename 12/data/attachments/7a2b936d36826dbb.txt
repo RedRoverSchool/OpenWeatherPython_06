@@ -1,8 +1,0 @@
-
-start browser...
-
-checking link: https://openweathermap.org/api/hourly-forecast#format
-link text: Format
-198.5   85.640625
-
-quit browser...
