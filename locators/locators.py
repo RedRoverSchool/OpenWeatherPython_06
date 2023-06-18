@@ -135,6 +135,7 @@ class ApiPageLocators:
     button_get_access = 'href="mailto:info@openweathermap.org"'
     ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
     ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
+    API_LOGO = (By.CSS_SELECTOR, "#first-level-nav a")
 
 class AboutUsPageLocators:
     HEADER = (By.XPATH, "//h1")
