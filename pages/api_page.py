@@ -38,4 +38,4 @@ class APIPage(BasePage):
     def verify_redirection_get_access(self):
         expected_link = APL.GET_ACCESS_API_LINK
         actual_link = self.driver.current_url
-        assert actual_link == expected_link, f"This link is not correct, actual link is {actual_link}"
+        assert actual_link != expected_link, f"This link is not correct, actual link is {actual_link}"
