@@ -1,5 +1,6 @@
 from pages.student_initiatives_page import StudentInitiativePage
 from pages.base_page import BasePage
+from test_data.urls import StudentInitiativeUrls
 
 class TestStudentInitiativePage:
 
@@ -14,3 +15,9 @@ class TestStudentInitiativePage:
         student_initiative_page.open_page()
         student_initiative_page.verify_correct_redirection_to_popup_window(wait=wait),\
             'Pop up window does not open'
+
+
+    def test_TC_010_02_05_Get_access_open_authorization_window(self, driver):
+        student_initiative = StudentInitiativePage(driver, StudentInitiativeUrls.STUDENT_INITIATIVE)
+        student_initiative.open_page()
+        student_initiative.check_open_autorization()

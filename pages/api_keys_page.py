@@ -1,3 +1,7 @@
+import pytest
+from selenium.common import NoAlertPresentException
+from selenium.webdriver.common.alert import Alert
+
 from pages.base_page import BasePage
 from locators.locators import ApiKeysLocator
 from oldTests.test_group_ducktales.pages.sign_in_page import SignInPage
@@ -73,3 +77,47 @@ class ApiKeysPage(BasePage):
     def check_is_api_key_generated(self, initial_table_length):
         actual_api_keys_table_length = self.get_length_of_table_api_keys()
         assert actual_api_keys_table_length == initial_table_length + 1, "The new API key does not generated"
+
+    def delete_api_key(self, api_key_name):
+        api_key_name_list = self.driver.find_elements(*ApiKeysLocator.API_KEY_NAME_SELECTOR)
+        api_key_name_text_list = [i.text for i in api_key_name_list]
+        if api_key_name in api_key_name_text_list:
+            api_key_name_index = api_key_name_text_list.index(api_key_name)
+        else:
+            pytest.fail(f"{api_key_name} not in list")
+        delete_api_key_icon_list = self.driver.find_elements(*ApiKeysLocator.DELETE_API_KEY)
+        delete_api_key_icon_list[api_key_name_index].click()
+        try:
+            Alert(self.driver).accept()
+        except NoAlertPresentException as e:
+            pytest.fail("no alert")
+        self.elements_are_present(ApiKeysLocator.NOTICE_PANEL)
+
+    def verify_visability_clickability_icon_for_deleting(self, api_key_name):
+        api_key_name_list = self.driver.find_elements(*ApiKeysLocator.API_KEY_NAME_SELECTOR)
+        api_key_name_text_list = [i.text for i in api_key_name_list]
+        if api_key_name in api_key_name_text_list:
+            api_key_name_index = api_key_name_text_list.index(api_key_name)
+        else:
+            pytest.fail(f"{api_key_name} not in list")
+        delete_api_key_icon_list = self.driver.find_elements(*ApiKeysLocator.DELETE_API_KEY)
+        delete_link = delete_api_key_icon_list[api_key_name_index]
+        assert delete_link.is_displayed() and delete_link.is_enabled(), \
+            f'"{api_key_name}" link is not visible or clickable'
+
+    def verify_modal_window_opening_with_confirmation_API_key_deletion(self, api_key_name):
+        api_key_name_list = self.driver.find_elements(*ApiKeysLocator.API_KEY_NAME_SELECTOR)
+        api_key_name_text_list = [i.text for i in api_key_name_list]
+        if api_key_name in api_key_name_text_list:
+            api_key_name_index = api_key_name_text_list.index(api_key_name)
+        else:
+            pytest.fail(f"{api_key_name} not in list")
+        delete_api_key_icon_list = self.driver.find_elements(*ApiKeysLocator.DELETE_API_KEY)
+        delete_api_key_icon_list[api_key_name_index].click()
+        try:
+            alert = self.driver.switch_to.alert
+            alert.dismiss()
+        except NoAlertPresentException as e:
+            alert = False
+        assert alert, \
+            "The modal window did not open"

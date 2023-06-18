@@ -173,6 +173,14 @@ class TestMainPage:
         page.open_page()
         page.check_google_play_brand_link_display()
 
+    def test_TC_001_05_04_verify_description_weather_for_current_location(self, driver, open_and_load_main_page, wait):
+        actual_weather = MainPage(driver)
+        actual_weather.check_description_weather_block('Feels like')
+
+    def test_TC_001_01_08_dropdown_list_contain_city_temperature(self, driver, open_and_load_main_page, wait):
+        search_result = MainPage(driver)
+        search_result.dropdown_contain_city_temperature()
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)
@@ -185,6 +193,11 @@ class TestMainPage:
         def test_TC_003_12_07_about_us_link_leads_to_correct_page(self, driver, open_and_load_main_page):
             page = MainPage(driver)
             page.about_us_link_leads_to_correct_page()
+
+        def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(self, driver, open_and_load_main_page, wait):
+            google_link = MainPage(driver)
+            google_link.check_leads_link_Googl_Play()
+
 
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
@@ -237,6 +250,10 @@ class TestMainPage:
             page = MainPage(driver)
             page.link_leads_to_page_with_correct_header(BasePageLocators.PARTNERS_LINK,
                                                         PartnersLocators.PARTNERS_PAGE_HEADING)
+
+        def test_TC_002_03_07_marketplace_link_redirects_to_valid_page(self, driver, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_marketplace_link_redirects_to_valid_page()
 
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS

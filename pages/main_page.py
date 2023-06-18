@@ -1,4 +1,4 @@
-from .base_page import BasePage
+from pages.base_page import BasePage
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from locators.locators import MainPageLocators, BasePageLocators
@@ -499,3 +499,27 @@ class MainPage(BasePage):
                 copyright_flag = 0
         assert element.is_displayed() and copyright_flag == 1, f'\nCopyright is not present (actual) on the page - {self.driver.current_url}'
 
+    def check_leads_link_Googl_Play(self):
+        self.driver.execute_script("window.scrollTo(100,document.body.scrollHeight);")
+        google_play = self.driver.find_element(*self.locators.GOOGLE_PLAY_BRAND_LINK)
+        self.driver.execute_script("arguments[0].click();", google_play)
+        self.driver.switch_to.window(self.driver.window_handles[1])
+        expected_title = 'OpenWeather'
+        assert '/play.google' in self.driver.current_url and expected_title in self.driver.title
+
+    def check_description_weather_block(self, text):
+        description_weather = self.driver.find_element(*self.locators.ACTUAL_WEATHER)
+        description_weather_text = description_weather.text
+        assert description_weather.is_displayed() and text in description_weather_text
+
+    def dropdown_contain_city_temperature(self):
+        search_city_input = self.driver.find_element(*self.locators.SEARCH_CITY_FIELD)
+        search_city_input.click()
+        search_city_input.send_keys(*self.locators.KEY_SEARCH_CITY)
+        self.driver.find_element(*self.locators.SEARCH_BUTTON).click()
+        dropdown_list = self.driver.find_elements(*self.locators.SEARCH_DROPDOWN)
+        for city in dropdown_list:
+            assert '°C' in city.text
+    def verify_marketplace_link_redirects_to_valid_page(self):
+        self.click_header_link("marketplace")
+        assert self.driver.current_url == Links.URL_MARKETPLACE
