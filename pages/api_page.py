@@ -29,3 +29,13 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.ONE_CALL_API_3).click()
         expected_link = APL.ONE_CALL_API_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
+
+    def click_button_get_access(self):
+        btn_get_access = self.driver.find_element(*APL.button_get_access)
+        self.action_move_to_element(btn_get_access)
+        self.driver.execute_script("arguments[0].click();", btn_get_access)
+
+    def verify_redirection_get_access(self):
+        expected_link = APL.GET_ACCESS_API_LINK
+        actual_link = self.driver.current_url
+        assert actual_link == expected_link, f"This link is not correct, actual link is {actual_link}"
