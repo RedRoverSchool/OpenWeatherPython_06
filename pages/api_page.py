@@ -29,3 +29,11 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.ONE_CALL_API_3).click()
         expected_link = APL.ONE_CALL_API_LINK
         assert self.driver.current_url == expected_link, "This link is not correct"
+
+    def verify_present_api_calls_and_responses(self):
+        counter = 0
+        for api_block in APL.history_api_full_archive_calls_and_response:
+            counter += 1
+            block = self.driver.find_element(*api_block)
+            assert block.is_displayed(), f"Block {counter} is missing"
+

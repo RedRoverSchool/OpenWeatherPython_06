@@ -135,6 +135,12 @@ class ApiPageLocators:
     button_get_access = 'href="mailto:info@openweathermap.org"'
     ONE_CALL_API_LINK = 'https://openweathermap.org/api/one-call-3'
     ONE_CALL_API_3 = (By.CSS_SELECTOR, ".col-sm-6>h2>a[href ='/api/one-call-3']")
+    history_api_full_archive_calls_and_response = [(By.CSS_SELECTOR, '#addlocation > div.api > code'),
+                                                    (By.CSS_SELECTOR, '#addlocation > div.response.open > div.api'),
+                                                    (By.CSS_SELECTOR, '#getlist > div > code'),
+                                                    (By.CSS_SELECTOR, '#data > div.api > code'),
+                                                    (By.CSS_SELECTOR, '#data > div.response.open > div.api > code')]
+
 
 class AboutUsPageLocators:
     HEADER = (By.XPATH, "//h1")

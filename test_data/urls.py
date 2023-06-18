@@ -86,6 +86,7 @@ class CookiesSettingPageUrls:
 
 class ApiPageUrls:
     GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
+    HISTORY_API_FULL_ARCHIVE_LINK = "https://openweathermap.org/api/history-api-full-archive"
 
 class StudentInitiativeUrls:
     STUDENT_INITIATIVE = 'https://openweathermap.org/our-initiatives/student-initiative'

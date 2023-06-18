@@ -1,7 +1,7 @@
 from pages.weather_api_page import WeatherApiPage
 from locators.locators import ClimateForecastLocators as CFL
 from pages.api_page import APIPage
-
+from test_data.urls import ApiPageUrls
 
 class TestWeatherApiPage:
     def test_tc_005_06_1_visibility_climatic_forecast_30_days_page_title(self, driver):
@@ -25,3 +25,10 @@ class TestWeatherApiPage:
         history_api_full.click_header_link('api')
         history_api_full.click_button_api_doc_history_full_archive()
         history_api_full.check_title_history_api_full_archive()
+
+    def test_005_17_02_check_api_calls_and_responses(self, driver):
+        history_api_full = APIPage(driver, ApiPageUrls.HISTORY_API_FULL_ARCHIVE_LINK)
+        history_api_full.open_page()
+        history_api_full.verify_present_api_calls_and_responses()
+
+
