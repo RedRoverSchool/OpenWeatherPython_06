@@ -90,3 +90,6 @@ class ApiPageUrls:
 
 class StudentInitiativeUrls:
     STUDENT_INITIATIVE = 'https://openweathermap.org/our-initiatives/student-initiative'
+
+class WeatherDashboardUrls:
+    dashboard_URL = 'https://openweathermap.org/weather-dashboard'

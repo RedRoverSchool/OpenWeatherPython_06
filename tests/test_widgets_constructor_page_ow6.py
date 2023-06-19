@@ -12,6 +12,12 @@ class TestWidgetsConstractorPage:
         widget_page = WidgetsConstructorPage(driver)
         widget_page.verify_visibility_of_celsius()
 
+    def test_TC_001_09_05_switched_on_Celsius(self, driver):
+        widget_page = WidgetsConstructorPage(driver)
+        widget_page.check_switched_temperature_units('celsius')
 
+    def test_TC_001_09_06_switched_on_Fahrenheit(self, driver):
+        widget_page = WidgetsConstructorPage(driver)
+        widget_page.check_switched_temperature_units('fahrenheit')
 
 

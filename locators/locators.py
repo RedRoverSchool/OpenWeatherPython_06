@@ -91,7 +91,8 @@ class MainPageLocators:
     ACTUAL_WEATHER = (By.CSS_SELECTOR, '#weather-widget div.current-container.mobile-padding div.bold')
     KEY_SEARCH_CITY = 'Saint Petersburg'
     MARKETPLACE_LINK = (By.CSS_SELECTOR, '#desktop-menu ul li:nth-child(4) a')
-
+    LOGO_LOCATOR = (By.XPATH, '//*[@class="logo"]/a/img')
+    TITLE_LOCATOR = (By.XPATH, '//p[text()="Product Collections"]')
 
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
@@ -115,6 +116,11 @@ class DashboardPageLocators:
     DASHBOARD_BUTTON_LOCATOR = (By.CSS_SELECTOR, '#mobile-menu > li:nth-child(4) > a')
     HOURLY_FORECAST_API_LOCATOR = (By.CSS_SELECTOR, 'div.col-lg-3 a')
     URL = 'https://openweathermap.org/'
+    pricing_plans_locators = [(By.XPATH, '//h4[text()="Free"]'),
+                              (By.XPATH, '//h4[text()="Startup"]'),
+                              (By.XPATH, '//h4[text()="Developer"]'),
+                              (By.XPATH, '//h4[text()="Professional"]'),
+                              (By.XPATH, '//h4[text()="Enterprise"]')]
 
 
 class PricingPageLocators:
@@ -268,6 +274,7 @@ class WeatherConditionsLocators:
     ELEMENTS_LOCATOR_DESC = lambda table: (
         By.XPATH, f"//table[@class='table table-bordered'][(position() = {table})]/tbody/tr/td[3]")
     CLOUDS_LOCATOR = (By.XPATH, '//a[contains(@href, "#Clouds")]/ancestor-or-self::table')
+    thunderstorm_locator = (By.XPATH, '//a[contains(@href, "#Thunderstorm")]/ancestor-or-self::table//tr')
 
 class GuideLocators:
     GUIDE_URL = 'https://openweathermap.org/guide'
@@ -334,7 +341,17 @@ class PartnersLocators:
 class WidgetsConstractorLocators:
     FAHRENHEIT_BUTTON = (By.CSS_SELECTOR, 'span#imperial')
     CELSIUS_BUTTON = (By.CSS_SELECTOR, 'span#metric')
-
+    metric_units = (By.XPATH, '//span[text()="°C"]')
+    imperial_units = (By.XPATH, '//span[text()="°F"]')
+    widgets_locators = [(By.XPATH, '//*[@id="container-openweathermap-widget-11"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-12"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-13"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-14"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-15"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-16"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-17"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-18"]'),
+                        (By.XPATH, '//*[@id="container-openweathermap-widget-19"]')]
 
 class ProfilePageLocators:
     AUTH_NOTIFICATION = (By.XPATH, "//div[@class='panel-body']")

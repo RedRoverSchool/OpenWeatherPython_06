@@ -37,3 +37,10 @@ def test_tc_001_01_02_verify_displaying_entered_city_name_in_cirillic(driver, op
     main_page.press_enter_button()
     search_result_page = SearchResultPage(driver)
     search_result_page.check_search_result_contains_city('Chisinau, MD')
+
+def test_TC_002_02_01_search_result_contains_city(driver, open_and_load_main_page):
+    main_page = MainPage(driver)
+    main_page.enter_city_in_weather_in_your_city_field('Bangkok')
+    main_page.press_enter_button()
+    search_result_page = SearchResultPage(driver)
+    search_result_page.check_search_result_contains_city('Bangkok')
