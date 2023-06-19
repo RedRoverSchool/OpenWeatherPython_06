@@ -27,7 +27,16 @@ class TestWeatherApiPage:
         history_api_full.click_button_api_doc_history_full_archive()
         history_api_full.check_title_history_api_full_archive()
 
+
+    def test_005_17_02_check_api_calls_and_responses(self, driver):
+        history_api_full = APIPage(driver, ApiPageUrls.HISTORY_API_FULL_ARCHIVE_LINK)
+        history_api_full.open_page()
+        history_api_full.verify_present_api_calls_and_responses()
+
+
+
     def test_tc_005_13_02_check_visibility_button_get_access(self, driver):
         weather_api = APIPage(driver, link=ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
         weather_api.open_page()
         weather_api.verify_visibility_button_get_access()
+
