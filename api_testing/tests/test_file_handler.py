@@ -1,4 +1,4 @@
-from api_testing.utils.file_handler.file_handler import FileHandler
+from api_testing.utils.file_handler import FileHandler
 import requests
 import os
 
