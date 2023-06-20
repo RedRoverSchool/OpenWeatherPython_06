@@ -3,6 +3,7 @@ import json
 from api_testing.utils.validator import validator
 import os
 
+
 class HTTPHandler:
     BASE_URL = "https://reqres.in"
 
@@ -24,7 +25,7 @@ class HTTPHandler:
             schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
             absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
             cls.validate_response(response, absolute_schemas_path_and_name)
-        return response.json()
+        return response
 
     @classmethod
     def post(cls, endpoint, data, schemas=None):
@@ -34,7 +35,7 @@ class HTTPHandler:
             schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
             absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
             cls.validate_response(response, absolute_schemas_path_and_name)
-        return response.json()
+        return response
 
     @classmethod
     def put(cls, endpoint, data, schemas=None):
@@ -44,7 +45,7 @@ class HTTPHandler:
             schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
             absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
             cls.validate_response(response, absolute_schemas_path_and_name)
-        return response.json()
+        return response
 
     @classmethod
     def patch(cls, endpoint, data, schemas=None):
@@ -54,7 +55,7 @@ class HTTPHandler:
             schemas_path_and_name = os.path.join('..', 'utils', 'schemas', schemas)
             absolute_schemas_path_and_name = os.path.abspath(schemas_path_and_name)
             cls.validate_response(response, absolute_schemas_path_and_name)
-        return response.json()
+        return response
 
     @classmethod
     def delete(cls, endpoint, schemas=None):
@@ -62,4 +63,4 @@ class HTTPHandler:
         response = requests.delete(url)
         if schemas:
             print('No schemas needed')
-        return response.status_code
+        return response
