@@ -63,4 +63,4 @@ class HTTPHandler:
         response = requests.delete(url)
         if schemas:
             print('No schemas needed')
-        return response.status_code
+        return response
