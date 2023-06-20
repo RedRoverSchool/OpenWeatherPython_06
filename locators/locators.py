@@ -305,6 +305,7 @@ class PartnersLocators:
     INFO_BOARD_GITHUB_LINK = (By.XPATH, "//a[text()='GitHub']")
     MOBILE_APP_BLOCK = (By.CSS_SELECTOR, "#mobile > h2")
     MOBILE_APP_LINK = (By.XPATH, "//*[@id='mobile']/p/a")
+    ANCHORS_LOCATOR = (By.XPATH, "//div[@class='doc-container']//li/a")
     GOOGLE_01 = (By.XPATH, "(//div[@class='doc-container']//li/a)[1]")
     GOOGLE_02 = (By.XPATH, "(//div[@class='doc-container']//li/a)[2]")
     MOZILLA = (By.XPATH, "(//div[@class='doc-container']//li/a)[3]")

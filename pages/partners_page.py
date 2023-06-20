@@ -112,3 +112,14 @@ class PartnersPage(BasePage):
         self.find_element_and_click(self.locators.GIT_BUTTON_PHP)
         self.driver.switch_to.window(self.driver.window_handles[-1])
         assert PartnersPageUrls.GIT_PHP_URL, self.driver.current_url
+
+    def verify_17_anchor_links_redirection(self):
+        address_bar = "https://openweathermap.org/examples#"
+        anchor_links_locator = PartnersLocators.ANCHORS_LOCATOR
+        anchor_links = self.driver.find_elements(*anchor_links_locator)
+        for anchor_link in anchor_links:
+            self.scroll_to_the_element(anchor_links_locator)
+            anchor_link.click()
+            href = anchor_link.get_attribute("href")
+            assert address_bar in self.driver.current_url and href == self.driver.current_url, \
+                f"Redirection of the anchor link {href} is not successful"
