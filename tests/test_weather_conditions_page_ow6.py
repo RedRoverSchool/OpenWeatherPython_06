@@ -28,3 +28,8 @@ class TestWeatherConditions:
         page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
         page.open_page()
         page.check_visible_group_of_codes('clouds')
+
+    def test_TC_001_12_01_thunderstorm_group_contains_items(self, driver):
+        weather_conditions_page = WeatherConditionsPage(driver, WeatherConditionsUrls.url_weather_conditions)
+        weather_conditions_page.open_page()
+        weather_conditions_page.check_number_of_elements('thunderstorm')

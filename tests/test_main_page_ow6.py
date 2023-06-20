@@ -253,6 +253,12 @@ class TestMainPage:
             main_page = MainPage(driver)
             main_page.verify_marketplace_link_redirects_to_valid_page()
 
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_002_01_03_Logo_is_visible(self, driver, page):
+            main_page = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            main_page.open_page()
+            main_page.check_logo_is_visible()
+
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
 
@@ -299,6 +305,12 @@ class TestMainPage:
             page = MainPage(driver)
             page.scroll_down_the_page()
             page.check_link_in_new_window(MainPageLocators.ASK_A_QUESTION_LINK, MainPageUrls.ASK_A_QUESTION_PAGE)
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_03_01_Product_Collections_title_is_visible(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            footer.check_product_collections_module_title_is_visible()
 
     class TestMainPageHourlyForecast:
         def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):

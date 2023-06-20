@@ -523,3 +523,11 @@ class MainPage(BasePage):
     def verify_marketplace_link_redirects_to_valid_page(self):
         self.click_header_link("marketplace")
         assert self.driver.current_url == Links.URL_MARKETPLACE
+
+    def check_logo_is_visible(self):
+        logo = self.driver.find_element(*self.locators.LOGO_LOCATOR)
+        assert logo.is_displayed(), "Logo is not visible"
+
+    def check_product_collections_module_title_is_visible(self):
+        title = self.driver.find_element(*self.locators.TITLE_LOCATOR)
+        assert title.is_displayed(), "Title is not visible"
