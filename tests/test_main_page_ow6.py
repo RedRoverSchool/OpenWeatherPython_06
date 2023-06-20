@@ -1,11 +1,9 @@
 import pytest
 
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators, FooterLocators
+from locators.locators import MainPageLocators, FooterLocators, BasePageLocators, PartnersLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
-from locators.locators import BasePageLocators
-from locators.locators import PartnersLocators
 from test_data.main_page_data import *
 
 

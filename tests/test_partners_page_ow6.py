@@ -152,3 +152,7 @@ class TestPartnersPage:
         page.open_page()
         page.verify_redirection_github_php_button_to_the_new_webpage()
 
+    def test_TC_011_19_02_verify_17_anchor_links_redirect_to_correct_block_of_the_page(self, driver):
+        page = PartnersPage(driver, PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        page.open_page()
+        page.verify_17_anchor_links_redirection()
