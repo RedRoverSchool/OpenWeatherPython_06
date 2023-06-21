@@ -121,3 +121,20 @@ class ApiKeysPage(BasePage):
             alert = False
         assert alert, \
             "The modal window did not open"
+
+    def verify_notice_message_about_API_key_deletion(self, api_key_name):
+        api_key_name_list = self.driver.find_elements(*ApiKeysLocator.API_KEY_NAME_SELECTOR)
+        api_key_name_text_list = [i.text for i in api_key_name_list]
+        if api_key_name in api_key_name_text_list:
+            api_key_name_index = api_key_name_text_list.index(api_key_name)
+        else:
+            pytest.fail(f"{api_key_name} not in list")
+        delete_api_key_icon_list = self.driver.find_elements(*ApiKeysLocator.DELETE_API_KEY)
+        delete_api_key_icon_list[api_key_name_index].click()
+        try:
+            Alert(self.driver).accept()
+        except NoAlertPresentException as e:
+            pytest.fail("no alert")
+        notice_panel = self.element_is_present(ApiKeysLocator.NOTICE_PANEL)
+        assert notice_panel.text == "API key was deleted successfully", \
+            "The text of the message does not match the expected result"

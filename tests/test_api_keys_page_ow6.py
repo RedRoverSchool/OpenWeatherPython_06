@@ -53,4 +53,12 @@ class TestApiKey:
         api_keys_page.verify_modal_window_opening_with_confirmation_API_key_deletion(api_key_name)
         api_keys_page.delete_api_key(api_key_name)
 
+    def test_tc_017_05_03_verify_notice_message_about_API_key_deletion(self, driver):
+        api_key_name = ''.join(random.choices(string.ascii_letters, k=8))
+        api_keys_page = ApiKeysPage(driver)
+        api_keys_page.open_api_keys_page()
+        api_keys_page.enter_created_api_key_name(api_key_name)
+        api_keys_page.click_generate_api_key_name_button()
+        api_keys_page.verify_notice_message_about_API_key_deletion(api_key_name)
+
 
