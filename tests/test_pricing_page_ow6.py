@@ -12,3 +12,12 @@ class TestPricingPage:
         pricing_page = PricingPage(driver, link=P.URL_PRICING)
         pricing_page.open_page()
         pricing_page.visibility_two_buttons_detailed_pricing()
+
+    def test_tc_002_03_08_open_pricing(self, driver, open_and_load_main_page):
+        pricing_page = PricingPage(driver)
+        pricing_page.check_header_title("pricing")
+
+    def test_TC_002_01_07_verify_clicking_on_the_logo_from_page_Pricing_redirects_to_main_page(self, driver):
+        price_page = PricingPage(driver, P.URL_PRICING)
+        price_page.open_page()
+        price_page.verify_clicking_on_the_logo_from_page_Pricing_redirects_to_main_page()

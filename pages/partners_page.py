@@ -76,6 +76,13 @@ class PartnersPage(BasePage):
         headers_on_the_page = [i.text for i in find_all_headers]
         assert data["sections"] == headers_on_the_page
 
+    def link_see_library_visibility(self, wait):
+        self.element_is_displayed(PartnersLocators.LINK_SEE_LIBRARY, wait)
+
+    def link_see_library_is_clickable(self, wait):
+        see_library_link = self.element_is_clickable(PartnersLocators.LINK_SEE_LIBRARY)
+        assert see_library_link.is_enabled(), "The link is not clickable"
+
     def redirecting_to_more_details_with_source_code_page(self, wait):
         more_details_link = self.driver.find_element(*PartnersLocators.MORE_DETAILS_LOCATOR)
         self.driver.execute_script("arguments[0].click();", more_details_link)
@@ -99,3 +106,20 @@ class PartnersPage(BasePage):
         self.driver.switch_to.window(self.driver.window_handles[-1])
         assert PartnersPageUrls.REPOSITORIES_OPENWEATHER, self.driver.current_url
 
+    def verify_redirection_github_php_button_to_the_new_webpage(self):
+        self.driver.get(PartnersPageUrls.PARTNERS_AND_SOLUTIONS)
+        self.allow_all_cookies()
+        self.find_element_and_click(self.locators.GIT_BUTTON_PHP)
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        assert PartnersPageUrls.GIT_PHP_URL, self.driver.current_url
+
+    def verify_17_anchor_links_redirection(self):
+        address_bar = "https://openweathermap.org/examples#"
+        anchor_links_locator = PartnersLocators.ANCHORS_LOCATOR
+        anchor_links = self.driver.find_elements(*anchor_links_locator)
+        for anchor_link in anchor_links:
+            self.scroll_to_the_element(anchor_links_locator)
+            anchor_link.click()
+            href = anchor_link.get_attribute("href")
+            assert address_bar in self.driver.current_url and href == self.driver.current_url, \
+                f"Redirection of the anchor link {href} is not successful"

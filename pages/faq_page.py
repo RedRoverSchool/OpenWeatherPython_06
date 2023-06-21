@@ -39,3 +39,9 @@ class FAQPage(BasePage):
                     previous_content), "The previous answer content is not hidden"
 
             previous_content = question_content
+
+    def check_header_title(self, link_name):
+        self.click_header_link(link_name)
+        expected_title = "Frequently Asked Questions"
+        displayed_title = self.driver.find_element(*faq.DISPLAYED_TITLE).text
+        assert displayed_title == expected_title

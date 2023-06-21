@@ -15,3 +15,8 @@ class WeatherDashboardPage(BasePage):
         self.switch_to_new_window()
         alert_mms = self.driver.find_element(*D.PANEL_SIGN_IN_FORM)
         assert alert_mms.is_displayed(), 'WELCOME EVENTS'
+
+    def check_pricing_plans(self):
+        for plan_locator in D.pricing_plans_locators:
+            plan = self.driver.find_element(*plan_locator)
+            assert plan.is_displayed()

@@ -1,11 +1,9 @@
 import pytest
 
 from pages.main_page import MainPage
-from locators.locators import MainPageLocators, FooterLocators
+from locators.locators import MainPageLocators, FooterLocators, BasePageLocators, PartnersLocators
 from test_data.urls import MainPageUrls
 from test_data.all_links import Links
-from locators.locators import BasePageLocators
-from locators.locators import PartnersLocators
 from test_data.main_page_data import *
 
 
@@ -173,6 +171,14 @@ class TestMainPage:
         page.open_page()
         page.check_google_play_brand_link_display()
 
+    def test_TC_001_05_04_verify_description_weather_for_current_location(self, driver, open_and_load_main_page, wait):
+        actual_weather = MainPage(driver)
+        actual_weather.check_description_weather_block('Feels like')
+
+    def test_TC_001_01_08_dropdown_list_contain_city_temperature(self, driver, open_and_load_main_page, wait):
+        search_result = MainPage(driver)
+        search_result.dropdown_contain_city_temperature()
+
     class TestFooterLinksFunctionality:
         def test_TC_003_12_04_current_and_forecast_apis_functionality(self, driver, open_and_load_main_page):
             page = MainPage(driver)
@@ -185,6 +191,11 @@ class TestMainPage:
         def test_TC_003_12_07_about_us_link_leads_to_correct_page(self, driver, open_and_load_main_page):
             page = MainPage(driver)
             page.about_us_link_leads_to_correct_page()
+
+        def test_TC_003_12_11_link_Google_Play_leads_to_correct_page_in_GP(self, driver, open_and_load_main_page, wait):
+            google_link = MainPage(driver)
+            google_link.check_leads_link_Googl_Play()
+
 
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
@@ -238,6 +249,16 @@ class TestMainPage:
             page.link_leads_to_page_with_correct_header(BasePageLocators.PARTNERS_LINK,
                                                         PartnersLocators.PARTNERS_PAGE_HEADING)
 
+        def test_TC_002_03_07_marketplace_link_redirects_to_valid_page(self, driver, open_and_load_main_page):
+            main_page = MainPage(driver)
+            main_page.verify_marketplace_link_redirects_to_valid_page()
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_002_01_03_Logo_is_visible(self, driver, page):
+            main_page = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            main_page.open_page()
+            main_page.check_logo_is_visible()
+
     class TestMainPageFooter:
         link_product_collections = MainPageUrls.PRODUCT_COLLECTION_LINKS
 
@@ -284,6 +305,12 @@ class TestMainPage:
             page = MainPage(driver)
             page.scroll_down_the_page()
             page.check_link_in_new_window(MainPageLocators.ASK_A_QUESTION_LINK, MainPageUrls.ASK_A_QUESTION_PAGE)
+
+        @pytest.mark.parametrize('page', data["pages"])
+        def test_TC_003_03_01_Product_Collections_title_is_visible(self, driver, page):
+            footer = MainPage(driver, f'{Links.URL_MAIN_PAGE}{page}')
+            footer.open_page()
+            footer.check_product_collections_module_title_is_visible()
 
     class TestMainPageHourlyForecast:
         def test_tc_001_08_04_verify_chart_is_present(self, driver, open_and_load_main_page, wait):

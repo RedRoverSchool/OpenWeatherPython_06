@@ -46,10 +46,11 @@ class PartnersPageUrls:
     ANDROID_WEATHER = 'http://www.survivingwithandroid.com/2016/01/4-free-weather-providers-api-to-develop.html'
     INFO_BOARD_GITHUB = "https://github.com/search?q=openweathermap&ref=cmdform"
     MOBILE_APP = 'http://owmgapp.glob3mobile.com'
+    GO_LIBRARY_PAGE = "http://briandowns.github.io/openweathermap/"
     DRUPAL_BUTTON = 'https://www.drupal.org/project/olowm'
     AWESOME_WIDGET_BUTTON = 'http://wordpress.org/extend/plugins/awesome-weather/'
     REPOSITORIES_OPENWEATHER = 'https://github.com/search?q=openweathermap&ref=cmdform&type=repositories'
-
+    GIT_PHP_URL = 'https://github.com/cmfcmf/OpenWeatherMap-PHP-Api'
 
 class MigratePageUrls:
     URL_DARK_SKY_API = 'https://openweathermap.org/darksky-openweather-3'
@@ -77,7 +78,18 @@ class MapsPageUrls:
 
 class MembersPageUrls:
     MEMBERS_PAGE_LINK = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/weather/startup'
+    URL_SUBSCRIPTION_BASE = 'https://home.openweathermap.org/subscriptions/unauth_subscribe/onecall_30/base'
 
 class CookiesSettingPageUrls:
     COOKIES_SETTINGS = 'https://openweathermap.org/cookies-settings'
 
+
+class ApiPageUrls:
+    GLOBAL_WEATHER_ALERTS_LINK = "https://openweathermap.org/api/push-weather-alerts"
+    HISTORY_API_FULL_ARCHIVE_LINK = "https://openweathermap.org/api/history-api-full-archive"
+
+class StudentInitiativeUrls:
+    STUDENT_INITIATIVE = 'https://openweathermap.org/our-initiatives/student-initiative'
+
+class WeatherDashboardUrls:
+    dashboard_URL = 'https://openweathermap.org/weather-dashboard'
