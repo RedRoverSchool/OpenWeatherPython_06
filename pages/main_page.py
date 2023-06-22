@@ -520,6 +520,7 @@ class MainPage(BasePage):
         dropdown_list = self.driver.find_elements(*self.locators.SEARCH_DROPDOWN)
         for city in dropdown_list:
             assert '°C' in city.text
+
     def verify_marketplace_link_redirects_to_valid_page(self):
         self.click_header_link("marketplace")
         assert self.driver.current_url == Links.URL_MARKETPLACE
@@ -531,3 +532,14 @@ class MainPage(BasePage):
     def check_product_collections_module_title_is_visible(self):
         title = self.driver.find_element(*self.locators.TITLE_LOCATOR)
         assert title.is_displayed(), "Title is not visible"
+
+    def graphic_hourly_forecast_is_displayed(self, wait):
+        graphic_hourly_forecast = self.driver.find_element(*self.locators.CHART_WEATHER)
+        self.go_to_element(graphic_hourly_forecast)
+        assert self.element_is_visible
+
+    def weather_items_are_displayed(self, wait):
+        self.driver.get('https://openweathermap.org/')
+        weather_items = self.driver.find_elements(*self.locators.WEATHER_ITEMS_LOCATOR)
+        self.driver.execute_script("arguments[0].scrolldown;", weather_items)
+        assert self.weather_items_are_displayed

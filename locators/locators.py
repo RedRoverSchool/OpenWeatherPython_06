@@ -94,6 +94,9 @@ class MainPageLocators:
     LOGO_LOCATOR = (By.XPATH, '//*[@class="logo"]/a/img')
     TITLE_LOCATOR = (By.XPATH, '//p[text()="Product Collections"]')
 
+    WEATHER_ITEMS_LOCATOR = (By.CSS_SELECTOR, "ul.weather-items")
+    WEATHER_ITEM_LOCATOR = (By.CSS_SELECTOR, 'ul.weather-items li:nth-child(1)')
+
 class DashboardPageLocators:
     HEADER_DASHBOARD_LINK = "https://openweathermap.org/weather-dashboard/"
     HEADER_DASHBOARD = (By.XPATH, '//*[@id="desktop-menu"]/ul/li[3]/a')
@@ -121,6 +124,10 @@ class DashboardPageLocators:
                               (By.XPATH, '//h4[text()="Developer"]'),
                               (By.XPATH, '//h4[text()="Professional"]'),
                               (By.XPATH, '//h4[text()="Enterprise"]')]
+
+    DASHBOARD_BUTTON_LOCATOR = (By.CSS_SELECTOR, '#mobile-menu > li:nth-child(4) > a')
+    HOURLY_FORECAST_API_LOCATOR = (By.CSS_SELECTOR, 'div.col-lg-3 a')
+    URL = 'https://openweathermap.org/'
 
 
 class PricingPageLocators:
