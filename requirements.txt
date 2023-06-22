@@ -6,3 +6,4 @@ allure-pytest==2.13.2
 allure-python-commons==2.13.2
 requests~=2.28.2
 jsonschema~=4.17.3
+pydantic~=1.10.9
