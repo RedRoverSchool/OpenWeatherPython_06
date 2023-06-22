@@ -138,3 +138,9 @@ class ApiKeysPage(BasePage):
         notice_panel = self.element_is_present(ApiKeysLocator.NOTICE_PANEL)
         assert notice_panel.text == "API key was deleted successfully", \
             "The text of the message does not match the expected result"
+
+    def verify_that_selected_api_key_was_deleted(self, api_key_name):
+        api_key_name_list = self.driver.find_elements(*ApiKeysLocator.API_KEY_NAME_SELECTOR)
+        api_key_name_text_list = [i.text for i in api_key_name_list]
+        assert api_key_name not in api_key_name_text_list, \
+            f"The selected api key '{api_key_name}' has not been deleted"
