@@ -40,3 +40,7 @@ class TestWeatherApiPage:
         weather_api.open_page()
         weather_api.verify_visibility_button_get_access()
 
+    def test_tc_005_13_03_check_redirection_page_get_access(self, driver):
+        weather_api = APIPage(driver, link=ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        weather_api.open_page()
+        weather_api.verify_get_access_redirects_to_valid_page()
