@@ -54,5 +54,6 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.button_get_access).click()
         actual_link = self.driver.current_url
         expected_link = ApiPageUrls.GET_ACCESS_API_LINK
+        print(f"Actual_link = {actual_link}")
         assert actual_link != expected_link, f"This link is not correct, actual link is {actual_link}"
 
