@@ -49,6 +49,10 @@ class MainPage(BasePage):
         for line in lines:
             assert line.is_displayed()
 
+    def check_footer_is_present(self):
+        footer_common_kit = self.element_is_present(self.locators.FOOTER_COMMON_KIT)
+        assert footer_common_kit is not None, "Footer is not present in the DOM tree"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link.is_displayed(), "The Historical Weather Data link is not visible"

@@ -2,10 +2,9 @@ from pages.profile_page import ProfilePage
 from pages.sign_in_page import SignInPage
 from test_data.urls import SignInUrls
 from pages.sign_in_page import \
-    SigninPage  # Someone did with a lowercase "i", this is not a double, if you remove this import, the oldTests below will break
+    SigninPage  # Someone did with a lowercase "i", this is not a double,
+# if you remove this import, the oldTests below will break
 from test_data.credentials import credentials
-from pages.main_page import MainPage
-from test_data.urls import MainPageUrls
 
 
 class TestSignInPage:
@@ -26,7 +25,7 @@ class TestSignInPage:
         page.open_page()
         page.check_registration_link_is_clickable()
 
-    def test_tc_014_03_04_checking_the_link_in_the_Sing_In_form_leads_to_the_registration_page(self, driver):
+    def test_tc_014_03_04_checking_the_link_in_the_sing_in_form_leads_to_the_registration_page(self, driver):
         page = SignInPage(driver, SignInUrls.url_sign_in_page)
         page.open_page()
         page.check_registration_link_functionality()
