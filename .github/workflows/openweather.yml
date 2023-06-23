@@ -39,6 +39,7 @@ jobs:
       with:
         files: |
           tests/
+          api_testing/
 
     - name: Run Pytest on changed files
       if: steps.changed-py-files.outputs.any_changed == 'true'
