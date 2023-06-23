@@ -490,3 +490,14 @@ class AskAQuestionPageLocators:
 
 class HowToStartLocators:
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
+
+
+class GlobalWeatherAlertsLocators:
+    FEATURES = (By.XPATH, "(//div[@class='doc-container']//a)[1]")
+    ACCESS = (By.XPATH, "(//div[@class='doc-container']//a)[2]")
+    DESCRIPTION = (By.XPATH, "(//div[@class='doc-container']//a)[3]")
+    EXAMPLES = (By.XPATH, "(//div[@class='doc-container']//a)[4]")
+    FIELDS = (By.XPATH, "(//div[@class='doc-container']//a)[5]")
+    TYPES = (By.XPATH, "(//div[@class='doc-container']//a)[6]")
+    LIST = (By.XPATH, "(//div[@class='doc-container']//a)[7]")
+    SEVEN_ANCHOR_LOCATORS = [FEATURES, ACCESS, DESCRIPTION, EXAMPLES, FIELDS, TYPES, LIST]
