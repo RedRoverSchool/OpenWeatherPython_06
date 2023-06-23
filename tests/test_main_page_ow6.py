@@ -24,6 +24,10 @@ class TestMainPage:
         main_page = MainPage(driver)
         main_page.element_is_displayed(MainPageLocators.AGRICULTURE_ANALYTICS_TITLE_LOCATOR, wait)
 
+    def test_tc_003_01_03_footer_presence_in_the_dom_tree(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_footer_is_present()
+
     def test_tc_003_03_03_historical_weather_data_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_historical_weather_data_link_is_visible()
