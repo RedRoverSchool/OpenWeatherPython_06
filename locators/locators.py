@@ -29,6 +29,7 @@ class MainPageLocators:
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
     FOOTER_COMMON_KIT = (By.CSS_SELECTOR, "#footer-website")
     HISTORICAL_WEATHER_DATA_LINK = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
     HOW_TO_START = (By.XPATH, "//div[@id='footer-website']//a[text()='How to start']")

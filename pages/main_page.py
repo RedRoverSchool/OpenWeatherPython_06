@@ -55,7 +55,7 @@ class MainPage(BasePage):
 
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
-        assert historical_weather_data_link.is_displayed(), "The Historical Weather Data link is not visible"
+        assert historical_weather_data_link, "The Historical Weather Data link is not visible"
 
     def check_historical_weather_data_link_functionality(self):
         historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
@@ -66,7 +66,11 @@ class MainPage(BasePage):
 
     def check_weather_dashboard_link_is_visible(self):
         weather_dashboard_link = self.element_is_visible(self.locators.WEATHER_DASHBOARD_LINK)
-        assert weather_dashboard_link.is_displayed(), "The Weather Dashboard link is not visible"
+        assert weather_dashboard_link, "The Weather Dashboard link is not visible"
+
+    def check_current_and_forecast_apis_link_is_visible(self):
+        current_and_forecast_apis_link = self.element_is_visible(self.locators.CURRENT_AND_FORECAST_APIS_LINK)
+        assert current_and_forecast_apis_link, "The Current and Forecast APIs link is not visible"
 
     def check_weather_dashboard_link_is_clickable(self):
         self.driver.find_element(*self.locators.COOKIES).click()
