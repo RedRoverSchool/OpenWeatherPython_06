@@ -84,6 +84,10 @@ class MainPage(BasePage):
         assert '/weather-dashboard' in self.driver.current_url, \
             "The Weather Dashboard link leads to an incorrect page"
 
+    def check_weather_maps_link_is_visible(self):
+        weather_maps_link = self.element_is_visible(self.locators.WEATHER_MAPS_LINK)
+        assert weather_maps_link, "The Current and Forecast APIs link is not visible"
+
     def check_weather_maps_link_functionality(self):
         weather_maps_link = self.driver.find_element(*self.locators.WEATHER_MAPS_LINK)
         self.go_to_element(weather_maps_link)
