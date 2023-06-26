@@ -86,7 +86,7 @@ class MainPage(BasePage):
 
     def check_weather_maps_link_is_visible(self):
         weather_maps_link = self.element_is_visible(self.locators.WEATHER_MAPS_LINK)
-        assert weather_maps_link, "The Current and Forecast APIs link is not visible"
+        assert weather_maps_link, "The Weather Maps link is not visible"
 
     def check_weather_maps_link_functionality(self):
         weather_maps_link = self.driver.find_element(*self.locators.WEATHER_MAPS_LINK)
@@ -94,6 +94,10 @@ class MainPage(BasePage):
         weather_maps_link.click()
         assert '/api#maps' in self.driver.current_url, \
             "The Weather Maps link leads to an incorrect page"
+
+    def check_widgets_link_is_visible(self):
+        widgets_link = self.element_is_visible(self.locators.WIDGETS_LINK)
+        assert widgets_link, "The Widgets link is not visible"
 
     def check_our_technology_link_functionality(self):
         our_technology_link = self.driver.find_element(*self.locators.OUR_TECHNOLOGY_LINK)
