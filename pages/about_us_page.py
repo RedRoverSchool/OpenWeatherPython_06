@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 from locators.locators import AboutUsPageLocators
 
-
 class AboutUsPage(BasePage):
     locators = AboutUsPageLocators()
     ABOUT_US_URL = 'https://openweathermap.org/about-us'
@@ -51,3 +50,7 @@ class AboutUsPage(BasePage):
         contact_us_button_link = self.driver.current_url
         assert contact_us_button_link == "https://home.openweathermap.org/questions"
 
+    def verify_4_orange_buttons_are_visible_and_clickable(self):
+        self.driver.get(self.ABOUT_US_URL)
+        find_4_buttons = self.driver.find_elements(*self.locators.ORANGE_BUTTONS)
+        assert [i.is_displayed() and i.is_enabled() for i in find_4_buttons]
