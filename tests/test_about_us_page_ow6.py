@@ -41,3 +41,7 @@ class TestAboutUsPage:
     def test_TC_001_15_06_verify_correct_redirection_of_the_contact_us_button(self, driver):
         about_us_page = AboutUsPage(driver)
         about_us_page.verify_redirection_contact_us_button_to_the_new_webpage()
+
+    def test_TC_001_15_12_Section_Where_to_4_orange_buttons_are_visible_and_clickable(self, driver):
+        page = AboutUsPage(driver)
+        page.verify_4_orange_buttons_are_visible_and_clickable()

@@ -171,6 +171,7 @@ class AboutUsPageLocators:
     CONTACT_US_BUTTON = (By.CSS_SELECTOR, 'div.contact-us.blue-transparent-container.white-text a')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
+    ORANGE_BUTTONS = (By.XPATH, "//a[@class='btn_block orange round']")
 
 
 class AppStorePageLocators:
