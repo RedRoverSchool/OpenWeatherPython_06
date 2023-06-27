@@ -44,3 +44,8 @@ class TestWeatherApiPage:
         weather_api = APIPage(driver, link=ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
         weather_api.open_page()
         weather_api.verify_get_access_redirects_to_valid_page()
+
+    def test_tc_005_17_03_check_5_headers(self, driver):
+        weather_api = APIPage(driver, link=ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        weather_api.open_page()
+        weather_api.verify_five_headers_are_present()
