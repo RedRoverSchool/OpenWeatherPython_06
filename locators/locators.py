@@ -31,7 +31,8 @@ class MainPageLocators:
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
     FOOTER_COMMON_KIT = (By.CSS_SELECTOR, "#footer-website")
-    HISTORICAL_WEATHER_DATA_LINK = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
+    HISTORICAL_WEATHER_DATA_LINK = (By.CSS_SELECTOR,
+                                    '#footer-website div :nth-child(1) :nth-child(1) ul :nth-child(2) > a')
     HOW_TO_START = (By.XPATH, "//div[@id='footer-website']//a[text()='How to start']")
     HOW_TO_START_LINK = (By.CSS_SELECTOR, "div[class='section-content'] a[href*='appid']")
     OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")

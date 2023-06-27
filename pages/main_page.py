@@ -57,6 +57,11 @@ class MainPage(BasePage):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"
 
+    def check_historical_weather_data_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
+        assert historical_weather_data_link.is_enabled(), "The Historical Weather Data link is not clickable"
+
     def check_historical_weather_data_link_functionality(self):
         historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
         self.go_to_element(historical_weather_data_link)
