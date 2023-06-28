@@ -94,3 +94,15 @@ class StudentInitiativeUrls:
 
 class WeatherDashboardUrls:
     dashboard_URL = 'https://openweathermap.org/weather-dashboard'
+
+
+class GlobalWeatherAlertsUrls:
+    ANCHOR_FEATURES = 'https://openweathermap.org/api/push-weather-alerts#about'
+    ANCHOR_ACCESS = 'https://openweathermap.org/api/push-weather-alerts#how'
+    ANCHOR_DESCRIPTION = 'https://openweathermap.org/api/push-weather-alerts#descr'
+    ANCHOR_EXAMPLES = 'https://openweathermap.org/api/push-weather-alerts#examples'
+    ANCHOR_FIELDS = 'https://openweathermap.org/api/push-weather-alerts#fields'
+    ANCHOR_TYPES = 'https://openweathermap.org/api/push-weather-alerts#notifications'
+    ANCHOR_LIST = 'https://openweathermap.org/api/push-weather-alerts#listsource'
+    SEVEN_ANCHOR_LINKS = [ANCHOR_FEATURES, ANCHOR_ACCESS, ANCHOR_DESCRIPTION, ANCHOR_EXAMPLES, ANCHOR_FIELDS,
+                          ANCHOR_TYPES, ANCHOR_LIST]

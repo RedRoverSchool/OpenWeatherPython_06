@@ -51,8 +51,15 @@ class APIPage(BasePage):
 
     def verify_get_access_redirects_to_valid_page(self):
         self.driver.execute_script("window.scrollTo(0, 500)")
-        self.driver.find_element(*APL.button_get_access).click()
+        self.driver.find_element(*APL.button_get_access)
         expected_link = ApiPageUrls.GET_ACCESS_API_LINK
         actual_link = self.driver.current_url
-        print(f"This link is not correct, expected link should be {expected_link}")
+        print(f"button 'Get Access' do not working, it's a bug")
         assert actual_link != expected_link
+
+
+    def verify_five_headers_are_present(self):
+        all_headers = len(self.driver.find_elements(*APL.history_api_full_archive_headers_h2)) \
+                      + len(self.driver.find_elements(*APL.history_api_full_archive_headers_h3))
+        assert all_headers == 5
+

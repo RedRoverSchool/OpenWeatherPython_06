@@ -55,7 +55,12 @@ class MainPage(BasePage):
 
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
-        assert historical_weather_data_link.is_displayed(), "The Historical Weather Data link is not visible"
+        assert historical_weather_data_link, "The Historical Weather Data link is not visible"
+
+    def check_historical_weather_data_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
+        assert historical_weather_data_link.is_enabled(), "The Historical Weather Data link is not clickable"
 
     def check_historical_weather_data_link_functionality(self):
         historical_weather_data_link = self.driver.find_element(*self.locators.HISTORICAL_WEATHER_DATA_LINK)
@@ -66,7 +71,11 @@ class MainPage(BasePage):
 
     def check_weather_dashboard_link_is_visible(self):
         weather_dashboard_link = self.element_is_visible(self.locators.WEATHER_DASHBOARD_LINK)
-        assert weather_dashboard_link.is_displayed(), "The Weather Dashboard link is not visible"
+        assert weather_dashboard_link, "The Weather Dashboard link is not visible"
+
+    def check_current_and_forecast_apis_link_is_visible(self):
+        current_and_forecast_apis_link = self.element_is_visible(self.locators.CURRENT_AND_FORECAST_APIS_LINK)
+        assert current_and_forecast_apis_link, "The Current and Forecast APIs link is not visible"
 
     def check_weather_dashboard_link_is_clickable(self):
         self.driver.find_element(*self.locators.COOKIES).click()
@@ -80,12 +89,20 @@ class MainPage(BasePage):
         assert '/weather-dashboard' in self.driver.current_url, \
             "The Weather Dashboard link leads to an incorrect page"
 
+    def check_weather_maps_link_is_visible(self):
+        weather_maps_link = self.element_is_visible(self.locators.WEATHER_MAPS_LINK)
+        assert weather_maps_link, "The Weather Maps link is not visible"
+
     def check_weather_maps_link_functionality(self):
         weather_maps_link = self.driver.find_element(*self.locators.WEATHER_MAPS_LINK)
         self.go_to_element(weather_maps_link)
         weather_maps_link.click()
         assert '/api#maps' in self.driver.current_url, \
             "The Weather Maps link leads to an incorrect page"
+
+    def check_widgets_link_is_visible(self):
+        widgets_link = self.element_is_visible(self.locators.WIDGETS_LINK)
+        assert widgets_link, "The Widgets link is not visible"
 
     def check_our_technology_link_functionality(self):
         our_technology_link = self.driver.find_element(*self.locators.OUR_TECHNOLOGY_LINK)
