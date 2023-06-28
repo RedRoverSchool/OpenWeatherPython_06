@@ -503,3 +503,10 @@ class GlobalWeatherAlertsLocators:
     TYPES = (By.XPATH, "(//div[@class='doc-container']//a)[6]")
     LIST = (By.XPATH, "(//div[@class='doc-container']//a)[7]")
     SEVEN_ANCHOR_LOCATORS = [FEATURES, ACCESS, DESCRIPTION, EXAMPLES, FIELDS, TYPES, LIST]
+    BODY_HEADINGS = {
+        (By.XPATH, "(//h2)[1]"): "Features of Global Weather Alerts",
+        (By.XPATH, "(//h2)[2]"): "How to get access to Global Weather Alerts",
+        (By.XPATH, "(//h2)[3]"): "Description of alert notifications",
+        (By.XPATH, "//h3"): "Types of alert notifications",
+        (By.XPATH, "(//h2)[4]"): "List of alerts sources"
+    }
