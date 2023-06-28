@@ -56,3 +56,10 @@ class APIPage(BasePage):
         actual_link = self.driver.current_url
         print(f"button 'Get Access' do not working, it's a bug")
         assert actual_link != expected_link
+
+
+    def verify_five_headers_are_present(self):
+        all_headers = len(self.driver.find_elements(*APL.history_api_full_archive_headers_h2)) \
+                      + len(self.driver.find_elements(*APL.history_api_full_archive_headers_h3))
+        assert all_headers == 5
+

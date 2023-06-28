@@ -156,8 +156,8 @@ class ApiPageLocators:
                                                     (By.CSS_SELECTOR, '#getlist > div > code'),
                                                     (By.CSS_SELECTOR, '#data > div.api > code'),
                                                     (By.CSS_SELECTOR, '#data > div.response.open > div.api > code')]
-
-
+    history_api_full_archive_headers_h2 = (By.XPATH, '//h2')
+    history_api_full_archive_headers_h3 = (By.XPATH, '//h3')
     API_LOGO = (By.CSS_SELECTOR, "#first-level-nav a")
 
 
