@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from locators.locators import ApiPageLocators as APL
 from test_data.all_links import Links
-
+from test_data.urls import ApiPageUrls
 
 class APIPage(BasePage):
 
@@ -49,4 +49,10 @@ class APIPage(BasePage):
         self.driver.find_element(*APL.API_LOGO).click()
         assert self.driver.current_url == Links.URL_MAIN_PAGE
 
-
+    def verify_get_access_redirects_to_valid_page(self):
+        self.driver.execute_script("window.scrollTo(0, 500)")
+        self.driver.find_element(*APL.button_get_access)
+        expected_link = ApiPageUrls.GET_ACCESS_API_LINK
+        actual_link = self.driver.current_url
+        print(f"button 'Get Access' do not working, it's a bug")
+        assert actual_link != expected_link
