@@ -175,3 +175,7 @@ class MarketplacePage(BasePage):
                and displayed_latitude == expected_latitude \
                and displayed_longitude == expected_longitude
 
+    def find_feels_like_in_parameters(self):
+        expected_parameter = "Feels like"
+        feels_like = self.driver.find_element(*M.FEELS_LIKE_PARAMETER).text
+        assert expected_parameter == feels_like, "Parameter Feels like is absent"
