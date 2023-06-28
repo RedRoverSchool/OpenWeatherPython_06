@@ -29,8 +29,10 @@ class MainPageLocators:
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
+    CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
     FOOTER_COMMON_KIT = (By.CSS_SELECTOR, "#footer-website")
-    HISTORICAL_WEATHER_DATA_LINK = (By.XPATH, "//a[contains(text(), 'Historical Weather Data')]")
+    HISTORICAL_WEATHER_DATA_LINK = (By.CSS_SELECTOR,
+                                    '#footer-website div :nth-child(1) :nth-child(1) ul :nth-child(2) > a')
     HOW_TO_START = (By.XPATH, "//div[@id='footer-website']//a[text()='How to start']")
     HOW_TO_START_LINK = (By.CSS_SELECTOR, "div[class='section-content'] a[href*='appid']")
     OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")
@@ -41,7 +43,7 @@ class MainPageLocators:
     WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
     WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
     WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[contains(text(), 'Website')]")
-
+    WIDGETS_LINK = (By.CSS_SELECTOR, "#footer-website div:nth-child(1) > div:nth-child(1) li:nth-child(5) > a")
     SEARCH_DROPDOWN = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
     SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
     SEARCH_CITY_FIELD = (By.CSS_SELECTOR, "input[placeholder='Search city']")
@@ -170,6 +172,7 @@ class AboutUsPageLocators:
     CONTACT_US_BUTTON = (By.CSS_SELECTOR, 'div.contact-us.blue-transparent-container.white-text a')
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
+    ORANGE_BUTTONS = (By.XPATH, "//a[@class='btn_block orange round']")
 
 
 class AppStorePageLocators:
@@ -490,3 +493,21 @@ class AskAQuestionPageLocators:
 
 class HowToStartLocators:
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
+
+
+class GlobalWeatherAlertsLocators:
+    FEATURES = (By.XPATH, "(//div[@class='doc-container']//a)[1]")
+    ACCESS = (By.XPATH, "(//div[@class='doc-container']//a)[2]")
+    DESCRIPTION = (By.XPATH, "(//div[@class='doc-container']//a)[3]")
+    EXAMPLES = (By.XPATH, "(//div[@class='doc-container']//a)[4]")
+    FIELDS = (By.XPATH, "(//div[@class='doc-container']//a)[5]")
+    TYPES = (By.XPATH, "(//div[@class='doc-container']//a)[6]")
+    LIST = (By.XPATH, "(//div[@class='doc-container']//a)[7]")
+    SEVEN_ANCHOR_LOCATORS = [FEATURES, ACCESS, DESCRIPTION, EXAMPLES, FIELDS, TYPES, LIST]
+    BODY_HEADINGS = {
+        (By.XPATH, "(//h2)[1]"): "Features of Global Weather Alerts",
+        (By.XPATH, "(//h2)[2]"): "How to get access to Global Weather Alerts",
+        (By.XPATH, "(//h2)[3]"): "Description of alert notifications",
+        (By.XPATH, "//h3"): "Types of alert notifications",
+        (By.XPATH, "(//h2)[4]"): "List of alerts sources"
+    }
