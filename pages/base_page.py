@@ -4,7 +4,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
 from locators.locators import BasePageLocators
-
+from selenium.webdriver.support.color import Color
 
 class BasePage:
     locators = BasePageLocators()
@@ -218,3 +218,10 @@ class BasePage:
     def find_element(self, locator):
         return self.driver.find_element(*locator)
 
+    def check_several_elements_color(self, locator, data):
+        elements = self.driver.find_elements(*locator)
+        for element in elements:
+            self.action_move_to_element(element)
+            link = element.get_attribute("href")
+            assert Color.from_string(element.value_of_css_property("color")).hex == data, \
+                f"{link} color is not {data}"

@@ -510,3 +510,5 @@ class GlobalWeatherAlertsLocators:
         (By.XPATH, "//h3"): "Types of alert notifications",
         (By.XPATH, "(//h2)[4]"): "List of alerts sources"
     }
+    SIXTEEN_BODY_LINKS = (By.XPATH, "//div[@class='doc-container']//a[contains(@href, '') "
+                                    "and not(@class='btn_like btn-orange')]")

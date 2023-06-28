@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from locators.locators import GlobalWeatherAlertsLocators as GWAL
 from test_data.urls import GlobalWeatherAlertsUrls as GWAU
+from test_data.global_weather_alerts_page_data import body_link_color
 
 
 class GlobalWeatherAlertsPage(BasePage):
@@ -22,3 +23,6 @@ class GlobalWeatherAlertsPage(BasePage):
             print(block)
             assert block.is_displayed() and block.text == expected_heading, \
                 f'"{block.text}" is not displayed or has wrong text'
+
+    def verify_16_body_links_have_the_same_color(self):
+        self.check_several_elements_color(GWAL.SIXTEEN_BODY_LINKS, body_link_color)
