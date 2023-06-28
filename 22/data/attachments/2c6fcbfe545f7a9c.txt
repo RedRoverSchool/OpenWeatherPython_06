@@ -1,1 +1,0 @@
-INFO     api_testing.test_get_all_users:test_teachers.py:12 completed successfully
