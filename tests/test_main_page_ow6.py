@@ -44,6 +44,10 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_current_and_forecast_apis_link_is_visible()
 
+    def test_tc_003_03_08_verify_historical_weather_data_link_clickability(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_historical_weather_data_link_is_clickable()
+
     def test_tc_003_03_10_verify_weather_maps_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_weather_maps_link_is_visible()
