@@ -12,3 +12,5 @@ class Links:
     FAQ_URL = 'https://openweathermap.org/faq'
     HOW_TO_START_URL = 'https://openweathermap.org/appid'
     URL_PARTNERS = 'https://openweathermap.org/examples'
+    URL_BLOG_WEATHER = "https://openweather.co.uk/blog/category/weather"
+    URL_OPENWEATHER_FOR_BUSINESS = "https://openweather.co.uk/"

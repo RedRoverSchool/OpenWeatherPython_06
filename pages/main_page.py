@@ -146,6 +146,12 @@ class MainPage(BasePage):
         link_href = blog_link.get_attribute('href')
         assert link_href == expected_link, "Incorrect link"
 
+    def check_terms_and_conditions_module_title_visibility(self):
+        terms_and_conditions_module_title = \
+            self.driver.find_element(*self.locators.TERMS_AND_CONDITIONS_TITLE)
+        assert terms_and_conditions_module_title.is_displayed(), \
+            "The Terms & Conditions module title is not visible"
+
     def check_website_terms_and_conditions_link_visibility(self):
         website_terms_and_conditions_link = self.driver.find_element(*self.locators.WEBSITE_TERMS_AND_CONDITIONS_LINK)
         assert website_terms_and_conditions_link.is_displayed(), "The Website terms and conditions link is not visible"
@@ -153,6 +159,16 @@ class MainPage(BasePage):
     def check_about_us_link_is_visible(self):
         about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
         assert about_us_link.is_displayed(), "The About us link is not visible"
+
+    def check_about_us_link_is_clickable(self):
+        about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
+        assert about_us_link.is_enabled(), "The About us link is not clickable"
+
+    def check_blog_link_functionality(self, expected_link):
+        self.allow_all_cookies()
+        blog_link = self.element_is_clickable(self.locators.BLOG_LINK)
+        link_href = blog_link.get_attribute('href')
+        assert link_href == expected_link, "Incorrect link"
 
     def check_product_collections_module_is_visible(self):
         product_collections_module = self.driver.find_element(*self.locators.PRODUCT_COLLECTIONS)
