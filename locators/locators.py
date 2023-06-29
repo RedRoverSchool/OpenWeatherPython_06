@@ -39,6 +39,7 @@ class MainPageLocators:
     OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")
     OUR_TECHNOLOGY_LINK = (By.XPATH, "//a[contains(text(), 'Our technology')]")
     PRODUCT_COLLECTIONS = (By.XPATH, "//p[@class='section-heading' and text()='Product Collections']")
+    PRODUCT_COLLECTIONS_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(1)')
     SUBSCRIBE_FOR_FREE_LINK = \
         (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
     TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")

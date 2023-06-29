@@ -53,6 +53,10 @@ class MainPage(BasePage):
         footer_common_kit = self.element_is_present(self.locators.FOOTER_COMMON_KIT)
         assert footer_common_kit is not None, "Footer is not present in the DOM tree"
 
+    def check_product_collections_section_is_visible(self):
+        product_collections_section = self.element_is_visible(self.locators.PRODUCT_COLLECTIONS_SECTION)
+        assert product_collections_section, "The Product Collections Section is not visible"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"

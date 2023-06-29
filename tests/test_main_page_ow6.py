@@ -29,6 +29,12 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_footer_is_present()
 
+    @pytest.mark.parametrize('URL', URLs)
+    def test_tc_003_02_02_verify_display_of_product_collections_module_on_pages(self, driver,
+                                                                                open_and_load_main_page, URL):
+        page = MainPage(driver, link=URL)
+        page.check_product_collections_section_is_visible()
+
     def test_tc_003_03_03_historical_weather_data_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_historical_weather_data_link_is_visible()
@@ -64,6 +70,12 @@ class TestMainPage:
     def test_tc_003_06_03_verify_website_terms_and_conditions_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_website_terms_and_conditions_link_visibility()
+
+    @pytest.mark.parametrize('URL', URLs)
+    def test_tc_003_08_05_about_us_link_is_visible_on_each_page_specified_in_data(self, driver,
+                                                                                  open_and_load_main_page, URL):
+        page = MainPage(driver, link=URL)
+        page.check_about_us_link_is_visible()
 
     @pytest.mark.parametrize('URL', URLs)
     def test_tc_003_08_06_verify_about_us_link_clickability(self, driver, open_and_load_main_page, URL):
@@ -236,7 +248,6 @@ class TestMainPage:
             google_link = MainPage(driver)
             google_link.check_leads_link_Googl_Play()
 
-
     class TestFooterLinksclickability:
         def test_TC_003_03_02_verify_clickability_current_and_forecast_apis(self, driver, open_and_load_main_page):
             page = MainPage(driver)
@@ -331,7 +342,6 @@ class TestMainPage:
             copyright_actual_result = footer.find_element(FooterLocators.FOOTER_COPYRIGHT)
             footer.go_to_element(copyright_actual_result)
             footer.check_copyright_is_displayed(copyright_actual_result)
-
 
         def test_TC_003_08_02_ask_a_question_link_is_visible(self, driver, open_and_load_main_page):
             page = MainPage(driver)
