@@ -2,12 +2,13 @@ import pytest
 
 from pages.main_page import MainPage
 from locators.locators import MainPageLocators, FooterLocators, BasePageLocators, PartnersLocators
-from test_data.urls import MainPageUrls
+from test_data.urls import MainPageUrls, SuitsUrls
 from test_data.all_links import Links
 from test_data.main_page_data import *
 
 
 class TestMainPage:
+    URLs = SuitsUrls.URLs
 
     def test_example_search_city(self, driver, open_and_load_main_page):
         main_page = MainPage(driver)
@@ -56,9 +57,18 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_widgets_link_is_visible()
 
+    def test_tc_003_06_02_verify_terms_and_conditions_module_title_visibility(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_terms_and_conditions_module_title_visibility()
+
     def test_tc_003_06_03_verify_website_terms_and_conditions_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_website_terms_and_conditions_link_visibility()
+
+    @pytest.mark.parametrize('URL', URLs)
+    def test_tc_003_08_06_verify_about_us_link_clickability(self, driver, open_and_load_main_page, URL):
+        page = MainPage(driver, link=URL)
+        page.check_about_us_link_is_clickable()
 
     def test_tc_003_12_01_check_historical_weather_data_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
@@ -94,9 +104,14 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_subscribe_for_free_link_functionality()
 
+    def test_tc_003_12_20_verify_blog_link_functionality(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        expected_link = Links.URL_BLOG_WEATHER
+        page.check_blog_link_functionality(expected_link)
+
     def test_tc_003_12_21_verify_openweather_for_business_link_functionality(self, driver, open_and_load_main_page):
         page = MainPage(driver)
-        expected_link = "https://openweather.co.uk/"
+        expected_link = Links.URL_OPENWEATHER_FOR_BUSINESS
         page.check_openweather_for_business_link_functionality(expected_link)
 
     def test_TC_003_13_01_verify_cookies_management_module_is_visible(self, driver, open_and_load_main_page):
