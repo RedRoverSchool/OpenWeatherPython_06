@@ -20,3 +20,8 @@ class TestGlobalWeatherAlertsPage:
         page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
         page.open_page()
         page.verify_16_body_links_have_the_same_color()
+
+    def test_TC_005_13_07_verify_16_body_links_are_visible_and_clickable(self, driver):
+        page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        page.open_page()
+        page.verify_16_body_links_are_visible_and_clickable()

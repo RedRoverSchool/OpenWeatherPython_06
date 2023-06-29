@@ -225,3 +225,9 @@ class BasePage:
             link = element.get_attribute("href")
             assert Color.from_string(element.value_of_css_property("color")).hex == data, \
                 f"{link} color is not {data}"
+
+    def verify_links_are_visible_and_clickable(self, locator):
+        links = self.driver.find_elements(*locator)
+        for link in links:
+            assert link.is_displayed() and link.is_enabled(), \
+                f"{link.get_attribute('href')} is not displayed or enabled"

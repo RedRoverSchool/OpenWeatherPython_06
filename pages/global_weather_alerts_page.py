@@ -26,3 +26,6 @@ class GlobalWeatherAlertsPage(BasePage):
 
     def verify_16_body_links_have_the_same_color(self):
         self.check_several_elements_color(GWAL.SIXTEEN_BODY_LINKS, body_link_color)
+
+    def verify_16_body_links_are_visible_and_clickable(self):
+        self.verify_links_are_visible_and_clickable(GWAL.SIXTEEN_BODY_LINKS)
