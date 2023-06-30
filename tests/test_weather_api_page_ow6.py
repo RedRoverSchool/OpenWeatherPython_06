@@ -1,8 +1,12 @@
+import time
+
 from pages.weather_api_page import WeatherApiPage
 from locators.locators import ClimateForecastLocators as CFL
 from pages.api_page import APIPage
 from test_data.urls import ApiPageUrls
-
+from pages.profile_page import ProfilePage
+from pages.sign_in_page import SignInPage
+from test_data.credentials import credentials
 
 class TestWeatherApiPage:
     def test_tc_005_06_1_visibility_climatic_forecast_30_days_page_title(self, driver):
@@ -51,3 +55,11 @@ class TestWeatherApiPage:
         weather_api.open_page()
         weather_api.verify_five_headers_are_present()
 
+    def test_tc_005_13_03_check_redirection_get_access_with_authorization(self, driver, open_and_load_sign_in_page):
+        sign_in_page = SignInPage(driver)
+        sign_in_page.check_authorization(credentials['email'], credentials['password'])
+        profile_page = ProfilePage(driver)
+        profile_page.check_auth_notification()
+        weather_api = APIPage(driver, link=ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        weather_api.open_page()
+        weather_api.verify_get_access_redirects_to_valid_page()

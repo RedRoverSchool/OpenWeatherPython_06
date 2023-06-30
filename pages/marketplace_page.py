@@ -175,3 +175,9 @@ class MarketplacePage(BasePage):
                and displayed_latitude == expected_latitude \
                and displayed_longitude == expected_longitude
 
+    def count_points_in_weather_parameters_list(self):
+        title_weather_parameters = self.driver.find_element(*M.HEADER_WEATHER_PAR)
+        expected_title = "Weather parameters"
+        markers = self.driver.find_elements(*M.WEATHER_PAR_MARKERS)
+        assert len(markers) == 11 and expected_title == title_weather_parameters.text
+

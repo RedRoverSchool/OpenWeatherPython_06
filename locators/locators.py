@@ -27,6 +27,7 @@ class MainPageLocators:
     ABOUT_US_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(1) > a")
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
+    BLOG_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(2) > a")
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
@@ -38,8 +39,11 @@ class MainPageLocators:
     OPENWEATHER_FOR_BUSINESS_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(3) > a")
     OUR_TECHNOLOGY_LINK = (By.XPATH, "//a[contains(text(), 'Our technology')]")
     PRODUCT_COLLECTIONS = (By.XPATH, "//p[@class='section-heading' and text()='Product Collections']")
+    PRODUCT_COLLECTIONS_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(1)')
     SUBSCRIBE_FOR_FREE_LINK = \
         (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
+    SUBSCRIPTION_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(2)')
+    TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
     WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
     WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
     WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[contains(text(), 'Website')]")
@@ -276,6 +280,8 @@ class MarketplaceLocators:
     LST_NAME_CITY = (By.XPATH, "//*[contains(text(), 'Paris')]")
     LST_LATITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[3]')
     LST_LONGITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[4]')
+    WEATHER_PAR_MARKERS = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[2]/div[1]//li')
+    HEADER_WEATHER_PAR = (By.XPATH, '//*[@class="accented"][contains(text(),"Weather parameters")]')
 
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
@@ -511,3 +517,15 @@ class GlobalWeatherAlertsLocators:
         (By.XPATH, "//h3"): "Types of alert notifications",
         (By.XPATH, "(//h2)[4]"): "List of alerts sources"
     }
+    SIXTEEN_BODY_LINKS = (By.XPATH, "//div[@class='doc-container']//a[contains(@href, '') "
+                                    "and not(@class='btn_like btn-orange')]")
+    HOW = (By.XPATH, "(//div[@class='doc-container']//a)[8]")
+    FIELDS2 = (By.XPATH, "(//div[@class='doc-container']//a)[9]")
+    ALERTS1 = (By.XPATH, "(//div[@class='doc-container']//a)[10]")
+    SIGN_UP = (By.XPATH, "(//div[@class='doc-container']//a)[11]")
+    ALERTS2 = (By.XPATH, "(//div[@class='doc-container']//a)[12]")
+    MAIL1 = (By.XPATH, "(//div[@class='doc-container']//a)[13]")
+    NOTIFICATIONS = (By.XPATH, "(//div[@class='doc-container']//a)[15]")
+    LIST_SOURCE = (By.XPATH, "(//div[@class='doc-container']//a)[16]")
+    MAIL2 = (By.XPATH, "(//div[@class='doc-container']//a)[17]")
+    NINE_BODY_LINKS_LOCATORS = [HOW, FIELDS2, ALERTS1, SIGN_UP, ALERTS2, MAIL1, NOTIFICATIONS, LIST_SOURCE, MAIL2]
