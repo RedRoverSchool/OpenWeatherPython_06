@@ -513,3 +513,13 @@ class GlobalWeatherAlertsLocators:
     }
     SIXTEEN_BODY_LINKS = (By.XPATH, "//div[@class='doc-container']//a[contains(@href, '') "
                                     "and not(@class='btn_like btn-orange')]")
+    HOW = (By.XPATH, "(//div[@class='doc-container']//a)[8]")
+    FIELDS2 = (By.XPATH, "(//div[@class='doc-container']//a)[9]")
+    ALERTS1 = (By.XPATH, "(//div[@class='doc-container']//a)[10]")
+    SIGN_UP = (By.XPATH, "(//div[@class='doc-container']//a)[11]")
+    ALERTS2 = (By.XPATH, "(//div[@class='doc-container']//a)[12]")
+    MAIL1 = (By.XPATH, "(//div[@class='doc-container']//a)[13]")
+    NOTIFICATIONS = (By.XPATH, "(//div[@class='doc-container']//a)[15]")
+    LIST_SOURCE = (By.XPATH, "(//div[@class='doc-container']//a)[16]")
+    MAIL2 = (By.XPATH, "(//div[@class='doc-container']//a)[17]")
+    NINE_BODY_LINKS_LOCATORS = [HOW, FIELDS2, ALERTS1, SIGN_UP, ALERTS2, MAIL1, NOTIFICATIONS, LIST_SOURCE, MAIL2]

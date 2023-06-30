@@ -106,3 +106,13 @@ class GlobalWeatherAlertsUrls:
     ANCHOR_LIST = 'https://openweathermap.org/api/push-weather-alerts#listsource'
     SEVEN_ANCHOR_LINKS = [ANCHOR_FEATURES, ANCHOR_ACCESS, ANCHOR_DESCRIPTION, ANCHOR_EXAMPLES, ANCHOR_FIELDS,
                           ANCHOR_TYPES, ANCHOR_LIST]
+    HOW = 'https://openweathermap.org/api/push-weather-alerts#how'
+    FIELDS2 = 'https://openweathermap.org/api/push-weather-alerts#fields'
+    ALERTS1 = 'https://openweathermap.org/price#alerts'
+    SIGN_UP = 'https://home.openweathermap.org/users/sign_up'
+    ALERTS2 = 'https://openweathermap.org/price#alerts'
+    MAIL1 = 'mailto:info@openweathermap.org'
+    NOTIFICATIONS = 'https://openweathermap.org/api/push-weather-alerts#notifications'
+    LIST_SOURCE = 'https://openweathermap.org/api/push-weather-alerts#listsource'
+    MAIL2 = 'mailto:info@openweathermap.org'
+    NINE_BODY_LINKS = [HOW, FIELDS2, ALERTS1, SIGN_UP, ALERTS2, MAIL1, NOTIFICATIONS, LIST_SOURCE, MAIL2]
