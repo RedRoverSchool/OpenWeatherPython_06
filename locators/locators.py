@@ -44,6 +44,7 @@ class MainPageLocators:
     SUBSCRIBE_FOR_FREE_LINK = \
         (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
     SUBSCRIPTION_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(2)')
+    TECHNOLOGIES_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(2) > div:nth-child(1)')
     TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
     WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
     WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")

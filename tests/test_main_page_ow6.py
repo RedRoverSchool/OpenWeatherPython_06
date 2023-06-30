@@ -45,6 +45,11 @@ class TestMainPage:
         page = MainPage(driver, link=URL)
         page.check_company_section_is_visible()
 
+    @pytest.mark.parametrize('URL', URLs)
+    def test_tc_003_02_05_verify_display_of_technologies_section_on_pages(self, driver, open_and_load_main_page, URL):
+        page = MainPage(driver, link=URL)
+        page.check_technologies_section_is_visible()
+
     def test_tc_003_03_03_historical_weather_data_link_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_historical_weather_data_link_is_visible()

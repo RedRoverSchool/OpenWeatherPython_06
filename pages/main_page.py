@@ -65,6 +65,10 @@ class MainPage(BasePage):
         company_section = self.element_is_visible(self.locators.COMPANY_SECTION)
         assert company_section, "The Company Section is not visible"
 
+    def check_technologies_section_is_visible(self):
+        technologies_section = self.element_is_visible(self.locators.TECHNOLOGIES_SECTION)
+        assert technologies_section, "The Technologies Section is not visible"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"
