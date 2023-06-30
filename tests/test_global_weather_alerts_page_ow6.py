@@ -25,3 +25,8 @@ class TestGlobalWeatherAlertsPage:
         page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
         page.open_page()
         page.verify_16_body_links_are_visible_and_clickable()
+
+    def test_TC_005_13_08_verify_redirection_of_9_body_links(self, driver):
+        page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        page.open_page()
+        page.verify_redirection_of_9_body_links()
