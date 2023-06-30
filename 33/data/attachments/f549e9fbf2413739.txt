@@ -1,0 +1,1 @@
+No such JSON schema file: /home/runner/work/OpenWeatherPython_06/utils/schemas/single_user.json
