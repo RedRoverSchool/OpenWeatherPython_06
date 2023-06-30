@@ -15,3 +15,18 @@ class TestGlobalWeatherAlertsPage:
         page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
         page.open_page()
         page.verify_visibility_and_headings_correctness_of_5_blocks_()
+
+    def test_TC_005_13_06_verify_16_body_links_have_the_same_color(self, driver):
+        page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        page.open_page()
+        page.verify_16_body_links_have_the_same_color()
+
+    def test_TC_005_13_07_verify_16_body_links_are_visible_and_clickable(self, driver):
+        page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        page.open_page()
+        page.verify_16_body_links_are_visible_and_clickable()
+
+    def test_TC_005_13_08_verify_redirection_of_9_body_links(self, driver):
+        page = GlobalWeatherAlertsPage(driver, ApiPageUrls.GLOBAL_WEATHER_ALERTS_LINK)
+        page.open_page()
+        page.verify_redirection_of_9_body_links()
