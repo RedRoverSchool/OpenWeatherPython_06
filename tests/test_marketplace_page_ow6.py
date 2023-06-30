@@ -149,7 +149,15 @@ class TestMarketplacePage:
         page.element_is_clickable(M.ADD_LOCATION_BTN)
         page.verify_name_of_location_and_its_coordinates_were_added_to_the_order(wait)
 
+
+    def test_tc_007_01_09_verify_fells_like_is_present_in_weather_parameters(self, driver):
+        page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+        page.open_page()
+        page.find_feels_like_in_parameters()
+
+
     def test_tc_007_01_08_count_nr_of_points_in_weather_parameters(self, driver):
         page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
         page.open_page()
         page.count_points_in_weather_parameters_list()
+

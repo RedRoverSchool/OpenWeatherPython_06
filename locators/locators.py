@@ -28,6 +28,7 @@ class MainPageLocators:
     ACCURACY_AND_QUALITY_OF_WEATHER_DATA_LINK = \
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
     BLOG_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(2) > a")
+    COMPANY_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(3)')
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
@@ -280,8 +281,11 @@ class MarketplaceLocators:
     LST_NAME_CITY = (By.XPATH, "//*[contains(text(), 'Paris')]")
     LST_LATITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[3]')
     LST_LONGITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[4]')
+
+    FEELS_LIKE_PARAMETER = (By.XPATH, "//*[@id='app']//ul/li[contains(text(),'Feels like')]")
     WEATHER_PAR_MARKERS = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[2]/div[1]//li')
     HEADER_WEATHER_PAR = (By.XPATH, '//*[@class="accented"][contains(text(),"Weather parameters")]')
+
 
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
