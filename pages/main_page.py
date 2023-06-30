@@ -57,6 +57,10 @@ class MainPage(BasePage):
         product_collections_section = self.element_is_visible(self.locators.PRODUCT_COLLECTIONS_SECTION)
         assert product_collections_section, "The Product Collections Section is not visible"
 
+    def check_subscription_section_is_visible(self):
+        subscription_section = self.element_is_visible(self.locators.SUBSCRIPTION_SECTION)
+        assert subscription_section, "The Subscription Section is not visible"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"
