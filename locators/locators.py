@@ -280,8 +280,11 @@ class MarketplaceLocators:
     LST_NAME_CITY = (By.XPATH, "//*[contains(text(), 'Paris')]")
     LST_LATITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[3]')
     LST_LONGITUDE_COORDINATE = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[3]/table/tbody/tr/td[4]')
+
+    FEELS_LIKE_PARAMETER = (By.XPATH, "//*[@id='app']//ul/li[contains(text(),'Feels like')]")
     WEATHER_PAR_MARKERS = (By.XPATH, '//*[@id="app"]/div[2]/div/div[1]/div[2]/div[1]//li')
     HEADER_WEATHER_PAR = (By.XPATH, '//*[@class="accented"][contains(text(),"Weather parameters")]')
+
 
 class WeatherConditionsLocators:
     WEATHER_ICONS = (By.XPATH, '//a[.="Weather icons"]')
