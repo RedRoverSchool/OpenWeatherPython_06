@@ -41,6 +41,7 @@ class MainPageLocators:
     OUR_TECHNOLOGY_LINK = (By.XPATH, "//a[contains(text(), 'Our technology')]")
     PRODUCT_COLLECTIONS = (By.XPATH, "//p[@class='section-heading' and text()='Product Collections']")
     PRODUCT_COLLECTIONS_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(1)')
+    SINGLE_LINKS_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(2) > div:nth-child(3)')
     SUBSCRIBE_FOR_FREE_LINK = \
         (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(2) > .section-content > ul > :nth-child(3) > a")
     SUBSCRIPTION_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(1) > div:nth-child(2)')
