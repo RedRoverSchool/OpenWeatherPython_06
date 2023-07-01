@@ -73,6 +73,10 @@ class MainPage(BasePage):
         terms_and_conditions_section = self.element_is_visible(self.locators.TERMS_AND_CONDITIONS_SECTION)
         assert terms_and_conditions_section, "The Terms & Conditions Section is not visible"
 
+    def check_single_links_section_is_visible(self):
+        single_links_section = self.element_is_visible(self.locators.SINGLE_LINKS_SECTION)
+        assert single_links_section, "The single links section is not visible"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"
