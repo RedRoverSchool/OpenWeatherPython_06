@@ -32,6 +32,7 @@ class MainPageLocators:
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, '#footer-website a[href="/api#current"]')
+    DOWNLOAD_OPENWEATHER_APP_SECTION = (By.CSS_SELECTOR, '#footer-website > div > div:nth-child(3)')
     FOOTER_COMMON_KIT = (By.CSS_SELECTOR, "#footer-website")
     HISTORICAL_WEATHER_DATA_LINK = (By.CSS_SELECTOR,
                                     '#footer-website div :nth-child(1) :nth-child(1) ul :nth-child(2) > a')
