@@ -81,6 +81,10 @@ class MainPage(BasePage):
         download_openweather_app_section = self.element_is_visible(self.locators.DOWNLOAD_OPENWEATHER_APP_SECTION)
         assert download_openweather_app_section, "The Download OpenWeather app section is not visible"
 
+    def check_social_media_section_is_visible(self):
+        social_media_section = self.element_is_visible(self.locators.SOCIAL_MEDIA_SECTION)
+        assert social_media_section, "The Social Media section is not visible"
+
     def check_historical_weather_data_link_is_visible(self):
         historical_weather_data_link = self.element_is_visible(self.locators.HISTORICAL_WEATHER_DATA_LINK)
         assert historical_weather_data_link, "The Historical Weather Data link is not visible"
