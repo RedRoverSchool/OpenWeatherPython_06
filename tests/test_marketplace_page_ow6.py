@@ -161,3 +161,18 @@ class TestMarketplacePage:
         page.open_page()
         page.count_points_in_weather_parameters_list()
 
+
+    def test_tc_007_01_10_field_input_year(self, driver):
+        page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+        page.open_page()
+        page.count_points_in_weather_parameters_list()
+
+    @pytest.mark.parametrize('locator', [M.YEAR_2018])
+    def test_tc_007_01_10_2_Select_year_2018_from_dropdown_list(self, driver, locator):
+        page = MarketplacePage(driver, link=M.URL_HISTORICAL_WEATHER)
+        page.open_page()
+        page.select_year_field()
+        page.select_element_from_dropdown_list(locator)
+        expected_year = "2018"
+        selected_year = driver.find_element(*M.EXPECTED_YEAR).text
+        assert expected_year == selected_year, 'Wrong year was shown'
