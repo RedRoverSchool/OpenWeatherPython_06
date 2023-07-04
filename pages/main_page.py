@@ -165,6 +165,10 @@ class MainPage(BasePage):
         assert '/appid' in self.driver.current_url, \
             "The How to start link leads to an incorrect page"
 
+    def check_pricing_link_is_visible(self):
+        pricing_link = self.element_is_visible(self.locators.PRICING_LINK)
+        assert pricing_link, "The Pricing link is not visible"
+
     def check_subscribe_for_free_link_functionality(self):
         subscribe_for_free_link = self.driver.find_element(*self.locators.SUBSCRIBE_FOR_FREE_LINK)
         self.go_to_element(subscribe_for_free_link)
