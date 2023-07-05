@@ -45,3 +45,7 @@ class TestAboutUsPage:
     def test_TC_001_15_12_Section_Where_to_4_orange_buttons_are_visible_and_clickable(self, driver):
         page = AboutUsPage(driver)
         page.verify_4_orange_buttons_are_visible_and_clickable()
+
+    def test_TC_001_15_13_Section_Where_to_3_orange_buttons_lead_to_correct_pages(self, driver):
+        page = AboutUsPage(driver)
+        page.verify_3_orange_buttons_redirection()

@@ -184,6 +184,12 @@ class AboutUsPageLocators:
     ALLOW_ALL_COOKIES_BUTTON = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     UBUNTU_MY_WEATHER_INDICATOR = (By.CSS_SELECTOR, "#ubuntu > a:nth-child(3)")
     ORANGE_BUTTONS = (By.XPATH, "//a[@class='btn_block orange round']")
+    BUY_BY_SUBSCRIBTION = (By.XPATH, "//a[@class='btn_block orange round'][1]")
+    BUY_IN_THE_MARKETPLACE = (By.XPATH, "//a[@class='btn_block orange round'][2]")
+    PRODUCT_DOCUMENTATION = (By.XPATH, "//a[@class='btn_block orange round'][3]")
+    NEWS_AND_UPDATES = (By.XPATH, "//a[@class='btn_block orange round'][4]")
+    WHERE_TO = (By.XPATH, "//h2[contains(text(), 'Where-to')]")
+    ORANGE_BUTTONS_1_2_3 = [BUY_BY_SUBSCRIBTION, BUY_IN_THE_MARKETPLACE, PRODUCT_DOCUMENTATION]
 
 
 class AppStorePageLocators:
