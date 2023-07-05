@@ -49,3 +49,7 @@ class TestAboutUsPage:
     def test_TC_001_15_13_Section_Where_to_3_orange_buttons_lead_to_correct_pages(self, driver):
         page = AboutUsPage(driver)
         page.verify_3_orange_buttons_redirection()
+
+    def test_TC_001_15_14_Section_Where_to_News_and_Updates_button_leads_to_correct_page(self, driver):
+        page = AboutUsPage(driver)
+        page.verify_redirection_of_news_and_updates_button()

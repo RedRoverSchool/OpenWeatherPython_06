@@ -64,3 +64,9 @@ class AboutUsPage(BasePage):
             link.click()
             assert expected_url == self.driver.current_url
 
+    def verify_redirection_of_news_and_updates_button(self):
+        self.driver.get(self.ABOUT_US_URL)
+        self.allow_all_cookies()
+        self.check_link_in_new_window(self.locators.NEWS_AND_UPDATES, self.urls.NEWS_AND_UPDATES_URL)
+
+
