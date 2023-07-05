@@ -116,3 +116,11 @@ class GlobalWeatherAlertsUrls:
     LIST_SOURCE = 'https://openweathermap.org/api/push-weather-alerts#listsource'
     MAIL2 = 'mailto:info@openweathermap.org'
     NINE_BODY_LINKS = [HOW, FIELDS2, ALERTS1, SIGN_UP, ALERTS2, MAIL1, NOTIFICATIONS, LIST_SOURCE, MAIL2]
+
+class AboutUsPage_urls:
+    BUY_BY_SUBSCRIBTION = "https://home.openweathermap.org/users/sign_in"
+    BUY_IN_THE_MARKETPLACE = "https://home.openweathermap.org/marketplace"
+    PRODUCT_DOCUMENTATION_URL = "https://openweathermap.org/api"
+    NEWS_AND_UPDATES_URL = "https://openweather.co.uk/blog/category/weather"
+    ORANGE_BUTTONS_URLS_1_2_3 = [BUY_BY_SUBSCRIBTION, BUY_IN_THE_MARKETPLACE, PRODUCT_DOCUMENTATION_URL]
+

@@ -1,10 +1,11 @@
 from pages.base_page import BasePage
 from locators.locators import AboutUsPageLocators
+from test_data.urls import AboutUsPage_urls
 
 class AboutUsPage(BasePage):
     locators = AboutUsPageLocators()
     ABOUT_US_URL = 'https://openweathermap.org/about-us'
-
+    urls = AboutUsPage_urls()
 
     def verify_correct_header_about_us_page(self):
         self.element_is_visible(self.locators.HEADER)
@@ -54,3 +55,12 @@ class AboutUsPage(BasePage):
         self.driver.get(self.ABOUT_US_URL)
         find_4_buttons = self.driver.find_elements(*self.locators.ORANGE_BUTTONS)
         assert [i.is_displayed() and i.is_enabled() for i in find_4_buttons]
+
+    def verify_3_orange_buttons_redirection(self):
+        for locator, expected_url in zip(self.locators.ORANGE_BUTTONS_1_2_3, self.urls.ORANGE_BUTTONS_URLS_1_2_3):
+            self.driver.get(self.ABOUT_US_URL)
+            self.scroll_to_the_element(self.locators.WHERE_TO)
+            link = self.driver.find_element(*locator)
+            link.click()
+            assert expected_url == self.driver.current_url
+
