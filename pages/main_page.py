@@ -174,6 +174,10 @@ class MainPage(BasePage):
         pricing_link = self.driver.find_element(*self.locators.PRICING_LINK)
         assert pricing_link.is_enabled(), "The Pricing link is not clickable"
 
+    def check_subscribe_for_free_link_is_visible(self):
+        subscribe_for_free_link = self.element_is_visible(self.locators.SUBSCRIBE_FOR_FREE_LINK)
+        assert subscribe_for_free_link, "The Subscribe for free link is not visible"
+
     def check_subscribe_for_free_link_functionality(self):
         subscribe_for_free_link = self.driver.find_element(*self.locators.SUBSCRIBE_FOR_FREE_LINK)
         self.go_to_element(subscribe_for_free_link)
