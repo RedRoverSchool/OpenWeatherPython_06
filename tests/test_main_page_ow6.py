@@ -109,6 +109,11 @@ class TestMainPage:
         page = MainPage(driver, link=URL)
         page.check_pricing_link_is_clickable()
 
+    @pytest.mark.parametrize('URL', URLs)
+    def test_tc_003_05_06_verify_display_of_subscribe_for_free_link_on_pages(self, driver, open_and_load_main_page, URL):
+        page = MainPage(driver, link=URL)
+        page.check_subscribe_for_free_link_is_visible()
+
     def test_tc_003_06_02_verify_terms_and_conditions_module_title_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_terms_and_conditions_module_title_visibility()
