@@ -124,6 +124,10 @@ class TestMainPage:
         page = MainPage(driver, link=URL)
         page.check_faq_link_is_visible()
 
+    def test_tc_003_05_09_verify_clickability_of_faq_link_on_pages(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_faq_link_is_clickable()
+
     def test_tc_003_06_02_verify_terms_and_conditions_module_title_visibility(self, driver, open_and_load_main_page):
         page = MainPage(driver)
         page.check_terms_and_conditions_module_title_visibility()
