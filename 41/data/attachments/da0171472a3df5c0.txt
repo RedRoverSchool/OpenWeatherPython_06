@@ -1,0 +1,9 @@
+
+start browser...
+<selenium.webdriver.remote.webelement.WebElement (session="1bef518ac5990faeccf929c44499bbec", element="20D98160794492B28EC439D0A53D1C1A_element_7")>
+<selenium.webdriver.remote.webelement.WebElement (session="1bef518ac5990faeccf929c44499bbec", element="20D98160794492B28EC439D0A53D1C1A_element_15")>
+<selenium.webdriver.remote.webelement.WebElement (session="1bef518ac5990faeccf929c44499bbec", element="20D98160794492B28EC439D0A53D1C1A_element_16")>
+<selenium.webdriver.remote.webelement.WebElement (session="1bef518ac5990faeccf929c44499bbec", element="20D98160794492B28EC439D0A53D1C1A_element_17")>
+<selenium.webdriver.remote.webelement.WebElement (session="1bef518ac5990faeccf929c44499bbec", element="20D98160794492B28EC439D0A53D1C1A_element_18")>
+
+quit browser...
