@@ -23,3 +23,9 @@ class PricingPage(BasePage):
     def verify_clicking_on_the_logo_from_page_Pricing_redirects_to_main_page(self):
         self.driver.find_element(*B.LOGO_LOCATOR).click()
         assert self.driver.current_url == Links.URL_MAIN_PAGE
+
+    def check_one_call_subscribe_button_redirect(self):
+        self.driver.get(P.URL_PRICING)
+        self.allow_all_cookies()
+        self.driver.find_element(*P.ONE_CALL_SUBSCRIBE_BUTTON).click()
+        assert 'unauth_subscribe/onecall_30/base' in self.driver.current_url, "The billing-info page isn't open"

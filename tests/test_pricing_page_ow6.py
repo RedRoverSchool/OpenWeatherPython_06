@@ -21,3 +21,7 @@ class TestPricingPage:
         price_page = PricingPage(driver, P.URL_PRICING)
         price_page.open_page()
         price_page.verify_clicking_on_the_logo_from_page_Pricing_redirects_to_main_page()
+
+    def test_TC_008_01_01_one_call_subscribe_button_redirects(self, driver):
+        pricing_page = PricingPage(driver)
+        pricing_page.check_one_call_subscribe_button_redirect()
