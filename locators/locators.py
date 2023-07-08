@@ -553,3 +553,4 @@ class GlobalWeatherAlertsLocators:
     LIST_SOURCE = (By.XPATH, "(//div[@class='doc-container']//a)[16]")
     MAIL2 = (By.XPATH, "(//div[@class='doc-container']//a)[17]")
     NINE_BODY_LINKS_LOCATORS = [HOW, FIELDS2, ALERTS1, SIGN_UP, ALERTS2, MAIL1, NOTIFICATIONS, LIST_SOURCE, MAIL2]
+

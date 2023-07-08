@@ -1,4 +1,3 @@
-from conftest import driver
 from pages.pricing_page import PricingPage
 from locators.locators import PricingPageLocators as P
 
