@@ -194,6 +194,11 @@ class MainPage(BasePage):
         faq_link = self.element_is_visible(self.locators.FAQ_LINK)
         assert faq_link, "The FAQ link is not visible"
 
+    def check_faq_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        faq_link = self.driver.find_element(*self.locators.FAQ_LINK)
+        assert faq_link.is_enabled(), "The FAQ link is not clickable"
+
     def check_openweather_for_business_link_functionality(self, expected_link):
         self.allow_all_cookies()
         blog_link = self.element_is_clickable(self.locators.OPENWEATHER_FOR_BUSINESS_LINK)
