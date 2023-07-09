@@ -215,6 +215,11 @@ class MainPage(BasePage):
         website_terms_and_conditions_link = self.driver.find_element(*self.locators.WEBSITE_TERMS_AND_CONDITIONS_LINK)
         assert website_terms_and_conditions_link.is_displayed(), "The Website terms and conditions link is not visible"
 
+    def check_website_terms_and_conditions_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        website_terms_and_conditions_link = self.driver.find_element(*self.locators.WEBSITE_TERMS_AND_CONDITIONS_LINK)
+        assert website_terms_and_conditions_link.is_enabled(), "The Website terms and conditions link is not clickable"
+
     def check_about_us_link_is_visible(self):
         about_us_link = self.driver.find_element(*self.locators.ABOUT_US_LINK)
         assert about_us_link.is_displayed(), "The About us link is not visible"
