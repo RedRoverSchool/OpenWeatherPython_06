@@ -136,6 +136,10 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_website_terms_and_conditions_link_visibility()
 
+    def test_tc_003_06_04_verify_clickability_of_website_terms_and_conditions_link(self, driver, open_and_load_main_page):
+        page = MainPage(driver)
+        page.check_website_terms_and_conditions_link_is_clickable()
+
     @pytest.mark.parametrize('URL', URLs)
     def test_tc_003_08_05_about_us_link_is_visible_on_each_page_specified_in_data(self, driver,
                                                                                   open_and_load_main_page, URL):

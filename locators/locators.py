@@ -54,7 +54,8 @@ class MainPageLocators:
     TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
     WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
     WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
-    WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.XPATH, "//a[contains(text(), 'Website')]")
+    WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.CSS_SELECTOR,
+                                         "#footer-website :nth-child(2) :nth-child(2) div :nth-child(3) a")
     WIDGETS_LINK = (By.CSS_SELECTOR, "#footer-website div:nth-child(1) > div:nth-child(1) li:nth-child(5) > a")
     SEARCH_DROPDOWN = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li')
     SEARCH_DROPDOWN_OPTION = (By.CSS_SELECTOR, 'ul.search-dropdown-menu li:nth-child(1) span:nth-child(1)')
