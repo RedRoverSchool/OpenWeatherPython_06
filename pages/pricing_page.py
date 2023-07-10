@@ -29,4 +29,3 @@ class PricingPage(BasePage):
         self.allow_all_cookies()
         self.driver.find_element(*P.ONE_CALL_SUBSCRIBE_BUTTON).click()
         assert 'unauth_subscribe/onecall_30/base' in self.driver.current_url, "The billing-info page isn't open"
-

@@ -24,3 +24,4 @@ class TestPricingPage:
     def test_TC_008_01_01_one_call_subscribe_button_redirects(self, driver):
         pricing_page = PricingPage(driver)
         pricing_page.check_one_call_subscribe_button_redirect()
+
