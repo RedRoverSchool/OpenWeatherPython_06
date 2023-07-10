@@ -52,6 +52,8 @@ class MainPageLocators:
     TECHNOLOGIES_SECTION = (By.CSS_SELECTOR, "#footer-website > div > div:nth-child(2) > div:nth-child(1)")
     TERMS_AND_CONDITIONS_SECTION = (By.CSS_SELECTOR, "#footer-website > div > div:nth-child(2) > div:nth-child(2)")
     TERMS_AND_CONDITIONS_TITLE = (By.CSS_SELECTOR, ":nth-child(2) > :nth-child(2) > .section-heading")
+    TERMS_AND_CONDITIONS_OF_SALE_LINK = (By.CSS_SELECTOR,
+                                         "#footer-website :nth-child(2) :nth-child(2) div li:nth-child(1) a")
     WEATHER_DASHBOARD_LINK = (By.XPATH, "//a[contains(text(), 'Weather Dashboard')]")
     WEATHER_MAPS_LINK = (By.XPATH, "//a[contains(text(), 'Weather Maps')]")
     WEBSITE_TERMS_AND_CONDITIONS_LINK = (By.CSS_SELECTOR,
