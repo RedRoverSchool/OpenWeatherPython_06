@@ -156,7 +156,7 @@ class PricingPageLocators:
     button_detailed_pricing_locators = [(By.XPATH, '//*[@id="current"]//a[2]'),
                                         (By.XPATH, '//*[@id="history"]//a[2]')]
     DISPLAYED_TITLE = (By.CSS_SELECTOR, 'h1.breadcrumb-title')
-
+    ONE_CALL_SUBSCRIBE_BUTTON = (By.XPATH, '//center/a[@class="ow-btn round btn-orange"]')
 
 class ApiPageLocators:
     API_PAGE = 'https://openweathermap.org/api'
