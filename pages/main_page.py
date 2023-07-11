@@ -224,6 +224,11 @@ class MainPage(BasePage):
         privacy_policy_link = self.driver.find_element(*self.locators.PRIVACY_POLICY_LINK)
         assert privacy_policy_link.is_displayed(), "The Privacy Policy link is not visible"
 
+    def check_privacy_policy_link_is_clickable(self):
+        self.driver.find_element(*self.locators.COOKIES).click()
+        privacy_policy_link = self.driver.find_element(*self.locators.PRIVACY_POLICY_LINK)
+        assert privacy_policy_link.is_enabled(), "The Privacy Policy link is not clickable"
+
     def check_website_terms_and_conditions_link_visibility(self):
         website_terms_and_conditions_link = self.driver.find_element(*self.locators.WEBSITE_TERMS_AND_CONDITIONS_LINK)
         assert website_terms_and_conditions_link.is_displayed(), "The Website terms and conditions link is not visible"
