@@ -1,0 +1,11 @@
+
+start browser...
+https://openweathermap.org/api/push-weather-alerts#about
+https://openweathermap.org/api/push-weather-alerts#how
+https://openweathermap.org/api/push-weather-alerts#descr
+https://openweathermap.org/api/push-weather-alerts#examples
+https://openweathermap.org/api/push-weather-alerts#fields
+https://openweathermap.org/api/push-weather-alerts#notifications
+https://openweathermap.org/api/push-weather-alerts#listsource
+
+quit browser...
