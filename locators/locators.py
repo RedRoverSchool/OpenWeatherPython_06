@@ -29,6 +29,7 @@ class MainPageLocators:
         (By.XPATH, "//a[contains(text(), 'Accuracy and quality of weather data')]")
     BLOG_LINK = (By.CSS_SELECTOR, ".not-foldable > .section-content > ul > :nth-child(2) > a")
     COMPANY_SECTION = (By.CSS_SELECTOR, "#footer-website > div > div:nth-child(1) > div:nth-child(3)")
+    COMPANY_TITLE = (By.CSS_SELECTOR, ":nth-child(1) > :nth-child(3) > .section-heading")
     CONNECT_YOUR_WEATHER_STATION_LINK = (By.CSS_SELECTOR, "li a[href*='station']")
     COOKIES = (By.XPATH, "//button[contains(text(), 'Allow all')]")
     CURRENT_AND_FORECAST_APIS_LINK = (By.CSS_SELECTOR, "#footer-website a[href='/api#current']")
