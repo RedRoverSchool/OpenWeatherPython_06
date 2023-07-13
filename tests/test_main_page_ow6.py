@@ -160,6 +160,10 @@ class TestMainPage:
         page = MainPage(driver)
         page.check_company_module_title_visibility()
 
+    def test_tc_003_07_03_verify_text_of_company_module_title(self, driver, open_and_load_main_page, wait):
+        page = MainPage(driver)
+        page.check_text_of_company_module_title("Company")
+
     @pytest.mark.parametrize('URL', URLs)
     def test_tc_003_08_05_about_us_link_is_visible_on_each_page_specified_in_data(self, driver,
                                                                                   open_and_load_main_page, URL):
